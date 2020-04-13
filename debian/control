@@ -113,7 +113,6 @@ Depends: ukui-kwin-data (= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
 Recommends: libqt5multimedia5-plugins, qtvirtualkeyboard-plugin
-Suggests: ukui-kwin-addons (>= 1.0.0)
 Description: UKUI window manager, common files
  Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
  gives you complete control over your windows, making sure
@@ -126,7 +125,7 @@ Description: UKUI window manager, common files
 
 Package: ukui-kwin-data
 Architecture: all
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: plasma-framework, ${misc:Depends}, ${shlibs:Depends}
 Recommends: python3,
             qml-module-qtmultimedia,
             qml-module-qtquick-controls,
