@@ -138,7 +138,7 @@ QQmlComponent *Helper::component(const QString &themeName)
                 m_engine->addImportPath(paths.previous());
             }
             m_svgComponent.reset(new QQmlComponent(m_engine.data()));
-            m_svgComponent->loadUrl(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/aurorae/aurorae.qml"))));
+            m_svgComponent->loadUrl(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ukui-kwin/aurorae/aurorae.qml"))));
         }
         // verify that the theme exists
         if (!QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("aurorae/themes/%1/%1rc").arg(themeName.mid(16))).isEmpty()) {
@@ -222,7 +222,7 @@ void Helper::init()
             if (!fileInfo.path().endsWith(QLatin1String("/org/ukui/kwin/decoration"))) {
                 continue;
             }
-            if (fileInfo.fileName() == QLatin1String("libukui_decorationplugin.so")) {
+            if (fileInfo.fileName() == QLatin1String("libdecorationplugin.so")) {
                 pluginPath = fileInfo.absoluteFilePath();
                 break;
             }
@@ -650,8 +650,8 @@ void ThemeFinder::findAllSvgThemes()
     }
 }
 
-static const QString s_configUiPath = QStringLiteral("kwin/decorations/%1/contents/ui/config.ui");
-static const QString s_configXmlPath = QStringLiteral("kwin/decorations/%1/contents/config/main.xml");
+static const QString s_configUiPath = QStringLiteral("ukui-kwin/decorations/%1/contents/ui/config.ui");
+static const QString s_configXmlPath = QStringLiteral("ukui-kwin/decorations/%1/contents/config/main.xml");
 
 bool ThemeFinder::hasConfiguration(const QString &theme) const
 {
@@ -726,7 +726,7 @@ void ConfigurationModule::initQml()
     KLocalizedTranslator *translator = new KLocalizedTranslator(this);
     QCoreApplication::instance()->installTranslator(translator);
     const KDesktopFile metaData(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                      QStringLiteral("kwin/decorations/%1/metadata.desktop").arg(m_theme)));
+                                                      QStringLiteral("ukui-kwin/decorations/%1/metadata.desktop").arg(m_theme)));
     const QString translationDomain = metaData.desktopGroup().readEntry("X-KWin-Config-TranslationDomain", QString());
     if (!translationDomain.isEmpty()) {
         translator->setTranslationDomain(translationDomain);

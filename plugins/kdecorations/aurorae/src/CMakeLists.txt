@@ -28,20 +28,20 @@ target_link_libraries(ukui_kwin5_aurorae
 
 install(TARGETS ukui_kwin5_aurorae DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
 
-set(ukui_decoration_plugin_SRCS
+set(decoration_plugin_SRCS
     colorhelper.cpp
     decorationoptions.cpp
     decorationplugin.cpp
 )
 
-add_library(ukui_decorationplugin SHARED ${ukui_decoration_plugin_SRCS})
-set_target_properties(ukui_decorationplugin PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org/ukui/kwin/decoration/")
-target_link_libraries(ukui_decorationplugin
+add_library(decorationplugin SHARED ${decoration_plugin_SRCS})
+set_target_properties(decorationplugin PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org/ukui/kwin/decoration/")
+target_link_libraries(decorationplugin
     KDecoration2::KDecoration
     KF5::ConfigWidgets
     Qt5::Quick
 )
-install(TARGETS ukui_decorationplugin DESTINATION ${QML_INSTALL_DIR}/org/ukui/kwin/decoration)
+install(TARGETS decorationplugin DESTINATION ${QML_INSTALL_DIR}/org/ukui/kwin/decoration)
 
 ########### install files ###############
 
