@@ -45,4 +45,4 @@ SwitchingMode=0
 ButtonsOnLeft=
 ButtonsOnRight=IAX
 library=org.ukui.kwin.aurorae
-theme=kwin4_decoration_qml_plastik
+theme=__aurorae__svg__ukui-k01
