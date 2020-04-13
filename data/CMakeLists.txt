@@ -12,3 +12,5 @@ install(TARGETS ukui_kwin5_update_default_rules DESTINATION ${LIB_INSTALL_DIR}/k
 ########### install files ###############
 
 install(FILES org_ukui_kwin.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
+install(FILES ukui-kwin.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+install(FILES ukui-kwinrc DESTINATION /etc/skel/.config)

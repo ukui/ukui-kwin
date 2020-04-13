@@ -167,7 +167,7 @@ QQmlComponent *Helper::loadComponent(const QString &themeName)
     qCDebug(AURORAE) << "Trying to load QML Decoration " << themeName;
     const QString internalname = themeName.toLower();
 
-    const auto offers = KPackage::PackageLoader::self()->findPackages(QStringLiteral("KWin/Decoration"), s_qmlPackageFolder,
+    const auto offers = KPackage::PackageLoader::self()->findPackages(QStringLiteral("UKUIKWin/Decoration"), s_qmlPackageFolder,
         [internalname] (const KPluginMetaData &data) {
             return data.pluginId().compare(internalname, Qt::CaseInsensitive) == 0;
         }
@@ -612,7 +612,7 @@ void ThemeFinder::init()
 
 void ThemeFinder::findAllQmlThemes()
 {
-    const auto offers = KPackage::PackageLoader::self()->findPackages(QStringLiteral("KWin/Decoration"), s_qmlPackageFolder);
+    const auto offers = KPackage::PackageLoader::self()->findPackages(QStringLiteral("UKUIKWin/Decoration"), s_qmlPackageFolder);
     for (const auto &offer : offers) {
         m_themes.insert(offer.name(), offer.pluginId());
     }

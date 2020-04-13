@@ -1,3 +1,5 @@
+etc/skel
+usr/share/applications/
 usr/share/config.kcfg/ukui-kwin.kcfg
 usr/share/config.kcfg/ukui-kwin_colorcorrect.kcfg
 usr/share/config.kcfg/ukuikwindecorationsettings.kcfg
