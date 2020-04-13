@@ -1,0 +1,9 @@
+Qt5Multimedia
+libhybris
+Xwayland
+QtQuick.Controls-QMLModule
+QtQuick.VirtualKeyboard-QMLModule
+QtMultimedia-QMLModule
+org.kde.plasma.components-QMLModule
+org.kde.plasma.core-QMLModule
+KF5Kirigami2

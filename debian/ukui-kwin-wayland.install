@@ -1,0 +1,3 @@
+usr/bin/ukui-kwin_wayland
+usr/lib/*/qt5/plugins/kf5/org.ukui.kidletime.platforms/KF5IdleTimeKWinWaylandPrivatePlugin.so
+usr/lib/*/qt5/plugins/platforms/UKUIKWinQpaPlugin.so

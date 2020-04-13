@@ -1,0 +1,7 @@
+# In ukui-kwin.deb
+org.ukui.kwin 2.0
+org.ukui.kwin.decoration 0.1
+org.ukui.kwin.decorations.*
+org.ukui.kwin.kwincompositing 1.0
+org.ukui.kwin.private.*
+org.ukui.private.kcms.kwin.*

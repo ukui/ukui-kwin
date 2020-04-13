@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    5.2.0.1
+</version>
+
+<headers>
+    /usr/include/ukui-kwin/kwin_export.h
+    /usr/include/ukui-kwin/kwinanimationeffect.h
+    /usr/include/ukui-kwin/kwinconfig.h
+    /usr/include/ukui-kwin/kwineffects.h
+    /usr/include/ukui-kwin/kwineffects_export.h
+    /usr/include/ukui-kwin/kwinglobals.h
+    /usr/include/ukui-kwin/kwinglplatform.h
+    /usr/include/ukui-kwin/kwingltexture.h
+    /usr/include/ukui-kwin/kwinglutils.h
+    /usr/include/ukui-kwin/kwinglutils_export.h
+    /usr/include/ukui-kwin/kwinglutils_funcs.h
+    /usr/include/ukui-kwin/kwinxrenderutils.h
+    /usr/include/ukui-kwin/kwinxrenderutils_export.h
+</headers>
+
+<libs>
+    /usr/lib/@@DEB_HOST_MULTIARCH@@/libukui-kwin4_effect_builtins.so
+    /usr/lib/@@DEB_HOST_MULTIARCH@@/libukui-kwineffects.so
+    /usr/lib/@@DEB_HOST_MULTIARCH@@/libukui-kwinglutils.so
+    /usr/lib/@@DEB_HOST_MULTIARCH@@/libukui-kwinxrenderutils.so
+</libs>
+
+<gcc_options>
+    -fPIC
+    -std=c++11
+    -fno-keep-inline-functions
+</gcc_options>
+
+</descriptor>

@@ -1,0 +1,6 @@
+rm_conffile /etc/xdg/ukui-aurorae.knsrc
+rm_conffile /etc/xdg/ukui-kwineffect.knsrc
+rm_conffile /etc/xdg/ukui-kwinscripts.knsrc
+rm_conffile /etc/xdg/ukui-kwinswitcher.knsrc
+rm_conffile /etc/xdg/ukui-window-decorations.knsrc
+rm_conffile /etc/xdg/org_ukui_kwin.categories

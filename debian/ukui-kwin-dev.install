@@ -1,0 +1,10 @@
+usr/include/ukui-kwin*.h
+usr/include/ukui-kwin/
+usr/lib/*/cmake/ukui-kwin/KWinDBusInterface/
+usr/lib/*/libukui-kwin4_effect_builtins.so
+usr/lib/*/libukui-kwineffects.so
+usr/lib/*/libukui-kwingl*utils.so
+usr/lib/*/libukui-kwinxrenderutils.so
+usr/share/dbus-1/interfaces/org.ukui.KWin.VirtualDesktopManager.xml
+usr/share/dbus-1/interfaces/org.ukui.KWin.xml
+usr/share/dbus-1/interfaces/org.ukui.kwin.*

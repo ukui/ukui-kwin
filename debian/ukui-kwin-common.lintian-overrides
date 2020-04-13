@@ -1,0 +1,5 @@
+ukui-kwin-common: package-name-doesnt-match-sonames libkcmukui-kwincommon5 libkdeinit5-ukui-kwin-rules-dialog libukui-kwin5
+ukui-kwin-common: dev-pkg-without-shlib-symlink usr/lib/*/libkdeinit5_ukui_kwin_rules_dialog.so usr/lib/*/libkdeinit5_ukui_kwin_rules_dialog.so
+ukui-kwin-common: dev-pkg-without-shlib-symlink usr/lib/*/libukui_kwin.so
+ukui-kwin-common: shlib-without-versioned-soname usr/lib/*/libkdeinit5_ukui_kwin_rules_dialog.so libkdeinit5_ukui_kwin_rules_dialog.so
+ukui-kwin-common: dev-pkg-without-shlib-symlink usr/lib/*/libkcmukui_kwincommon.so.* usr/lib/x86_64-linux-gnu/libkcmukui_kwincommon.so
