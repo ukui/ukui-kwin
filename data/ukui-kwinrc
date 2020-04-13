@@ -17,7 +17,7 @@ Rows=2
 
 [Windows]
 #UKUI placement
-Placement=Smart
+Placement=Random
 #UKUI not hide dialog
 HideUtilityWindowsForInactive=false
 
