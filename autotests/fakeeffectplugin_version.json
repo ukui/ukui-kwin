@@ -1,13 +1,13 @@
 {
     "KPlugin": {
         "Id": "effectversion",
-        "ServiceTypes": ["KWin/Effect"]
+        "ServiceTypes": ["UKUIKWin/Effect"]
     },
     "Type": "Service",
     "X-KDE-Library": "effectversionplugin",
     "X-KDE-PluginInfo-EnabledByDefault": true,
     "X-KDE-PluginInfo-Name": "effectversion",
     "X-KDE-ServiceTypes": [
-        "KWin/Effect"
+        "UKUIKWin/Effect"
     ]
 }

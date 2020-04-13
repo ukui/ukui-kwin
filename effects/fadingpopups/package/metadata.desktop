@@ -64,7 +64,7 @@ Comment[zh_CN]=当弹窗被显示或者隐藏时，使窗口平滑地淡入淡�
 Comment[zh_TW]=當彈出視窗出現或消失時，讓彈出視窗滑順的淡入和淡出
 
 Type=Service
-X-KDE-ServiceTypes=KWin/Effect
+X-KDE-ServiceTypes=UKUIKWin/Effect
 X-KDE-PluginInfo-Author=Vlad Zahorodnii
 X-KDE-PluginInfo-Email=vlad.zahorodnii@kde.org
 X-KDE-PluginInfo-Name=kwin4_effect_fadingpopups

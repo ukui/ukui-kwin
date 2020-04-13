@@ -153,7 +153,7 @@ Comment[zh_CN]=使窗口在某些条件下呈现半透明效果
 Comment[zh_TW]=在不同的情況下讓視窗變半透明
 
 Type=Service
-X-KDE-ServiceTypes=KWin/Effect,KCModule
+X-KDE-ServiceTypes=UKUIKWin/Effect,KCModule
 X-KDE-PluginInfo-Author=Luboš Luňák, Martin Gräßlin
 X-KDE-PluginInfo-Email=l.lunak@kde.org, mgraesslin@kde.org
 X-KDE-PluginInfo-Name=kwin4_effect_translucency

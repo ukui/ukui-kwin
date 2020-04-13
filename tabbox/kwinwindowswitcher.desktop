@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KWin/WindowSwitcher
+X-KDE-ServiceType=UKUIKWin/WindowSwitcher
 
 Comment=KWin Window Switcher Layout
 Comment[bs]=KWin Prozor Switcher Izgled

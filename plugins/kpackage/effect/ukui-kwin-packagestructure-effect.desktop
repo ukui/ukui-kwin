@@ -37,5 +37,5 @@ X-KDE-Library=ukui_kwin_packagestructure_effect
 
 X-KDE-PluginInfo-Author=Vlad Zahorodnii
 X-KDE-PluginInfo-Email=vlad.zahorodnii@kde.org
-X-KDE-PluginInfo-Name=KWin/Effect
+X-KDE-PluginInfo-Name=UKUIKWin/Effect
 X-KDE-PluginInfo-Version=1

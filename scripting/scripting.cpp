@@ -758,7 +758,7 @@ LoadScriptList KWin::Scripting::queryScriptsToLoad()
     }
     QMap<QString,QString> pluginStates = KConfigGroup(_config, "Plugins").entryMap();
     const QString scriptFolder = QStringLiteral(UKUI_KWIN_NAME "/scripts/");
-    const auto offers = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KWin/Script"), scriptFolder);
+    const auto offers = KPackage::PackageLoader::self()->listPackages(QStringLiteral("UKUIKWin/Script"), scriptFolder);
 
     LoadScriptList scriptsToLoad;
 

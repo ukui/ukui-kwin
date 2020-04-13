@@ -41,7 +41,7 @@ Name[zh_CN]=窗口管理器效果
 Name[zh_TW]=視窗管理員效果
 
 ProvidersUrl=https://download.kde.org/ocs/providers.xml
-Categories=KWin Effects
+Categories=UKUIKWin Effects
 StandardResource=tmp
-InstallationCommand=kpackagetool5 --type KWin/Effect --install %f
-UninstallCommand=kpackagetool5 --type KWin/Effect --remove %f
+InstallationCommand=kpackagetool5 --type UKUIKWin/Effect --install %f
+UninstallCommand=kpackagetool5 --type UKUIKWin/Effect --remove %f

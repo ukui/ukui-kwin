@@ -153,7 +153,7 @@ Comment[zh_CN]=登录时平滑淡入到桌面
 Comment[zh_TW]=登入時平順地淡入桌面
 
 Type=Service
-X-KDE-ServiceTypes=KWin/Effect,KCModule
+X-KDE-ServiceTypes=UKUIKWin/Effect,KCModule
 X-KDE-PluginInfo-Author=Lubos Lunak, Kai Uwe Broulik, Martin Gräßlin
 X-KDE-PluginInfo-Email=l.lunak@kde.org, kde@privat.broulik.de, mgraesslin@kde.org
 X-KDE-PluginInfo-Name=kwin4_effect_login

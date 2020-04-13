@@ -74,8 +74,8 @@ void MinimizeAllScriptTest::initTestCase()
 static QString locateMainScript(const QString &pluginName)
 {
     const QList<KPluginMetaData> offers = KPackage::PackageLoader::self()->findPackages(
-        QStringLiteral("KWin/Script"),
-        QStringLiteral("kwin/scripts"),
+        QStringLiteral("UKUIKWin/Script"),
+        QStringLiteral("UKUIkwin/scripts"),
         [&](const KPluginMetaData &metaData) {
             return metaData.pluginId() == pluginName;
         }

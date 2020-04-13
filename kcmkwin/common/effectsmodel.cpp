@@ -277,7 +277,7 @@ void EffectsModel::loadBuiltInEffects(const KConfigGroup &kwinConfig, const KPlu
 void EffectsModel::loadJavascriptEffects(const KConfigGroup &kwinConfig)
 {
     const auto plugins = KPackage::PackageLoader::self()->listPackages(
-        QStringLiteral("KWin/Effect"),
+        QStringLiteral("UKUIKWin/Effect"),
         QStringLiteral("ukui-kwin/effects")
     );
     for (const KPluginMetaData &metaData : plugins) {
@@ -324,7 +324,7 @@ void EffectsModel::loadPluginEffects(const KConfigGroup &kwinConfig, const KPlug
     const auto pluginEffects = KPluginLoader::findPlugins(
         QStringLiteral("ukui-kwin/effects/plugins/"),
         [](const KPluginMetaData &data) {
-            return data.serviceTypes().contains(QStringLiteral("KWin/Effect"));
+            return data.serviceTypes().contains(QStringLiteral("UKUIKWin/Effect"));
         }
     );
     for (const KPluginMetaData &pluginEffect : pluginEffects) {

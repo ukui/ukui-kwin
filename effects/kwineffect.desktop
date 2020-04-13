@@ -87,13 +87,13 @@ Comment[zh_TW]=UKUIKWin 效果
 [PropertyDef::X-KDE-Ordering]
 Type=int
 
-[PropertyDef::X-UKUIKWin-Requires-OpenGL]
+[PropertyDef::X-KWin-Requires-OpenGL]
 Type=bool
 
-[PropertyDef::X-UKUIKWin-Requires-OpenGL2]
+[PropertyDef::X-KWin-Requires-OpenGL2]
 Type=bool
 
-[PropertyDef::X-UKUIKWin-Requires-Shaders]
+[PropertyDef::X-KWin-Requires-Shaders]
 Type=bool
 
 [PropertyDef::X-UKUIKWin-Video-Url]

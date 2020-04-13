@@ -80,15 +80,15 @@ void Module::importScript()
 {
     ui->messageWidget->animatedHide();
 
-    QString path = QFileDialog::getOpenFileName(nullptr, i18n("Import KWin Script"), QDir::homePath(),
-                                                i18n("*.kwinscript|KWin scripts (*.kwinscript)"));
+    QString path = QFileDialog::getOpenFileName(nullptr, i18n("Import UKUI-KWin Script"), QDir::homePath(),
+                                                i18n("*.ukui-kwinscript|UKUI-KWin scripts (*.ukui-kwinscript)"));
 
     if (path.isNull()) {
         return;
     }
 
     using namespace KPackage;
-    PackageStructure *structure = PackageLoader::self()->loadPackageStructure(QStringLiteral("KWin/Script"));
+    PackageStructure *structure = PackageLoader::self()->loadPackageStructure(QStringLiteral("UKUIKWin/Script"));
     Package package(structure);
 
     KJob *installJob = package.update(path);
@@ -109,7 +109,7 @@ void Module::importScriptInstallFinished(KJob *job)
     using namespace KPackage;
 
     // so we can show the name of the package we just imported
-    PackageStructure *structure = PackageLoader::self()->loadPackageStructure(QStringLiteral("KWin/Script"));
+    PackageStructure *structure = PackageLoader::self()->loadPackageStructure(QStringLiteral("UKUIKWin/Script"));
     Package package(structure);
     package.setPath(job->property("packagePath").toString());
     Q_ASSERT(package.isValid());
@@ -133,7 +133,7 @@ void Module::updateListViewContents()
     };
 
     const QString scriptFolder = QStringLiteral("ukui-kwin/scripts/");
-    const auto scripts = KPackage::PackageLoader::self()->findPackages(QStringLiteral("KWin/Script"), scriptFolder, filter);
+    const auto scripts = KPackage::PackageLoader::self()->findPackages(QStringLiteral("UKUIKWin/Script"), scriptFolder, filter);
 
     QList<KPluginInfo> scriptinfos = KPluginInfo::fromMetaData(scripts.toVector());
 

@@ -44,5 +44,5 @@ X-KDE-Library=ukui_kwin_packagestructure_windowswitcher
 
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=notmart@gmail.com
-X-KDE-PluginInfo-Name=KWin/WindowSwitcher
+X-KDE-PluginInfo-Name=UKUIKWin/WindowSwitcher
 X-KDE-PluginInfo-Version=1

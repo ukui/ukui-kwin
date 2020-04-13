@@ -41,7 +41,7 @@ Name[zh_CN]=窗口切换器布局
 Name[zh_TW]=視窗切換器佈局
 
 ProvidersUrl=https://download.kde.org/ocs/providers.xml
-Categories=KWin Switching Layouts
+Categories=UKUIKWin Switching Layouts
 StandardResource=tmp
-InstallationCommand=kpackagetool5 --type KWin/WindowSwitcher --install %f
-UninstallCommand=kpackagetool5 --type KWin/WindowSwitcher --remove %f
+InstallationCommand=kpackagetool5 --type UKUIKWin/WindowSwitcher --install %f
+UninstallCommand=kpackagetool5 --type UKUIKWin/WindowSwitcher --remove %f

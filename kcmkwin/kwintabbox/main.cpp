@@ -207,7 +207,7 @@ void KWinTabBoxConfig::initLayoutLists()
     QString coverswitch = BuiltInEffects::effectData(BuiltInEffect::CoverSwitch).displayName;
     QString flipswitch = BuiltInEffects::effectData(BuiltInEffect::FlipSwitch).displayName;
 
-    QList<KPluginMetaData> offers = KPackage::PackageLoader::self()->listPackages("KWin/WindowSwitcher");
+    QList<KPluginMetaData> offers = KPackage::PackageLoader::self()->listPackages("UKUIKWin/WindowSwitcher");
     QStringList layoutNames, layoutPlugins, layoutPaths;
 
     const auto lnfPackages = availableLnFPackages();

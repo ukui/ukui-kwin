@@ -299,7 +299,7 @@ void TestPluginEffectLoader::testLoadPluginEffect()
 
     const auto plugins = KPluginLoader::findPlugins(QString(),
         [name] (const KPluginMetaData &data) {
-            return data.pluginId().compare(name, Qt::CaseInsensitive) == 0 && data.serviceTypes().contains(QStringLiteral("KWin/Effect"));
+            return data.pluginId().compare(name, Qt::CaseInsensitive) == 0 && data.serviceTypes().contains(QStringLiteral("UKUIKWin/Effect"));
         }
     );
     QCOMPARE(plugins.size(), 1);

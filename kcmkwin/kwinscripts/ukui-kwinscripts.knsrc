@@ -40,7 +40,7 @@ Name[zh_CN]=窗口管理器脚本
 Name[zh_TW]=視窗管理員指令稿
 
 ProvidersUrl=https://download.kde.org/ocs/providers.xml
-Categories=KWin Scripts
+Categories=UKUIKWin Scripts
 StandardResource=tmp
-InstallationCommand=kpackagetool5 --type KWin/Script --install %f
-UninstallCommand=kpackagetool5 --type KWin/Script --remove %f
+InstallationCommand=kpackagetool5 --type UKUIKWin/Script --install %f
+UninstallCommand=kpackagetool5 --type UKUIKWin/Script --remove %f

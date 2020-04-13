@@ -208,7 +208,7 @@ void KWinScreenEdgesConfig::monitorInit()
     monitorAddItem(i18n("Toggle alternative window switching"));
 
     const QString scriptFolder = QStringLiteral("ukui-kwin/scripts/");
-    const auto scripts = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KWin/Script"), scriptFolder);
+    const auto scripts = KPackage::PackageLoader::self()->listPackages(QStringLiteral("UKUIKWin/Script"), scriptFolder);
 
     KConfigGroup config(m_config, "Plugins");
     for (const KPluginMetaData &script: scripts) {

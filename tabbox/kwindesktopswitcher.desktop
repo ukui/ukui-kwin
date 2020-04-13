@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KWin/DesktopSwitcher
+X-KDE-ServiceType=UKUIKWin/DesktopSwitcher
 
 Comment=KWin Desktop Switcher Layout
 Comment[bs]=Izgled KWin prebacivača radnih površina

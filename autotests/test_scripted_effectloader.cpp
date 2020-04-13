@@ -316,7 +316,7 @@ void TestScriptedEffectLoader::testLoadScriptedEffect()
     KSharedConfig::Ptr config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig);
     loader.setConfig(config);
 
-    const auto services = KPackage::PackageLoader::self()->findPackages(QStringLiteral("KWin/Effect"), QStringLiteral("kwin/effects"),
+    const auto services = KPackage::PackageLoader::self()->findPackages(QStringLiteral("UKUIKWin/Effect"), QStringLiteral("ukui-kwin/effects"),
         [name] (const KPluginMetaData &metadata) {
             return metadata.pluginId().compare(name, Qt::CaseInsensitive) == 0;
         }
