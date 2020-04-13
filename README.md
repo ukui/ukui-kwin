@@ -12,7 +12,7 @@ The further step we want to make big diffrences on ukui-kwin and feed back to kw
 All of ukui-kwin's dependencies are found through CMake. CMake will report what is missing.
 On Debian based distributions the easiest way to install all build dependencies is
 
-    sudo apt build-dep kwin-wayland
+    sudo apt build-dep ukui-kwin-wayland
 
 ## Quick building
   
