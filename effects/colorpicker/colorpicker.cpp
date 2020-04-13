@@ -102,7 +102,7 @@ QColor ColorPickerEffect::pick()
             hideInfoMessage();
             if (p == QPoint(-1, -1)) {
                 // error condition
-                QDBusConnection::sessionBus().send(m_replyMessage.createErrorReply(QStringLiteral("org.kde.kwin.ColorPicker.Error.Cancelled"), "Color picking got cancelled"));
+                QDBusConnection::sessionBus().send(m_replyMessage.createErrorReply(QStringLiteral("org.ukui.kwin.ColorPicker.Error.Cancelled"), "Color picking got cancelled"));
                 m_picking = false;
             } else {
                 m_scheduledPosition = p;

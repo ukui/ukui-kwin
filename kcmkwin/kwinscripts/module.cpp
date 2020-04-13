@@ -43,12 +43,12 @@
 Module::Module(QWidget *parent, const QVariantList &args) :
     KCModule(parent, args),
     ui(new Ui::Module),
-    m_kwinConfig(KSharedConfig::openConfig("kwinrc"))
+    m_kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"))
 {
-    KAboutData *about = new KAboutData("kwin-scripts",
-                                       i18n("KWin Scripts"),
+    KAboutData *about = new KAboutData("ukuikwin-scripts",
+                                       i18n("UKUIKWin Scripts"),
                                        global_s_versionStringFull,
-                                       i18n("Configure KWin scripts"),
+                                       i18n("Configure UKUIKWin scripts"),
                                        KAboutLicense::GPL_V2);
 
     about->addAuthor(i18n("Tamás Krutki"));
@@ -58,7 +58,7 @@ Module::Module(QWidget *parent, const QVariantList &args) :
 
     ui->messageWidget->hide();
 
-    ui->ghnsButton->setConfigFile(QStringLiteral("kwinscripts.knsrc"));
+    ui->ghnsButton->setConfigFile(QStringLiteral("ukui-kwinscripts.knsrc"));
     connect(ui->ghnsButton, &KNS3::Button::dialogFinished, this, [this](const KNS3::Entry::List &changedEntries) {
         if (!changedEntries.isEmpty()) {
             updateListViewContents();
@@ -132,7 +132,7 @@ void Module::updateListViewContents()
         return true;
     };
 
-    const QString scriptFolder = QStringLiteral("kwin/scripts/");
+    const QString scriptFolder = QStringLiteral("ukui-kwin/scripts/");
     const auto scripts = KPackage::PackageLoader::self()->findPackages(QStringLiteral("KWin/Script"), scriptFolder, filter);
 
     QList<KPluginInfo> scriptinfos = KPluginInfo::fromMetaData(scripts.toVector());
@@ -158,7 +158,7 @@ void Module::save()
 {
     ui->scriptSelector->save();
     m_kwinConfig->sync();
-    QDBusMessage message = QDBusMessage::createMethodCall("org.kde.KWin", "/Scripting", "org.kde.kwin.Scripting", "start");
+    QDBusMessage message = QDBusMessage::createMethodCall("org.ukui.KWin", "/Scripting", "org.ukui.kwin.Scripting", "start");
     QDBusConnection::sessionBus().asyncCall(message);
 
     emit changed(false);

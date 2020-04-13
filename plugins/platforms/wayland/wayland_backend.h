@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_WAYLAND_BACKEND_H
 // KWin
 #include "platform.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwinglobals.h>
 // Qt
 #include <QHash>
@@ -169,11 +169,11 @@ private:
 * It creates the connection to the Wayland Compositor, sets up the registry and creates
 * the Wayland output surfaces and its shell mappings.
 */
-class KWIN_EXPORT WaylandBackend : public Platform
+class UKUI_KWIN_EXPORT WaylandBackend : public Platform
 {
     Q_OBJECT
     Q_INTERFACES(KWin::Platform)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Platform" FILE "wayland.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Platform" FILE "wayland.json")
 public:
     explicit WaylandBackend(QObject *parent = nullptr);
     ~WaylandBackend() override;

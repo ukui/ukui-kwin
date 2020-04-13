@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // KConfigSkeleton
 #include "lookingglassconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -59,7 +59,7 @@ LookingGlassEffectConfig::LookingGlassEffectConfig(QWidget* parent, const QVaria
 
     layout->addWidget(m_ui);
 
-    LookingGlassConfig::instance(KWIN_CONFIG);
+    LookingGlassConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(LookingGlassConfig::self(), m_ui);
     connect(m_ui->editor, &KShortcutsEditor::keyChange, this, qOverload<>(&LookingGlassEffectConfig::changed));
 
@@ -102,7 +102,7 @@ void LookingGlassEffectConfig::save()
 
     m_ui->editor->save();   // undo() will restore to this state from now on
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("lookingglass"));

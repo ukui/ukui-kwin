@@ -45,9 +45,9 @@ public:
         : QObject(nullptr)
     {
         QDBusConnection::sessionBus().connect(
-            QStringLiteral("org.kde.kwin.testvirtualkeyboard"),
+            QStringLiteral("org.ukui.kwin.testvirtualkeyboard"),
             QStringLiteral("/VirtualKeyboard"),
-            QStringLiteral("org.kde.kwin.VirtualKeyboard"),
+            QStringLiteral("org.ukui.kwin.VirtualKeyboard"),
             QStringLiteral("enabledChanged"),
             this,
             SLOT(slotEnabledChanged()));
@@ -65,7 +65,7 @@ private Q_SLOTS:
 
 void VirtualKeyboardDBusTest::initTestCase()
 {
-    QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.kwin.testvirtualkeyboard"));
+    QDBusConnection::sessionBus().registerService(QStringLiteral("org.ukui.kwin.testvirtualkeyboard"));
 }
 
 void VirtualKeyboardDBusTest::testEnabled()
@@ -81,9 +81,9 @@ void VirtualKeyboardDBusTest::testEnabled()
     QVERIFY(enabledChangedSpy.isValid());
 
     auto readProperty = [] (bool enabled) {
-        const QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.kwin.testvirtualkeyboard"),
+        const QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.ukui.kwin.testvirtualkeyboard"),
                                                                     QStringLiteral("/VirtualKeyboard"),
-                                                                    QStringLiteral("org.kde.kwin.VirtualKeyboard"),
+                                                                    QStringLiteral("org.ukui.kwin.VirtualKeyboard"),
                                                                     QStringLiteral("isEnabled"));
         const auto reply = QDBusConnection::sessionBus().call(message);
         QCOMPARE(reply.type(), QDBusMessage::ReplyMessage);
@@ -129,9 +129,9 @@ void VirtualKeyboardDBusTest::testRequestEnabled()
     QSignalSpy activateRequestedSpy(&dbus, &VirtualKeyboardDBus::activateRequested);
     QVERIFY(activateRequestedSpy.isValid());
     QFETCH(QString, method);
-    const QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.kwin.testvirtualkeyboard"),
+    const QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.ukui.kwin.testvirtualkeyboard"),
                                                                 QStringLiteral("/VirtualKeyboard"),
-                                                                QStringLiteral("org.kde.kwin.VirtualKeyboard"),
+                                                                QStringLiteral("org.ukui.kwin.VirtualKeyboard"),
                                                                 method);
     QDBusConnection::sessionBus().asyncCall(message);
     QTRY_COMPARE(activateRequestedSpy.count(), 1);

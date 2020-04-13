@@ -418,7 +418,7 @@ void KTitleBarActionsConfig::save()
         config->sync();
         // Send signal to all kwin instances
         QDBusMessage message =
-            QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+            QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
         QDBusConnection::sessionBus().send(message);
 
     }
@@ -543,7 +543,7 @@ void KWindowActionsConfig::save()
         config->sync();
         // Send signal to all kwin instances
         QDBusMessage message =
-            QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+            QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
         QDBusConnection::sessionBus().send(message);
     }
 }

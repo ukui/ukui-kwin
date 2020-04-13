@@ -1,6 +1,6 @@
 #######################################
 # Effect
-install(FILES main.qml DESTINATION ${DATA_INSTALL_DIR}/kwin/effects/desktopgrid/)
+install(FILES main.qml DESTINATION ${DATA_INSTALL_DIR}/ukui-kwin/effects/desktopgrid/)
 
 #######################################
 # Config
@@ -27,5 +27,5 @@ install(
     TARGETS
         kwin_desktopgrid_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )

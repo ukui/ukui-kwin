@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "workspace.h"
 #include "appmenu.h"
 
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <KDecoration2/DecorationSettings>
 

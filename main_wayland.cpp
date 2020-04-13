@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "composite.h"
 #include "virtualkeyboard.h"
 #include "workspace.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 // kwin
 #include "platform.h"
 #include "effects.h"
@@ -394,7 +394,7 @@ int main(int argc, char * argv[])
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
 
     // enforce our internal qpa plugin, unfortunately command line switch has precedence
-    setenv("QT_QPA_PLATFORM", "wayland-org.kde.kwin.qpa", true);
+    setenv("QT_QPA_PLATFORM", "wayland-org.ukui.kwin.qpa", true);
 
     qunsetenv("QT_DEVICE_PIXEL_RATIO");
     qputenv("QT_IM_MODULE", "qtvirtualkeyboard");
@@ -408,7 +408,7 @@ int main(int argc, char * argv[])
     KWin::Application::createAboutData();
     KQuickAddons::QtQuickSettings::init();
 
-    const auto availablePlugins = KPluginLoader::findPlugins(QStringLiteral("org.kde.kwin.waylandbackends"));
+    const auto availablePlugins = KPluginLoader::findPlugins(QStringLiteral("org.ukui.kwin.waylandbackends"));
     auto hasPlugin = [&availablePlugins] (const QString &name) {
         return std::any_of(availablePlugins.begin(), availablePlugins.end(),
             [name] (const KPluginMetaData &plugin) {

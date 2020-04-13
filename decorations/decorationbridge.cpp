@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "scene.h"
 #include "wayland_server.h"
 #include "workspace.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 // KDecoration
 #include <KDecoration2/Decoration>
@@ -51,7 +51,7 @@ namespace KWin
 namespace Decoration
 {
 
-static const QString s_aurorae = QStringLiteral("org.kde.kwin.aurorae");
+static const QString s_aurorae = QStringLiteral("org.ukui.kwin.aurorae");
 static const QString s_pluginName = QStringLiteral("org.kde.kdecoration2");
 #if HAVE_BREEZE_DECO
 static const QString s_defaultPlugin = QStringLiteral(BREEZE_KDECORATION_PLUGIN_ID);
@@ -86,7 +86,7 @@ DecorationBridge::~DecorationBridge()
 QString DecorationBridge::readPlugin()
 {
     //Try to get a default from look and feel
-    KConfigGroup cg(m_lnfConfig, "kwinrc");
+    KConfigGroup cg(m_lnfConfig, "ukui-kwinrc");
     cg = KConfigGroup(&cg, "org.kde.kdecoration2");
     return kwinApp()->config()->group(s_pluginName).readEntry("library", cg.readEntry("library", s_defaultPlugin));
 }
@@ -99,7 +99,7 @@ static bool readNoPlugin()
 QString DecorationBridge::readTheme() const
 {
     //Try to get a default from look and feel
-    KConfigGroup cg(m_lnfConfig, "kwinrc");
+    KConfigGroup cg(m_lnfConfig, "ukui-kwinrc");
     cg = KConfigGroup(&cg, "org.kde.kdecoration2");
     return kwinApp()->config()->group(s_pluginName).readEntry("theme", cg.readEntry("theme", m_defaultTheme));
 }

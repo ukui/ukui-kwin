@@ -219,7 +219,7 @@ bool Compositor::setupStart()
                 << "Configured compositor not supported by Platform. Falling back to defaults";
     }
 
-    const auto availablePlugins = KPluginLoader::findPlugins(QStringLiteral("org.kde.kwin.scenes"));
+    const auto availablePlugins = KPluginLoader::findPlugins(QStringLiteral("org.ukui.kwin.scenes"));
 
     for (auto type : qAsConst(supportedCompositors)) {
         const auto pluginIt = std::find_if(availablePlugins.begin(), availablePlugins.end(),

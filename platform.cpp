@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "platform.h"
 
 #include "abstract_output.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include "composite.h"
 #include "cursor.h"
 #include "effects.h"

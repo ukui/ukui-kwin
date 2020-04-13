@@ -174,7 +174,7 @@ void WindowRuleTest::testWindowClassChange()
     auto group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", 2);
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", 1);
     group.sync();
@@ -203,7 +203,7 @@ void WindowRuleTest::testWindowClassChange()
     xcb_icccm_size_hints_set_position(&hints, 1, windowGeometry.x(), windowGeometry.y());
     xcb_icccm_size_hints_set_size(&hints, 1, windowGeometry.width(), windowGeometry.height());
     xcb_icccm_set_wm_normal_hints(c.data(), w, &hints);
-    xcb_icccm_set_wm_class(c.data(), w, 23, "org.kde.bar\0org.kde.bar");
+    xcb_icccm_set_wm_class(c.data(), w, 23, "org.ukui.bar\0org.ukui.bar");
 
     NETWinInfo info(c.data(), w, rootWindow(), NET::WMAllProperties, NET::WM2AllProperties);
     info.setWindowType(NET::Normal);
@@ -231,7 +231,7 @@ void WindowRuleTest::testWindowClassChange()
     // now change class
     QSignalSpy windowClassChangedSpy{client, &X11Client::windowClassChanged};
     QVERIFY(windowClassChangedSpy.isValid());
-    xcb_icccm_set_wm_class(c.data(), w, 23, "org.kde.foo\0org.kde.foo");
+    xcb_icccm_set_wm_class(c.data(), w, 23, "org.ukui.foo\0org.ukui.foo");
     xcb_flush(c.data());
     QVERIFY(windowClassChangedSpy.wait());
     QCOMPARE(client->keepAbove(), true);

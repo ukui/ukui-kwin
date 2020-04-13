@@ -236,7 +236,7 @@ qint64 Manager::scheduledTransitionDuration() const
 void Manager::initShortcuts()
 {
     QAction *toggleAction = new QAction(this);
-    toggleAction->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    toggleAction->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     toggleAction->setObjectName(i18n("Toggle Night Color"));
     toggleAction->setText(i18n("Toggle Night Color"));
     KGlobalAccel::setGlobalShortcut(toggleAction, QList<QKeySequence>());

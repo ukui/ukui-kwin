@@ -67,7 +67,7 @@ class HwcomposerBackend : public Platform
 {
     Q_OBJECT
     Q_INTERFACES(KWin::Platform)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Platform" FILE "hwcomposer.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Platform" FILE "hwcomposer.json")
 public:
     explicit HwcomposerBackend(QObject *parent = nullptr);
     virtual ~HwcomposerBackend();

@@ -140,16 +140,16 @@ void WindowThumbnailItem::findImage()
     QString imagePath;
     switch (m_wId) {
     case Konqueror:
-        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kwin/kcm_kwintabbox/konqueror.png");
+        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ukui-kwin/kcm_ukuikwintabbox/konqueror.png");
         break;
     case Systemsettings:
-        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kwin/kcm_kwintabbox/systemsettings.png");
+        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ukui-kwin/kcm_ukuikwintabbox/systemsettings.png");
         break;
     case KMail:
-        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kwin/kcm_kwintabbox/kmail.png");
+        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ukui-kwin/kcm_ukuikwintabbox/kmail.png");
         break;
     case Dolphin:
-        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kwin/kcm_kwintabbox/dolphin.png");
+        imagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ukui-kwin/kcm_ukuikwintabbox/dolphin.png");
         break;
     default:
         // ignore

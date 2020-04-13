@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_X11WINDOWED_BACKEND_H
 #include "platform.h"
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QSize>
@@ -37,11 +37,11 @@ namespace KWin
 {
 class X11WindowedOutput;
 
-class KWIN_EXPORT X11WindowedBackend : public Platform
+class UKUI_KWIN_EXPORT X11WindowedBackend : public Platform
 {
     Q_OBJECT
     Q_INTERFACES(KWin::Platform)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Platform" FILE "x11.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Platform" FILE "x11.json")
     Q_PROPERTY(QSize size READ screenSize NOTIFY sizeChanged)
 public:
     X11WindowedBackend(QObject *parent = nullptr);

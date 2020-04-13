@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // own
 #include "tabboxhandler.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwinglobals.h>
 #include "xcbutils.h"
 // tabbox
@@ -235,7 +235,7 @@ QObject *TabBoxHandlerPrivate::createSwitcherItem(bool desktopMode)
                                               .arg(config.layoutName())
                                               .arg(desktopMode ? QStringLiteral("desktopswitcher/DesktopSwitcher.qml") : QStringLiteral("windowswitcher/WindowSwitcher.qml")));
     if (file.isNull()) {
-        const QString folderName = QLatin1String(KWIN_NAME) + (desktopMode ? QLatin1String("/desktoptabbox/") : QLatin1String("/tabbox/"));
+        const QString folderName = QLatin1String(UKUI_KWIN_NAME) + (desktopMode ? QLatin1String("/desktoptabbox/") : QLatin1String("/tabbox/"));
         auto findSwitcher = [this, desktopMode, folderName] {
             const QString type = desktopMode ? QStringLiteral("KWin/DesktopSwitcher") : QStringLiteral("KWin/WindowSwitcher");
             auto offers = KPackage::PackageLoader::self()->findPackages(type,  folderName,
@@ -300,7 +300,7 @@ void TabBoxHandlerPrivate::show()
 {
 #ifndef KWIN_UNIT_TEST
     if (m_qmlContext.isNull()) {
-        qmlRegisterType<SwitcherItem>("org.kde.kwin", 2, 0, "Switcher");
+        qmlRegisterType<SwitcherItem>("org.ukui.kwin", 2, 0, "Switcher");
         m_qmlContext.reset(new QQmlContext(Scripting::self()->qmlEngine()));
     }
     if (m_qmlComponent.isNull()) {

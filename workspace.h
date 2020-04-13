@@ -65,7 +65,7 @@ class X11Client;
 class X11EventFilter;
 enum class Predicate;
 
-class KWIN_EXPORT Workspace : public QObject
+class UKUI_KWIN_EXPORT Workspace : public QObject
 {
     Q_OBJECT
 public:

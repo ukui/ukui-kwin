@@ -145,9 +145,9 @@ QByteArray DetectDialog::selectedMachine() const
 
 void DetectDialog::selectWindow()
 {
-    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
+    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.ukui.KWin"),
                                                           QStringLiteral("/KWin"),
-                                                          QStringLiteral("org.kde.KWin"),
+                                                          QStringLiteral("org.ukui.KWin"),
                                                           QStringLiteral("queryWindowInfo"));
     QDBusPendingReply<QVariantMap> async = QDBusConnection::sessionBus().asyncCall(message);
 

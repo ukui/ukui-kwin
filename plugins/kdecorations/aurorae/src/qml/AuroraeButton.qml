@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kwin.decoration 0.1
+import org.ukui.kwin.decoration 0.1
 
 DecorationButton {
     function widthForButton() {

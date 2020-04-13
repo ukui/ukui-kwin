@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_X11_OUTPUT_H
 
 #include "abstract_output.h"
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QRect>
@@ -34,7 +34,7 @@ namespace KWin
 /**
  * X11 output representation
  */
-class KWIN_EXPORT X11Output : public AbstractOutput
+class UKUI_KWIN_EXPORT X11Output : public AbstractOutput
 {
     Q_OBJECT
 

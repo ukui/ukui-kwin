@@ -194,11 +194,11 @@ void UserActionsMenu::helperDialog(const QString& message, AbstractClient* clien
     } else
         abort();
     if (!type.isEmpty()) {
-        KConfig cfg(QStringLiteral("kwin_dialogsrc"));
+        KConfig cfg(QStringLiteral("ukui-kwin_dialogsrc"));
         KConfigGroup cg(&cfg, "Notification Messages");  // Depends on KMessageBox
         if (!cg.readEntry(type, true))
             return;
-        args << QStringLiteral("--dontagain") << QLatin1String("kwin_dialogsrc:") + type;
+        args << QStringLiteral("--dontagain") << QLatin1String("ukui-kwin_dialogsrc:") + type;
     }
     if (client)
         args << QStringLiteral("--embed") << QString::number(client->windowId());
@@ -211,17 +211,17 @@ void UserActionsMenu::helperDialog(const QString& message, AbstractClient* clien
 QStringList configModules(bool controlCenter)
 {
     QStringList args;
-    args <<  QStringLiteral("kwindecoration");
+    args <<  QStringLiteral("ukuikwindecoration");
     if (controlCenter)
-        args << QStringLiteral("kwinoptions");
-    else if (KAuthorized::authorizeControlModule(QStringLiteral("kde-kwinoptions.desktop")))
-        args << QStringLiteral("kwinactions") << QStringLiteral("kwinfocus") <<  QStringLiteral("kwinmoving") << QStringLiteral("kwinadvanced")
-             << QStringLiteral("kwinrules") << QStringLiteral("kwincompositing") << QStringLiteral("kwineffects")
+        args << QStringLiteral("ukuikwinoptions");
+    else if (KAuthorized::authorizeControlModule(QStringLiteral("ukui-ukuikwinoptions.desktop")))
+        args << QStringLiteral("ukuikwinactions") << QStringLiteral("ukuikwinfocus") <<  QStringLiteral("ukuikwinmoving") << QStringLiteral("ukuikwinadvanced")
+             << QStringLiteral("ukuikwinrules") << QStringLiteral("ukuikwincompositing") << QStringLiteral("ukuikwineffects")
 #ifdef KWIN_BUILD_TABBOX
-             << QStringLiteral("kwintabbox")
+             << QStringLiteral("ukuikwintabbox")
 #endif
-             << QStringLiteral("kwinscreenedges")
-             << QStringLiteral("kwinscripts")
+             << QStringLiteral("ukuikwinscreenedges")
+             << QStringLiteral("ukuikwinscripts")
              ;
     return args;
 }
@@ -249,93 +249,95 @@ void UserActionsMenu::init()
         }
     };
 
-    m_moveOperation = advancedMenu->addAction(i18n("&Move"));
-    m_moveOperation->setIcon(QIcon::fromTheme(QStringLiteral("transform-move")));
-    setShortcut(m_moveOperation, QStringLiteral("Window Move"));
-    m_moveOperation->setData(Options::UnrestrictedMoveOp);
+     m_moveOperation = advancedMenu->addAction(i18n("&Move"));
+     m_moveOperation->setIcon(QIcon::fromTheme(QStringLiteral("transform-move")));
+     setShortcut(m_moveOperation, QStringLiteral("Window Move"));
+     m_moveOperation->setData(Options::UnrestrictedMoveOp);
+ 
+     m_resizeOperation = advancedMenu->addAction(i18n("&Resize"));
+     m_resizeOperation->setIcon(QIcon::fromTheme(QStringLiteral("transform-scale")));
+     setShortcut(m_resizeOperation, QStringLiteral("Window Resize"));
+     m_resizeOperation->setData(Options::ResizeOp);
+ 
+     m_keepAboveOperation = advancedMenu->addAction(i18n("Keep &Above Others"));
+     m_keepAboveOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-keep-above")));
+     setShortcut(m_keepAboveOperation, QStringLiteral("Window Above Other Windows"));
+     m_keepAboveOperation->setCheckable(true);
+     m_keepAboveOperation->setData(Options::KeepAboveOp);
+ 
+     m_keepBelowOperation = advancedMenu->addAction(i18n("Keep &Below Others"));
+     m_keepBelowOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-keep-below")));
+     setShortcut(m_keepBelowOperation, QStringLiteral("Window Below Other Windows"));
+     m_keepBelowOperation->setCheckable(true);
+     m_keepBelowOperation->setData(Options::KeepBelowOp);
+ 
+     m_fullScreenOperation = advancedMenu->addAction(i18n("&Fullscreen"));
+     m_fullScreenOperation->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
+     setShortcut(m_fullScreenOperation, QStringLiteral("Window Fullscreen"));
+     m_fullScreenOperation->setCheckable(true);
+     m_fullScreenOperation->setData(Options::FullScreenOp);
+ 
+     m_shadeOperation = advancedMenu->addAction(i18n("&Shade"));
+     m_shadeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-shade")));
+     setShortcut(m_shadeOperation, QStringLiteral("Window Shade"));
+     m_shadeOperation->setCheckable(true);
+     m_shadeOperation->setData(Options::ShadeOp);
 
-    m_resizeOperation = advancedMenu->addAction(i18n("&Resize"));
-    m_resizeOperation->setIcon(QIcon::fromTheme(QStringLiteral("transform-scale")));
-    setShortcut(m_resizeOperation, QStringLiteral("Window Resize"));
-    m_resizeOperation->setData(Options::ResizeOp);
+     m_noBorderOperation = advancedMenu->addAction(i18n("&No Border"));
+     m_noBorderOperation->setIcon(QIcon::fromTheme(QStringLiteral("edit-none-border")));
+     setShortcut(m_noBorderOperation, QStringLiteral("Window No Border"));
+     m_noBorderOperation->setCheckable(true);
+     m_noBorderOperation->setData(Options::NoBorderOp);
+ 
+/* UKUI comment for the moment 
+ *    advancedMenu->addSeparator();
+ *
+ *   m_shortcutOperation = advancedMenu->addAction(i18n("Set Window Short&cut..."));
+ *   m_shortcutOperation->setIcon(QIcon::fromTheme(QStringLiteral("configure-shortcuts")));
+ *   setShortcut(m_shortcutOperation, QStringLiteral("Setup Window Shortcut"));
+ *   m_shortcutOperation->setData(Options::SetupWindowShortcutOp);
 
-    m_keepAboveOperation = advancedMenu->addAction(i18n("Keep &Above Others"));
-    m_keepAboveOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-keep-above")));
-    setShortcut(m_keepAboveOperation, QStringLiteral("Window Above Other Windows"));
-    m_keepAboveOperation->setCheckable(true);
-    m_keepAboveOperation->setData(Options::KeepAboveOp);
+ *   QAction *action = advancedMenu->addAction(i18n("Configure Special &Window Settings..."));
+ *   action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-windows-actions")));
+ *   action->setData(Options::WindowRulesOp);
+ *   m_rulesOperation = action;
 
-    m_keepBelowOperation = advancedMenu->addAction(i18n("Keep &Below Others"));
-    m_keepBelowOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-keep-below")));
-    setShortcut(m_keepBelowOperation, QStringLiteral("Window Below Other Windows"));
-    m_keepBelowOperation->setCheckable(true);
-    m_keepBelowOperation->setData(Options::KeepBelowOp);
-
-    m_fullScreenOperation = advancedMenu->addAction(i18n("&Fullscreen"));
-    m_fullScreenOperation->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
-    setShortcut(m_fullScreenOperation, QStringLiteral("Window Fullscreen"));
-    m_fullScreenOperation->setCheckable(true);
-    m_fullScreenOperation->setData(Options::FullScreenOp);
-
-    m_shadeOperation = advancedMenu->addAction(i18n("&Shade"));
-    m_shadeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-shade")));
-    setShortcut(m_shadeOperation, QStringLiteral("Window Shade"));
-    m_shadeOperation->setCheckable(true);
-    m_shadeOperation->setData(Options::ShadeOp);
-
-    m_noBorderOperation = advancedMenu->addAction(i18n("&No Border"));
-    m_noBorderOperation->setIcon(QIcon::fromTheme(QStringLiteral("edit-none-border")));
-    setShortcut(m_noBorderOperation, QStringLiteral("Window No Border"));
-    m_noBorderOperation->setCheckable(true);
-    m_noBorderOperation->setData(Options::NoBorderOp);
-
-    advancedMenu->addSeparator();
-
-    m_shortcutOperation = advancedMenu->addAction(i18n("Set Window Short&cut..."));
-    m_shortcutOperation->setIcon(QIcon::fromTheme(QStringLiteral("configure-shortcuts")));
-    setShortcut(m_shortcutOperation, QStringLiteral("Setup Window Shortcut"));
-    m_shortcutOperation->setData(Options::SetupWindowShortcutOp);
-
-    QAction *action = advancedMenu->addAction(i18n("Configure Special &Window Settings..."));
-    action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-windows-actions")));
-    action->setData(Options::WindowRulesOp);
-    m_rulesOperation = action;
-
-    action = advancedMenu->addAction(i18n("Configure S&pecial Application Settings..."));
-    action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-windows-actions")));
-    action->setData(Options::ApplicationRulesOp);
-    m_applicationRulesOperation = action;
-    if (!kwinApp()->config()->isImmutable() &&
-            !KAuthorized::authorizeControlModules(configModules(true)).isEmpty()) {
-        advancedMenu->addSeparator();
-        action = advancedMenu->addAction(i18nc("Entry in context menu of window decoration to open the configuration module of KWin",
-                                        "Configure W&indow Manager..."));
-        action->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
-        connect(action, &QAction::triggered, this,
-            [this]() {
-                // opens the KWin configuration
-                QStringList args;
-                args << QStringLiteral("--icon") << QStringLiteral("preferences-system-windows");
-                const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                            QStringLiteral("kservices5/kwinfocus.desktop"));
-                if (!path.isEmpty()) {
-                    args << QStringLiteral("--desktopfile") << path;
-                }
-                args << configModules(false);
-                QProcess *p = new Process(this);
-                p->setArguments(args);
-                p->setProcessEnvironment(kwinApp()->processStartupEnvironment());
-                p->setProgram(QStringLiteral("kcmshell5"));
-                connect(p, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), p, &QProcess::deleteLater);
-                connect(p, &QProcess::errorOccurred, this, [p](QProcess::ProcessError e) {
-                    if (e == QProcess::FailedToStart) {
-                        qCDebug(KWIN_CORE) << "Failed to start kcmshell5";
-                    }
-                });
-                p->start();
-            }
-        );
-    }
+ *   action = advancedMenu->addAction(i18n("Configure S&pecial Application Settings..."));
+ *   action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-windows-actions")));
+ *   action->setData(Options::ApplicationRulesOp);
+ *   m_applicationRulesOperation = action;
+ *   if (!kwinApp()->config()->isImmutable() &&
+ *           !KAuthorized::authorizeControlModules(configModules(true)).isEmpty()) {
+ *       advancedMenu->addSeparator();
+ *       action = advancedMenu->addAction(i18nc("Entry in context menu of window decoration to open the configuration module of KWin",
+ *                                       "Configure W&indow Manager..."));
+ *       action->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+ *       connect(action, &QAction::triggered, this,
+ *           [this]() {
+ *               // opens the KWin configuration
+ *               QStringList args;
+ *               args << QStringLiteral("--icon") << QStringLiteral("preferences-system-windows");
+ *               const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+ *                                                           QStringLiteral("kservices5/ukuikwinfocus.desktop"));
+ *               if (!path.isEmpty()) {
+ *                   args << QStringLiteral("--desktopfile") << path;
+ *               }
+ *               args << configModules(false);
+ *               QProcess *p = new Process(this);
+ *               p->setArguments(args);
+ *               p->setProcessEnvironment(kwinApp()->processStartupEnvironment());
+ *               p->setProgram(QStringLiteral("kcmshell5"));
+ *               connect(p, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), p, &QProcess::deleteLater);
+ *               connect(p, &QProcess::errorOccurred, this, [p](QProcess::ProcessError e) {
+ *                   if (e == QProcess::FailedToStart) {
+ *                       qCDebug(KWIN_CORE) << "Failed to start kcmshell5";
+ *                   }
+ *               });
+ *               p->start();
+ *           }
+ *       );
+ *   }
+ */
 
     m_maximizeOperation = m_menu->addAction(i18n("Ma&ximize"));
     m_maximizeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-maximize")));
@@ -348,7 +350,7 @@ void UserActionsMenu::init()
     setShortcut(m_minimizeOperation, QStringLiteral("Window Minimize"));
     m_minimizeOperation->setData(Options::MinimizeOp);
 
-    action = m_menu->addMenu(advancedMenu);
+    QAction *action = m_menu->addMenu(advancedMenu);
     action->setText(i18n("&More Actions"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-more-symbolic")));
 
@@ -404,7 +406,7 @@ void UserActionsMenu::menuAboutToShow()
     m_noBorderOperation->setChecked(m_client->noBorder());
     m_minimizeOperation->setEnabled(m_client->isMinimizable());
     m_closeOperation->setEnabled(m_client->isCloseable());
-    m_shortcutOperation->setEnabled(m_client->rules()->checkShortcut(QString()).isNull());
+//    m_shortcutOperation->setEnabled(m_client->rules()->checkShortcut(QString()).isNull());
 
     // drop the existing scripts menu
     delete m_scriptsMenu;
@@ -422,8 +424,8 @@ void UserActionsMenu::menuAboutToShow()
         action->setText(i18n("&Extensions"));
     }
 
-    m_rulesOperation->setEnabled(m_client->supportsWindowRules());
-    m_applicationRulesOperation->setEnabled(m_client->supportsWindowRules());
+    //m_rulesOperation->setEnabled(m_client->supportsWindowRules());
+    //m_applicationRulesOperation->setEnabled(m_client->supportsWindowRules());
 
     showHideActivityMenu();
 }
@@ -956,7 +958,7 @@ template <typename T, typename Slot>
 void Workspace::initShortcut(const QString &actionName, const QString &description, const QKeySequence &shortcut, T *receiver, Slot slot, const QVariant &data)
 {
     QAction *a = new QAction(this);
-    a->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    a->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     a->setObjectName(actionName);
     a->setText(description);
     if (data.isValid()) {
@@ -1028,7 +1030,7 @@ void Workspace::clientShortcutUpdated(AbstractClient* c)
         if (action == nullptr) { // new shortcut
             action = new QAction(this);
             kwinApp()->platform()->setupActionForGlobalAccel(action);
-            action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+            action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
             action->setObjectName(key);
             action->setText(i18n("Activate Window (%1)", c->caption()));
             connect(action, &QAction::triggered, c, std::bind(&Workspace::activateClient, this, c, true));

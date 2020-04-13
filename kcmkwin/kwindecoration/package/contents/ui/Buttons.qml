@@ -24,7 +24,7 @@ import QtQuick.Controls 2.4 as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.5 as Kirigami
-import org.kde.kwin.private.kdecoration 1.0 as KDecoration
+import org.ukui.kwin.private.kdecoration 1.0 as KDecoration
 
 ColumnLayout {
     Layout.fillWidth: true

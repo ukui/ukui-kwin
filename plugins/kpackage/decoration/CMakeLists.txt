@@ -4,14 +4,14 @@ set(decoration_SRCS
     decoration.cpp
 )
 
-add_library(kwin_packagestructure_decoration MODULE ${decoration_SRCS})
+add_library(ukui_kwin_packagestructure_decoration MODULE ${decoration_SRCS})
 
-target_link_libraries(kwin_packagestructure_decoration
+target_link_libraries(ukui_kwin_packagestructure_decoration
    KF5::I18n
    KF5::Package
 )
 
-kcoreaddons_desktop_to_json(kwin_packagestructure_decoration kwin-packagestructure-decoration.desktop)
+kcoreaddons_desktop_to_json(ukui_kwin_packagestructure_decoration ukui-kwin-packagestructure-decoration.desktop)
 
-install(TARGETS kwin_packagestructure_decoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
+install(TARGETS ukui_kwin_packagestructure_decoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
 

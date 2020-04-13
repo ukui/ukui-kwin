@@ -11,8 +11,8 @@ endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/platformsupport/scenes/opengl)
 add_library(KWinWaylandWaylandBackend MODULE ${WAYLAND_BACKEND_SOURCES})
-set_target_properties(KWinWaylandWaylandBackend PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.kde.kwin.waylandbackends/")
-target_link_libraries(KWinWaylandWaylandBackend kwin KF5::WaylandClient SceneQPainterBackend)
+set_target_properties(KWinWaylandWaylandBackend PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.ukui.kwin.waylandbackends/")
+target_link_libraries(KWinWaylandWaylandBackend ukui-kwin KF5::WaylandClient SceneQPainterBackend)
 
 if (HAVE_WAYLAND_EGL)
     target_link_libraries(KWinWaylandWaylandBackend SceneOpenGLBackend Wayland::Egl)
@@ -22,5 +22,5 @@ install(
     TARGETS
         KWinWaylandWaylandBackend
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/org.kde.kwin.waylandbackends/
+        ${PLUGIN_INSTALL_DIR}/org.ukui.kwin.waylandbackends/
 )

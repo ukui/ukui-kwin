@@ -54,7 +54,7 @@ X11TestApplication::X11TestApplication(int &argc, char **argv)
     removeLibraryPath(ownPath);
     addLibraryPath(ownPath);
 
-    const auto plugins = KPluginLoader::findPluginsById(QStringLiteral("org.kde.kwin.platforms"),
+    const auto plugins = KPluginLoader::findPluginsById(QStringLiteral("org.ukui.kwin.platforms"),
                                                         QStringLiteral("KWinX11Platform"));
     if (plugins.empty()) {
         quit();

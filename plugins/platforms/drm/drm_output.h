@@ -42,7 +42,7 @@ class DrmPlane;
 class DrmConnector;
 class DrmCrtc;
 
-class KWIN_EXPORT DrmOutput : public AbstractWaylandOutput
+class UKUI_KWIN_EXPORT DrmOutput : public AbstractWaylandOutput
 {
     Q_OBJECT
 public:

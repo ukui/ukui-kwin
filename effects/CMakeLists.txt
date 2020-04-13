@@ -1,7 +1,7 @@
 # KI18N Translation Domain for this library
 add_definitions(-DTRANSLATION_DOMAIN=\"kwin_effects\" -DEFFECT_BUILTINS)
 
-include_directories(${KWIN_SOURCE_DIR}) # for xcbutils.h
+include_directories(${UKUI_KWIN_SOURCE_DIR}) # for xcbutils.h
 
 set(kwin_effect_OWN_LIBS
     kwineffects
@@ -61,12 +61,12 @@ macro(KWIN4_ADD_EFFECT name)
     kwin4_add_effect_backend(kwin4_effect_${name} ${ARGN})
 
     set_target_properties(kwin4_effect_${name} PROPERTIES VERSION 1.0.0 SOVERSION 1)
-    set_target_properties(kwin4_effect_${name} PROPERTIES OUTPUT_NAME ${KWIN_NAME}4_effect_${name})
+    set_target_properties(kwin4_effect_${name} PROPERTIES OUTPUT_NAME ${UKUI_KWIN_NAME}4_effect_${name})
     install(TARGETS kwin4_effect_${name} ${INSTALL_TARGETS_DEFAULT_ARGS})
 endmacro()
 
 # Install the KWin/Effect service type
-install(FILES kwineffect.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES kwineffect.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR}/ukui-kwin)
 
 # Create initial variables
 set(kwin4_effect_include_directories)
@@ -136,10 +136,10 @@ kconfig_add_kcfg_files(kwin4_effect_builtins_sources
 
 # scripted effects
 function(install_scripted_effect name)
-    kpackage_install_package(${name}/package kwin4_effect_${name} effects kwin)
+    kpackage_install_package(${name}/package kwin4_effect_${name} effects ukui-kwin)
 
     # necessary so tests are found without installing
-    file(COPY ${name}/package/contents ${name}/package/metadata.desktop DESTINATION ${CMAKE_BINARY_DIR}/bin/kwin/effects/kwin4_effect_${name})
+    file(COPY ${name}/package/contents ${name}/package/metadata.desktop DESTINATION ${CMAKE_BINARY_DIR}/bin/ukui-kwin/effects/kwin4_effect_${name})
 endfunction()
 install_scripted_effect(dialogparent)
 install_scripted_effect(dimscreen)

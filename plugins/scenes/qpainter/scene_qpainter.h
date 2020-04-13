@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace KWin {
 
-class KWIN_EXPORT SceneQPainter : public Scene
+class UKUI_KWIN_EXPORT SceneQPainter : public Scene
 {
     Q_OBJECT
 
@@ -161,11 +161,11 @@ private:
     QImage m_images[int(DecorationPart::Count)];
 };
 
-class KWIN_EXPORT QPainterFactory : public SceneFactory
+class UKUI_KWIN_EXPORT QPainterFactory : public SceneFactory
 {
     Q_OBJECT
     Q_INTERFACES(KWin::SceneFactory)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Scene" FILE "qpainter.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Scene" FILE "qpainter.json")
 
 public:
     explicit QPainterFactory(QObject *parent = nullptr);

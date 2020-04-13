@@ -686,7 +686,7 @@ void LockScreenTest::testKeyboardShortcut()
     QScopedPointer<QAction> action(new QAction(nullptr));
     QSignalSpy actionSpy(action.data(), &QAction::triggered);
     QVERIFY(actionSpy.isValid());
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName("LockScreenTest::testKeyboardShortcut");
     KGlobalAccel::self()->setDefaultShortcut(action.data(), QList<QKeySequence>{Qt::CTRL + Qt::META + Qt::ALT + Qt::Key_Space});
     KGlobalAccel::self()->setShortcut(action.data(), QList<QKeySequence>{Qt::CTRL + Qt::META + Qt::ALT + Qt::Key_Space},

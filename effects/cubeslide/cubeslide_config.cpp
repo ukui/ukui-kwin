@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "cubeslide_config.h"
 // KConfigSkeleton
 #include "cubeslideconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <kconfiggroup.h>
@@ -49,7 +49,7 @@ CubeSlideEffectConfig::CubeSlideEffectConfig(QWidget* parent, const QVariantList
 
     layout->addWidget(m_ui);
 
-    CubeSlideConfig::instance(KWIN_CONFIG);
+    CubeSlideConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(CubeSlideConfig::self(), m_ui);
 
     load();
@@ -58,7 +58,7 @@ CubeSlideEffectConfig::CubeSlideEffectConfig(QWidget* parent, const QVariantList
 void CubeSlideEffectConfig::save()
 {
     KCModule::save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("cubeslide"));

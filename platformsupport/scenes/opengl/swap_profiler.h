@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_SCENE_OPENGL_SWAP_PROFILER_H
 
 #include <QElapsedTimer>
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 namespace KWin
 {
@@ -31,7 +31,7 @@ namespace KWin
  * @short Profiler to detect whether we have triple buffering
  * The strategy is to start setBlocksForRetrace(false) but assume blocking and have the system prove that assumption wrong
  */
-class KWIN_EXPORT SwapProfiler
+class UKUI_KWIN_EXPORT SwapProfiler
 {
 public:
     SwapProfiler();

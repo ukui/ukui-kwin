@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "aurorae.h"
 #include "auroraetheme.h"
-#include "config-kwin.h"
+#include "config-ukui-kwin.h"
 #include "kwineffectquickview.h"
 // qml imports
 #include "decorationoptions.h"
@@ -116,7 +116,7 @@ void Helper::unref()
 }
 
 static const QString s_defaultTheme = QStringLiteral("kwin4_decoration_qml_plastik");
-static const QString s_qmlPackageFolder = QStringLiteral(KWIN_NAME "/decorations/");
+static const QString s_qmlPackageFolder = QStringLiteral(UKUI_KWIN_NAME "/decorations/");
 /*
  * KDecoration2::BorderSize doesn't map to the indices used for the Aurorae SVG Button Sizes.
  * BorderSize defines None and NoSideBorder as index 0 and 1. These do not make sense for Button
@@ -219,10 +219,10 @@ void Helper::init()
             if (!fileInfo.isFile()) {
                 continue;
             }
-            if (!fileInfo.path().endsWith(QLatin1String("/org/kde/kwin/decoration"))) {
+            if (!fileInfo.path().endsWith(QLatin1String("/org/ukui/kwin/decoration"))) {
                 continue;
             }
-            if (fileInfo.fileName() == QLatin1String("libdecorationplugin.so")) {
+            if (fileInfo.fileName() == QLatin1String("libukui_decorationplugin.so")) {
                 pluginPath = fileInfo.absoluteFilePath();
                 break;
             }
@@ -231,8 +231,8 @@ void Helper::init()
             break;
         }
     }
-    m_engine->importPlugin(pluginPath, "org.kde.kwin.decoration", nullptr);
-    qmlRegisterType<KWin::Borders>("org.kde.kwin.decoration", 0, 1, "Borders");
+    m_engine->importPlugin(pluginPath, "org.ukui.kwin.decoration", nullptr);
+    qmlRegisterType<KWin::Borders>("org.ukui.kwin.decoration", 0, 1, "Borders");
 
     qmlRegisterType<KDecoration2::Decoration>();
     qmlRegisterType<KDecoration2::DecoratedClient>();

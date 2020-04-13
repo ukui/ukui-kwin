@@ -19,7 +19,7 @@
 */
 
 #include "genericscriptedconfig.h"
-#include "config-kwin.h"
+#include "config-ukui-kwin.h"
 #include <kwineffects_interface.h>
 #include <KAboutData>
 #define TRANSLATION_DOMAIN "kwin_scripting"
@@ -64,14 +64,14 @@ void GenericScriptedConfig::createUi()
     QVBoxLayout* layout = new QVBoxLayout(this);
 
     const QString kconfigXTFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                        QLatin1String(KWIN_NAME) +
+                                                        QLatin1String(UKUI_KWIN_NAME) +
                                                         QLatin1Char('/') +
                                                         typeName() +
                                                         QLatin1Char('/') +
                                                         m_packageName +
                                                         QLatin1String("/contents/config/main.xml"));
     const QString uiPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                 QLatin1String(KWIN_NAME) +
+                                                 QLatin1String(UKUI_KWIN_NAME) +
                                                  QLatin1Char('/') +
                                                  typeName() +
                                                  QLatin1Char('/') +
@@ -90,7 +90,7 @@ void GenericScriptedConfig::createUi()
     QFile uiFile(uiPath);
     // try getting a translation domain
     const QString metaDataPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                        QStringLiteral(KWIN_NAME"/%1/%2/metadata.desktop").arg(typeName()).arg(m_packageName));
+                                                        QStringLiteral(UKUI_KWIN_NAME"/%1/%2/metadata.desktop").arg(typeName()).arg(m_packageName));
     if (!metaDataPath.isNull()) {
         KDesktopFile metaData(metaDataPath);
         m_translator->setTranslationDomain(metaData.desktopGroup().readEntry("X-KWin-Config-TranslationDomain", QString()));
@@ -136,12 +136,12 @@ QString ScriptedEffectConfig::typeName() const
 
 KConfigGroup ScriptedEffectConfig::configGroup()
 {
-    return KSharedConfig::openConfig(QStringLiteral(KWIN_CONFIG))->group(QLatin1String("Effect-") + packageName());
+    return KSharedConfig::openConfig(QStringLiteral(UKUI_KWIN_CONFIG))->group(QLatin1String("Effect-") + packageName());
 }
 
 void ScriptedEffectConfig::reload()
 {
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(packageName());
@@ -159,7 +159,7 @@ ScriptingConfig::~ScriptingConfig()
 
 KConfigGroup ScriptingConfig::configGroup()
 {
-    return KSharedConfig::openConfig(QStringLiteral(KWIN_CONFIG))->group(QLatin1String("Script-") + packageName());
+    return KSharedConfig::openConfig(QStringLiteral(UKUI_KWIN_CONFIG))->group(QLatin1String("Script-") + packageName());
 }
 
 QString ScriptingConfig::typeName() const

@@ -53,7 +53,7 @@ namespace LibInput
 class Device;
 }
 
-class KWIN_EXPORT KeyboardInputRedirection : public QObject
+class UKUI_KWIN_EXPORT KeyboardInputRedirection : public QObject
 {
     Q_OBJECT
 public:

@@ -112,8 +112,8 @@ TabletModeManager::TabletModeManager(QObject *parent)
         hasTabletModeInputChanged(false);
     }
 
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/kde/KWin"),
-                                                 QStringLiteral("org.kde.KWin.TabletModeManager"),
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/ukui/KWin"),
+                                                 QStringLiteral("org.ukui.KWin.TabletModeManager"),
                                                  this,
                                                  QDBusConnection::ExportAllProperties | QDBusConnection::ExportAllSignals
     );

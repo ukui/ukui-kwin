@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "effectsmodel.h"
 
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <effect_builtins.h>
-#include <kwin_effects_interface.h>
+#include <ukui_kwin_effects_interface.h>
 
 #include <KAboutData>
 #include <KCModule>
@@ -239,7 +239,7 @@ void EffectsModel::loadBuiltInEffects(const KConfigGroup &kwinConfig, const KPlu
         effect.authorName = i18n("KWin development team");
         effect.authorEmail = QString(); // not used at all
         effect.license = QStringLiteral("GPL");
-        effect.version = QStringLiteral(KWIN_VERSION_STRING);
+        effect.version = QStringLiteral(UKUI_KWIN_VERSION_STRING);
         effect.untranslatedCategory = data.category;
         effect.category = translatedCategory(data.category);
         effect.serviceName = data.name;
@@ -278,7 +278,7 @@ void EffectsModel::loadJavascriptEffects(const KConfigGroup &kwinConfig)
 {
     const auto plugins = KPackage::PackageLoader::self()->listPackages(
         QStringLiteral("KWin/Effect"),
-        QStringLiteral("kwin/effects")
+        QStringLiteral("ukui-kwin/effects")
     );
     for (const KPluginMetaData &metaData : plugins) {
         KPluginInfo plugin(metaData);
@@ -322,7 +322,7 @@ void EffectsModel::loadJavascriptEffects(const KConfigGroup &kwinConfig)
 void EffectsModel::loadPluginEffects(const KConfigGroup &kwinConfig, const KPluginInfo::List &configs)
 {
     const auto pluginEffects = KPluginLoader::findPlugins(
-        QStringLiteral("kwin/effects/plugins/"),
+        QStringLiteral("ukui-kwin/effects/plugins/"),
         [](const KPluginMetaData &data) {
             return data.serviceTypes().contains(QStringLiteral("KWin/Effect"));
         }
@@ -355,8 +355,8 @@ void EffectsModel::loadPluginEffects(const KConfigGroup &kwinConfig, const KPlug
             }
         }
 
-        if (pluginEffect.rawData().contains("org.kde.kwin.effect")) {
-            const QJsonObject d(pluginEffect.rawData().value("org.kde.kwin.effect").toObject());
+        if (pluginEffect.rawData().contains("org.ukui.kwin.effect")) {
+            const QJsonObject d(pluginEffect.rawData().value("org.ukui.kwin.effect").toObject());
             effect.exclusiveGroup = d.value("exclusiveGroup").toString();
             effect.video = QUrl::fromUserInput(d.value("video").toString());
             effect.enabledByDefaultFunction = d.value("enabledByDefaultMethod").toBool();
@@ -389,10 +389,10 @@ void EffectsModel::loadPluginEffects(const KConfigGroup &kwinConfig, const KPlug
 
 void EffectsModel::load(LoadOptions options)
 {
-    KConfigGroup kwinConfig(KSharedConfig::openConfig("kwinrc"), "Plugins");
+    KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
 
     m_pendingEffects.clear();
-    const KPluginInfo::List configs = KPluginTrader::self()->query(QStringLiteral("kwin/effects/configs/"));
+    const KPluginInfo::List configs = KPluginTrader::self()->query(QStringLiteral("ukui-kwin/effects/configs/"));
     loadBuiltInEffects(kwinConfig, configs);
     loadJavascriptEffects(kwinConfig);
     loadPluginEffects(kwinConfig, configs);
@@ -436,7 +436,7 @@ void EffectsModel::load(LoadOptions options)
         emit loaded();
     };
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
 
@@ -502,7 +502,7 @@ void EffectsModel::updateEffectStatus(const QModelIndex &rowIndex, Status effect
 
 void EffectsModel::save()
 {
-    KConfigGroup kwinConfig(KSharedConfig::openConfig("kwinrc"), "Plugins");
+    KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
 
     QVector<EffectData> dirtyEffects;
 
@@ -534,7 +534,7 @@ void EffectsModel::save()
 
     kwinConfig.sync();
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
 
@@ -601,7 +601,7 @@ QModelIndex EffectsModel::findByPluginId(const QString &pluginId) const
 static KCModule *findBinaryConfig(const QString &pluginId, QObject *parent)
 {
     return KPluginTrader::createInstanceFromQuery<KCModule>(
-        QStringLiteral("kwin/effects/configs/"),
+        QStringLiteral("ukui-kwin/effects/configs/"),
         QString(),
         QStringLiteral("'%1' in [X-KDE-ParentComponents]").arg(pluginId),
         parent
@@ -611,7 +611,7 @@ static KCModule *findBinaryConfig(const QString &pluginId, QObject *parent)
 static KCModule *findScriptedConfig(const QString &pluginId, QObject *parent)
 {
     const auto offers = KPluginTrader::self()->query(
-        QStringLiteral("kwin/effects/configs/"),
+        QStringLiteral("ukui-kwin/effects/configs/"),
         QString(),
         QStringLiteral("[X-KDE-Library] == 'kcm_kwin4_genericscripted'")
     );

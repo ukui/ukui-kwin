@@ -341,11 +341,11 @@ private:
     XRenderPicture* m_pictures[int(DecorationPart::Count)];
 };
 
-class KWIN_EXPORT XRenderFactory : public SceneFactory
+class UKUI_KWIN_EXPORT XRenderFactory : public SceneFactory
 {
     Q_OBJECT
     Q_INTERFACES(KWin::SceneFactory)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Scene" FILE "xrender.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Scene" FILE "xrender.json")
 
 public:
     explicit XRenderFactory(QObject *parent = nullptr);

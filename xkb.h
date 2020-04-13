@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_XKB_H
 #include "input.h"
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <KSharedConfig>
 
@@ -49,7 +49,7 @@ namespace Server
 namespace KWin
 {
 
-class KWIN_EXPORT Xkb : public QObject
+class UKUI_KWIN_EXPORT Xkb : public QObject
 {
     Q_OBJECT
 public:

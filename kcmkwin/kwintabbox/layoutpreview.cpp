@@ -43,8 +43,8 @@ LayoutPreview::LayoutPreview(const QString &path, QObject *parent)
 {
     QQmlEngine *engine = new QQmlEngine(this);
     QQmlComponent *component = new QQmlComponent(engine, this);
-    qmlRegisterType<WindowThumbnailItem>("org.kde.kwin", 2, 0, "ThumbnailItem");
-    qmlRegisterType<SwitcherItem>("org.kde.kwin", 2, 0, "Switcher");
+    qmlRegisterType<WindowThumbnailItem>("org.ukui.kwin", 2, 0, "ThumbnailItem");
+    qmlRegisterType<SwitcherItem>("org.ukui.kwin", 2, 0, "Switcher");
     qmlRegisterType<QAbstractItemModel>();
     component->loadUrl(QUrl::fromLocalFile(path));
     if (component->isError()) {

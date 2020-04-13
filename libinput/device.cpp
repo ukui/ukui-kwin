@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <linux/input.h>
 
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 namespace KWin
 {
@@ -253,8 +253,8 @@ Device::Device(libinput_device *device, QObject *parent)
     }
 
     s_devices << this;
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/kde/KWin/InputDevice/") + m_sysName,
-                                                 QStringLiteral("org.kde.KWin.InputDevice"),
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/org/ukui/KWin/InputDevice/") + m_sysName,
+                                                 QStringLiteral("org.ukui.KWin.InputDevice"),
                                                  this,
                                                  QDBusConnection::ExportAllProperties
     );
@@ -263,7 +263,7 @@ Device::Device(libinput_device *device, QObject *parent)
 Device::~Device()
 {
     s_devices.removeOne(this);
-    QDBusConnection::sessionBus().unregisterObject(QStringLiteral("/org/kde/KWin/InputDevice/") + m_sysName);
+    QDBusConnection::sessionBus().unregisterObject(QStringLiteral("/org/ukui/KWin/InputDevice/") + m_sysName);
     libinput_device_unref(m_device);
 }
 

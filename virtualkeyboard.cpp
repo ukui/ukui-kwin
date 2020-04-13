@@ -79,7 +79,7 @@ void VirtualKeyboard::init()
     m_inputWindow->setFlags(Qt::FramelessWindowHint);
     m_inputWindow->setGeometry(screens()->geometry(screens()->current()));
     m_inputWindow->setResizeMode(QQuickView::SizeRootObjectToView);
-    m_inputWindow->setSource(QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral(KWIN_NAME "/virtualkeyboard/main.qml"))));
+    m_inputWindow->setSource(QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral(UKUI_KWIN_NAME "/virtualkeyboard/main.qml"))));
     if (m_inputWindow->status() != QQuickView::Status::Ready) {
         qCWarning(KWIN_VIRTUALKEYBOARD) << "window not ready yet";
         m_inputWindow.reset();

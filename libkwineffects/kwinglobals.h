@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPoint>
 #include <QVariant>
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <xcb/xcb.h>
 
@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace KWin
 {
-KWIN_EXPORT Q_NAMESPACE
+UKUI_KWIN_EXPORT Q_NAMESPACE
 
 enum CompositingType {
     NoCompositing = 0,
@@ -150,7 +150,7 @@ enum class SessionState {
 Q_ENUM_NS(SessionState)
 
 inline
-KWIN_EXPORT xcb_connection_t *connection()
+UKUI_KWIN_EXPORT xcb_connection_t *connection()
 {
     static xcb_connection_t *s_con = nullptr;
     if (!s_con) {
@@ -161,7 +161,7 @@ KWIN_EXPORT xcb_connection_t *connection()
 }
 
 inline
-KWIN_EXPORT xcb_window_t rootWindow()
+UKUI_KWIN_EXPORT xcb_window_t rootWindow()
 {
     static xcb_window_t s_rootWindow = XCB_WINDOW_NONE;
     if (s_rootWindow == XCB_WINDOW_NONE) {
@@ -171,13 +171,13 @@ KWIN_EXPORT xcb_window_t rootWindow()
 }
 
 inline
-KWIN_EXPORT xcb_timestamp_t xTime()
+UKUI_KWIN_EXPORT xcb_timestamp_t xTime()
 {
     return qApp->property("x11Time").value<xcb_timestamp_t>();
 }
 
 inline
-KWIN_EXPORT xcb_screen_t *defaultScreen()
+UKUI_KWIN_EXPORT xcb_screen_t *defaultScreen()
 {
     static xcb_screen_t *s_screen = nullptr;
     if (s_screen) {
@@ -195,14 +195,14 @@ KWIN_EXPORT xcb_screen_t *defaultScreen()
 }
 
 inline
-KWIN_DEPRECATED_EXPORT int displayWidth()
+UKUI_KWIN_DEPRECATED_EXPORT int displayWidth()
 {
     xcb_screen_t *screen = defaultScreen();
     return screen ? screen->width_in_pixels : 0;
 }
 
 inline
-KWIN_DEPRECATED_EXPORT int displayHeight()
+UKUI_KWIN_DEPRECATED_EXPORT int displayHeight()
 {
     xcb_screen_t *screen = defaultScreen();
     return screen ? screen->height_in_pixels : 0;

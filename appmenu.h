@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <xcb/xcb.h>
 
 class QPoint;
-class OrgKdeKappmenuInterface;
+class OrgUkuiKappmenuInterface;
 class QDBusObjectPath;
 class QDBusServiceWatcher;
 
@@ -60,7 +60,7 @@ private Q_SLOTS:
     void slotMenuHidden(const QString &serviceName, const QDBusObjectPath &menuObjectPath);
 
 private:
-    OrgKdeKappmenuInterface *m_appmenuInterface;
+    OrgUkuiKappmenuInterface *m_appmenuInterface;
     QDBusServiceWatcher *m_kappMenuWatcher;
 
     AbstractClient *findAbstractClientWithApplicationMenu(const QString &serviceName, const QDBusObjectPath &menuObjectPath);

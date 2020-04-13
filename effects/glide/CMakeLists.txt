@@ -19,6 +19,6 @@ install(
     TARGETS
         kwin_glide_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )
 

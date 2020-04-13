@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "flipswitch_config.h"
 // KConfigSkeleton
 #include "flipswitchconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -70,7 +70,7 @@ FlipSwitchEffectConfig::FlipSwitchEffectConfig(QWidget* parent, const QVariantLi
 
     m_ui->shortcutEditor->addCollection(m_actionCollection);
 
-    FlipSwitchConfig::instance(KWIN_CONFIG);
+    FlipSwitchConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(FlipSwitchConfig::self(), m_ui);
 
     load();
@@ -85,7 +85,7 @@ void FlipSwitchEffectConfig::save()
     KCModule::save();
     m_ui->shortcutEditor->save();
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("flipswitch"));

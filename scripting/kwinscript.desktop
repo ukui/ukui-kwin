@@ -1,58 +1,58 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KWin/Script
+X-KDE-ServiceType=UKUIKWin/Script
 
-Comment=KWin Script
-Comment[bs]=KWin skripta
-Comment[ca]=Script del KWin
-Comment[ca@valencia]=Script de KWin
-Comment[cs]=Skript KWinu
-Comment[da]=KWin-script
-Comment[de]=KWin-Skript
-Comment[el]=Σενάριο KWin
-Comment[en_GB]=KWin Script
-Comment[es]=Guion de KWin
-Comment[et]=KWini skript
-Comment[eu]=KWin scripta
-Comment[fi]=KWin-skripti
-Comment[fr]=Script KWin
-Comment[ga]=Script KWin
-Comment[gl]=Script de KWin
-Comment[he]=תוספים של KWin
-Comment[hu]=KWin parancsfájl
-Comment[ia]=Script de kwin
-Comment[id]=Skrip KWin
-Comment[it]=Script kwin
-Comment[ja]=KWin Script
-Comment[kk]=KWin скрипті
-Comment[km]=ស្គ្រីប KWin
-Comment[ko]=KWin 스크립트
-Comment[lt]=KWin scenarijus
+Comment=UKUIKWin Script
+Comment[bs]=UKUIKWin skripta
+Comment[ca]=Script del UKUIKWin
+Comment[ca@valencia]=Script de UKUIKWin
+Comment[cs]=Skript UKUIKWinu
+Comment[da]=UKUIKWin-script
+Comment[de]=UKUIKWin-Skript
+Comment[el]=Σενάριο UKUIKWin
+Comment[en_GB]=UKUIKWin Script
+Comment[es]=Guion de UKUIKWin
+Comment[et]=UKUIKWini skript
+Comment[eu]=UKUIKWin scripta
+Comment[fi]=UKUIKWin-skripti
+Comment[fr]=Script UKUIKWin
+Comment[ga]=Script UKUIKWin
+Comment[gl]=Script de UKUIKWin
+Comment[he]=תוספים של UKUIKWin
+Comment[hu]=UKUIKWin parancsfájl
+Comment[ia]=Script de ukui-kwin
+Comment[id]=Skrip UKUIKWin
+Comment[it]=Script ukui-kwin
+Comment[ja]=UKUIKWin Script
+Comment[kk]=UKUIKWin скрипті
+Comment[km]=ស្គ្រីប UKUIKWin
+Comment[ko]=UKUIKWin 스크립트
+Comment[lt]=UKUIKWin scenarijus
 Comment[mr]=के-विन स्क्रिप्ट
-Comment[nb]=KWin-skript
-Comment[nds]=KWin-Skript
-Comment[nl]=KWin-script
-Comment[nn]=KWin-skript
-Comment[pa]=KWin ਸਕ੍ਰਿਪਟ
-Comment[pl]=Skrypt KWin
-Comment[pt]=Programa do KWin
-Comment[pt_BR]=Script do KWin
-Comment[ro]=Script KWin
-Comment[ru]=Сценарий KWin
-Comment[sk]=KWin skript
-Comment[sl]=Skript KWin
+Comment[nb]=UKUIKWin-skript
+Comment[nds]=UKUIKWin-Skript
+Comment[nl]=UKUIKWin-script
+Comment[nn]=UKUIKWin-skript
+Comment[pa]=UKUIKWin ਸਕ੍ਰਿਪਟ
+Comment[pl]=Skrypt UKUIKWin
+Comment[pt]=Programa do UKUIKWin
+Comment[pt_BR]=Script do UKUIKWin
+Comment[ro]=Script UKUIKWin
+Comment[ru]=Сценарий UKUIKWin
+Comment[sk]=UKUIKWin skript
+Comment[sl]=Skript UKUIKWin
 Comment[sr]=К‑винова скрипта
 Comment[sr@ijekavian]=К‑винова скрипта
-Comment[sr@ijekavianlatin]=KWinova skripta
-Comment[sr@latin]=KWinova skripta
-Comment[sv]=Kwin-skript
-Comment[tr]=KWin Betiği
-Comment[ug]=KWin قوليازما
-Comment[uk]=Скрипт KWin
-Comment[vi]=Tập lệnh KWin
-Comment[x-test]=xxKWin Scriptxx
-Comment[zh_CN]=KWin 脚本
-Comment[zh_TW]=KWin 文稿
+Comment[sr@ijekavianlatin]=UKUIKWinova skripta
+Comment[sr@latin]=UKUIKWinova skripta
+Comment[sv]=UKUIKwin-skript
+Comment[tr]=UKUIKWin Betiği
+Comment[ug]=UKUIKWin قوليازما
+Comment[uk]=Скрипт UKUIKWin
+Comment[vi]=Tập lệnh UKUIKWin
+Comment[x-test]=xxUKUIKWin Scriptxx
+Comment[zh_CN]=UKUIKWin 脚本
+Comment[zh_TW]=UKUIKWin 文稿
 
 [PropertyDef::X-Plasma-API]
 Type=QString
@@ -60,8 +60,8 @@ Type=QString
 [PropertyDef::X-Plasma-MainScript]
 Type=QString
 
-[PropertyDef::X-KWin-Exclude-Listing]
+[PropertyDef::X-UKUIKWin-Exclude-Listing]
 Type=bool
 
-[PropertyDef::X-KWin-Border-Activate]
+[PropertyDef::X-UKUIKWin-Border-Activate]
 Type=bool

@@ -30,25 +30,25 @@ ColumnLayout {
     Layout.margins: 20
 
     function lock() {
-        org_kde_kwin_tests_pointerconstraints_backend.lockRequest(lockPersChck.checked, root.activRect());
+        org_ukui_kwin_tests_pointerconstraints_backend.lockRequest(lockPersChck.checked, root.activRect());
     }
     function confine() {
-        org_kde_kwin_tests_pointerconstraints_backend.confineRequest(confPersChck.checked, root.activRect());
+        org_ukui_kwin_tests_pointerconstraints_backend.confineRequest(confPersChck.checked, root.activRect());
     }
     function unlock() {
-        org_kde_kwin_tests_pointerconstraints_backend.unlockRequest();
+        org_ukui_kwin_tests_pointerconstraints_backend.unlockRequest();
     }
     function unconfine() {
-        org_kde_kwin_tests_pointerconstraints_backend.unconfineRequest();
+        org_ukui_kwin_tests_pointerconstraints_backend.unconfineRequest();
     }
     function hideAndConfine() {
-        org_kde_kwin_tests_pointerconstraints_backend.hideAndConfineRequest();
+        org_ukui_kwin_tests_pointerconstraints_backend.hideAndConfineRequest();
     }
     function undoHideAndConfine() {
-        org_kde_kwin_tests_pointerconstraints_backend.undoHideRequest();
+        org_ukui_kwin_tests_pointerconstraints_backend.undoHideRequest();
     }
 
-    property bool waylandNative: org_kde_kwin_tests_pointerconstraints_backend.mode === 0
+    property bool waylandNative: org_ukui_kwin_tests_pointerconstraints_backend.mode === 0
 
     Keys.onPressed: {
         if (event.key === Qt.Key_L) {
@@ -80,7 +80,7 @@ ColumnLayout {
     }
 
     Connections {
-        target: org_kde_kwin_tests_pointerconstraints_backend
+        target: org_ukui_kwin_tests_pointerconstraints_backend
         onForceSurfaceCommit: {
             forceCommitRect.visible = true
         }
@@ -147,7 +147,7 @@ ColumnLayout {
         text: "Send position hint on lock"
         checked: root.waylandNative
         enabled: root.waylandNative
-        onCheckedChanged: org_kde_kwin_tests_pointerconstraints_backend.lockHint = checked;
+        onCheckedChanged: org_ukui_kwin_tests_pointerconstraints_backend.lockHint = checked;
     }
     CheckBox {
         id: restrAreaChck
@@ -165,7 +165,7 @@ ColumnLayout {
         text: "Allow critical errors"
         checked: false
         enabled: root.waylandNative
-        onCheckedChanged: org_kde_kwin_tests_pointerconstraints_backend.errorsAllowed = checked;
+        onCheckedChanged: org_ukui_kwin_tests_pointerconstraints_backend.errorsAllowed = checked;
     }
 
     Item {

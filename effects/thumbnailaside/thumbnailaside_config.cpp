@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "thumbnailaside_config.h"
 // KConfigSkeleton
 #include "thumbnailasideconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -59,7 +59,7 @@ ThumbnailAsideEffectConfig::ThumbnailAsideEffectConfig(QWidget* parent, const QV
 
     connect(m_ui->editor, &KShortcutsEditor::keyChange, this, &ThumbnailAsideEffectConfig::markAsChanged);
 
-    ThumbnailAsideConfig::instance(KWIN_CONFIG);
+    ThumbnailAsideConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(ThumbnailAsideConfig::self(), this);
 
     // Shortcut config. The shortcut belongs to the component "kwin"!
@@ -90,7 +90,7 @@ void ThumbnailAsideEffectConfig::save()
 {
     KCModule::save();
     m_ui->editor->save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("thumbnailaside"));

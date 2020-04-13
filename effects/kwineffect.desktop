@@ -1,106 +1,106 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KWin/Effect
+X-KDE-ServiceType=UKUIKWin/Effect
 
-Comment=KWin Effect
-Comment[af]=KWin-effek
+Comment=UKUIKWin Effect
+Comment[af]=UKUIKWin-effek
 Comment[ar]=تأثيرات كوين
-Comment[be]=Эфекты KWin
-Comment[be@latin]=Efekty akońnika „KWin”
-Comment[bg]=Ефект KWin
-Comment[bn_IN]=KWin ইফেক্ট
+Comment[be]=Эфекты UKUIKWin
+Comment[be@latin]=Efekty akońnika „UKUIKWin”
+Comment[bg]=Ефект UKUIKWin
+Comment[bn_IN]=UKUIKWin ইফেক্ট
 Comment[bs]=Efekti K‑vina
-Comment[ca]=Efecte del KWin
-Comment[ca@valencia]=Efecte de KWin
-Comment[cs]=KWin efekt
+Comment[ca]=Efecte del UKUIKWin
+Comment[ca@valencia]=Efecte de UKUIKWin
+Comment[cs]=UKUIKWin efekt
 Comment[csb]=Efektë òknów
-Comment[da]=KWin-effekt
-Comment[de]=KWin-Effekt
-Comment[el]=Εφέ KWin
-Comment[en_GB]=KWin Effect
-Comment[eo]=KWin efekto
-Comment[es]=Efecto de KWin
-Comment[et]=KWin'i efektid
-Comment[eu]=KWin efektua
-Comment[fa]=جلوه‌های KWin
-Comment[fi]=KWin-tehoste
-Comment[fr]=Effet KWin
-Comment[fy]=KWin Effekt
-Comment[ga]=Maisíocht KWin
-Comment[gl]=Efecto de KWin
-Comment[gu]=KWin અસરો
-Comment[he]=אפקט של KWin
+Comment[da]=UKUIKWin-effekt
+Comment[de]=UKUIKWin-Effekt
+Comment[el]=Εφέ UKUIKWin
+Comment[en_GB]=UKUIKWin Effect
+Comment[eo]=UKUIKWin efekto
+Comment[es]=Efecto de UKUIKWin
+Comment[et]=UKUIKWin'i efektid
+Comment[eu]=UKUIKWin efektua
+Comment[fa]=جلوه‌های UKUIKWin
+Comment[fi]=UKUIKWin-tehoste
+Comment[fr]=Effet UKUIKWin
+Comment[fy]=UKUIKWin Effekt
+Comment[ga]=Maisíocht UKUIKWin
+Comment[gl]=Efecto de UKUIKWin
+Comment[gu]=UKUIKWin અસરો
+Comment[he]=אפקט של UKUIKWin
 Comment[hi]=के-विन प्रभाव
 Comment[hne]=के-विन प्रभाव
-Comment[hr]=KWin efekt
-Comment[hu]=KWin-effekt
-Comment[ia]=Effecto de KWin
-Comment[id]=Efek KWin
-Comment[is]=KWin áhrif
-Comment[it]=Effetto di KWin
-Comment[ja]=KWin 効果
-Comment[kk]=KWin эффекті
-Comment[km]=បែបផែន KWin
+Comment[hr]=UKUIKWin efekt
+Comment[hu]=UKUIKWin-effekt
+Comment[ia]=Effecto de UKUIKWin
+Comment[id]=Efek UKUIKWin
+Comment[is]=UKUIKWin áhrif
+Comment[it]=Effetto di UKUIKWin
+Comment[ja]=UKUIKWin 効果
+Comment[kk]=UKUIKWin эффекті
+Comment[km]=បែបផែន UKUIKWin
 Comment[kn]=ಕೆವಿನ್ ಪರಿಣಾಮ
-Comment[ko]=KWin 효과
-Comment[ku]=Efektê KWin
-Comment[lt]=KWin efektas
-Comment[lv]=KWin efekts
+Comment[ko]=UKUIKWin 효과
+Comment[ku]=Efektê UKUIKWin
+Comment[lt]=UKUIKWin efektas
+Comment[lv]=UKUIKWin efekts
 Comment[mai]=के-विन प्रभाव
-Comment[mk]=Ефект за KWin
+Comment[mk]=Ефект за UKUIKWin
 Comment[ml]=കെവിന്‍ പ്രഭാവം
 Comment[mr]=के-विन परिणाम
-Comment[nb]=KWin-effekt
-Comment[nds]=KWin-Effekt
+Comment[nb]=UKUIKWin-effekt
+Comment[nds]=UKUIKWin-Effekt
 Comment[ne]=केडीई विन प्रभाव
-Comment[nl]=KWin-effect
-Comment[nn]=KWin-effekt
-Comment[pa]=KWin ਪਰਭਾਵ
-Comment[pl]=Efekty KWin
-Comment[pt]=Efeito do KWin
-Comment[pt_BR]=Efeito do KWin
-Comment[ro]=Efect KWin
+Comment[nl]=UKUIKWin-effect
+Comment[nn]=UKUIKWin-effekt
+Comment[pa]=UKUIKWin ਪਰਭਾਵ
+Comment[pl]=Efekty UKUIKWin
+Comment[pt]=Efeito do UKUIKWin
+Comment[pt_BR]=Efeito do UKUIKWin
+Comment[ro]=Efect UKUIKWin
 Comment[ru]=Эффект диспетчера окон
-Comment[se]=KWin-effeavttat
-Comment[si]=KWin සැරසිලි
-Comment[sk]=Efekty KWin
-Comment[sl]=Učinek KWin
+Comment[se]=UKUIKWin-effeavttat
+Comment[si]=UKUIKWin සැරසිලි
+Comment[sk]=Efekty UKUIKWin
+Comment[sl]=Učinek UKUIKWin
 Comment[sr]=Ефекти К‑вина
 Comment[sr@ijekavian]=Ефекти К‑вина
-Comment[sr@ijekavianlatin]=Efekti KWina
-Comment[sr@latin]=Efekti KWina
-Comment[sv]=Kwin-effekt
+Comment[sr@ijekavianlatin]=Efekti UKUIKWina
+Comment[sr@latin]=Efekti UKUIKWina
+Comment[sv]=UKUIKwin-effekt
 Comment[ta]=கேவின் தாக்கங்கள்
-Comment[te]=KWin ప్రభావం
-Comment[th]=ลูกเล่นของ KWin
-Comment[tr]=KWin Efekti
-Comment[ug]=KWin ئۈنۈمى
-Comment[uk]=Ефект KWin
-Comment[uz]=KWin effektlari
-Comment[uz@cyrillic]=KWin эффектлари
-Comment[vi]=Hiệu ứng KWin
-Comment[wa]=Efet KWin
-Comment[x-test]=xxKWin Effectxx
-Comment[zh_CN]=KWin 效果
-Comment[zh_TW]=KWin 效果
+Comment[te]=UKUIKWin ప్రభావం
+Comment[th]=ลูกเล่นของ UKUIKWin
+Comment[tr]=UKUIKWin Efekti
+Comment[ug]=UKUIKWin ئۈنۈمى
+Comment[uk]=Ефект UKUIKWin
+Comment[uz]=UKUIKWin effektlari
+Comment[uz@cyrillic]=UKUIKWin эффектлари
+Comment[vi]=Hiệu ứng UKUIKWin
+Comment[wa]=Efet UKUIKWin
+Comment[x-test]=xxUKUIKWin Effectxx
+Comment[zh_CN]=UKUIKWin 效果
+Comment[zh_TW]=UKUIKWin 效果
 
 [PropertyDef::X-KDE-Ordering]
 Type=int
 
-[PropertyDef::X-KWin-Requires-OpenGL]
+[PropertyDef::X-UKUIKWin-Requires-OpenGL]
 Type=bool
 
-[PropertyDef::X-KWin-Requires-OpenGL2]
+[PropertyDef::X-UKUIKWin-Requires-OpenGL2]
 Type=bool
 
-[PropertyDef::X-KWin-Requires-Shaders]
+[PropertyDef::X-UKUIKWin-Requires-Shaders]
 Type=bool
 
-[PropertyDef::X-KWin-Video-Url]
+[PropertyDef::X-UKUIKWin-Video-Url]
 Type=QString
 
-[PropertyDef::X-KWin-Exclusive-Category]
+[PropertyDef::X-UKUIKWin-Exclusive-Category]
 Type=QString
 
-[PropertyDef::X-KWin-Internal]
+[PropertyDef::X-UKUIKWin-Internal]
 Type=bool

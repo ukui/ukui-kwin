@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "edge.h"
 #include "sync_filter.h"
 #include "windowselector.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwinconfig.h>
 #if HAVE_EPOXY_GLX
 #include "glxbackend.h"

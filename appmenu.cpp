@@ -34,17 +34,17 @@ using namespace KWin;
 
 KWIN_SINGLETON_FACTORY(ApplicationMenu)
 
-static const QString s_viewService(QStringLiteral("org.kde.kappmenuview"));
+static const QString s_viewService(QStringLiteral("org.ukui.kappmenuview"));
 
 ApplicationMenu::ApplicationMenu(QObject *parent)
     : QObject(parent)
-    , m_appmenuInterface(new OrgKdeKappmenuInterface(QStringLiteral("org.kde.kappmenu"), QStringLiteral("/KAppMenu"), QDBusConnection::sessionBus(), this))
+    , m_appmenuInterface(new OrgUkuiKappmenuInterface(QStringLiteral("org.ukui.kappmenu"), QStringLiteral("/KAppMenu"), QDBusConnection::sessionBus(), this))
 {
-    connect(m_appmenuInterface, &OrgKdeKappmenuInterface::showRequest, this, &ApplicationMenu::slotShowRequest);
-    connect(m_appmenuInterface, &OrgKdeKappmenuInterface::menuShown, this, &ApplicationMenu::slotMenuShown);
-    connect(m_appmenuInterface, &OrgKdeKappmenuInterface::menuHidden, this, &ApplicationMenu::slotMenuHidden);
+    connect(m_appmenuInterface, &OrgUkuiKappmenuInterface::showRequest, this, &ApplicationMenu::slotShowRequest);
+    connect(m_appmenuInterface, &OrgUkuiKappmenuInterface::menuShown, this, &ApplicationMenu::slotMenuShown);
+    connect(m_appmenuInterface, &OrgUkuiKappmenuInterface::menuHidden, this, &ApplicationMenu::slotMenuHidden);
     
-    m_kappMenuWatcher = new QDBusServiceWatcher(QStringLiteral("org.kde.kappmenu"), QDBusConnection::sessionBus(),
+    m_kappMenuWatcher = new QDBusServiceWatcher(QStringLiteral("org.ukui.kappmenu"), QDBusConnection::sessionBus(),
             QDBusServiceWatcher::WatchForRegistration|QDBusServiceWatcher::WatchForUnregistration, this);
 
     connect(m_kappMenuWatcher, &QDBusServiceWatcher::serviceRegistered,
@@ -58,7 +58,7 @@ ApplicationMenu::ApplicationMenu(QObject *parent)
                 emit applicationMenuEnabledChanged(false);
             });
 
-    m_applicationMenuEnabled = QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.kde.kappmenu"));
+    m_applicationMenuEnabled = QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.ukui.kappmenu"));
 }
 
 ApplicationMenu::~ApplicationMenu()

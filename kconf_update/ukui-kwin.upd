@@ -1,0 +1,39 @@
+Version=1
+
+# Replace old Scale in effect with Scale effect.
+Id=replace-scalein-with-scale
+File=ukui-kwinrc
+Group=Plugins
+Key=ukui-kwin4_effect_scaleinEnabled,scaleEnabled
+
+# Port the Minimize Animation effect to JavaScript.
+Id=port-minimizeanimation-effect-to-js
+File=ukui-kwinrc
+Group=Plugins
+Key=minimizeanimationEnabled,ukui-kwin4_effect_squashEnabled
+
+# Port the Scale effect to JavaScript.
+Id=port-scale-effect-to-js
+File=ukui-kwinrc
+Group=Effect-Scale,Effect-ukui-kwin4_effect_scale
+AllKeys
+Group=Plugins
+Key=scaleEnabled,ukui-kwin4_effect_scaleEnabled
+
+# Port the Dim Screen effect to JavaScript.
+Id=port-dimscreen-effect-to-js
+File=ukui-kwinrc
+Group=Plugins
+Key=dimscreenEnabled,ukui-kwin4_effect_dimscreenEnabled
+
+# Deactivate auto border size if the user has changed border size in the past
+Id=auto-bordersize
+File=ukui-kwinrc
+Group=org.kde.kdecoration2
+Script=ukui-kwin-5.16-auto-bordersize.sh,sh
+
+# Move AnimationSpeed to kdeglobals as AnimationDurationFactor converting to a useful value
+Id=animation-speed
+File=ukui-kwinrc,kdeglobals
+Group=Compositing,KDE
+Script=ukui-kwin-5.18-move-animspeed.py,python3

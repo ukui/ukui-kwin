@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "cube_config.h"
 // KConfigSkeleton
 #include "cubeconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -86,7 +86,7 @@ CubeEffectConfig::CubeEffectConfig(QWidget* parent, const QVariantList& args) :
     capsSelectionChanged();
     connect(m_ui->kcfg_Caps, &QCheckBox::stateChanged, this, &CubeEffectConfig::capsSelectionChanged);
     m_ui->kcfg_Wallpaper->setFilter(QStringLiteral("*.png *.jpeg *.jpg "));
-    CubeConfig::instance(KWIN_CONFIG);
+    CubeConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(CubeConfig::self(), m_ui);
     load();
 }
@@ -95,7 +95,7 @@ void CubeEffectConfig::save()
 {
     KCModule::save();
     m_ui->editor->save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("cube"));

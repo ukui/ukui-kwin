@@ -20,7 +20,7 @@
 #include "kcm.h"
 #include "decorationmodel.h"
 #include "declarative-plugin/buttonsmodel.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <KAboutData>
 #include <KConfigGroup>
@@ -37,9 +37,9 @@
 
 #include <KNewStuff3/KNS3/DownloadDialog>
 
-#include "kwindecorationsettings.h"
+#include "ukuikwindecorationsettings.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMKWinDecorationFactory, "kwindecoration.json", registerPlugin<KCMKWinDecoration>();)
+K_PLUGIN_FACTORY_WITH_JSON(KCMKWinDecorationFactory, "ukuikwindecoration.json", registerPlugin<KCMKWinDecoration>();)
 
 Q_DECLARE_METATYPE(KDecoration2::BorderSize)
 
@@ -58,7 +58,7 @@ KCMKWinDecoration::KCMKWinDecoration(QObject *parent, const QVariantList &argume
     , m_availableButtonsModel(new KDecoration2::Preview::ButtonsModel(this))
     , m_settings(new KWinDecorationSettings(this))
 {
-    auto about = new KAboutData(QStringLiteral("kcm_kwindecoration"),
+    auto about = new KAboutData(QStringLiteral("kcm_ukuikwindecoration"),
                                 i18n("Window Decorations"),
                                 QStringLiteral("1.0"),
                                 QString(),
@@ -73,9 +73,9 @@ KCMKWinDecoration::KCMKWinDecoration(QObject *parent, const QVariantList &argume
     qmlRegisterType<QSortFilterProxyModel>();
     qmlRegisterType<KWinDecorationSettings>();
 #else
-    qmlRegisterAnonymousType<QAbstractListModel>("org.kde.kwin.KWinDecoration", 1);
-    qmlRegisterAnonymousType<QSortFilterProxyModel>("org.kde.kwin.KWinDecoration", 1);
-    qmlRegisterAnonymousType<KWinDecorationSettings>("org.kde.kwin.KWinDecoration", 1);
+    qmlRegisterAnonymousType<QAbstractListModel>("org.ukui.kwin.KWinDecoration", 1);
+    qmlRegisterAnonymousType<QSortFilterProxyModel>("org.ukui.kwin.KWinDecoration", 1);
+    qmlRegisterAnonymousType<KWinDecorationSettings>("org.ukui.kwin.KWinDecoration", 1);
 #endif
     m_proxyThemesModel->setSourceModel(m_themesModel);
     m_proxyThemesModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
@@ -99,7 +99,7 @@ KCMKWinDecoration::KCMKWinDecoration(QObject *parent, const QVariantList &argume
 
     // Update the themes when the color scheme or a theme's settings change
     QDBusConnection::sessionBus()
-        .connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"),
+        .connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.ukui.KWin"), QStringLiteral("reloadConfig"),
             this, SLOT(reloadKWinSettings()));
 
     QMetaObject::invokeMethod(m_themesModel, "init", Qt::QueuedConnection);
@@ -118,7 +118,7 @@ void KCMKWinDecoration::reloadKWinSettings()
 void KCMKWinDecoration::getNewStuff(QQuickItem *context)
 {
     if (!m_newStuffDialog) {
-        m_newStuffDialog = new KNS3::DownloadDialog(QStringLiteral("window-decorations.knsrc"));
+        m_newStuffDialog = new KNS3::DownloadDialog(QStringLiteral("ukui-window-decorations.knsrc"));
         m_newStuffDialog->setWindowTitle(i18n("Download New Window Decorations"));
         m_newStuffDialog->setWindowModality(Qt::WindowModal);
         connect(m_newStuffDialog, &KNS3::DownloadDialog::accepted, this, &KCMKWinDecoration::load);
@@ -158,7 +158,7 @@ void KCMKWinDecoration::save()
 
     // Send a signal to all kwin instances
     QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"),
-                                                      QStringLiteral("org.kde.KWin"),
+                                                      QStringLiteral("org.ukui.KWin"),
                                                       QStringLiteral("reloadConfig"));
     QDBusConnection::sessionBus().send(message);
 }

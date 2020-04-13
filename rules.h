@@ -290,7 +290,7 @@ private:
 };
 
 #ifndef KCMRULES
-class KWIN_EXPORT RuleBook : public QObject
+class UKUI_KWIN_EXPORT RuleBook : public QObject
 {
     Q_OBJECT
 public:

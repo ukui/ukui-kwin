@@ -30,7 +30,7 @@ class QScriptValue;
 
 namespace KWin
 {
-class KWIN_EXPORT ScriptedEffect : public KWin::AnimationEffect
+class UKUI_KWIN_EXPORT ScriptedEffect : public KWin::AnimationEffect
 {
     Q_OBJECT
     Q_ENUMS(DataRole)

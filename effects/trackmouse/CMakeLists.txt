@@ -1,7 +1,7 @@
 #######################################
 # Effect
 # Data files
-install(FILES data/tm_inner.png data/tm_outer.png DESTINATION ${DATA_INSTALL_DIR}/kwin)
+install(FILES data/tm_inner.png data/tm_outer.png DESTINATION ${DATA_INSTALL_DIR}/ukui-kwin)
 
 #######################################
 # Config
@@ -25,5 +25,5 @@ install(
     TARGETS
         kwin_trackmouse_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )

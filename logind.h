@@ -30,7 +30,7 @@ class QDBusServiceWatcher;
 namespace KWin
 {
 
-class KWIN_EXPORT LogindIntegration : public QObject
+class UKUI_KWIN_EXPORT LogindIntegration : public QObject
 {
     Q_OBJECT
 public:

@@ -23,7 +23,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore;
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 2.0 as Plasma;
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons;
-import org.kde.kwin 2.0;
+import org.ukui.kwin 2.0;
 
 PlasmaCore.Dialog {
     id: dialog

@@ -111,7 +111,7 @@ private:
     AbstractClient* m_client;
 };
 
-class KWIN_EXPORT TabBox : public QObject
+class UKUI_KWIN_EXPORT TabBox : public QObject
 {
     Q_OBJECT
 public:

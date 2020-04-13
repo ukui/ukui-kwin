@@ -1357,8 +1357,8 @@ QString Workspace::supportInformation() const
     // help understand English. Because of that all texts are not translated
     support.append(QStringLiteral("Version\n"));
     support.append(QStringLiteral("=======\n"));
-    support.append(QStringLiteral("KWin version: "));
-    support.append(QStringLiteral(KWIN_VERSION_STRING));
+    support.append(QStringLiteral("UKUI-KWin version: "));
+    support.append(QStringLiteral(UKUI_KWIN_VERSION_STRING));
     support.append(QStringLiteral("\n"));
     support.append(QStringLiteral("Qt Version: "));
     support.append(QString::fromUtf8(qVersion()));

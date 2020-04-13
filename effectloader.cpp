@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // own
 #include "effectloader.h"
 // KWin
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects.h>
 #include "effects/effect_builtins.h"
 #include "scripting/scriptedeffect.h"
@@ -289,12 +289,12 @@ void ScriptedEffectLoader::queryAndLoadAll()
 
 QList<KPluginMetaData> ScriptedEffectLoader::findAllEffects() const
 {
-    return KPackage::PackageLoader::self()->listPackages(s_serviceType, QStringLiteral("kwin/effects"));
+    return KPackage::PackageLoader::self()->listPackages(s_serviceType, QStringLiteral("ukui-kwin/effects"));
 }
 
 KPluginMetaData ScriptedEffectLoader::findEffect(const QString &name) const
 {
-    const auto plugins = KPackage::PackageLoader::self()->findPackages(s_serviceType, QStringLiteral("kwin/effects"),
+    const auto plugins = KPackage::PackageLoader::self()->findPackages(s_serviceType, QStringLiteral("ukui-kwin/effects"),
         [name] (const KPluginMetaData &metadata) {
             return metadata.pluginId().compare(name, Qt::CaseInsensitive) == 0;
         }
@@ -316,7 +316,7 @@ void ScriptedEffectLoader::clear()
 PluginEffectLoader::PluginEffectLoader(QObject *parent)
     : AbstractEffectLoader(parent)
     , m_queue(new EffectLoadQueue< PluginEffectLoader, KPluginMetaData>(this))
-    , m_pluginSubDirectory(QStringLiteral("kwin/effects/plugins/"))
+    , m_pluginSubDirectory(QStringLiteral("ukui-kwin/effects/plugins/"))
 {
 }
 

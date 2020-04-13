@@ -97,7 +97,7 @@ void GlobalShortcutsTest::testConsumedShift()
     // this test verifies that a shortcut with a consumed shift modifier triggers
     // create the action
     QScopedPointer<QAction> action(new QAction(nullptr));
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName(QStringLiteral("globalshortcuts-test-consumed-shift"));
     QSignalSpy triggeredSpy(action.data(), &QAction::triggered);
     QVERIFY(triggeredSpy.isValid());
@@ -122,7 +122,7 @@ void GlobalShortcutsTest::testRepeatedTrigger()
     // in addition pressing another key should stop triggering the shortcut
 
     QScopedPointer<QAction> action(new QAction(nullptr));
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName(QStringLiteral("globalshortcuts-test-consumed-shift"));
     QSignalSpy triggeredSpy(action.data(), &QAction::triggered);
     QVERIFY(triggeredSpy.isValid());
@@ -183,7 +183,7 @@ void GlobalShortcutsTest::testMetaShiftW()
 {
     // BUG 370341
     QScopedPointer<QAction> action(new QAction(nullptr));
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName(QStringLiteral("globalshortcuts-test-meta-shift-w"));
     QSignalSpy triggeredSpy(action.data(), &QAction::triggered);
     QVERIFY(triggeredSpy.isValid());
@@ -209,7 +209,7 @@ void GlobalShortcutsTest::testComponseKey()
 {
     // BUG 390110
     QScopedPointer<QAction> action(new QAction(nullptr));
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName(QStringLiteral("globalshortcuts-accent"));
     QSignalSpy triggeredSpy(action.data(), &QAction::triggered);
     QVERIFY(triggeredSpy.isValid());

@@ -34,7 +34,7 @@ class CompositorSelectionOwner;
 class Scene;
 class X11Client;
 
-class KWIN_EXPORT Compositor : public QObject
+class UKUI_KWIN_EXPORT Compositor : public QObject
 {
     Q_OBJECT
 public:
@@ -172,7 +172,7 @@ private:
     QElapsedTimer m_monotonicClock;
 };
 
-class KWIN_EXPORT WaylandCompositor : public Compositor
+class UKUI_KWIN_EXPORT WaylandCompositor : public Compositor
 {
     Q_OBJECT
 public:
@@ -189,7 +189,7 @@ private:
     explicit WaylandCompositor(QObject *parent);
 };
 
-class KWIN_EXPORT X11Compositor : public Compositor
+class UKUI_KWIN_EXPORT X11Compositor : public Compositor
 {
     Q_OBJECT
 public:

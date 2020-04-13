@@ -37,7 +37,7 @@ class OpenGLBackend;
 class SyncManager;
 class SyncObject;
 
-class KWIN_EXPORT SceneOpenGL
+class UKUI_KWIN_EXPORT SceneOpenGL
     : public Scene
 {
     Q_OBJECT
@@ -315,11 +315,11 @@ inline SceneOpenGLTexture* OpenGLWindowPixmap::texture() const
     return m_texture.data();
 }
 
-class KWIN_EXPORT OpenGLFactory : public SceneFactory
+class UKUI_KWIN_EXPORT OpenGLFactory : public SceneFactory
 {
     Q_OBJECT
     Q_INTERFACES(KWin::SceneFactory)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Scene" FILE "opengl.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Scene" FILE "opengl.json")
 
 public:
     explicit OpenGLFactory(QObject *parent = nullptr);

@@ -23,7 +23,7 @@
 #include "input.h"
 #include "input_event.h"
 #include "input_event_spy.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <QPropertyAnimation>
 #include <QStandardPaths>
@@ -187,7 +187,7 @@ void OnScreenNotification::ensureQmlComponent()
     }
     m_qmlComponent.reset(new QQmlComponent(m_qmlEngine));
     const QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                m_config->group(QStringLiteral("OnScreenNotification")).readEntry("QmlPath", QStringLiteral(KWIN_NAME "/onscreennotification/plasma/main.qml")));
+                                                m_config->group(QStringLiteral("OnScreenNotification")).readEntry("QmlPath", QStringLiteral(UKUI_KWIN_NAME "/onscreennotification/plasma/main.qml")));
     if (fileName.isEmpty()) {
         return;
     }

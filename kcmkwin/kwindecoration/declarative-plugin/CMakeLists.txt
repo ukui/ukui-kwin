@@ -22,5 +22,5 @@ target_link_libraries(kdecorationprivatedeclarative
     KF5::Service
 )
 
-install(TARGETS kdecorationprivatedeclarative DESTINATION ${QML_INSTALL_DIR}/org/kde/kwin/private/kdecoration )
-install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/kwin/private/kdecoration )
+install(TARGETS kdecorationprivatedeclarative DESTINATION ${QML_INSTALL_DIR}/org/ukui/kwin/private/kdecoration )
+install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/ukui/kwin/private/kdecoration )

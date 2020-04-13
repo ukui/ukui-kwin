@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "screenedgeitem.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include "screenedge.h"
 
 #include <QAction>

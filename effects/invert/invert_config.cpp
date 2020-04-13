@@ -88,7 +88,7 @@ void InvertEffectConfig::save()
     mShortcutEditor->save();    // undo() will restore to this state from now on
 
     emit changed(false);
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("invert"));

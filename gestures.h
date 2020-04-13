@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KWIN_GESTURES_H
 #define KWIN_GESTURES_H
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QPointF>
@@ -181,7 +181,7 @@ private:
     QSizeF m_minimumDelta;
 };
 
-class KWIN_EXPORT GestureRecognizer : public QObject
+class UKUI_KWIN_EXPORT GestureRecognizer : public QObject
 {
     Q_OBJECT
 public:

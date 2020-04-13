@@ -23,7 +23,7 @@
 
 void DecorationPackage::initPackage(KPackage::Package *package)
 {
-    package->setDefaultPackageRoot(QStringLiteral("kwin/decorations/"));
+    package->setDefaultPackageRoot(QStringLiteral("ukui-kwin/decorations/"));
 
     package->addDirectoryDefinition("config", QStringLiteral("config"), i18n("Configuration Definitions"));
     QStringList mimetypes;
@@ -56,7 +56,7 @@ void DecorationPackage::pathChanged(KPackage::Package *package)
     }
 }
 
-K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(DecorationPackage, "kwin-packagestructure-decoration.json")
+K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(DecorationPackage, "ukui-kwin-packagestructure-decoration.json")
 
 #include "decoration.moc"
 

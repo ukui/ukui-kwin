@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "mock_libinput.h"
 #include "../../libinput/device.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <KSharedConfig>
 
@@ -176,16 +176,16 @@ namespace {
 template <typename T>
 T dbusProperty(const QString &name, const char *property)
 {
-    QDBusInterface interface{QStringLiteral("org.kde.kwin.tests.libinputdevice"),
-                             QStringLiteral("/org/kde/KWin/InputDevice/") + name,
-                             QStringLiteral("org.kde.KWin.InputDevice")};
+    QDBusInterface interface{QStringLiteral("org.ukui.kwin.tests.libinputdevice"),
+                             QStringLiteral("/org/ukui/KWin/InputDevice/") + name,
+                             QStringLiteral("org.ukui.KWin.InputDevice")};
     return interface.property(property).value<T>();
 }
 }
 
 void TestLibinputDevice::initTestCase()
 {
-    QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.kwin.tests.libinputdevice"));
+    QDBusConnection::sessionBus().registerService(QStringLiteral("org.ukui.kwin.tests.libinputdevice"));
 }
 
 void TestLibinputDevice::testStaticGetter()

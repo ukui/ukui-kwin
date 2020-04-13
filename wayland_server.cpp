@@ -235,7 +235,7 @@ public:
         return interfaces;
     }
 
-    QSet<QByteArray> interfacesBlackList = {"org_kde_kwin_remote_access_manager", "org_kde_plasma_window_management", "org_kde_kwin_fake_input", "org_kde_kwin_keystate"};
+    QSet<QByteArray> interfacesBlackList = {"org_ukui_kwin_remote_access_manager", "org_kde_plasma_window_management", "org_ukui_kwin_fake_input", "org_ukui_kwin_keystate"};
 
     bool allowInterface(KWayland::Server::ClientConnection *client, const QByteArray &interfaceName) override {
         if (client->processId() == getpid()) {

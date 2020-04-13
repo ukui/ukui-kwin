@@ -37,13 +37,13 @@ DEALINGS IN THE SOFTWARE.
 
 int main(int argc, char* argv[])
 {
-    KLocalizedString::setApplicationDomain("kwin");
+    KLocalizedString::setApplicationDomain("ukui-kwin");
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("xcb"));
     QApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("dialog-warning")));
-    QCoreApplication::setApplicationName(QStringLiteral("kwin_killer_helper"));
-    QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
+    QCoreApplication::setApplicationName(QStringLiteral("ukui_kwin_killer_helper"));
+    QCoreApplication::setOrganizationDomain(QStringLiteral("ukui.org"));
     QApplication::setApplicationDisplayName(i18n("Window Manager"));
     QCoreApplication::setApplicationVersion(QStringLiteral("1.0"));
 

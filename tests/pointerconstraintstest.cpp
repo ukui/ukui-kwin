@@ -406,7 +406,7 @@ int main(int argc, char **argv)
     QQuickView view;
 
     QQmlContext* context = view.engine()->rootContext();
-    context->setContextProperty(QStringLiteral("org_kde_kwin_tests_pointerconstraints_backend"), backend);
+    context->setContextProperty(QStringLiteral("org_ukui_kwin_tests_pointerconstraints_backend"), backend);
 
     view.setSource(QUrl::fromLocalFile(QStringLiteral(DIR) +QStringLiteral("/pointerconstraintstest.qml")));
     view.show();

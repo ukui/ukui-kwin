@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDBusMetaType>
 
 #include <sys/stat.h>
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #if HAVE_SYS_SYSMACROS_H
 #include <sys/sysmacros.h>
 #endif

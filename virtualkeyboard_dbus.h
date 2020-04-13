@@ -27,7 +27,7 @@ namespace KWin
 class VirtualKeyboardDBus : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.VirtualKeyboard")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.VirtualKeyboard")
     Q_PROPERTY(bool enabled READ isEnabled NOTIFY enabledChanged)
 public:
     explicit VirtualKeyboardDBus(QObject *parent = nullptr);

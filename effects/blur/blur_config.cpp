@@ -20,7 +20,7 @@
 #include "blur_config.h"
 // KConfigSkeleton
 #include "blurconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <kwineffects_interface.h>
 #include <KAboutData>
@@ -37,7 +37,7 @@ BlurEffectConfig::BlurEffectConfig(QWidget *parent, const QVariantList &args)
     : KCModule(KAboutData::pluginData(QStringLiteral("blur")), parent, args)
 {
     ui.setupUi(this);
-    BlurConfig::instance(KWIN_CONFIG);
+    BlurConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(BlurConfig::self(), this);
 
     load();
@@ -51,7 +51,7 @@ void BlurEffectConfig::save()
 {
     KCModule::save();
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("blur"));

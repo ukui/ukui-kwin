@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 2.7
-import org.kde.kwin.private.kdecoration 1.0 as KDecoration
+import org.ukui.kwin.private.kdecoration 1.0 as KDecoration
 
 ListView {
     id: view

@@ -2554,7 +2554,7 @@ while it's active!</string>
           <bool>false</bool>
          </property>
          <property name="placeholderText">
-          <string>org.kde.kwin</string>
+          <string>org.ukui.kwin</string>
          </property>
         </widget>
        </item>

@@ -56,7 +56,7 @@ class ScriptUnloaderAgent;
 class QtScriptWorkspaceWrapper;
 class X11Client;
 
-class KWIN_EXPORT AbstractScript : public QObject
+class UKUI_KWIN_EXPORT AbstractScript : public QObject
 {
     Q_OBJECT
 public:
@@ -220,7 +220,7 @@ private:
 class Script : public AbstractScript, QDBusContext
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Scripting")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Scripting")
 public:
 
     Script(int id, QString scriptName, QString pluginName, QObject *parent = nullptr);
@@ -276,7 +276,7 @@ private:
 class DeclarativeScript : public AbstractScript
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Scripting")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Scripting")
 public:
     explicit DeclarativeScript(int id, QString scriptName, QString pluginName, QObject *parent = nullptr);
     ~DeclarativeScript() override;
@@ -333,10 +333,10 @@ private:
 /**
  * The heart of KWin::Scripting. Infinite power lies beyond
  */
-class KWIN_EXPORT Scripting : public QObject
+class UKUI_KWIN_EXPORT Scripting : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Scripting")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Scripting")
 private:
     explicit Scripting(QObject *parent);
     QStringList scriptList;

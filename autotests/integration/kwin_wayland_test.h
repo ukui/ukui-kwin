@@ -217,7 +217,7 @@ Q_DECLARE_METATYPE(KWin::Test::XdgShellSurfaceType)
 #define WAYLANDTEST_MAIN_HELPER(TestObject, DPI, OperationMode) \
 int main(int argc, char *argv[]) \
 { \
-    setenv("QT_QPA_PLATFORM", "wayland-org.kde.kwin.qpa", true); \
+    setenv("QT_QPA_PLATFORM", "wayland-org.ukui.kwin.qpa", true); \
     setenv("QT_QPA_PLATFORM_PLUGIN_PATH", QFileInfo(QString::fromLocal8Bit(argv[0])).absolutePath().toLocal8Bit().constData(), true); \
     setenv("KWIN_FORCE_OWN_QPA", "1", true); \
     qunsetenv("KDE_FULL_SESSION"); \

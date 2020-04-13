@@ -26,7 +26,7 @@
 #include <QObject>
 #include <KSharedConfig>
 
-class OrgKdeKwinCompositingInterface;
+class OrgUkuiKwinCompositingInterface;
 
 namespace KWin {
 namespace Compositing {
@@ -110,7 +110,7 @@ private:
     int m_openGLPlatformInterface;
     bool m_windowsBlockCompositing;
     bool m_windowsBlockingCompositing;
-    OrgKdeKwinCompositingInterface *m_compositingInterface;
+    OrgUkuiKwinCompositingInterface *m_compositingInterface;
     KSharedConfigPtr m_config;
 };
 

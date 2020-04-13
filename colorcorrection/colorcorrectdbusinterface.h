@@ -35,7 +35,7 @@ class Manager;
 class ColorCorrectDBusInterface : public QObject, public QDBusContext
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.ColorCorrect")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.ColorCorrect")
     Q_PROPERTY(bool inhibited READ isInhibited)
     Q_PROPERTY(bool enabled READ isEnabled)
     Q_PROPERTY(bool running READ isRunning)

@@ -25,12 +25,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QVector>
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 namespace KWin
 {
 
-class KWIN_EXPORT X11EventFilter
+class UKUI_KWIN_EXPORT X11EventFilter
 {
 public:
     /**

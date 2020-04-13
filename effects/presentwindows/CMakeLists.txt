@@ -1,6 +1,6 @@
 #######################################
 # Effect
-install(FILES main.qml DESTINATION ${DATA_INSTALL_DIR}/kwin/effects/presentwindows/)
+install(FILES main.qml DESTINATION ${DATA_INSTALL_DIR}/ukui-kwin/effects/presentwindows/)
 
 #######################################
 # Config
@@ -25,5 +25,5 @@ install(
     TARGETS
         kwin_presentwindows_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )

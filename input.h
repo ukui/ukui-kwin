@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QObject>
 #include <QPoint>
 #include <QPointer>
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <KSharedConfig>
 #include <QSet>
@@ -71,7 +71,7 @@ namespace LibInput
  * getting input first (e.g. screen edges) and filter the input event out if we currently have
  * a full input grab.
  */
-class KWIN_EXPORT InputRedirection : public QObject
+class UKUI_KWIN_EXPORT InputRedirection : public QObject
 {
     Q_OBJECT
 public:
@@ -333,7 +333,7 @@ private:
  * Deleting an instance of InputEventFilter automatically uninstalls it from
  * InputRedirection.
  */
-class KWIN_EXPORT InputEventFilter
+class UKUI_KWIN_EXPORT InputEventFilter
 {
 public:
     InputEventFilter();
@@ -392,7 +392,7 @@ protected:
     void passToWaylandServer(QKeyEvent *event);
 };
 
-class KWIN_EXPORT InputDeviceHandler : public QObject
+class UKUI_KWIN_EXPORT InputDeviceHandler : public QObject
 {
     Q_OBJECT
 public:

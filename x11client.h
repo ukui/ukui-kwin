@@ -57,7 +57,7 @@ enum class Predicate {
     InputIdMatch
 };
 
-class KWIN_EXPORT X11Client : public AbstractClient
+class UKUI_KWIN_EXPORT X11Client : public AbstractClient
 {
     Q_OBJECT
     /**

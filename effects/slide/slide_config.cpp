@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "slide_config.h"
 // KConfigSkeleton
 #include "slideconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <kwineffects_interface.h>
 
@@ -39,7 +39,7 @@ SlideEffectConfig::SlideEffectConfig(QWidget *parent, const QVariantList &args)
     : KCModule(KAboutData::pluginData(QStringLiteral("slide")), parent, args)
 {
     m_ui.setupUi(this);
-    SlideConfig::instance(KWIN_CONFIG);
+    SlideConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(SlideConfig::self(), this);
     load();
 }
@@ -52,7 +52,7 @@ void SlideEffectConfig::save()
 {
     KCModule::save();
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("slide"));

@@ -28,7 +28,7 @@ EffectPackageStructure::EffectPackageStructure(QObject *parent, const QVariantLi
 
 void EffectPackageStructure::initPackage(KPackage::Package *package)
 {
-    package->setDefaultPackageRoot(QStringLiteral("kwin/effects/"));
+    package->setDefaultPackageRoot(QStringLiteral("ukui-kwin/effects/"));
 
     package->addDirectoryDefinition("code", QStringLiteral("code"), i18n("Executable Scripts"));
     package->setMimeTypes("code", {QStringLiteral("text/plain")});
@@ -58,6 +58,6 @@ void EffectPackageStructure::pathChanged(KPackage::Package *package)
     package->addFileDefinition("mainscript", mainScript, i18n("Main Script File"));
 }
 
-K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(EffectPackageStructure, "kwin-packagestructure-effect.json")
+K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(EffectPackageStructure, "ukui-kwin-packagestructure-effect.json")
 
 #include "effect.moc"

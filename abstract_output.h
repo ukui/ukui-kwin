@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KWIN_ABSTRACT_OUTPUT_H
 #define KWIN_ABSTRACT_OUTPUT_H
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QRect>
@@ -38,7 +38,7 @@ class OutputChangeSet;
 namespace KWin
 {
 
-class KWIN_EXPORT GammaRamp
+class UKUI_KWIN_EXPORT GammaRamp
 {
 public:
     GammaRamp(uint32_t size);
@@ -95,7 +95,7 @@ private:
 /**
  * Generic output representation.
  */
-class KWIN_EXPORT AbstractOutput : public QObject
+class UKUI_KWIN_EXPORT AbstractOutput : public QObject
 {
     Q_OBJECT
 

@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #pragma once
 #include <QDebug>
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 namespace KWin
 {
 
-class KWIN_EXPORT AbstractOpenGLContextAttributeBuilder
+class UKUI_KWIN_EXPORT AbstractOpenGLContextAttributeBuilder
 {
 public:
     virtual ~AbstractOpenGLContextAttributeBuilder() {

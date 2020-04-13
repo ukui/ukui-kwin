@@ -49,7 +49,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -68,7 +68,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -87,7 +87,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -106,7 +106,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -125,7 +125,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -144,7 +144,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -164,7 +164,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });
@@ -184,7 +184,7 @@ ColorCorrectDBusInterface::ColorCorrectDBusInterface(Manager *parent)
         );
 
         message.setArguments({
-            QStringLiteral("org.kde.kwin.ColorCorrect"),
+            QStringLiteral("org.ukui.kwin.ColorCorrect"),
             changedProperties,
             QStringList(), // invalidated_properties
         });

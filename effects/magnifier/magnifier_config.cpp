@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "magnifier_config.h"
 // KConfigSkeleton
 #include "magnifierconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -58,7 +58,7 @@ MagnifierEffectConfig::MagnifierEffectConfig(QWidget* parent, const QVariantList
 
     layout->addWidget(m_ui);
 
-    MagnifierConfig::instance(KWIN_CONFIG);
+    MagnifierConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(MagnifierConfig::self(), m_ui);
 
     connect(m_ui->editor, &KShortcutsEditor::keyChange, this, qOverload<>(&MagnifierEffectConfig::changed));
@@ -103,7 +103,7 @@ void MagnifierEffectConfig::save()
 
     m_ui->editor->save();   // undo() will restore to this state from now on
     KCModule::save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("magnifier"));

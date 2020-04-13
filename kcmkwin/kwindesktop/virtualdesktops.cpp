@@ -19,14 +19,14 @@
 #include "virtualdesktops.h"
 #include "animationsmodel.h"
 #include "desktopsmodel.h"
-#include "virtualdesktopssettings.h"
+#include "ukuivirtualdesktopssettings.h"
 
 #include <KAboutApplicationDialog>
 #include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-K_PLUGIN_FACTORY_WITH_JSON(VirtualDesktopsFactory, "kcm_kwin_virtualdesktops.json", registerPlugin<KWin::VirtualDesktops>();)
+K_PLUGIN_FACTORY_WITH_JSON(VirtualDesktopsFactory, "kcm_ukuikwin_virtualdesktops.json", registerPlugin<KWin::VirtualDesktops>();)
 
 namespace KWin
 {
@@ -37,7 +37,7 @@ VirtualDesktops::VirtualDesktops(QObject *parent, const QVariantList &args)
     , m_desktopsModel(new KWin::DesktopsModel(this))
     , m_animationsModel(new AnimationsModel(this))
 {
-    KAboutData *about = new KAboutData(QStringLiteral("kcm_kwin_virtualdesktops"),
+    KAboutData *about = new KAboutData(QStringLiteral("kcm_ukuikwin_virtualdesktops"),
         i18n("Virtual Desktops"),
         QStringLiteral("2.0"), QString(), KAboutLicense::GPL);
     setAboutData(about);
@@ -89,7 +89,7 @@ void VirtualDesktops::save()
     m_animationsModel->save();
 
     QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"),
-        QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"));
+        QStringLiteral("org.ukui.KWin"), QStringLiteral("reloadConfig"));
     QDBusConnection::sessionBus().send(message);
 }
 

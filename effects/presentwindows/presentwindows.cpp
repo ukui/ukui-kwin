@@ -1940,7 +1940,7 @@ void PresentWindowsEffect::reCreateGrids()
 CloseWindowView::CloseWindowView(QObject *parent)
     : EffectQuickScene(parent)
 {
-    setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/effects/presentwindows/main.qml"))));
+    setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ukui-kwin/effects/presentwindows/main.qml"))));
     if (QQuickItem *item = rootItem()) {
         connect(item, SIGNAL(clicked()), this, SLOT(clicked()));
         setGeometry(QRect(QPoint(), QSize(item->implicitWidth(), item->implicitHeight())));

@@ -36,7 +36,7 @@ using namespace KWin;
 using namespace KWayland::Client;
 
 static const QString s_socketName = QStringLiteral("wayland_test_kwin_modifier_only_shortcut-0");
-static const QString s_serviceName = QStringLiteral("org.kde.KWin.Test.ModifierOnlyShortcut");
+static const QString s_serviceName = QStringLiteral("org.ukui.KWin.Test.ModifierOnlyShortcut");
 static const QString s_path = QStringLiteral("/Test");
 
 class ModifierOnlyShortcutTest : public QObject
@@ -57,7 +57,7 @@ private Q_SLOTS:
 class Target : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.KWin.Test.ModifierOnlyShortcut")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.KWin.Test.ModifierOnlyShortcut")
 
 public:
     Target();

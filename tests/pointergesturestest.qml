@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 import QtQuick 2.0
-import org.kde.kwin.tests 1.0
+import org.ukui.kwin.tests 1.0
 
 Image {
     source: "../48-apps-kwin.png"

@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MAIN_H
 
 #include <kwinglobals.h>
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <KSharedConfig>
 // Qt
@@ -45,7 +45,7 @@ public:
     bool nativeEventFilter(const QByteArray &eventType, void *message, long int *result) override;
 };
 
-class KWIN_EXPORT Application : public  QApplication
+class UKUI_KWIN_EXPORT Application : public  QApplication
 {
     Q_OBJECT
     Q_PROPERTY(quint32 x11Time READ x11Time WRITE setX11Time)
@@ -271,7 +271,7 @@ namespace Xwl
 class Xwayland;
 }
 
-class KWIN_EXPORT ApplicationWaylandAbstract : public Application
+class UKUI_KWIN_EXPORT ApplicationWaylandAbstract : public Application
 {
     Q_OBJECT
 public:

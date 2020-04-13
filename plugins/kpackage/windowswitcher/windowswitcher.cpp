@@ -23,7 +23,7 @@
 
 void SwitcherPackage::initPackage(KPackage::Package *package)
 {
-    package->setDefaultPackageRoot(QStringLiteral("kwin/tabbox/"));
+    package->setDefaultPackageRoot(QStringLiteral("ukui-kwin/tabbox/"));
 
     package->addDirectoryDefinition("config", QStringLiteral("config"), i18n("Configuration Definitions"));
     QStringList mimetypes;
@@ -56,7 +56,7 @@ void SwitcherPackage::pathChanged(KPackage::Package *package)
     }
 }
 
-K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(SwitcherPackage, "kwin-packagestructure-windowswitcher.json")
+K_EXPORT_KPACKAGE_PACKAGE_WITH_JSON(SwitcherPackage, "ukui-kwin-packagestructure-windowswitcher.json")
 
 #include "windowswitcher.moc"
 

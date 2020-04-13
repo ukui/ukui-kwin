@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mouseclick_config.h"
 // KConfigSkeleton
 #include "mouseclickconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -68,7 +68,7 @@ MouseClickEffectConfig::MouseClickEffectConfig(QWidget* parent, const QVariantLi
 
     m_ui->editor->addCollection(m_actionCollection);
 
-    MouseClickConfig::instance(KWIN_CONFIG);
+    MouseClickConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(MouseClickConfig::self(), m_ui);
     load();
 }
@@ -83,7 +83,7 @@ void MouseClickEffectConfig::save()
 {
     KCModule::save();
     m_ui->editor->save();   // undo() will restore to this state from now on
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("mouseclick"));

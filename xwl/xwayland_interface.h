@@ -41,7 +41,7 @@ enum class DragEventReply {
 };
 } // namespace Xwl
 
-class KWIN_EXPORT XwaylandInterface : public QObject
+class UKUI_KWIN_EXPORT XwaylandInterface : public QObject
 {
     Q_OBJECT
 

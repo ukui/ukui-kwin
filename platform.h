@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #ifndef KWIN_PLATFORM_H
 #define KWIN_PLATFORM_H
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 #include <kwinglobals.h>
 #include <epoxy/egl.h>
 #include <fixx11h.h>
@@ -65,7 +65,7 @@ class Renderer;
 class DecoratedClientImpl;
 }
 
-class KWIN_EXPORT Outputs : public QVector<AbstractOutput*>
+class UKUI_KWIN_EXPORT Outputs : public QVector<AbstractOutput*>
 {
 public:
     Outputs(){};
@@ -76,7 +76,7 @@ public:
     }
 };
 
-class KWIN_EXPORT Platform : public QObject
+class UKUI_KWIN_EXPORT Platform : public QObject
 {
     Q_OBJECT
 public:
@@ -568,6 +568,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE(KWin::Platform, "org.kde.kwin.Platform")
+Q_DECLARE_INTERFACE(KWin::Platform, "org.ukui.kwin.Platform")
 
 #endif

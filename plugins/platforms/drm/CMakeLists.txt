@@ -31,8 +31,8 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/platformsupport/scenes/opengl)
 
 add_library(KWinWaylandDrmBackend MODULE ${DRM_SOURCES})
-set_target_properties(KWinWaylandDrmBackend PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.kde.kwin.waylandbackends/")
-target_link_libraries(KWinWaylandDrmBackend kwin Libdrm::Libdrm SceneQPainterBackend SceneOpenGLBackend)
+set_target_properties(KWinWaylandDrmBackend PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.ukui.kwin.waylandbackends/")
+target_link_libraries(KWinWaylandDrmBackend ukui-kwin Libdrm::Libdrm SceneQPainterBackend SceneOpenGLBackend)
 
 if (HAVE_GBM)
     target_link_libraries(KWinWaylandDrmBackend gbm::gbm)
@@ -42,5 +42,5 @@ install(
     TARGETS
         KWinWaylandDrmBackend
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/org.kde.kwin.waylandbackends/
+        ${PLUGIN_INSTALL_DIR}/org.ukui.kwin.waylandbackends/
 )

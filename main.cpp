@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 #include "main.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 // kwin
 #include "platform.h"
 #include "atoms.h"
@@ -191,13 +191,13 @@ bool Application::wasCrash()
     return crashes > 0;
 }
 
-static const char description[] = I18N_NOOP("KDE window manager");
+static const char description[] = I18N_NOOP("UKUI window manager");
 
 void Application::createAboutData()
 {
-    KAboutData aboutData(QStringLiteral(KWIN_NAME),          // The program name used internally
-                         i18n("KWin"),                       // A displayable program name string
-                         QStringLiteral(KWIN_VERSION_STRING), // The program version string
+    KAboutData aboutData(QStringLiteral(UKUI_KWIN_NAME),          // The program name used internally
+                         i18n("Ukui-KWin"),                       // A displayable program name string
+                         QStringLiteral(UKUI_KWIN_VERSION_STRING), // The program version string
                          i18n(description),                  // Short description of what the app does
                          KAboutLicense::GPL,            // The license this code is released under
                          i18n("(c) 1999-2019, The KDE Developers"));   // Copyright Statement
@@ -221,7 +221,7 @@ void Application::setupCommandLine(QCommandLineParser *parser)
     QCommandLineOption lockOption(s_lockOption, i18n("Disable configuration options"));
     QCommandLineOption crashesOption(s_crashesOption, i18n("Indicate that KWin has recently crashed n times"), QStringLiteral("n"));
 
-    parser->setApplicationDescription(i18n("KDE window manager"));
+    parser->setApplicationDescription(i18n("UKUI window manager"));
     parser->addOption(lockOption);
     parser->addOption(crashesOption);
     KAboutData::applicationData().setupCommandLine(parser);
@@ -263,7 +263,7 @@ void Application::setupMalloc()
 
 void Application::setupLocalizedString()
 {
-    KLocalizedString::setApplicationDomain("kwin");
+    KLocalizedString::setApplicationDomain("ukui-kwin");
 }
 
 void Application::createWorkspace()

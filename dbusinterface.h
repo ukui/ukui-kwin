@@ -49,7 +49,7 @@ class VirtualDesktopManager;
 class DBusInterface: public QObject, protected QDBusContext
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.KWin")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.KWin")
 public:
     explicit DBusInterface(QObject *parent);
     ~DBusInterface() override;
@@ -84,7 +84,7 @@ private:
 class CompositorDBusInterface : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Compositing")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Compositing")
     /**
      * @brief Whether the Compositor is active. That is a Scene is present and the Compositor is
      * not shutting down itself.
@@ -184,7 +184,7 @@ private:
 class VirtualDesktopManagerDBusInterface : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.KWin.VirtualDesktopManager")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.KWin.VirtualDesktopManager")
 
     /**
      * The number of virtual desktops currently available.

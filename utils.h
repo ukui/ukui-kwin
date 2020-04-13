@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_UTILS_H
 
 // cmake stuff
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwinconfig.h>
 // kwin
 #include <kwinglobals.h>
@@ -124,11 +124,11 @@ Q_DECLARE_FLAGS(QuickTileMode, QuickTileFlag)
 
 template <typename T> using ScopedCPointer = QScopedPointer<T, QScopedPointerPodDeleter>;
 
-void KWIN_EXPORT updateXTime();
-void KWIN_EXPORT grabXServer();
-void KWIN_EXPORT ungrabXServer();
-bool KWIN_EXPORT grabXKeyboard(xcb_window_t w = XCB_WINDOW_NONE);
-void KWIN_EXPORT ungrabXKeyboard();
+void UKUI_KWIN_EXPORT updateXTime();
+void UKUI_KWIN_EXPORT grabXServer();
+void UKUI_KWIN_EXPORT ungrabXServer();
+bool UKUI_KWIN_EXPORT grabXKeyboard(xcb_window_t w = XCB_WINDOW_NONE);
+void UKUI_KWIN_EXPORT ungrabXKeyboard();
 
 /**
  * Small helper class which performs grabXServer in the ctor and
@@ -153,9 +153,9 @@ public:
 
 // converting between X11 mouse/keyboard state mask and Qt button/keyboard states
 Qt::MouseButton x11ToQtMouseButton(int button);
-Qt::MouseButton KWIN_EXPORT x11ToQtMouseButton(int button);
-Qt::MouseButtons KWIN_EXPORT x11ToQtMouseButtons(int state);
-Qt::KeyboardModifiers KWIN_EXPORT x11ToQtKeyboardModifiers(int state);
+Qt::MouseButton UKUI_KWIN_EXPORT x11ToQtMouseButton(int button);
+Qt::MouseButtons UKUI_KWIN_EXPORT x11ToQtMouseButtons(int state);
+Qt::KeyboardModifiers UKUI_KWIN_EXPORT x11ToQtKeyboardModifiers(int state);
 
 /**
  * Separate the concept of an unet QPoint and 0,0
@@ -187,7 +187,7 @@ private:
 /**
  * QProcess subclass which unblocks SIGUSR in the child process.
  */
-class KWIN_EXPORT Process : public QProcess
+class UKUI_KWIN_EXPORT Process : public QProcess
 {
     Q_OBJECT
 public:

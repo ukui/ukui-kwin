@@ -37,7 +37,7 @@ class AbstractClient;
 class Platform;
 class OrientationSensor;
 
-class KWIN_EXPORT Screens : public QObject
+class UKUI_KWIN_EXPORT Screens : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)

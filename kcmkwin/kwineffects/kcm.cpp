@@ -27,7 +27,7 @@
 #include <QWindow>
 
 K_PLUGIN_FACTORY_WITH_JSON(DesktopEffectsKCMFactory,
-                           "kcm_kwin_effects.json",
+                           "kcm_ukuikwin_effects.json",
                            registerPlugin<KWin::DesktopEffectsKCM>();)
 
 namespace KWin
@@ -37,10 +37,10 @@ DesktopEffectsKCM::DesktopEffectsKCM(QObject *parent, const QVariantList &args)
     : KQuickAddons::ConfigModule(parent, args)
     , m_model(new EffectsModel(this))
 {
-    qmlRegisterType<EffectsFilterProxyModel>("org.kde.private.kcms.kwin.effects", 1, 0, "EffectsFilterProxyModel");
+    qmlRegisterType<EffectsFilterProxyModel>("org.kde.private.kcms.ukuikwin.effects", 1, 0, "EffectsFilterProxyModel");
 
     auto about = new KAboutData(
-        QStringLiteral("kcm_kwin_effects"),
+        QStringLiteral("kcm_ukuikwin_effects"),
         i18n("Desktop Effects"),
         QStringLiteral("2.0"),
         QString(),
@@ -84,7 +84,7 @@ void DesktopEffectsKCM::defaults()
 
 void DesktopEffectsKCM::openGHNS(QQuickItem *context)
 {
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog(QStringLiteral("kwineffect.knsrc"));
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog(QStringLiteral("ukui-kwineffect.knsrc"));
     dialog->setWindowTitle(i18n("Download New Desktop Effects"));
     dialog->winId();
 

@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // KConfigSkeleton
 #include "mousemarkconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -59,7 +59,7 @@ MouseMarkEffectConfig::MouseMarkEffectConfig(QWidget* parent, const QVariantList
 
     layout->addWidget(m_ui);
 
-    MouseMarkConfig::instance(KWIN_CONFIG);
+    MouseMarkConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(MouseMarkConfig::self(), m_ui);
 
     // Shortcut config. The shortcut belongs to the component "kwin"!
@@ -97,7 +97,7 @@ void MouseMarkEffectConfig::save()
     m_actionCollection->writeSettings();
     m_ui->editor->save();   // undo() will restore to this state from now on
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("mousemark"));

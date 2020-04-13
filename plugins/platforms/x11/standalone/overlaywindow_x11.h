@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "../../../../x11eventfilter.h"
 
 namespace KWin {
-class KWIN_EXPORT OverlayWindowX11 : public OverlayWindow, public X11EventFilter {
+class UKUI_KWIN_EXPORT OverlayWindowX11 : public OverlayWindow, public X11EventFilter {
 public:
     OverlayWindowX11();
     ~OverlayWindowX11() override;

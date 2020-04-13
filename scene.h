@@ -57,7 +57,7 @@ class Shadow;
 class WindowPixmap;
 
 // The base class for compositing backends.
-class KWIN_EXPORT Scene : public QObject
+class UKUI_KWIN_EXPORT Scene : public QObject
 {
     Q_OBJECT
 public:
@@ -273,7 +273,7 @@ private:
 /**
  * Factory class to create a Scene. Needs to be implemented by the plugins.
  */
-class KWIN_EXPORT SceneFactory : public QObject
+class UKUI_KWIN_EXPORT SceneFactory : public QObject
 {
     Q_OBJECT
 public:
@@ -404,7 +404,7 @@ private:
  * This class is intended to be inherited for the needs of the compositor backends which need further mapping from
  * the native pixmap to the respective rendering format.
  */
-class KWIN_EXPORT WindowPixmap
+class UKUI_KWIN_EXPORT WindowPixmap
 {
 public:
     virtual ~WindowPixmap();
@@ -696,6 +696,6 @@ const QSize &WindowPixmap::size() const
 
 } // namespace
 
-Q_DECLARE_INTERFACE(KWin::SceneFactory, "org.kde.kwin.Scene")
+Q_DECLARE_INTERFACE(KWin::SceneFactory, "org.ukui.kwin.Scene")
 
 #endif

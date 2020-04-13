@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "main_x11.h"
 
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include "platform.h"
 #include "sm.h"
@@ -85,7 +85,7 @@ public:
         addWM(QStringLiteral("metacity"));
         addWM(QStringLiteral("openbox"));
         addWM(QStringLiteral("fvwm2"));
-        addWM(QStringLiteral(KWIN_INTERNAL_NAME_X11));
+        addWM(QStringLiteral(UKUI_KWIN_INTERNAL_NAME_X11));
 
         QVBoxLayout *mainLayout = new QVBoxLayout(this);
         mainLayout->addWidget(mainWidget);
@@ -289,7 +289,7 @@ void ApplicationX11::crashChecking()
     if (crashes >= 4) {
         // Something has gone seriously wrong
         AlternativeWMDialog dialog;
-        QString cmd = QStringLiteral(KWIN_INTERNAL_NAME_X11);
+        QString cmd = QStringLiteral(UKUI_KWIN_INTERNAL_NAME_X11);
         if (dialog.exec() == QDialog::Accepted)
             cmd = dialog.selectedWM();
         else
@@ -341,7 +341,7 @@ void ApplicationX11::crashHandler(int signal)
 } // namespace
 
 extern "C"
-KWIN_EXPORT int kdemain(int argc, char * argv[])
+UKUI_KWIN_EXPORT int kdemain(int argc, char * argv[])
 {
     KWin::Application::setupMalloc();
     KWin::Application::setupLocalizedString();
@@ -466,7 +466,7 @@ KWIN_EXPORT int kdemain(int argc, char * argv[])
     }
 
     // find and load the X11 platform plugin
-    const auto plugins = KPluginLoader::findPluginsById(QStringLiteral("org.kde.kwin.platforms"),
+    const auto plugins = KPluginLoader::findPluginsById(QStringLiteral("org.ukui.kwin.platforms"),
                                                         QStringLiteral("KWinX11Platform"));
     if (plugins.isEmpty()) {
         std::cerr << "FATAL ERROR: KWin could not find the KWinX11Platform plugin" << std::endl;

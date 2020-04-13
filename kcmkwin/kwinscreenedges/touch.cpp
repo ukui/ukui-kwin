@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "touch.h"
 #include <effect_builtins.h>
-#include <kwin_effects_interface.h>
+#include <ukui_kwin_effects_interface.h>
 
 #include <KAboutData>
 #include <KConfigGroup>
@@ -44,7 +44,7 @@ KWinScreenEdgesConfigForm::KWinScreenEdgesConfigForm(QWidget* parent)
 
 KWinScreenEdgesConfig::KWinScreenEdgesConfig(QWidget* parent, const QVariantList& args)
     : KCModule(parent, args)
-    , m_config(KSharedConfig::openConfig("kwinrc"))
+    , m_config(KSharedConfig::openConfig("ukui-kwinrc"))
 {
     m_ui = new KWinScreenEdgesConfigForm(this);
     QVBoxLayout* layout = new QVBoxLayout(this);
@@ -77,10 +77,10 @@ void KWinScreenEdgesConfig::save()
     monitorSave();
 
     // Reload KWin.
-    QDBusMessage message = QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+    QDBusMessage message = QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
     QDBusConnection::sessionBus().send(message);
     // and reconfigure the effects
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                              QStringLiteral("/Effects"),
                                              QDBusConnection::sessionBus());
     interface.reconfigureEffect(BuiltInEffects::nameForEffect(BuiltInEffect::PresentWindows));
@@ -148,7 +148,7 @@ void KWinScreenEdgesConfig::monitorInit()
     monitorAddItem(i18n("Toggle window switching"));
     monitorAddItem(i18n("Toggle alternative window switching"));
 
-    const QString scriptFolder = QStringLiteral("kwin/scripts/");
+    const QString scriptFolder = QStringLiteral("ukui-kwin/scripts/");
     const auto scripts = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KWin/Script"), scriptFolder);
 
     KConfigGroup config(m_config, "Plugins");

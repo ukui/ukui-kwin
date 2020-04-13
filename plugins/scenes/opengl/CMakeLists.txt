@@ -18,9 +18,9 @@ ecm_qt_declare_logging_category(
 qt5_add_resources(SCENE_OPENGL_SRCS resources.qrc)
 
 add_library(KWinSceneOpenGL MODULE ${SCENE_OPENGL_SRCS})
-set_target_properties(KWinSceneOpenGL PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.kde.kwin.scenes/")
+set_target_properties(KWinSceneOpenGL PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.ukui.kwin.scenes/")
 target_link_libraries(KWinSceneOpenGL
-    kwin
+    ukui-kwin
     SceneOpenGLBackend
 )
 
@@ -28,5 +28,5 @@ install(
     TARGETS
         KWinSceneOpenGL
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/org.kde.kwin.scenes/
+        ${PLUGIN_INSTALL_DIR}/org.ukui.kwin.scenes/
 )

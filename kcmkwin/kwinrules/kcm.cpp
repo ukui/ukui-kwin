@@ -39,7 +39,7 @@ namespace KWin
 
 KCMRules::KCMRules(QWidget *parent, const QVariantList &)
     : KCModule(parent)
-    , config("kwinrulesrc", KConfig::NoGlobals)
+    , config("ukui-kwinrulesrc", KConfig::NoGlobals)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -47,7 +47,7 @@ KCMRules::KCMRules(QWidget *parent, const QVariantList &)
     widget = new KCMRulesList(this);
     layout->addWidget(widget);
     connect(widget, SIGNAL(changed(bool)), SLOT(moduleChanged(bool)));
-    KAboutData *about = new KAboutData(QStringLiteral("kcmkwinrules"),
+    KAboutData *about = new KAboutData(QStringLiteral("kcmukuikwinrules"),
                                        i18n("Window-Specific Settings Configuration Module"),
                                        QString(), QString(), KAboutLicense::GPL, i18n("(c) 2004 KWin and KControl Authors"));
     about->addAuthor(i18n("Lubos Lunak"), QString(), "l.lunak@kde.org");
@@ -69,7 +69,7 @@ void KCMRules::save()
     config.sync();
     // Send signal to all kwin instances
     QDBusMessage message =
-        QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+        QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
     QDBusConnection::sessionBus().send(message);
 
 }

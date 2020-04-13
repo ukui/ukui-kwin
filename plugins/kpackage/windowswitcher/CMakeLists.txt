@@ -4,13 +4,13 @@ set(windowswitcher_SRCS
     windowswitcher.cpp
 )
 
-add_library(kwin_packagestructure_windowswitcher MODULE ${windowswitcher_SRCS})
+add_library(ukui_kwin_packagestructure_windowswitcher MODULE ${windowswitcher_SRCS})
 
-target_link_libraries(kwin_packagestructure_windowswitcher
+target_link_libraries(ukui_kwin_packagestructure_windowswitcher
    KF5::I18n
    KF5::Package
 )
 
-kcoreaddons_desktop_to_json(kwin_packagestructure_windowswitcher kwin-packagestructure-windowswitcher.desktop)
+kcoreaddons_desktop_to_json(ukui_kwin_packagestructure_windowswitcher ukui-kwin-packagestructure-windowswitcher.desktop)
 
-install(TARGETS kwin_packagestructure_windowswitcher DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
+install(TARGETS ukui_kwin_packagestructure_windowswitcher DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)

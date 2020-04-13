@@ -44,7 +44,7 @@ class AbstractClient;
 namespace Decoration
 {
 
-class KWIN_EXPORT DecorationBridge : public KDecoration2::DecorationBridge
+class UKUI_KWIN_EXPORT DecorationBridge : public KDecoration2::DecorationBridge
 {
     Q_OBJECT
 public:

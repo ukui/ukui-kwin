@@ -1457,7 +1457,7 @@ DesktopButtonsView::DesktopButtonsView(QWindow *parent)
 
     rootContext()->setContextProperty(QStringLiteral("add"), QVariant(true));
     rootContext()->setContextProperty(QStringLiteral("remove"), QVariant(true));
-    setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/effects/desktopgrid/main.qml"))));
+    setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ukui-kwin/effects/desktopgrid/main.qml"))));
     if (QObject *item = rootObject()->findChild<QObject*>(QStringLiteral("addButton"))) {
         connect(item, SIGNAL(clicked()), SIGNAL(addDesktop()));
     }

@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
 #include <QAction>
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <KLocalizedString>
@@ -54,7 +54,7 @@ TrackMouseEffectConfigForm::TrackMouseEffectConfigForm(QWidget* parent) : QWidge
 TrackMouseEffectConfig::TrackMouseEffectConfig(QWidget* parent, const QVariantList& args) :
     KCModule(KAboutData::pluginData(QStringLiteral("trackmouse")), parent, args)
 {
-    TrackMouseConfig::instance(KWIN_CONFIG);
+    TrackMouseConfig::instance(UKUI_KWIN_CONFIG);
     m_ui = new TrackMouseEffectConfigForm(this);
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_ui);
@@ -99,7 +99,7 @@ void TrackMouseEffectConfig::save()
 {
     KCModule::save();
     m_actionCollection->writeSettings();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("trackmouse"));

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-project(UKWM2)
+project(UKUI-KWIN)
 set(PROJECT_VERSION "1.0.0")
-set(PROJECT_VERSION_MAJOR 5)
+set(PROJECT_VERSION_MAJOR 1)
 
 set(QT_MIN_VERSION "5.12.0")
 set(KF5_MIN_VERSION "5.66.0")
@@ -309,10 +309,10 @@ option(KWIN_BUILD_XRENDER_COMPOSITING "Enable building of KWin with XRender Comp
 cmake_dependent_option(KWIN_BUILD_ACTIVITIES "Enable building of KWin with kactivities support" ON "KF5Activities_FOUND" OFF)
 
 # Binary name of KWin
-set(KWIN_NAME "kwin")
-set(KWIN_INTERNAL_NAME_X11 "kwin_x11")
-set(KWIN_INTERNAL_NAME_WAYLAND "kwin_wayland")
-set(KWIN_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(UKUI_KWIN_NAME "ukui-kwin")
+set(UKUI_KWIN_INTERNAL_NAME_X11 "ukui-kwin_x11")
+set(UKUI_KWIN_INTERNAL_NAME_WAYLAND "ukui-kwin_wayland")
+set(UKUI_KWIN_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # KWIN_HAVE_XRENDER_COMPOSITING - whether XRender-based compositing support is available: may be disabled
 if (KWIN_BUILD_XRENDER_COMPOSITING)
@@ -363,10 +363,10 @@ add_feature_info("SCHED_RESET_ON_FORK"
                  HAVE_SCHED_RESET_ON_FORK
                  "Required for running kwin_wayland with real-time scheduling")
 
-configure_file(config-kwin.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kwin.h)
+configure_file(config-ukui-kwin.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ukui-kwin.h)
 
 ########### global ###############
-set(kwin_effects_dbus_xml ${CMAKE_CURRENT_SOURCE_DIR}/org.kde.kwin.Effects.xml)
+set(kwin_effects_dbus_xml ${CMAKE_CURRENT_SOURCE_DIR}/org.ukui.kwin.Effects.xml)
 
 include_directories(BEFORE
     ${CMAKE_CURRENT_BINARY_DIR}/libkwineffects
@@ -552,17 +552,17 @@ endif()
 kconfig_add_kcfg_files(kwin_KDEINIT_SRCS settings.kcfgc)
 kconfig_add_kcfg_files(kwin_KDEINIT_SRCS colorcorrection/colorcorrect_settings.kcfgc)
 
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.KWin.xml dbusinterface.h KWin::DBusInterface)
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.kwin.Compositing.xml dbusinterface.h KWin::CompositorDBusInterface)
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.kwin.ColorCorrect.xml colorcorrection/colorcorrectdbusinterface.h KWin::ColorCorrect::ColorCorrectDBusInterface)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.KWin.xml dbusinterface.h KWin::DBusInterface)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.kwin.Compositing.xml dbusinterface.h KWin::CompositorDBusInterface)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.kwin.ColorCorrect.xml colorcorrection/colorcorrectdbusinterface.h KWin::ColorCorrect::ColorCorrectDBusInterface)
 qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS ${kwin_effects_dbus_xml} effects.h KWin::EffectsHandlerImpl)
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.kwin.OrientationSensor.xml orientation_sensor.h KWin::OrientationSensor)
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.KWin.VirtualDesktopManager.xml dbusinterface.h KWin::VirtualDesktopManagerDBusInterface)
-qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.kde.KWin.Session.xml sm.h KWin::SessionManager)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.kwin.OrientationSensor.xml orientation_sensor.h KWin::OrientationSensor)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.KWin.VirtualDesktopManager.xml dbusinterface.h KWin::VirtualDesktopManagerDBusInterface)
+qt5_add_dbus_adaptor(kwin_KDEINIT_SRCS org.ukui.KWin.Session.xml sm.h KWin::SessionManager)
 
 qt5_add_dbus_interface(kwin_KDEINIT_SRCS ${KSCREENLOCKER_DBUS_INTERFACES_DIR}/kf5_org.freedesktop.ScreenSaver.xml screenlocker_interface)
 qt5_add_dbus_interface(kwin_KDEINIT_SRCS ${KSCREENLOCKER_DBUS_INTERFACES_DIR}/org.kde.screensaver.xml kscreenlocker_interface)
-qt5_add_dbus_interface(kwin_KDEINIT_SRCS org.kde.kappmenu.xml appmenu_interface)
+qt5_add_dbus_interface(kwin_KDEINIT_SRCS org.ukui.kappmenu.xml appmenu_interface)
 
 ki18n_wrap_ui(kwin_KDEINIT_SRCS
     debug_console.ui
@@ -647,24 +647,24 @@ set(kwinLibs
     Libinput::Libinput
 )
 
-add_library(kwin SHARED ${kwin_KDEINIT_SRCS})
+add_library(ukui-kwin SHARED ${kwin_KDEINIT_SRCS})
 
-set_target_properties(kwin PROPERTIES
+set_target_properties(ukui-kwin PROPERTIES
    VERSION ${PROJECT_VERSION}
    SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
-target_link_libraries(kwin ${kwinLibs})
-generate_export_header(kwin EXPORT_FILE_NAME kwin_export.h)
+target_link_libraries(ukui-kwin ${kwinLibs})
+generate_export_header(ukui-kwin EXPORT_FILE_NAME ukui-kwin_export.h)
 
-target_link_libraries(kwin kwinglutils ${epoxy_LIBRARY})
+target_link_libraries(ukui-kwin kwinglutils ${epoxy_LIBRARY})
 
-kf5_add_kdeinit_executable(kwin_x11 main_x11.cpp)
-target_link_libraries(kdeinit_kwin_x11 kwin KF5::Crash Qt5::X11Extras)
+kf5_add_kdeinit_executable(ukui-kwin_x11 main_x11.cpp)
+target_link_libraries(kdeinit_ukui-kwin_x11 ukui-kwin KF5::Crash Qt5::X11Extras)
 
-install(TARGETS kwin ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
-install(TARGETS kdeinit_kwin_x11 ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(TARGETS kwin_x11 ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS ukui-kwin ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+install(TARGETS kdeinit_ukui-kwin_x11 ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS ukui-kwin_x11 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 set(kwin_XWAYLAND_SRCS
    ${CMAKE_CURRENT_SOURCE_DIR}/xwl/clipboard.cpp
@@ -695,20 +695,20 @@ set(kwin_WAYLAND_SRCS
    tabletmodemanager.cpp
 )
 
-add_executable(kwin_wayland ${kwin_WAYLAND_SRCS} ${kwin_XWAYLAND_SRCS})
-target_link_libraries(kwin_wayland kwin KF5::Crash)
+add_executable(ukui-kwin_wayland ${kwin_WAYLAND_SRCS} ${kwin_XWAYLAND_SRCS})
+target_link_libraries(ukui-kwin_wayland ukui-kwin KF5::Crash)
 if (HAVE_LIBCAP)
-    target_link_libraries(kwin_wayland ${Libcap_LIBRARIES})
+    target_link_libraries(ukui-kwin_wayland ${Libcap_LIBRARIES})
 endif()
 
-install(TARGETS kwin_wayland ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS ukui-kwin_wayland ${INSTALL_TARGETS_DEFAULT_ARGS})
 if (HAVE_LIBCAP)
     install(
     CODE "execute_process(
             COMMAND
                 ${SETCAP_EXECUTABLE}
                 CAP_SYS_NICE=+ep
-                \$ENV{DESTDIR}${CMAKE_INSTALL_FULL_BINDIR}/kwin_wayland)"
+                \$ENV{DESTDIR}${CMAKE_INSTALL_FULL_BINDIR}/ukui-kwin_wayland)"
     )
 endif()
 
@@ -717,23 +717,23 @@ add_subdirectory(plugins)
 
 ########### install files ###############
 
-install(FILES kwin.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${KWIN_NAME}.kcfg)
-install(FILES colorcorrection/colorcorrect_settings.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${KWIN_NAME}_colorcorrect.kcfg)
-install(FILES kwin.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR} RENAME ${KWIN_NAME}.notifyrc)
+install(FILES ukui-kwin.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}.kcfg)
+install(FILES colorcorrection/colorcorrect_settings.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}_colorcorrect.kcfg)
+install(FILES ukui-kwin.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}.notifyrc)
 install(
     FILES
-        org.kde.KWin.VirtualDesktopManager.xml
-        org.kde.KWin.xml
-        org.kde.kwin.ColorCorrect.xml
-        org.kde.kwin.Compositing.xml
-        org.kde.kwin.Effects.xml
+        org.ukui.KWin.VirtualDesktopManager.xml
+        org.ukui.KWin.xml
+        org.ukui.kwin.ColorCorrect.xml
+        org.ukui.kwin.Compositing.xml
+        org.ukui.kwin.Effects.xml
     DESTINATION
         ${KDE_INSTALL_DBUSINTERFACEDIR}
 )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kwin_export.h DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ukui-kwin_export.h DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 
 # Install the KWin/Script service type
-install(FILES scripting/kwinscript.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES scripting/kwinscript.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR}/ukui-kwin)
 
 add_subdirectory(qml)
 
@@ -742,9 +742,9 @@ if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
-if (KF5DocTools_FOUND)
-    add_subdirectory(doc)
-endif()
+#if (KF5DocTools_FOUND)
+#    add_subdirectory(doc)
+#endif()
 
 add_subdirectory(kconf_update)
 
@@ -755,7 +755,7 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 include(CMakePackageConfigHelpers)
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KWinDBusInterface")
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/ukui-kwin/KWinDBusInterface")
 configure_package_config_file(KWinDBusInterfaceConfig.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/KWinDBusInterfaceConfig.cmake"
     PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
@@ -767,6 +767,6 @@ find_package(KF5I18n CONFIG REQUIRED)
 ki18n_install(po)
 
   find_package(KF5DocTools CONFIG)
-  if(KF5DocTools_FOUND)
-    kdoctools_install(po)
-  endif()
+#  if(KF5DocTools_FOUND)
+#    kdoctools_install(po)
+#  endif()

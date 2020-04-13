@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <KPluginInfo>
 #include <KSharedConfig>
@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace KWin
 {
 
-class KWIN_EXPORT EffectsModel : public QAbstractItemModel
+class UKUI_KWIN_EXPORT EffectsModel : public QAbstractItemModel
 {
     Q_OBJECT
 

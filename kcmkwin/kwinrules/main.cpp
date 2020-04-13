@@ -39,7 +39,7 @@ namespace KWin
 
 static void loadRules(QList< Rules* >& rules)
 {
-    KConfig _cfg("kwinrulesrc", KConfig::NoGlobals);
+    KConfig _cfg("ukui-kwinrulesrc", KConfig::NoGlobals);
     KConfigGroup cfg(&_cfg, "General");
     int count = cfg.readEntry("count", 0);
     for (int i = 1;
@@ -53,7 +53,7 @@ static void loadRules(QList< Rules* >& rules)
 
 static void saveRules(const QList< Rules* >& rules)
 {
-    KConfig cfg("kwinrulesrc", KConfig::NoGlobals);
+    KConfig cfg("ukui-kwinrulesrc", KConfig::NoGlobals);
     QStringList groups = cfg.groupList();
     for (QStringList::ConstIterator it = groups.constBegin();
             it != groups.constEnd();
@@ -226,7 +226,7 @@ static void edit(const QVariantMap &data, bool whole_app)
     saveRules(rules);
     // Send signal to all kwin instances
     QDBusMessage message =
-        QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+        QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
     QDBusConnection::sessionBus().send(message);
     qApp->quit();
 }
@@ -234,19 +234,19 @@ static void edit(const QVariantMap &data, bool whole_app)
 } // namespace
 
 extern "C"
-KWIN_EXPORT int kdemain(int argc, char* argv[])
+UKUI_KWIN_EXPORT int kdemain(int argc, char* argv[])
 {
     QApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    app.setApplicationDisplayName(i18n("KWin"));
-    app.setApplicationName("kwin_rules_dialog");
+    app.setApplicationDisplayName(i18n("Ukui-KWin"));
+    app.setApplicationName("ukui_kwin_rules_dialog");
     app.setApplicationVersion("1.0");
     bool whole_app = false;
     QUuid uuid;
     {
         QCommandLineParser parser;
-        parser.setApplicationDescription(i18n("KWin helper utility"));
-        parser.addOption(QCommandLineOption("uuid", i18n("KWin id of the window for special window settings."), "uuid"));
+        parser.setApplicationDescription(i18n("Ukui-KWin helper utility"));
+        parser.addOption(QCommandLineOption("uuid", i18n("Ukui-KWin id of the window for special window settings."), "uuid"));
         parser.addOption(QCommandLineOption("whole-app", i18n("Whether the settings should affect all windows of the application.")));
         parser.process(app);
 
@@ -259,9 +259,9 @@ KWIN_EXPORT int kdemain(int argc, char* argv[])
         printf("%s\n", qPrintable(i18n("This helper utility is not supposed to be called directly.")));
         return 1;
     }
-    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
+    QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.ukui.KWin"),
                                                           QStringLiteral("/KWin"),
-                                                          QStringLiteral("org.kde.KWin"),
+                                                          QStringLiteral("org.ukui.KWin"),
                                                           QStringLiteral("getWindowInfo"));
     message.setArguments({uuid.toString()});
     QDBusPendingReply<QVariantMap> async = QDBusConnection::sessionBus().asyncCall(message);

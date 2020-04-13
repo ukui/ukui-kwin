@@ -41,7 +41,7 @@ namespace KWin
 
 class EglDmabuf;
 
-class KWIN_EXPORT AbstractEglBackend : public QObject, public OpenGLBackend
+class UKUI_KWIN_EXPORT AbstractEglBackend : public QObject, public OpenGLBackend
 {
     Q_OBJECT
 public:
@@ -90,7 +90,7 @@ private:
     EglDmabuf *m_dmaBuf = nullptr;
 };
 
-class KWIN_EXPORT AbstractEglTexture : public SceneOpenGLTexturePrivate
+class UKUI_KWIN_EXPORT AbstractEglTexture : public SceneOpenGLTexturePrivate
 {
 public:
     ~AbstractEglTexture() override;

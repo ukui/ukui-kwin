@@ -33,7 +33,7 @@ namespace Decoration
 class Renderer;
 }
 
-class KWIN_EXPORT Deleted : public Toplevel
+class UKUI_KWIN_EXPORT Deleted : public Toplevel
 {
     Q_OBJECT
 

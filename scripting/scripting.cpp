@@ -500,7 +500,7 @@ void KWin::Script::slotScriptLoadedFromFile()
         watcher->deleteLater();
 
         if (m_invocationContext.type() == QDBusMessage::MethodCallMessage) {
-            auto reply = m_invocationContext.createErrorReply("org.kde.kwin.Scripting.FileError", QString("Could not open %1").arg(fileName()));
+            auto reply = m_invocationContext.createErrorReply("org.ukui.kwin.Scripting.FileError", QString("Could not open %1").arg(fileName()));
             QDBusConnection::sessionBus().send(reply);
             m_invocationContext = QDBusMessage();
         }
@@ -701,15 +701,15 @@ KWin::Scripting::Scripting(QObject *parent)
 
 void KWin::Scripting::init()
 {
-    qmlRegisterType<DesktopThumbnailItem>("org.kde.kwin", 2, 0, "DesktopThumbnailItem");
-    qmlRegisterType<WindowThumbnailItem>("org.kde.kwin", 2, 0, "ThumbnailItem");
-    qmlRegisterType<DBusCall>("org.kde.kwin", 2, 0, "DBusCall");
-    qmlRegisterType<ScreenEdgeItem>("org.kde.kwin", 2, 0, "ScreenEdgeItem");
+    qmlRegisterType<DesktopThumbnailItem>("org.ukui.kwin", 2, 0, "DesktopThumbnailItem");
+    qmlRegisterType<WindowThumbnailItem>("org.ukui.kwin", 2, 0, "ThumbnailItem");
+    qmlRegisterType<DBusCall>("org.ukui.kwin", 2, 0, "DBusCall");
+    qmlRegisterType<ScreenEdgeItem>("org.ukui.kwin", 2, 0, "ScreenEdgeItem");
     qmlRegisterType<KWin::ScriptingClientModel::ClientModel>();
-    qmlRegisterType<KWin::ScriptingClientModel::SimpleClientModel>("org.kde.kwin", 2, 0, "ClientModel");
-    qmlRegisterType<KWin::ScriptingClientModel::ClientModelByScreen>("org.kde.kwin", 2, 0, "ClientModelByScreen");
-    qmlRegisterType<KWin::ScriptingClientModel::ClientModelByScreenAndDesktop>("org.kde.kwin", 2, 0, "ClientModelByScreenAndDesktop");
-    qmlRegisterType<KWin::ScriptingClientModel::ClientFilterModel>("org.kde.kwin", 2, 0, "ClientFilterModel");
+    qmlRegisterType<KWin::ScriptingClientModel::SimpleClientModel>("org.ukui.kwin", 2, 0, "ClientModel");
+    qmlRegisterType<KWin::ScriptingClientModel::ClientModelByScreen>("org.ukui.kwin", 2, 0, "ClientModelByScreen");
+    qmlRegisterType<KWin::ScriptingClientModel::ClientModelByScreenAndDesktop>("org.ukui.kwin", 2, 0, "ClientModelByScreenAndDesktop");
+    qmlRegisterType<KWin::ScriptingClientModel::ClientFilterModel>("org.ukui.kwin", 2, 0, "ClientFilterModel");
     qmlRegisterType<KWin::AbstractClient>();
     qmlRegisterType<KWin::X11Client>();
     qmlRegisterType<QAbstractItemModel>();
@@ -757,7 +757,7 @@ LoadScriptList KWin::Scripting::queryScriptsToLoad()
         s_started = true;
     }
     QMap<QString,QString> pluginStates = KConfigGroup(_config, "Plugins").entryMap();
-    const QString scriptFolder = QStringLiteral(KWIN_NAME "/scripts/");
+    const QString scriptFolder = QStringLiteral(UKUI_KWIN_NAME "/scripts/");
     const auto offers = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KWin/Script"), scriptFolder);
 
     LoadScriptList scriptsToLoad;

@@ -201,7 +201,7 @@ void PreviewBridge::configure()
         }
         // Send signal to all kwin instances
         QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"),
-                                                          QStringLiteral("org.kde.KWin"),
+                                                          QStringLiteral("org.ukui.KWin"),
                                                           QStringLiteral("reloadConfig"));
         QDBusConnection::sessionBus().send(message);
     };

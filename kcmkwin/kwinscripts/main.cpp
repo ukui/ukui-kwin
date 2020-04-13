@@ -21,6 +21,6 @@
 #include "module.h"
 
 K_PLUGIN_FACTORY(KcmKWinScriptsFactory,
-                 registerPlugin<Module>("kwin-scripts");)
+                 registerPlugin<Module>("ukuikwin-scripts");)
 
 #include "main.moc"

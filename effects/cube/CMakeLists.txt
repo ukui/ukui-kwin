@@ -2,7 +2,7 @@
 # Effect
 
 # Data files
-install(FILES data/cubecap.png DESTINATION ${DATA_INSTALL_DIR}/kwin)
+install(FILES data/cubecap.png DESTINATION ${DATA_INSTALL_DIR}/ukui-kwin)
 
 #######################################
 # Config
@@ -28,5 +28,5 @@ install(
     TARGETS
         kwin_cube_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )

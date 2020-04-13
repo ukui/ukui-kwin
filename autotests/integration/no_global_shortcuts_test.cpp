@@ -38,7 +38,7 @@ using namespace KWin;
 using namespace KWayland::Client;
 
 static const QString s_socketName = QStringLiteral("wayland_test_kwin_no_global_shortcuts-0");
-static const QString s_serviceName = QStringLiteral("org.kde.KWin.Test.ModifierOnlyShortcut");
+static const QString s_serviceName = QStringLiteral("org.ukui.KWin.Test.ModifierOnlyShortcut");
 static const QString s_path = QStringLiteral("/Test");
 
 Q_DECLARE_METATYPE(KWin::ElectricBorder)
@@ -66,7 +66,7 @@ private Q_SLOTS:
 class Target : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.KWin.Test.ModifierOnlyShortcut")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.KWin.Test.ModifierOnlyShortcut")
 
 public:
     Target();
@@ -184,7 +184,7 @@ void NoGlobalShortcutsTest::testTrigger()
 void NoGlobalShortcutsTest::testKGlobalAccel()
 {
     QScopedPointer<QAction> action(new QAction(nullptr));
-    action->setProperty("componentName", QStringLiteral(KWIN_NAME));
+    action->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
     action->setObjectName(QStringLiteral("globalshortcuts-test-meta-shift-w"));
     QSignalSpy triggeredSpy(action.data(), &QAction::triggered);
     QVERIFY(triggeredSpy.isValid());

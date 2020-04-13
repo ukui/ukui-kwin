@@ -38,7 +38,7 @@
 
 #include "windows.h"
 #include <effect_builtins.h>
-#include <kwin_effects_interface.h>
+#include <ukui_kwin_effects_interface.h>
 
 // kwin config keywords
 #define KWIN_FOCUS                 "FocusPolicy"
@@ -337,7 +337,7 @@ void KFocusConfig::save(void)
         config->sync();
         // Send signal to all kwin instances
         QDBusMessage message =
-            QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+            QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
         QDBusConnection::sessionBus().send(message);
     }
     emit KCModule::changed(false);
@@ -462,7 +462,7 @@ void KAdvancedConfig::save(void)
         config->sync();
         // Send signal to all kwin instances
         QDBusMessage message =
-            QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+            QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
         QDBusConnection::sessionBus().send(message);
 
     }
@@ -579,11 +579,11 @@ void KMovingConfig::save(void)
         config->sync();
         // Send signal to all kwin instances
         QDBusMessage message =
-            QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+            QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
         QDBusConnection::sessionBus().send(message);
     }
     // and reconfigure the effect
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     if (geometryTip) {

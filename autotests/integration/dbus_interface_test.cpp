@@ -48,9 +48,9 @@ using namespace KWayland::Client;
 
 static const QString s_socketName = QStringLiteral("wayland_test_kwin_dbus_interface-0");
 
-const QString s_destination{QStringLiteral("org.kde.KWin")};
+const QString s_destination{QStringLiteral("org.ukui.KWin")};
 const QString s_path{QStringLiteral("/KWin")};
-const QString s_interface{QStringLiteral("org.kde.KWin")};
+const QString s_interface{QStringLiteral("org.ukui.KWin")};
 
 class TestDbusInterface : public QObject
 {
@@ -128,7 +128,7 @@ void TestDbusInterface::testGetWindowInfoXdgShellClient()
     QScopedPointer<Surface> surface(Test::createSurface());
     QFETCH(Test::XdgShellSurfaceType, type);
     QScopedPointer<XdgShellSurface> shellSurface(Test::createXdgShellSurface(type, surface.data()));
-    shellSurface->setAppId(QByteArrayLiteral("org.kde.foo"));
+    shellSurface->setAppId(QByteArrayLiteral("org.ukui.foo"));
     shellSurface->setTitle(QStringLiteral("Test window"));
 
     // now let's render
@@ -167,8 +167,8 @@ void TestDbusInterface::testGetWindowInfoXdgShellClient()
     QCOMPARE(windowData.value(QStringLiteral("localhost")).toBool(), true);
     QCOMPARE(windowData.value(QStringLiteral("role")).toString(), QString());
     QCOMPARE(windowData.value(QStringLiteral("resourceName")).toString(), QStringLiteral("testDbusInterface"));
-    QCOMPARE(windowData.value(QStringLiteral("resourceClass")).toString(), QStringLiteral("org.kde.foo"));
-    QCOMPARE(windowData.value(QStringLiteral("desktopFile")).toString(), QStringLiteral("org.kde.foo"));
+    QCOMPARE(windowData.value(QStringLiteral("resourceClass")).toString(), QStringLiteral("org.ukui.foo"));
+    QCOMPARE(windowData.value(QStringLiteral("desktopFile")).toString(), QStringLiteral("org.ukui.foo"));
     QCOMPARE(windowData.value(QStringLiteral("caption")).toString(), QStringLiteral("Test window"));
 
     auto verifyProperty = [client] (const QString &name) {
@@ -267,7 +267,7 @@ void TestDbusInterface::testGetWindowInfoX11Client()
     xcb_icccm_set_wm_class(c.data(), w, 7, "foo\0bar");
     NETWinInfo winInfo(c.data(), w, rootWindow(), NET::Properties(), NET::Properties2());
     winInfo.setName("Some caption");
-    winInfo.setDesktopFileName("org.kde.foo");
+    winInfo.setDesktopFileName("org.ukui.foo");
     xcb_map_window(c.data(), w);
     xcb_flush(c.data());
 
@@ -308,7 +308,7 @@ void TestDbusInterface::testGetWindowInfoX11Client()
     QCOMPARE(windowData.value(QStringLiteral("role")).toString(), QString());
     QCOMPARE(windowData.value(QStringLiteral("resourceName")).toString(), QStringLiteral("foo"));
     QCOMPARE(windowData.value(QStringLiteral("resourceClass")).toString(), QStringLiteral("bar"));
-    QCOMPARE(windowData.value(QStringLiteral("desktopFile")).toString(), QStringLiteral("org.kde.foo"));
+    QCOMPARE(windowData.value(QStringLiteral("desktopFile")).toString(), QStringLiteral("org.ukui.foo"));
     QCOMPARE(windowData.value(QStringLiteral("caption")).toString(), QStringLiteral("Some caption"));
     // not testing clientmachine as that is system dependent
     // due to that also not testing localhost

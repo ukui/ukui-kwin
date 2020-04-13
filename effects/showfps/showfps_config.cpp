@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // KConfigSkeleton
 #include "showfpsconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <KLocalizedString>
@@ -42,7 +42,7 @@ ShowFpsEffectConfig::ShowFpsEffectConfig(QWidget* parent, const QVariantList& ar
     m_ui = new Ui::ShowFpsEffectConfigForm;
     m_ui->setupUi(this);
 
-    ShowFpsConfig::instance(KWIN_CONFIG);
+    ShowFpsConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(ShowFpsConfig::self(), this);
 
     load();
@@ -56,7 +56,7 @@ ShowFpsEffectConfig::~ShowFpsEffectConfig()
 void ShowFpsEffectConfig::save()
 {
     KCModule::save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("showfps"));

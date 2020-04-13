@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class PlastikPlugin : public QQmlExtensionPlugin
 {
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.decorations.plastik")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.decorations.plastik")
     Q_OBJECT
 public:
     void registerTypes(const char *uri) override;

@@ -20,7 +20,7 @@
 **************************************************************************/
 
 #include "compositing.h"
-#include <kwin_compositing_interface.h>
+#include <ukui_kwin_compositing_interface.h>
 
 #include <KCModuleProxy>
 #include <KConfigGroup>
@@ -48,8 +48,8 @@ Compositing::Compositing(QObject *parent)
     , m_openGLPlatformInterfaceModel(new OpenGLPlatformInterfaceModel(this))
     , m_openGLPlatformInterface(0)
     , m_windowsBlockCompositing(true)
-    , m_compositingInterface(new OrgKdeKwinCompositingInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Compositor"), QDBusConnection::sessionBus(), this))
-    , m_config(KSharedConfig::openConfig("kwinrc"))
+    , m_compositingInterface(new OrgUkuiKwinCompositingInterface(QStringLiteral("org.ukui.KWin"), QStringLiteral("/Compositor"), QDBusConnection::sessionBus(), this))
+    , m_config(KSharedConfig::openConfig("ukui-kwinrc"))
 {
     reset();
     connect(this, &Compositing::animationSpeedChanged,       this, &Compositing::changed);
@@ -326,7 +326,7 @@ void Compositing::save()
     if (m_changed) {
         // Send signal to all kwin instances
         QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/Compositor"),
-                                                          QStringLiteral("org.kde.kwin.Compositing"),
+                                                          QStringLiteral("org.ukui.kwin.Compositing"),
                                                           QStringLiteral("reinit"));
         QDBusConnection::sessionBus().send(message);
         m_changed = false;
@@ -484,7 +484,7 @@ OpenGLPlatformInterfaceModel::OpenGLPlatformInterfaceModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     beginResetModel();
-    OrgKdeKwinCompositingInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinCompositingInterface interface(QStringLiteral("org.ukui.KWin"),
                                              QStringLiteral("/Compositor"),
                                              QDBusConnection::sessionBus());
     m_keys << interface.supportedOpenGLPlatformInterfaces();

@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KWIN_WAYLAND_CURSOR_THEME_H
 #define KWIN_WAYLAND_CURSOR_THEME_H
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include "cursor.h"
@@ -39,7 +39,7 @@ class ShmPool;
 namespace KWin
 {
 
-class KWIN_EXPORT WaylandCursorTheme : public QObject
+class UKUI_KWIN_EXPORT WaylandCursorTheme : public QObject
 {
     Q_OBJECT
 public:

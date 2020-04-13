@@ -37,8 +37,8 @@
 namespace KWin
 {
 
-static const QString s_serviceName(QStringLiteral("org.kde.KWin"));
-static const QString s_virtualDesktopsInterface(QStringLiteral("org.kde.KWin.VirtualDesktopManager"));
+static const QString s_serviceName(QStringLiteral("org.ukui.KWin"));
+static const QString s_virtualDesktopsInterface(QStringLiteral("org.ukui.KWin.VirtualDesktopManager"));
 static const QString s_virtDesktopsPath(QStringLiteral("/VirtualDesktopManager"));
 static const QString s_fdoPropertiesInterface(QStringLiteral("org.freedesktop.DBus.Properties"));
 

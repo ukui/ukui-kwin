@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_VIRTUAL_BACKEND_H
 #include "platform.h"
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QRect>
@@ -32,11 +32,11 @@ namespace KWin
 {
 class VirtualOutput;
 
-class KWIN_EXPORT VirtualBackend : public Platform
+class UKUI_KWIN_EXPORT VirtualBackend : public Platform
 {
     Q_OBJECT
     Q_INTERFACES(KWin::Platform)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Platform" FILE "virtual.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Platform" FILE "virtual.json")
 
 public:
     VirtualBackend(QObject *parent = nullptr);

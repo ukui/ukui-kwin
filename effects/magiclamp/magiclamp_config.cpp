@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "magiclamp_config.h"
 // KConfigSkeleton
 #include "magiclampconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <kwineffects_interface.h>
 
@@ -51,7 +51,7 @@ MagicLampEffectConfig::MagicLampEffectConfig(QWidget* parent, const QVariantList
 
     layout->addWidget(m_ui);
 
-    MagicLampConfig::instance(KWIN_CONFIG);
+    MagicLampConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(MagicLampConfig::self(), m_ui);
 
     load();
@@ -60,7 +60,7 @@ MagicLampEffectConfig::MagicLampEffectConfig(QWidget* parent, const QVariantList
 void MagicLampEffectConfig::save()
 {
     KCModule::save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("magiclamp"));

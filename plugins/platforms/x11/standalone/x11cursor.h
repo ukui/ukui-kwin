@@ -27,7 +27,7 @@ namespace KWin
 {
 class XFixesCursorEventFilter;
 
-class KWIN_EXPORT X11Cursor : public Cursor
+class UKUI_KWIN_EXPORT X11Cursor : public Cursor
 {
     Q_OBJECT
 public:

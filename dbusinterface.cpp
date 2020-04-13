@@ -48,7 +48,7 @@ namespace KWin
 
 DBusInterface::DBusInterface(QObject *parent)
     : QObject(parent)
-    , m_serviceName(QStringLiteral("org.kde.KWin"))
+    , m_serviceName(QStringLiteral("org.ukui.KWin"))
 {
     (void) new KWinAdaptor(this);
 
@@ -64,7 +64,7 @@ DBusInterface::DBusInterface(QObject *parent)
     } else {
         announceService();
     }
-    dbus.connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"),
+    dbus.connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.ukui.KWin"), QStringLiteral("reloadConfig"),
                  Workspace::self(), SLOT(slotReloadConfig()));
     connect(kwinApp(), &Application::x11ConnectionChanged, this, &DBusInterface::announceService);
 }
@@ -83,7 +83,7 @@ DBusInterface::~DBusInterface()
 {
     QDBusConnection::sessionBus().unregisterService(m_serviceName);
     // KApplication automatically also grabs org.kde.kwin, so it's often been used externally - ensure to free it as well
-    QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.kde.kwin"));
+    QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.ukui.kwin"));
     if (kwinApp()->x11Connection()) {
         xcb_delete_property(kwinApp()->x11Connection(), kwinApp()->x11RootWindow(), atoms->kwin_dbus_service);
     }
@@ -256,7 +256,7 @@ CompositorDBusInterface::CompositorDBusInterface(Compositor *parent)
     new CompositingAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     dbus.registerObject(QStringLiteral("/Compositor"), this);
-    dbus.connect(QString(), QStringLiteral("/Compositor"), QStringLiteral("org.kde.kwin.Compositing"),
+    dbus.connect(QString(), QStringLiteral("/Compositor"), QStringLiteral("org.ukui.kwin.Compositing"),
                  QStringLiteral("reinit"), this, SLOT(reinitialize()));
 }
 
@@ -355,7 +355,7 @@ VirtualDesktopManagerDBusInterface::VirtualDesktopManagerDBusInterface(VirtualDe
 
     new VirtualDesktopManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QStringLiteral("/VirtualDesktopManager"),
-        QStringLiteral("org.kde.KWin.VirtualDesktopManager"),
+        QStringLiteral("org.ukui.KWin.VirtualDesktopManager"),
         this
     );
 

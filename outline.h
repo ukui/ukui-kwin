@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QRect>
 #include <QObject>
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 class QQmlContext;
 class QQmlComponent;
@@ -126,7 +126,7 @@ private:
     KWIN_SINGLETON(Outline)
 };
 
-class KWIN_EXPORT OutlineVisual
+class UKUI_KWIN_EXPORT OutlineVisual
 {
 public:
     OutlineVisual(Outline *outline);

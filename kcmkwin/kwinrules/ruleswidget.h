@@ -20,7 +20,7 @@
 #ifndef __RULESWIDGET_H__
 #define __RULESWIDGET_H__
 
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <QDialog>
 #include <kkeysequencewidget.h>

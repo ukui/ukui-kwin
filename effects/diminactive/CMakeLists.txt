@@ -19,5 +19,5 @@ install(
     TARGETS
         kwin_diminactive_config
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/kwin/effects/configs
+        ${PLUGIN_INSTALL_DIR}/ukui-kwin/effects/configs
 )

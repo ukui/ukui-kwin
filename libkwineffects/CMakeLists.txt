@@ -32,7 +32,7 @@ set_target_properties(kwinxrenderutils PROPERTIES
     VERSION ${KWINEFFECTS_VERSION_STRING}
     SOVERSION ${KWINEFFECTS_SOVERSION}
 )
-set_target_properties(kwinxrenderutils PROPERTIES OUTPUT_NAME ${KWIN_NAME}xrenderutils)
+set_target_properties(kwinxrenderutils PROPERTIES OUTPUT_NAME ${UKUI_KWIN_NAME}xrenderutils)
 
 install(TARGETS kwinxrenderutils EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -78,7 +78,7 @@ set_target_properties(kwineffects PROPERTIES
     VERSION ${KWINEFFECTS_VERSION_STRING}
     SOVERSION ${KWINEFFECTS_SOVERSION}
 )
-set_target_properties(kwineffects PROPERTIES OUTPUT_NAME ${KWIN_NAME}effects)
+set_target_properties(kwineffects PROPERTIES OUTPUT_NAME ${UKUI_KWIN_NAME}effects)
 
 install(TARGETS kwineffects EXPORT kdeworkspaceLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -106,7 +106,7 @@ macro(KWIN4_ADD_GLUTILS_BACKEND name glinclude)
 endmacro()
 
 kwin4_add_glutils_backend(kwinglutils ${epoxy_INCLUDE_DIR} ${epoxy_LIBRARY})
-set_target_properties(kwinglutils PROPERTIES OUTPUT_NAME ${KWIN_NAME}glutils)
+set_target_properties(kwinglutils PROPERTIES OUTPUT_NAME ${UKUI_KWIN_NAME}glutils)
 
 target_link_libraries(kwinglutils PUBLIC ${epoxy_LIBRARY})
 
@@ -124,4 +124,4 @@ install(FILES
     kwinglutils.h
     kwinglutils_funcs.h
     kwinxrenderutils.h
-    DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+    DESTINATION ${INCLUDE_INSTALL_DIR}/ukui-kwin/ COMPONENT Devel)

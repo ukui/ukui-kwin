@@ -2173,8 +2173,8 @@ public:
      * @see desktops()
      * @deprecated
      */
-#ifndef KWIN_NO_DEPRECATED
-    virtual int KWIN_DEPRECATED desktop() const = 0; // prefer isOnXXX()
+#ifndef UKUI_KWIN_NO_DEPRECATED
+    virtual int UKUI_KWIN_DEPRECATED desktop() const = 0; // prefer isOnXXX()
 #endif
     /**
      * All the desktops by number that the window is in. On X11 this list will always have

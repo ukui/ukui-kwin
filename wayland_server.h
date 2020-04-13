@@ -79,7 +79,7 @@ class XdgShellClient;
 class AbstractClient;
 class Toplevel;
 
-class KWIN_EXPORT WaylandServer : public QObject
+class UKUI_KWIN_EXPORT WaylandServer : public QObject
 {
     Q_OBJECT
 public:

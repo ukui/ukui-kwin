@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_X11_PLATFORM_H
 #include "platform.h"
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 
@@ -35,11 +35,11 @@ class WindowSelector;
 class X11EventFilter;
 class X11Output;
 
-class KWIN_EXPORT X11StandalonePlatform : public Platform
+class UKUI_KWIN_EXPORT X11StandalonePlatform : public Platform
 {
     Q_OBJECT
     Q_INTERFACES(KWin::Platform)
-    Q_PLUGIN_METADATA(IID "org.kde.kwin.Platform" FILE "x11.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kwin.Platform" FILE "x11.json")
 public:
     X11StandalonePlatform(QObject *parent = nullptr);
     ~X11StandalonePlatform() override;

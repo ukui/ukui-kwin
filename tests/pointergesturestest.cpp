@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<PinchGesture>("org.kde.kwin.tests", 1, 0, "PinchGesture");
+    qmlRegisterType<PinchGesture>("org.ukui.kwin.tests", 1, 0, "PinchGesture");
 
     QQuickView view;
     view.setSource(QUrl::fromLocalFile(QStringLiteral(DIR) +QStringLiteral("/pointergesturestest.qml")));

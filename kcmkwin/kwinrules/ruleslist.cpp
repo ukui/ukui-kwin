@@ -216,7 +216,7 @@ void KCMRulesList::load()
             ++it)
         delete *it;
     rules.clear();
-    KConfig _cfg("kwinrulesrc");
+    KConfig _cfg("ukui-kwinrulesrc");
     KConfigGroup cfg(&_cfg, "General");
     int count = cfg.readEntry("count", 0);
     rules.reserve(count);
@@ -237,7 +237,7 @@ void KCMRulesList::load()
 
 void KCMRulesList::save()
 {
-    KConfig cfg(QLatin1String("kwinrulesrc"));
+    KConfig cfg(QLatin1String("ukui-kwinrulesrc"));
     QStringList groups = cfg.groupList();
     for (QStringList::ConstIterator it = groups.constBegin();
             it != groups.constEnd();

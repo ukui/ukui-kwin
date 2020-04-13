@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "kwineffects.h"
 
-#include "config-kwin.h"
+#include "config-ukui-kwin.h"
 #ifdef KWIN_HAVE_XRENDER_COMPOSITING
 #include "kwinxrenderutils.h"
 #endif

@@ -25,10 +25,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // xcb
 #include <xcb/xcb.h>
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 namespace KWin {
-class KWIN_EXPORT OverlayWindow {
+class UKUI_KWIN_EXPORT OverlayWindow {
 public:
     virtual ~OverlayWindow();
     /// Creates XComposite overlay window, call initOverlay() afterwards

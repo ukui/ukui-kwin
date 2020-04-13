@@ -37,7 +37,7 @@ class IdleTimeout;
 class Poller : public AbstractSystemPoller
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.kidletime.AbstractSystemPoller" FILE "kwin.json")
+    Q_PLUGIN_METADATA(IID "org.ukui.kidletime.AbstractSystemPoller" FILE "kwin.json")
     Q_INTERFACES(AbstractSystemPoller)
 
 public:

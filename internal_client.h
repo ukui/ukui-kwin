@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace KWin
 {
 
-class KWIN_EXPORT InternalClient : public AbstractClient
+class UKUI_KWIN_EXPORT InternalClient : public AbstractClient
 {
     Q_OBJECT
 

@@ -27,8 +27,8 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/platformsupport/scenes/opengl)
 
 add_library(KWinX11Platform MODULE ${X11PLATFORM_SOURCES})
-set_target_properties(KWinX11Platform PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.kde.kwin.platforms/")
-target_link_libraries(KWinX11Platform eglx11common kwin kwinxrenderutils SceneOpenGLBackend Qt5::X11Extras XCB::CURSOR KF5::Crash )
+set_target_properties(KWinX11Platform PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/org.ukui.kwin.platforms/")
+target_link_libraries(KWinX11Platform eglx11common ukui-kwin kwinxrenderutils SceneOpenGLBackend Qt5::X11Extras XCB::CURSOR KF5::Crash )
 if (X11_Xinput_FOUND)
     target_link_libraries(KWinX11Platform ${X11_Xinput_LIB})
 endif()
@@ -41,5 +41,5 @@ install(
     TARGETS
         KWinX11Platform
     DESTINATION
-        ${PLUGIN_INSTALL_DIR}/org.kde.kwin.platforms/
+        ${PLUGIN_INSTALL_DIR}/org.ukui.kwin.platforms/
 )

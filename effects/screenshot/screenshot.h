@@ -35,7 +35,7 @@ namespace KWin
 class ScreenShotEffect : public Effect, protected QDBusContext
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Screenshot")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Screenshot")
 public:
     enum ScreenShotType {
         INCLUDE_DECORATION = 1 << 0,

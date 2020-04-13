@@ -1047,8 +1047,8 @@ void RuleBook::edit(AbstractClient* c, bool whole_app)
     QProcess *p = new Process(this);
     p->setArguments(args);
     p->setProcessEnvironment(kwinApp()->processStartupEnvironment());
-    const QFileInfo buildDirBinary{QDir{QCoreApplication::applicationDirPath()}, QStringLiteral("kwin_rules_dialog")};
-    p->setProgram(buildDirBinary.exists() ? buildDirBinary.absoluteFilePath() : QStringLiteral(KWIN_RULES_DIALOG_BIN));
+    const QFileInfo buildDirBinary{QDir{QCoreApplication::applicationDirPath()}, QStringLiteral("ukui_kwin_rules_dialog")};
+    p->setProgram(buildDirBinary.exists() ? buildDirBinary.absoluteFilePath() : QStringLiteral(UKUI_KWIN_RULES_DIALOG_BIN));
     p->setProcessChannelMode(QProcess::MergedChannels);
     connect(p, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), p, &QProcess::deleteLater);
     connect(p, &QProcess::errorOccurred, this, [p](QProcess::ProcessError e) {
@@ -1063,7 +1063,7 @@ void RuleBook::load()
 {
     deleteAll();
     if (!m_config) {
-        m_config = KSharedConfig::openConfig(QStringLiteral(KWIN_NAME "rulesrc"), KConfig::NoGlobals);
+        m_config = KSharedConfig::openConfig(QStringLiteral(UKUI_KWIN_NAME "rulesrc"), KConfig::NoGlobals);
     } else {
         m_config->reparseConfiguration();
     }

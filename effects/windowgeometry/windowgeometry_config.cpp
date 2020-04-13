@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "windowgeometry_config.h"
 // KConfigSkeleton
 #include "windowgeometryconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 
 #include <QAction>
@@ -47,7 +47,7 @@ WindowGeometryConfigForm::WindowGeometryConfigForm(QWidget* parent) : QWidget(pa
 WindowGeometryConfig::WindowGeometryConfig(QWidget* parent, const QVariantList& args)
     : KCModule(KAboutData::pluginData(QStringLiteral("windowgeometry")), parent, args)
 {
-    WindowGeometryConfiguration::instance(KWIN_CONFIG);
+    WindowGeometryConfiguration::instance(UKUI_KWIN_CONFIG);
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(myUi = new WindowGeometryConfigForm(this));
 
@@ -79,7 +79,7 @@ void WindowGeometryConfig::save()
 {
     KCModule::save();
     myUi->shortcuts->save();   // undo() will restore to this state from now on
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("windowgeometry"));

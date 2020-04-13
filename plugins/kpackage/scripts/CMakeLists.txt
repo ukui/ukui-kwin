@@ -4,13 +4,13 @@ set(scripts_SRCS
     scripts.cpp
 )
 
-add_library(kwin_packagestructure_scripts MODULE ${scripts_SRCS})
+add_library(ukui_kwin_packagestructure_scripts MODULE ${scripts_SRCS})
 
-target_link_libraries(kwin_packagestructure_scripts
+target_link_libraries(ukui_kwin_packagestructure_scripts
    KF5::I18n
    KF5::Package
 )
 
-kcoreaddons_desktop_to_json(kwin_packagestructure_scripts kwin-packagestructure-scripts.desktop)
+kcoreaddons_desktop_to_json(ukui_kwin_packagestructure_scripts ukui-kwin-packagestructure-scripts.desktop)
 
-install(TARGETS kwin_packagestructure_scripts DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)
+install(TARGETS ukui_kwin_packagestructure_scripts DESTINATION ${KDE_INSTALL_PLUGINDIR}/kpackage/packagestructure)

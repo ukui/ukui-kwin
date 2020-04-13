@@ -59,7 +59,7 @@ class DecoratedClientImpl;
 class DecorationPalette;
 }
 
-class KWIN_EXPORT AbstractClient : public Toplevel
+class UKUI_KWIN_EXPORT AbstractClient : public Toplevel
 {
     Q_OBJECT
 

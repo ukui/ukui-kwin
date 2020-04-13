@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace KWin
 {
 
-class KWIN_EXPORT Atoms
+class UKUI_KWIN_EXPORT Atoms
 {
 public:
     Atoms();
@@ -102,7 +102,7 @@ private:
 };
 
 
-extern KWIN_EXPORT Atoms* atoms;
+extern UKUI_KWIN_EXPORT Atoms* atoms;
 
 } // namespace
 

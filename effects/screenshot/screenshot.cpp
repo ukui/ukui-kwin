@@ -40,15 +40,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace KWin
 {
 
-const static QString s_errorAlreadyTaking = QStringLiteral("org.kde.kwin.Screenshot.Error.AlreadyTaking");
+const static QString s_errorAlreadyTaking = QStringLiteral("org.ukui.kwin.Screenshot.Error.AlreadyTaking");
 const static QString s_errorAlreadyTakingMsg = QStringLiteral("A screenshot is already been taken");
-const static QString s_errorFd = QStringLiteral("org.kde.kwin.Screenshot.Error.FileDescriptor");
+const static QString s_errorFd = QStringLiteral("org.ukui.kwin.Screenshot.Error.FileDescriptor");
 const static QString s_errorFdMsg = QStringLiteral("No valid file descriptor");
-const static QString s_errorCancelled = QStringLiteral("org.kde.kwin.Screenshot.Error.Cancelled");
+const static QString s_errorCancelled = QStringLiteral("org.ukui.kwin.Screenshot.Error.Cancelled");
 const static QString s_errorCancelledMsg = QStringLiteral("Screenshot got cancelled");
-const static QString s_errorInvalidArea = QStringLiteral("org.kde.kwin.Screenshot.Error.InvalidArea");
+const static QString s_errorInvalidArea = QStringLiteral("org.ukui.kwin.Screenshot.Error.InvalidArea");
 const static QString s_errorInvalidAreaMsg = QStringLiteral("Invalid area requested");
-const static QString s_errorInvalidScreen = QStringLiteral("org.kde.kwin.Screenshot.Error.InvalidScreen");
+const static QString s_errorInvalidScreen = QStringLiteral("org.ukui.kwin.Screenshot.Error.InvalidScreen");
 const static QString s_errorInvalidScreenMsg = QStringLiteral("Invalid screen requested");
 
 bool ScreenShotEffect::supported()

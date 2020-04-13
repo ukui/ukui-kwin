@@ -64,10 +64,10 @@ class Unmanaged;
 class WindowPropertyNotifyX11Filter;
 class X11Client;
 
-class KWIN_EXPORT EffectsHandlerImpl : public EffectsHandler
+class UKUI_KWIN_EXPORT EffectsHandlerImpl : public EffectsHandler
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.Effects")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.Effects")
     Q_PROPERTY(QStringList activeEffects READ activeEffects)
     Q_PROPERTY(QStringList loadedEffects READ loadedEffects)
     Q_PROPERTY(QStringList listOfEffects READ listOfEffects)
@@ -536,7 +536,7 @@ private:
     Group* group;
 };
 
-class KWIN_EXPORT EffectFrameImpl
+class UKUI_KWIN_EXPORT EffectFrameImpl
     : public QObject, public EffectFrame
 {
     Q_OBJECT

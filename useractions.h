@@ -54,7 +54,7 @@ class AbstractClient;
  *
  * @author Martin Gräßlin <mgraesslin@kde.org>
  */
-class KWIN_EXPORT UserActionsMenu : public QObject
+class UKUI_KWIN_EXPORT UserActionsMenu : public QObject
 {
     Q_OBJECT
 public:

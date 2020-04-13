@@ -33,7 +33,7 @@ namespace KWin
 class ColorPickerEffect : public Effect, protected QDBusContext
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.kwin.ColorPicker")
+    Q_CLASSINFO("D-Bus Interface", "org.ukui.kwin.ColorPicker")
 public:
     ColorPickerEffect();
     ~ColorPickerEffect() override;

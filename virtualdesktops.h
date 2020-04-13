@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KWIN_VIRTUAL_DESKTOPS_H
 // KWin
 #include <kwinglobals.h>
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 // Qt includes
 #include <QObject>
 #include <QPoint>
@@ -46,7 +46,7 @@ class PlasmaVirtualDesktopManagementInterface;
 
 namespace KWin {
 
-class KWIN_EXPORT VirtualDesktop : public QObject
+class UKUI_KWIN_EXPORT VirtualDesktop : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QByteArray id READ id CONSTANT)
@@ -139,7 +139,7 @@ private:
  * of an adjacent desktop or to switch to an adjacent desktop. Interested parties should make use of
  * these methods and not replicate the logic to switch to the next desktop.
  */
-class KWIN_EXPORT VirtualDesktopManager : public QObject
+class UKUI_KWIN_EXPORT VirtualDesktopManager : public QObject
 {
     Q_OBJECT
     /**

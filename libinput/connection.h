@@ -43,7 +43,7 @@ class Event;
 class Device;
 class Context;
 
-class KWIN_EXPORT Connection : public QObject
+class UKUI_KWIN_EXPORT Connection : public QObject
 {
     Q_OBJECT
 

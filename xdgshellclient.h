@@ -49,7 +49,7 @@ enum class PingReason {
     FocusWindow
 };
 
-class KWIN_EXPORT XdgShellClient : public AbstractClient
+class UKUI_KWIN_EXPORT XdgShellClient : public AbstractClient
 {
     Q_OBJECT
 

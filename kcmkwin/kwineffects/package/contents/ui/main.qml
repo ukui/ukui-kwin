@@ -23,7 +23,7 @@ import QtQuick.Layouts 1.1
 import org.kde.kcm 1.2
 import org.kde.kconfig 1.0
 import org.kde.kirigami 2.10 as Kirigami
-import org.kde.private.kcms.kwin.effects 1.0 as Private
+import org.kde.private.kcms.ukuikwin.effects 1.0 as Private
 
 ScrollViewKCM {
     ConfigModule.quickHelp: i18n("This module lets you configure desktop effects.")

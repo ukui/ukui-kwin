@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #pragma once
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <KWayland/Server/linuxdmabuf_v1_interface.h>
 
@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace KWin
 {
 
-class KWIN_EXPORT DmabufBuffer : public KWayland::Server::LinuxDmabufUnstableV1Buffer
+class UKUI_KWIN_EXPORT DmabufBuffer : public KWayland::Server::LinuxDmabufUnstableV1Buffer
 {
 public:
     using Plane = KWayland::Server::LinuxDmabufUnstableV1Interface::Plane;
@@ -53,7 +53,7 @@ private:
     Flags m_flags;
 };
 
-class KWIN_EXPORT LinuxDmabuf : public KWayland::Server::LinuxDmabufUnstableV1Interface::Impl
+class UKUI_KWIN_EXPORT LinuxDmabuf : public KWayland::Server::LinuxDmabufUnstableV1Interface::Impl
 {
 public:
     using Plane = KWayland::Server::LinuxDmabufUnstableV1Interface::Plane;

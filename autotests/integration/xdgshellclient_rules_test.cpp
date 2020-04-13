@@ -301,7 +301,7 @@ void TestXdgShellClientRules::testPositionDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -313,7 +313,7 @@ void TestXdgShellClientRules::testPositionDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -339,7 +339,7 @@ void TestXdgShellClientRules::testPositionApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -351,7 +351,7 @@ void TestXdgShellClientRules::testPositionApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -395,7 +395,7 @@ void TestXdgShellClientRules::testPositionApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QVERIFY(client->isMovable());
@@ -418,7 +418,7 @@ void TestXdgShellClientRules::testPositionRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -430,7 +430,7 @@ void TestXdgShellClientRules::testPositionRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -474,7 +474,7 @@ void TestXdgShellClientRules::testPositionRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QVERIFY(client->isMovable());
@@ -497,7 +497,7 @@ void TestXdgShellClientRules::testPositionForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -509,7 +509,7 @@ void TestXdgShellClientRules::testPositionForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -534,7 +534,7 @@ void TestXdgShellClientRules::testPositionForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QVERIFY(!client->isMovable());
@@ -556,7 +556,7 @@ void TestXdgShellClientRules::testPositionApplyNow()
     XdgShellClient *client;
     Surface *surface;
     QObject *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -572,7 +572,7 @@ void TestXdgShellClientRules::testPositionApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -638,7 +638,7 @@ void TestXdgShellClientRules::testPositionForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("position", QPoint(42, 42));
     group.writeEntry("positionrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -650,7 +650,7 @@ void TestXdgShellClientRules::testPositionForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -675,7 +675,7 @@ void TestXdgShellClientRules::testPositionForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QVERIFY(client->isMovable());
@@ -698,7 +698,7 @@ void TestXdgShellClientRules::testSizeDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -713,7 +713,7 @@ void TestXdgShellClientRules::testSizeDontAffect()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The window size shouldn't be enforced by the rule.
@@ -749,7 +749,7 @@ void TestXdgShellClientRules::testSizeApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -764,7 +764,7 @@ void TestXdgShellClientRules::testSizeApply()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The initial configure event should contain size hint set by the rule.
@@ -854,7 +854,7 @@ void TestXdgShellClientRules::testSizeApply()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -887,7 +887,7 @@ void TestXdgShellClientRules::testSizeRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -902,7 +902,7 @@ void TestXdgShellClientRules::testSizeRemember()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The initial configure event should contain size hint set by the rule.
@@ -992,7 +992,7 @@ void TestXdgShellClientRules::testSizeRemember()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1025,7 +1025,7 @@ void TestXdgShellClientRules::testSizeForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1040,7 +1040,7 @@ void TestXdgShellClientRules::testSizeForce()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The initial configure event should contain size hint set by the rule.
@@ -1080,7 +1080,7 @@ void TestXdgShellClientRules::testSizeForce()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1115,7 +1115,7 @@ void TestXdgShellClientRules::testSizeApplyNow()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The expected surface dimensions should be set by the rule.
@@ -1141,7 +1141,7 @@ void TestXdgShellClientRules::testSizeApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1182,7 +1182,7 @@ void TestXdgShellClientRules::testSizeForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("size", QSize(480, 640));
     group.writeEntry("sizerule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1197,7 +1197,7 @@ void TestXdgShellClientRules::testSizeForceTemporarily()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // The initial configure event should contain size hint set by the rule.
@@ -1237,7 +1237,7 @@ void TestXdgShellClientRules::testSizeForceTemporarily()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1272,7 +1272,7 @@ void TestXdgShellClientRules::testMaximizeDontAffect()
     group.writeEntry("maximizehorizrule", int(Rules::DontAffect));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1287,7 +1287,7 @@ void TestXdgShellClientRules::testMaximizeDontAffect()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1334,7 +1334,7 @@ void TestXdgShellClientRules::testMaximizeApply()
     group.writeEntry("maximizehorizrule", int(Rules::Apply));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1349,7 +1349,7 @@ void TestXdgShellClientRules::testMaximizeApply()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1403,7 +1403,7 @@ void TestXdgShellClientRules::testMaximizeApply()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1446,7 +1446,7 @@ void TestXdgShellClientRules::testMaximizeRemember()
     group.writeEntry("maximizehorizrule", int(Rules::Remember));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1461,7 +1461,7 @@ void TestXdgShellClientRules::testMaximizeRemember()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1515,7 +1515,7 @@ void TestXdgShellClientRules::testMaximizeRemember()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1558,7 +1558,7 @@ void TestXdgShellClientRules::testMaximizeForce()
     group.writeEntry("maximizehorizrule", int(Rules::Force));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1573,7 +1573,7 @@ void TestXdgShellClientRules::testMaximizeForce()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1617,7 +1617,7 @@ void TestXdgShellClientRules::testMaximizeForce()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1660,7 +1660,7 @@ void TestXdgShellClientRules::testMaximizeApplyNow()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1697,7 +1697,7 @@ void TestXdgShellClientRules::testMaximizeApplyNow()
     group.writeEntry("maximizehorizrule", int(Rules::ApplyNow));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1767,7 +1767,7 @@ void TestXdgShellClientRules::testMaximizeForceTemporarily()
     group.writeEntry("maximizehorizrule", int(Rules::ForceTemporarily));
     group.writeEntry("maximizevert", true);
     group.writeEntry("maximizevertrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1782,7 +1782,7 @@ void TestXdgShellClientRules::testMaximizeForceTemporarily()
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     QScopedPointer<QSignalSpy> configureRequestedSpy;
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     // Wait for the initial configure event.
@@ -1826,7 +1826,7 @@ void TestXdgShellClientRules::testMaximizeForceTemporarily()
     surface.reset(Test::createSurface());
     shellSurface.reset(createXdgShellSurface(type, surface.data(), surface.data(), Test::CreationSetup::CreateOnly));
     configureRequestedSpy.reset(new QSignalSpy(shellSurface.data(), &XdgShellSurface::configureRequested));
-    shellSurface->setAppId("org.kde.foo");
+    shellSurface->setAppId("org.ukui.foo");
     surface->commit(Surface::CommitFlag::None);
 
     QVERIFY(configureRequestedSpy->wait());
@@ -1867,7 +1867,7 @@ void TestXdgShellClientRules::testDesktopDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1885,7 +1885,7 @@ void TestXdgShellClientRules::testDesktopDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should appear on the current virtual desktop.
@@ -1908,7 +1908,7 @@ void TestXdgShellClientRules::testDesktopApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1926,7 +1926,7 @@ void TestXdgShellClientRules::testDesktopApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should appear on the second virtual desktop.
@@ -1944,7 +1944,7 @@ void TestXdgShellClientRules::testDesktopApply()
     QVERIFY(Test::waitForWindowDestroyed(client));
     VirtualDesktopManager::self()->setCurrent(1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 2);
     QCOMPARE(VirtualDesktopManager::self()->current(), 2);
@@ -1965,7 +1965,7 @@ void TestXdgShellClientRules::testDesktopRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -1983,7 +1983,7 @@ void TestXdgShellClientRules::testDesktopRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 2);
     QCOMPARE(VirtualDesktopManager::self()->current(), 2);
@@ -1997,7 +1997,7 @@ void TestXdgShellClientRules::testDesktopRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
@@ -2018,7 +2018,7 @@ void TestXdgShellClientRules::testDesktopForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2036,7 +2036,7 @@ void TestXdgShellClientRules::testDesktopForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should appear on the second virtual desktop.
@@ -2054,7 +2054,7 @@ void TestXdgShellClientRules::testDesktopForce()
     QVERIFY(Test::waitForWindowDestroyed(client));
     VirtualDesktopManager::self()->setCurrent(1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 2);
     QCOMPARE(VirtualDesktopManager::self()->current(), 2);
@@ -2080,7 +2080,7 @@ void TestXdgShellClientRules::testDesktopApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
@@ -2091,7 +2091,7 @@ void TestXdgShellClientRules::testDesktopApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2128,7 +2128,7 @@ void TestXdgShellClientRules::testDesktopForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("desktop", 2);
     group.writeEntry("desktoprule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2146,7 +2146,7 @@ void TestXdgShellClientRules::testDesktopForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should appear on the second virtual desktop.
@@ -2164,7 +2164,7 @@ void TestXdgShellClientRules::testDesktopForceTemporarily()
     QVERIFY(Test::waitForWindowDestroyed(client));
     VirtualDesktopManager::self()->setCurrent(1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->desktop(), 1);
     QCOMPARE(VirtualDesktopManager::self()->current(), 1);
@@ -2193,7 +2193,7 @@ void TestXdgShellClientRules::testMinimizeDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", true);
     group.writeEntry("minimizerule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2205,7 +2205,7 @@ void TestXdgShellClientRules::testMinimizeDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
 
@@ -2228,7 +2228,7 @@ void TestXdgShellClientRules::testMinimizeApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", true);
     group.writeEntry("minimizerule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2240,7 +2240,7 @@ void TestXdgShellClientRules::testMinimizeApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
 
@@ -2255,7 +2255,7 @@ void TestXdgShellClientRules::testMinimizeApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
     QVERIFY(client->isMinimized());
@@ -2276,7 +2276,7 @@ void TestXdgShellClientRules::testMinimizeRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", false);
     group.writeEntry("minimizerule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2288,7 +2288,7 @@ void TestXdgShellClientRules::testMinimizeRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2301,7 +2301,7 @@ void TestXdgShellClientRules::testMinimizeRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
     QVERIFY(client->isMinimized());
@@ -2322,7 +2322,7 @@ void TestXdgShellClientRules::testMinimizeForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", false);
     group.writeEntry("minimizerule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2334,7 +2334,7 @@ void TestXdgShellClientRules::testMinimizeForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2347,7 +2347,7 @@ void TestXdgShellClientRules::testMinimizeForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2369,7 +2369,7 @@ void TestXdgShellClientRules::testMinimizeApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2380,7 +2380,7 @@ void TestXdgShellClientRules::testMinimizeApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", true);
     group.writeEntry("minimizerule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2416,7 +2416,7 @@ void TestXdgShellClientRules::testMinimizeForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("minimize", false);
     group.writeEntry("minimizerule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2428,7 +2428,7 @@ void TestXdgShellClientRules::testMinimizeForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2441,7 +2441,7 @@ void TestXdgShellClientRules::testMinimizeForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isMinimizable());
     QVERIFY(!client->isMinimized());
@@ -2464,7 +2464,7 @@ void TestXdgShellClientRules::testSkipTaskbarDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2476,7 +2476,7 @@ void TestXdgShellClientRules::testSkipTaskbarDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be affected by the rule.
@@ -2498,7 +2498,7 @@ void TestXdgShellClientRules::testSkipTaskbarApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2510,7 +2510,7 @@ void TestXdgShellClientRules::testSkipTaskbarApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a taskbar.
@@ -2524,7 +2524,7 @@ void TestXdgShellClientRules::testSkipTaskbarApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->skipTaskbar());
 
@@ -2544,7 +2544,7 @@ void TestXdgShellClientRules::testSkipTaskbarRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2556,7 +2556,7 @@ void TestXdgShellClientRules::testSkipTaskbarRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a taskbar.
@@ -2570,7 +2570,7 @@ void TestXdgShellClientRules::testSkipTaskbarRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be included on a taskbar.
@@ -2592,7 +2592,7 @@ void TestXdgShellClientRules::testSkipTaskbarForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2604,7 +2604,7 @@ void TestXdgShellClientRules::testSkipTaskbarForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a taskbar.
@@ -2618,7 +2618,7 @@ void TestXdgShellClientRules::testSkipTaskbarForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The skip-taskbar state should be still forced.
@@ -2639,7 +2639,7 @@ void TestXdgShellClientRules::testSkipTaskbarApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipTaskbar());
 
@@ -2649,7 +2649,7 @@ void TestXdgShellClientRules::testSkipTaskbarApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2683,7 +2683,7 @@ void TestXdgShellClientRules::testSkipTaskbarForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("skiptaskbar", true);
     group.writeEntry("skiptaskbarrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2695,7 +2695,7 @@ void TestXdgShellClientRules::testSkipTaskbarForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a taskbar.
@@ -2709,7 +2709,7 @@ void TestXdgShellClientRules::testSkipTaskbarForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipTaskbar());
 
@@ -2733,7 +2733,7 @@ void TestXdgShellClientRules::testSkipPagerDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2745,7 +2745,7 @@ void TestXdgShellClientRules::testSkipPagerDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be affected by the rule.
@@ -2767,7 +2767,7 @@ void TestXdgShellClientRules::testSkipPagerApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2779,7 +2779,7 @@ void TestXdgShellClientRules::testSkipPagerApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a pager.
@@ -2793,7 +2793,7 @@ void TestXdgShellClientRules::testSkipPagerApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->skipPager());
 
@@ -2813,7 +2813,7 @@ void TestXdgShellClientRules::testSkipPagerRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2825,7 +2825,7 @@ void TestXdgShellClientRules::testSkipPagerRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a pager.
@@ -2839,7 +2839,7 @@ void TestXdgShellClientRules::testSkipPagerRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be included on a pager.
@@ -2861,7 +2861,7 @@ void TestXdgShellClientRules::testSkipPagerForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2873,7 +2873,7 @@ void TestXdgShellClientRules::testSkipPagerForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a pager.
@@ -2887,7 +2887,7 @@ void TestXdgShellClientRules::testSkipPagerForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The skip-pager state should be still forced.
@@ -2908,7 +2908,7 @@ void TestXdgShellClientRules::testSkipPagerApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipPager());
 
@@ -2918,7 +2918,7 @@ void TestXdgShellClientRules::testSkipPagerApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2952,7 +2952,7 @@ void TestXdgShellClientRules::testSkipPagerForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("skippager", true);
     group.writeEntry("skippagerrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -2964,7 +2964,7 @@ void TestXdgShellClientRules::testSkipPagerForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be included on a pager.
@@ -2978,7 +2978,7 @@ void TestXdgShellClientRules::testSkipPagerForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipPager());
 
@@ -3002,7 +3002,7 @@ void TestXdgShellClientRules::testSkipSwitcherDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3014,7 +3014,7 @@ void TestXdgShellClientRules::testSkipSwitcherDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should not be affected by the rule.
@@ -3036,7 +3036,7 @@ void TestXdgShellClientRules::testSkipSwitcherApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3048,7 +3048,7 @@ void TestXdgShellClientRules::testSkipSwitcherApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be excluded from window switching effects.
@@ -3062,7 +3062,7 @@ void TestXdgShellClientRules::testSkipSwitcherApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->skipSwitcher());
 
@@ -3082,7 +3082,7 @@ void TestXdgShellClientRules::testSkipSwitcherRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3094,7 +3094,7 @@ void TestXdgShellClientRules::testSkipSwitcherRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be excluded from window switching effects.
@@ -3108,7 +3108,7 @@ void TestXdgShellClientRules::testSkipSwitcherRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be included in window switching effects.
@@ -3130,7 +3130,7 @@ void TestXdgShellClientRules::testSkipSwitcherForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3142,7 +3142,7 @@ void TestXdgShellClientRules::testSkipSwitcherForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be excluded from window switching effects.
@@ -3156,7 +3156,7 @@ void TestXdgShellClientRules::testSkipSwitcherForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The skip-switcher state should be still forced.
@@ -3177,7 +3177,7 @@ void TestXdgShellClientRules::testSkipSwitcherApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipSwitcher());
 
@@ -3187,7 +3187,7 @@ void TestXdgShellClientRules::testSkipSwitcherApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3221,7 +3221,7 @@ void TestXdgShellClientRules::testSkipSwitcherForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("skipswitcher", true);
     group.writeEntry("skipswitcherrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3233,7 +3233,7 @@ void TestXdgShellClientRules::testSkipSwitcherForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The client should be excluded from window switching effects.
@@ -3247,7 +3247,7 @@ void TestXdgShellClientRules::testSkipSwitcherForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->skipSwitcher());
 
@@ -3271,7 +3271,7 @@ void TestXdgShellClientRules::testKeepAboveDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3283,7 +3283,7 @@ void TestXdgShellClientRules::testKeepAboveDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The keep-above state of the client should not be affected by the rule.
@@ -3305,7 +3305,7 @@ void TestXdgShellClientRules::testKeepAboveApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3317,7 +3317,7 @@ void TestXdgShellClientRules::testKeepAboveApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept above.
@@ -3331,7 +3331,7 @@ void TestXdgShellClientRules::testKeepAboveApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->keepAbove());
 
@@ -3351,7 +3351,7 @@ void TestXdgShellClientRules::testKeepAboveRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3363,7 +3363,7 @@ void TestXdgShellClientRules::testKeepAboveRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept above.
@@ -3377,7 +3377,7 @@ void TestXdgShellClientRules::testKeepAboveRemember()
     QVERIFY(Test::waitForWindowDestroyed(client));
 
     // Re-open the client, it should not be kept above.
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepAbove());
 
@@ -3397,7 +3397,7 @@ void TestXdgShellClientRules::testKeepAboveForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3409,7 +3409,7 @@ void TestXdgShellClientRules::testKeepAboveForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept above.
@@ -3423,7 +3423,7 @@ void TestXdgShellClientRules::testKeepAboveForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->keepAbove());
 
@@ -3442,7 +3442,7 @@ void TestXdgShellClientRules::testKeepAboveApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepAbove());
 
@@ -3452,7 +3452,7 @@ void TestXdgShellClientRules::testKeepAboveApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3486,7 +3486,7 @@ void TestXdgShellClientRules::testKeepAboveForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3498,7 +3498,7 @@ void TestXdgShellClientRules::testKeepAboveForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept above.
@@ -3512,7 +3512,7 @@ void TestXdgShellClientRules::testKeepAboveForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepAbove());
 
@@ -3538,7 +3538,7 @@ void TestXdgShellClientRules::testKeepBelowDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3550,7 +3550,7 @@ void TestXdgShellClientRules::testKeepBelowDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The keep-below state of the client should not be affected by the rule.
@@ -3572,7 +3572,7 @@ void TestXdgShellClientRules::testKeepBelowApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3584,7 +3584,7 @@ void TestXdgShellClientRules::testKeepBelowApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept below.
@@ -3598,7 +3598,7 @@ void TestXdgShellClientRules::testKeepBelowApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->keepBelow());
 
@@ -3618,7 +3618,7 @@ void TestXdgShellClientRules::testKeepBelowRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3630,7 +3630,7 @@ void TestXdgShellClientRules::testKeepBelowRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept below.
@@ -3644,7 +3644,7 @@ void TestXdgShellClientRules::testKeepBelowRemember()
     QVERIFY(Test::waitForWindowDestroyed(client));
 
     // Re-open the client, it should not be kept below.
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepBelow());
 
@@ -3664,7 +3664,7 @@ void TestXdgShellClientRules::testKeepBelowForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3676,7 +3676,7 @@ void TestXdgShellClientRules::testKeepBelowForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept below.
@@ -3690,7 +3690,7 @@ void TestXdgShellClientRules::testKeepBelowForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->keepBelow());
 
@@ -3709,7 +3709,7 @@ void TestXdgShellClientRules::testKeepBelowApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepBelow());
 
@@ -3719,7 +3719,7 @@ void TestXdgShellClientRules::testKeepBelowApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3753,7 +3753,7 @@ void TestXdgShellClientRules::testKeepBelowForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("below", true);
     group.writeEntry("belowrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3765,7 +3765,7 @@ void TestXdgShellClientRules::testKeepBelowForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // Initially, the client should be kept below.
@@ -3779,7 +3779,7 @@ void TestXdgShellClientRules::testKeepBelowForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(!client->keepBelow());
 
@@ -3805,7 +3805,7 @@ void TestXdgShellClientRules::testShortcutDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3817,7 +3817,7 @@ void TestXdgShellClientRules::testShortcutDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QCOMPARE(client->shortcut(), QKeySequence());
     client->minimize();
@@ -3852,7 +3852,7 @@ void TestXdgShellClientRules::testShortcutApply()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::Apply));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3864,7 +3864,7 @@ void TestXdgShellClientRules::testShortcutApply()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // If we press the window shortcut, the window should be brought back to user.
@@ -3913,7 +3913,7 @@ void TestXdgShellClientRules::testShortcutApply()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The window shortcut should be set back to Ctrl+Alt+1.
@@ -3937,7 +3937,7 @@ void TestXdgShellClientRules::testShortcutRemember()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::Remember));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -3949,7 +3949,7 @@ void TestXdgShellClientRules::testShortcutRemember()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // If we press the window shortcut, the window should be brought back to user.
@@ -3986,7 +3986,7 @@ void TestXdgShellClientRules::testShortcutRemember()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The window shortcut should be set to the last known value.
@@ -4010,7 +4010,7 @@ void TestXdgShellClientRules::testShortcutForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4022,7 +4022,7 @@ void TestXdgShellClientRules::testShortcutForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // If we press the window shortcut, the window should be brought back to user.
@@ -4059,7 +4059,7 @@ void TestXdgShellClientRules::testShortcutForce()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // The window shortcut should still be forced.
@@ -4080,7 +4080,7 @@ void TestXdgShellClientRules::testShortcutApplyNow()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->shortcut().isEmpty());
 
@@ -4090,7 +4090,7 @@ void TestXdgShellClientRules::testShortcutApplyNow()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::ApplyNow));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4149,7 +4149,7 @@ void TestXdgShellClientRules::testShortcutForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("shortcut", "Ctrl+Alt+1");
     group.writeEntry("shortcutrule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4161,7 +4161,7 @@ void TestXdgShellClientRules::testShortcutForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
 
     // If we press the window shortcut, the window should be brought back to user.
@@ -4198,7 +4198,7 @@ void TestXdgShellClientRules::testShortcutForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->shortcut().isEmpty());
 
@@ -4278,7 +4278,7 @@ void TestXdgShellClientRules::testActiveOpacityDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityactive", 90);
     group.writeEntry("opacityactiverule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4290,7 +4290,7 @@ void TestXdgShellClientRules::testActiveOpacityDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -4313,7 +4313,7 @@ void TestXdgShellClientRules::testActiveOpacityForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityactive", 90);
     group.writeEntry("opacityactiverule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4325,7 +4325,7 @@ void TestXdgShellClientRules::testActiveOpacityForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 0.9);
@@ -4346,7 +4346,7 @@ void TestXdgShellClientRules::testActiveOpacityForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityactive", 90);
     group.writeEntry("opacityactiverule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4358,7 +4358,7 @@ void TestXdgShellClientRules::testActiveOpacityForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 0.9);
@@ -4367,7 +4367,7 @@ void TestXdgShellClientRules::testActiveOpacityForceTemporarily()
     delete shellSurface;
     delete surface;
     QVERIFY(Test::waitForWindowDestroyed(client));
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 1.0);
@@ -4388,7 +4388,7 @@ void TestXdgShellClientRules::testInactiveOpacityDontAffect()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityinactive", 80);
     group.writeEntry("opacityinactiverule", int(Rules::DontAffect));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4400,7 +4400,7 @@ void TestXdgShellClientRules::testInactiveOpacityDontAffect()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
 
@@ -4427,7 +4427,7 @@ void TestXdgShellClientRules::testInactiveOpacityForce()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityinactive", 80);
     group.writeEntry("opacityinactiverule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4439,7 +4439,7 @@ void TestXdgShellClientRules::testInactiveOpacityForce()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 1.0);
@@ -4467,7 +4467,7 @@ void TestXdgShellClientRules::testInactiveOpacityForceTemporarily()
     KConfigGroup group = config->group("1");
     group.writeEntry("opacityinactive", 80);
     group.writeEntry("opacityinactiverule", int(Rules::ForceTemporarily));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4479,7 +4479,7 @@ void TestXdgShellClientRules::testInactiveOpacityForceTemporarily()
     XdgShellClient *client;
     Surface *surface;
     XdgShellSurface *shellSurface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 1.0);
@@ -4494,7 +4494,7 @@ void TestXdgShellClientRules::testInactiveOpacityForceTemporarily()
     // The rule should be discarded when the client is closed.
     delete shellSurface;
     delete surface;
-    std::tie(client, surface, shellSurface) = createWindow(type, "org.kde.foo");
+    std::tie(client, surface, shellSurface) = createWindow(type, "org.ukui.foo");
     QVERIFY(client);
     QVERIFY(client->isActive());
     QCOMPARE(client->opacity(), 1.0);
@@ -4516,7 +4516,7 @@ void TestXdgShellClientRules::testMatchAfterNameChange()
     KConfigGroup group = config->group("1");
     group.writeEntry("above", true);
     group.writeEntry("aboverule", int(Rules::Force));
-    group.writeEntry("wmclass", "org.kde.foo");
+    group.writeEntry("wmclass", "org.ukui.foo");
     group.writeEntry("wmclasscomplete", false);
     group.writeEntry("wmclassmatch", int(Rules::ExactMatch));
     group.sync();
@@ -4535,7 +4535,7 @@ void TestXdgShellClientRules::testMatchAfterNameChange()
     QSignalSpy desktopFileNameSpy(c, &AbstractClient::desktopFileNameChanged);
     QVERIFY(desktopFileNameSpy.isValid());
 
-    shellSurface->setAppId(QByteArrayLiteral("org.kde.foo"));
+    shellSurface->setAppId(QByteArrayLiteral("org.ukui.foo"));
     QVERIFY(desktopFileNameSpy.wait());
     QCOMPARE(c->keepAbove(), true);
 }

@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "presentwindows_config.h"
 // KConfigSkeleton
 #include "presentwindowsconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 #include <kwineffects_interface.h>
 #include <QAction>
 
@@ -85,7 +85,7 @@ PresentWindowsEffectConfig::PresentWindowsEffectConfig(QWidget* parent, const QV
 
     connect(m_ui->shortcutEditor, &KShortcutsEditor::keyChange, this, &PresentWindowsEffectConfig::markAsChanged);
 
-    PresentWindowsConfig::instance(KWIN_CONFIG);
+    PresentWindowsConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(PresentWindowsConfig::self(), m_ui);
 
     load();
@@ -101,7 +101,7 @@ void PresentWindowsEffectConfig::save()
 {
     KCModule::save();
     m_ui->shortcutEditor->save();
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("presentwindows"));

@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // KConfigSkeleton
 #include "diminactiveconfig.h"
-#include <config-kwin.h>
+#include <config-ukui-kwin.h>
 
 #include <kwineffects_interface.h>
 
@@ -41,7 +41,7 @@ DimInactiveEffectConfig::DimInactiveEffectConfig(QWidget *parent, const QVariant
     : KCModule(KAboutData::pluginData(QStringLiteral("diminactive")), parent, args)
 {
     m_ui.setupUi(this);
-    DimInactiveConfig::instance(KWIN_CONFIG);
+    DimInactiveConfig::instance(UKUI_KWIN_CONFIG);
     addConfig(DimInactiveConfig::self(), this);
     load();
 }
@@ -54,7 +54,7 @@ void DimInactiveEffectConfig::save()
 {
     KCModule::save();
 
-    OrgKdeKwinEffectsInterface interface(QStringLiteral("org.kde.KWin"),
+    OrgUkuiKwinEffectsInterface interface(QStringLiteral("org.ukui.KWin"),
                                          QStringLiteral("/Effects"),
                                          QDBusConnection::sessionBus());
     interface.reconfigureEffect(QStringLiteral("diminactive"));

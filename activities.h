@@ -35,7 +35,7 @@ namespace KWin
 {
 class X11Client;
 
-class KWIN_EXPORT Activities : public QObject
+class UKUI_KWIN_EXPORT Activities : public QObject
 {
     Q_OBJECT
 

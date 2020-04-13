@@ -1,2 +1,2 @@
-module org.kde.kwin.private.kdecoration
+module org.ukui.kwin.private.kdecoration
 plugin kdecorationprivatedeclarative

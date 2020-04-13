@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QObject>
 #include <QRegion>
 
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 namespace KWin
 {
@@ -35,7 +35,7 @@ namespace Decoration
 
 class DecoratedClientImpl;
 
-class KWIN_EXPORT Renderer : public QObject
+class UKUI_KWIN_EXPORT Renderer : public QObject
 {
     Q_OBJECT
 public:

@@ -47,7 +47,7 @@ enum HiddenPreviews {
 
 class Settings;
 
-class KWIN_EXPORT Options : public QObject
+class UKUI_KWIN_EXPORT Options : public QObject
 {
     Q_OBJECT
     Q_ENUMS(FocusPolicy)
@@ -895,7 +895,7 @@ private:
     MouseCommand wheelToMouseCommand(MouseWheelCommand com, int delta) const;
 };
 
-extern KWIN_EXPORT Options* options;
+extern UKUI_KWIN_EXPORT Options* options;
 
 } // namespace
 

@@ -41,7 +41,7 @@ class KFocusConfigStandalone : public KFocusConfig
     Q_OBJECT
 public:
     KFocusConfigStandalone(QWidget* parent, const QVariantList &)
-        : KFocusConfig(true, new KConfig("kwinrc"), parent)
+        : KFocusConfig(true, new KConfig("ukui-kwinrc"), parent)
     {}
 };
 
@@ -50,7 +50,7 @@ class KMovingConfigStandalone : public KMovingConfig
     Q_OBJECT
 public:
     KMovingConfigStandalone(QWidget* parent, const QVariantList &)
-        : KMovingConfig(true, new KConfig("kwinrc"), parent)
+        : KMovingConfig(true, new KConfig("ukui-kwinrc"), parent)
     {}
 };
 
@@ -59,14 +59,14 @@ class KAdvancedConfigStandalone : public KAdvancedConfig
     Q_OBJECT
 public:
     KAdvancedConfigStandalone(QWidget* parent, const QVariantList &)
-        : KAdvancedConfig(true, new KConfig("kwinrc"), parent)
+        : KAdvancedConfig(true, new KConfig("ukui-kwinrc"), parent)
     {}
 };
 
 KWinOptions::KWinOptions(QWidget *parent, const QVariantList &)
     : KCModule(parent)
 {
-    mConfig = new KConfig("kwinrc");
+    mConfig = new KConfig("ukui-kwinrc");
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -99,7 +99,7 @@ KWinOptions::KWinOptions(QWidget *parent, const QVariantList &)
     connect(mAdvanced, SIGNAL(changed(bool)), this, SLOT(moduleChanged(bool)));
 
     KAboutData *about =
-        new KAboutData(QStringLiteral("kcmkwinoptions"), i18n("Window Behavior Configuration Module"),
+        new KAboutData(QStringLiteral("ukuikcmkwinoptions"), i18n("Window Behavior Configuration Module"),
                        QString(), QString(), KAboutLicense::GPL,
                        i18n("(c) 1997 - 2002 KWin and KControl Authors"));
 
@@ -145,7 +145,7 @@ void KWinOptions::save()
     mConfig->sync();
     // Send signal to all kwin instances
     QDBusMessage message =
-        QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+        QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
     QDBusConnection::sessionBus().send(message);
 
 
@@ -179,7 +179,7 @@ void KWinOptions::moduleChanged(bool state)
 KActionsOptions::KActionsOptions(QWidget *parent, const QVariantList &)
     : KCModule(parent)
 {
-    mConfig = new KConfig("kwinrc");
+    mConfig = new KConfig("ukui-kwinrc");
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -220,7 +220,7 @@ void KActionsOptions::save()
     mConfig->sync();
     // Send signal to all kwin instances
     QDBusMessage message =
-        QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+        QDBusMessage::createSignal("/KWin", "org.ukui.KWin", "reloadConfig");
     QDBusConnection::sessionBus().send(message);
 
 }
@@ -238,11 +238,11 @@ void KActionsOptions::moduleChanged(bool state)
 }
 
 K_PLUGIN_FACTORY_DEFINITION(KWinOptionsFactory,
-                            registerPlugin<KActionsOptions>("kwinactions");
-                            registerPlugin<KFocusConfigStandalone>("kwinfocus");
-                            registerPlugin<KMovingConfigStandalone>("kwinmoving");
-                            registerPlugin<KAdvancedConfigStandalone>("kwinadvanced");
-                            registerPlugin<KWinOptions>("kwinoptions");
+                            registerPlugin<KActionsOptions>("ukuikwinactions");
+                            registerPlugin<KFocusConfigStandalone>("ukuikwinfocus");
+                            registerPlugin<KMovingConfigStandalone>("ukuikwinmoving");
+                            registerPlugin<KAdvancedConfigStandalone>("ukuikwinadvanced");
+                            registerPlugin<KWinOptions>("ukuikwinoptions");
                            )
 
 #include "main.moc"

@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstract_output.h"
 #include <utils.h>
-#include <kwin_export.h>
+#include <ukui-kwin_export.h>
 
 #include <QObject>
 #include <QPoint>
@@ -52,7 +52,7 @@ namespace KWin
 /**
  * Generic output representation in a Wayland session
  */
-class KWIN_EXPORT AbstractWaylandOutput : public AbstractOutput
+class UKUI_KWIN_EXPORT AbstractWaylandOutput : public AbstractOutput
 {
     Q_OBJECT
 public:
