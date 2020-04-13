@@ -1,9 +1,31 @@
 [Compositing]
 OpenGLIsUnsafe=false
+#UKUI for preview
+HiddenPreviews=6
+#UKUI animation speed
+AnimationSpeed=2
+
+[Effect-PresentWindows]
+#UKUI disable hotarea
+BorderActivate=9
+BorderActivateAll=9
+BorderActivateClass=9
 
 [Desktops]
 Number=4
 Rows=2
+
+[Windows]
+#UKUI placement
+Placement=Smart
+#UKUI not hide dialog
+HideUtilityWindowsForInactive=false
+
+[Plugins]
+#UKUI show desktop not aperture window
+kwin4_effect_windowapertureEnabled=false
+#UKUI disable window fade
+kwin4_effect_fadeEnabled=false
 
 [Effect-CoverSwitch]
 TabBox=false
