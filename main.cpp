@@ -1,4 +1,10 @@
 /********************************************************************
+ UKUI-KWin - the UKUI3.0 window manager
+ This file is part of the UKUI project
+ The ukui-kwin is forked from kwin
+
+Copyright (C) 2014-2020 kylinos.cn
+
  KWin - the KDE window manager
  This file is part of the KDE project.
 
@@ -191,25 +197,20 @@ bool Application::wasCrash()
     return crashes > 0;
 }
 
-static const char description[] = I18N_NOOP("UKUI window manager");
+static const char description[] = I18N_NOOP("UKUI3.0 window manager");
 
 void Application::createAboutData()
 {
     KAboutData aboutData(QStringLiteral(UKUI_KWIN_NAME),          // The program name used internally
-                         i18n("Ukui-KWin"),                       // A displayable program name string
+                         i18n("UKUI-KWin"),                       // A displayable program name string
                          QStringLiteral(UKUI_KWIN_VERSION_STRING), // The program version string
                          i18n(description),                  // Short description of what the app does
                          KAboutLicense::GPL,            // The license this code is released under
-                         i18n("(c) 1999-2019, The KDE Developers"));   // Copyright Statement
+                         i18n("(c) 2014-2020, The UKUI Developers"));   // Copyright Statement
 
-    aboutData.addAuthor(i18n("Matthias Ettrich"), QString(), QStringLiteral("ettrich@kde.org"));
-    aboutData.addAuthor(i18n("Cristian Tibirna"), QString(), QStringLiteral("tibirna@kde.org"));
-    aboutData.addAuthor(i18n("Daniel M. Duley"),  QString(), QStringLiteral("mosfet@kde.org"));
-    aboutData.addAuthor(i18n("Luboš Luňák"),      QString(), QStringLiteral("l.lunak@kde.org"));
-    aboutData.addAuthor(i18n("Martin Flöser"),    QString(), QStringLiteral("mgraesslin@kde.org"));
-    aboutData.addAuthor(i18n("David Edmundson"),  QStringLiteral("Maintainer"), QStringLiteral("davidedmundson@kde.org"));
-    aboutData.addAuthor(i18n("Roman Gilg"),       QStringLiteral("Maintainer"), QStringLiteral("subdiff@gmail.com"));
-    aboutData.addAuthor(i18n("Vlad Zahorodnii"),  QStringLiteral("Maintainer"), QStringLiteral("vlad.zahorodnii@kde.org"));
+    aboutData.addAuthor(i18n("Liu Yi"),    QString(), QStringLiteral("liuyi@kylinos.cn"));
+    aboutData.addAuthor(i18n("Liu Yi"),       QStringLiteral("Maintainer"), QStringLiteral("liuyi@kylinos.cn"));
+    aboutData.addAuthor(i18n("Chen Chunan"),  QStringLiteral("Maintainer"), QStringLiteral("chenchunan@kylinos.cn"));
     KAboutData::setApplicationData(aboutData);
 }
 
@@ -219,9 +220,9 @@ static const QString s_crashesOption = QStringLiteral("crashes");
 void Application::setupCommandLine(QCommandLineParser *parser)
 {
     QCommandLineOption lockOption(s_lockOption, i18n("Disable configuration options"));
-    QCommandLineOption crashesOption(s_crashesOption, i18n("Indicate that KWin has recently crashed n times"), QStringLiteral("n"));
+    QCommandLineOption crashesOption(s_crashesOption, i18n("Indicate that UKUI-KWin has recently crashed n times"), QStringLiteral("n"));
 
-    parser->setApplicationDescription(i18n("UKUI window manager"));
+    parser->setApplicationDescription(i18n("UKUI3.0 window manager"));
     parser->addOption(lockOption);
     parser->addOption(crashesOption);
     KAboutData::applicationData().setupCommandLine(parser);

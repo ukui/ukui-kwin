@@ -1,4 +1,10 @@
 /******************************************************************************
+*   UKUI-KWin - the UKUI3.0 window manager                                    *
+*   This file is part of the UKUI project                                     *
+*   The ukui-kwin is forked from kwin                                         *
+*                                                                             *
+*   Copyright (C) 2014-2020 kylinos.cn                                        *
+*                                                                             *
 *   Copyright 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>                  *
 *                                                                             *
 *   This library is free software; you can redistribute it and/or             *
