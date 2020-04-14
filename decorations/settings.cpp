@@ -24,6 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "settings.h"
+#include "gsettingfont.h"
 // KWin
 #include "decorationbridge.h"
 #include "composite.h"
@@ -32,12 +33,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "appmenu.h"
 
 #include <config-ukui-kwin.h>
-
 #include <KDecoration2/DecorationSettings>
-
 #include <KConfigGroup>
-
 #include <QFontDatabase>
+
+#define DEFAULT_FONTSIZE 18
 
 namespace KWin
 {
@@ -68,6 +68,30 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     );
     connect(Workspace::self(), &Workspace::configChanged, this, &SettingsImpl::readSettings);
     connect(DecorationBridge::self(), &DecorationBridge::metaDataLoaded, this, &SettingsImpl::readSettings);
+
+    const QByteArray schema("org.ukui.style");
+    const QByteArray path("/org/ukui/style/");
+    m_pSettings = new QGSettings(schema, path, this);
+    connect(m_pSettings, SIGNAL(changed(const QString&)), this, SLOT(onGSettingChangedSlot()));
+    //connect(m_pSettings, SIGNAL(changed(const QString &)),this,SLOT(onGSettingChangedSlot(const QString &)));
+    //connect(m_pSettings, &QGSettings::changed, this, &SettingsImpl::onGSettingChangedSlot);
+
+    if (true == m_pSettings->keys().contains("systemFontSize"))
+    {
+        QString strAppName = m_pSettings->get("system-font-size").toString();
+        fputs("SettingsImpl::SettingsImpl,  获取到QGSettings值\n", stderr);
+        puts(strAppName.toLatin1().data());
+        puts(strAppName.toStdString().c_str());
+    }
+
+    GSettingFont* p = new GSettingFont;
+    connect(p, SIGNAL(Sig_fontChanged(int)), this, SLOT(onFontChanged(int)));
+
+    QDBusConnection connection = QDBusConnection::sessionBus();
+    if(connection.registerService("com.ukui.kwin"))
+    {
+        connection.registerObject("/Ukui/kwin", p, QDBusConnection::ExportAllSlots);
+    }
 }
 
 SettingsImpl::~SettingsImpl() = default;
@@ -161,6 +185,34 @@ static KDecoration2::BorderSize stringToSize(const QString &name)
     return it.value();
 }
 
+void SettingsImpl::onGSettingChangedSlot()
+{
+    fputs("SettingsImpl::onGSettingChangedSlot,  gsetting 生效吗\n", stderr);
+    if (false == m_pSettings->keys().contains("systemFontSize"))
+    {
+        return;
+    }
+
+    QString strFontSize = m_pSettings->get("system-font-size").toString();
+    bool bOk;
+    int nFontSize = strFontSize.toInt(&bOk);
+    if(false == bOk)
+    {
+        return;
+    }
+
+    m_font.setPixelSize(nFontSize);
+    emit decorationSettings()->fontChanged(m_font);
+    return;
+}
+
+void SettingsImpl::onFontChanged(int nFont)
+{
+        m_font.setPixelSize(nFont);
+        emit decorationSettings()->fontChanged(m_font);
+        return;
+}
+
 void SettingsImpl::readSettings()
 {
     KConfigGroup config = kwinApp()->config()->group(QStringLiteral("org.kde.kdecoration2"));
@@ -199,7 +251,8 @@ void SettingsImpl::readSettings()
         m_borderSize = size;
         emit decorationSettings()->borderSizeChanged(m_borderSize);
     }
-    const QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
+    font.setPixelSize(DEFAULT_FONTSIZE);
     if (font != m_font) {
         m_font = font;
         emit decorationSettings()->fontChanged(m_font);

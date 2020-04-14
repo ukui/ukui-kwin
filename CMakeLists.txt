@@ -31,6 +31,10 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     X11Extras
 )
 
+find_package(PkgConfig)
+pkg_check_modules(Qsettings REQUIRED gsettings-qt)
+include_directories(${Qsettings_INCLUDE_DIRS})
+
 find_package(Qt5Test ${QT_MIN_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Test PROPERTIES
     PURPOSE "Required for tests"
@@ -416,6 +420,7 @@ set(kwin_KDEINIT_SRCS
     decorations/decorationrenderer.cpp
     decorations/decorations_logging.cpp
     decorations/settings.cpp
+    decorations/gsettingfont.cpp
     deleted.cpp
     effectloader.cpp
     effects.cpp
@@ -644,6 +649,7 @@ set(kwinLibs
     ${kwin_XCB_LIBS}
     ${kwin_WAYLAND_LIBS}
     ${UDEV_LIBS}
+    ${Qsettings_LIBRARIES}
     Libinput::Libinput
 )
 

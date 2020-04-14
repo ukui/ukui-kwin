@@ -24,6 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 
+#include <QGSettings>
+#include <QtDBus>
+
 class KConfigGroup;
 
 namespace KWin
@@ -64,6 +67,12 @@ private:
     bool m_autoBorderSize = true;
     bool m_closeDoubleClickMenu = false;
     QFont m_font;
+    QGSettings* m_pSettings;
+
+public Q_SLOTS:
+    void onGSettingChangedSlot();
+    void onFontChanged(int nFont);
+
 };
 } // Decoration
 } // KWin
