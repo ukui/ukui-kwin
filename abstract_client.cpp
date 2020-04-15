@@ -2536,7 +2536,8 @@ AbstractClient *AbstractClient::findClientWithSameCaption() const
 
 QString AbstractClient::caption() const
 {
-    QString cap = captionNormal() + captionSuffix();
+    //QString cap = captionNormal() + captionSuffix();      //窗口重名自带后缀索引功能
+    QString cap = captionNormal();                          //将重名窗口带后缀索引的功能去掉
     if (unresponsive()) {
         cap += QLatin1String(" ");
         cap += i18nc("Application is not responding, appended to window title", "(Not Responding)");
