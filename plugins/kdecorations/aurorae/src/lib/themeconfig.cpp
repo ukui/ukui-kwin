@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QGuiApplication>
 #include <QScreen>
+#include <QtWidgets>
 
 namespace Aurorae
 {
@@ -127,10 +128,24 @@ void ThemeConfig::load(const KConfig &conf)
 
     qreal scaleFactor = 1;
     QScreen *primary = QGuiApplication::primaryScreen();
+
     if (primary) {
-        const qreal dpi = primary->logicalDotsPerInchX();
-        scaleFactor = dpi / 96.0f;
+        //const qreal dpi = primary->logicalDotsPerInchX();
+        //scaleFactor = dpi / 96.0f;
+
+        QDesktopWidget* m_pDeskWgt = QApplication::desktop();
+        QRect screenRect = m_pDeskWgt->screenGeometry();
+        int nScreenHeight = screenRect.height();
+        fputs("ThemeConfig::load,  打印屏幕高度\n", stderr);
+        puts(QString::number(nScreenHeight, 10, 4).toLatin1().data());
+        if(nScreenHeight >= 2000)
+        {
+            scaleFactor = 2.0;
+        }
     }
+
+    fputs("ThemeConfig::load,  打印放大系数\n", stderr);
+    puts(QString::number(scaleFactor, 10, 4).toLatin1().data());
 
     KConfigGroup border(&conf, QStringLiteral("Layout"));
     // default values taken from KCommonDecoration::layoutMetric() in kcommondecoration.cpp

@@ -36,8 +36,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KDecoration2/DecorationSettings>
 #include <KConfigGroup>
 #include <QFontDatabase>
+#include <QtWidgets>
 
-#define DEFAULT_FONTSIZE 18
+#define DEFAULT_FONTSIZE 15
 
 namespace KWin
 {
@@ -48,6 +49,14 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     , DecorationSettingsPrivate(parent)
     , m_borderSize(KDecoration2::BorderSize::Normal)
 {
+    m_nScaleFactor = 1;                       //放大系数
+    QDesktopWidget* m_pDeskWgt = QApplication::desktop();
+    QRect screenRect = m_pDeskWgt->screenGeometry();
+    if(screenRect.height() >= 2000)
+    {
+        m_nScaleFactor = 2;
+    }
+
     readSettings();
 
     auto c = connect(Compositor::self(), &Compositor::compositingToggled,
@@ -73,8 +82,6 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     const QByteArray path("/org/ukui/style/");
     m_pSettings = new QGSettings(schema, path, this);
     connect(m_pSettings, SIGNAL(changed(const QString&)), this, SLOT(onGSettingChangedSlot()));
-    //connect(m_pSettings, SIGNAL(changed(const QString &)),this,SLOT(onGSettingChangedSlot(const QString &)));
-    //connect(m_pSettings, &QGSettings::changed, this, &SettingsImpl::onGSettingChangedSlot);
 
     if (true == m_pSettings->keys().contains("systemFontSize"))
     {
@@ -208,9 +215,9 @@ void SettingsImpl::onGSettingChangedSlot()
 
 void SettingsImpl::onFontChanged(int nFont)
 {
-        m_font.setPixelSize(nFont);
-        emit decorationSettings()->fontChanged(m_font);
-        return;
+    m_font.setPixelSize(nFont * m_nScaleFactor);
+    emit decorationSettings()->fontChanged(m_font);
+    return;
 }
 
 void SettingsImpl::readSettings()
@@ -251,8 +258,9 @@ void SettingsImpl::readSettings()
         m_borderSize = size;
         emit decorationSettings()->borderSizeChanged(m_borderSize);
     }
+
     QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
-    font.setPixelSize(DEFAULT_FONTSIZE);
+    font.setPixelSize(DEFAULT_FONTSIZE * m_nScaleFactor);
     if (font != m_font) {
         m_font = font;
         emit decorationSettings()->fontChanged(m_font);

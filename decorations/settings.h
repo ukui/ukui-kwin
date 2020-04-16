@@ -68,6 +68,7 @@ private:
     bool m_closeDoubleClickMenu = false;
     QFont m_font;
     QGSettings* m_pSettings;
+    int m_nScaleFactor;         //放大系数
 
 public Q_SLOTS:
     void onGSettingChangedSlot();

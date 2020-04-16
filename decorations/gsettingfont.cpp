@@ -31,9 +31,8 @@ void GSettingFont::onGSettingChanged()
 
 void GSettingFont::setFontSize(int nFont)
 {
-        fputs("GSettingThread::test,  gsetting 生效吗\n", stderr);
-        nFont = nFont + 4;              //标题栏字体的大小实际比真实字体小4个单位
-        emit Sig_fontChanged(nFont);
-        return;
+    nFont = nFont + 4;              //标题栏字体的大小实际比真实字体小4个单位
+    emit Sig_fontChanged(nFont);
+    return;
 }
 
