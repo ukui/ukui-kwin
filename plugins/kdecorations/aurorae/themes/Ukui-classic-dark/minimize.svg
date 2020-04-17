@@ -1,1 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 30"><defs><style>.cls-1,.cls-3{fill:#3d6be5;}.cls-1{opacity:0;}.cls-2,.cls-4,.cls-6{fill:#fff;}.cls-2{opacity:0.57;}.cls-5{fill:#3257ca;}.cls-6{opacity:0.2;}</style></defs><title>最小化-深色主题</title><g id="layer1-9" data-name="layer1"><g id="active-center"><rect id="底图" class="cls-1" width="30" height="30" rx="4"/><rect class="cls-2" x="10" y="15" width="10" height="1" rx="0.5"/></g><g id="hover-center"><rect id="底图-2" data-name="底图" class="cls-3" x="30" width="30" height="30" rx="4"/><rect class="cls-4" x="40" y="15" width="10" height="1" rx="0.5"/></g><g id="pressed-center"><rect id="底图-3" data-name="底图" class="cls-5" x="60" width="30" height="30" rx="4"/><rect class="cls-4" x="70" y="15" width="10" height="1" rx="0.5"/></g><g id="inactive-center"><rect id="底图-4" data-name="底图" class="cls-1" x="90" width="30" height="30" rx="4"/><rect class="cls-6" x="100" y="15" width="10" height="1" rx="0.5"/></g><g id="hover-inactive-center"><rect id="底图-5" data-name="底图" class="cls-3" x="120" width="30" height="30" rx="4"/><rect class="cls-4" x="130" y="15" width="10" height="1" rx="0.5"/></g><g id="pressed-inactive-center"><rect id="底图-6" data-name="底图" class="cls-5" x="150" width="30" height="30" rx="4"/><rect class="cls-4" x="160" y="15" width="10" height="1" rx="0.5"/></g><g id="deactivated-center"><rect id="底图-7" data-name="底图" class="cls-1" x="180" width="30" height="30" rx="4"/><rect class="cls-2" x="190" y="15" width="10" height="1" rx="0.5"/></g><g id="deactivated-inactive-center"><rect id="底图-8" data-name="底图" class="cls-1" x="210" width="30" height="30" rx="4"/><rect class="cls-6" x="220" y="15" width="10" height="1" rx="0.5"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 30">
+  <defs>
+    <style>.cls-1,.cls-3{fill:#3d6be5;}.cls-1{opacity:0;}.cls-2,.cls-4,.cls-6{fill:#fff;}.cls-2{opacity:0.57;}.cls-5{fill:#3257ca;}.cls-6{opacity:0.2;}</style>
+  </defs>
+  <title>最小化-深色主题</title>
+  <g id="layer1-9" data-name="layer1">
+    <g id="active-center">
+      <rect id="底图" class="cls-1" width="30" height="30" rx="4"/>
+      <rect class="cls-2" x="10" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="hover-center">
+      <rect id="底图-2" data-name="底图" class="cls-3" x="30" width="30" height="30" rx="4"/>
+      <rect class="cls-4" x="40" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="pressed-center">
+      <rect id="底图-3" data-name="底图" class="cls-5" x="60" width="30" height="30" rx="4"/>
+      <rect class="cls-4" x="70" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="inactive-center">
+      <rect id="底图-4" data-name="底图" class="cls-1" x="90" width="30" height="30" rx="4"/>
+      <rect class="cls-6" x="100" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="hover-inactive-center">
+      <rect id="底图-5" data-name="底图" class="cls-3" x="120" width="30" height="30" rx="4"/>
+      <rect class="cls-4" x="130" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="pressed-inactive-center">
+      <rect id="底图-6" data-name="底图" class="cls-5" x="150" width="30" height="30" rx="4"/>
+      <rect class="cls-4" x="160" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="deactivated-center">
+      <rect id="底图-7" data-name="底图" class="cls-1" x="180" width="30" height="30" rx="4"/>
+      <rect class="cls-2" x="190" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+    <g id="deactivated-inactive-center">
+      <rect id="底图-8" data-name="底图" class="cls-1" x="210" width="30" height="30" rx="4"/>
+      <rect class="cls-6" x="220" y="15" width="10" height="1" rx="0.5"/>
+    </g>
+  </g>
+</svg>
