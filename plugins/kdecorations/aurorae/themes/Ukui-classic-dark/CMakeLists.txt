@@ -1,7 +1,7 @@
 install(
     FILES
         close.svg
-        ukui-k01rc
+        Ukui-classic-darkrc
         menu.svg
         minimize.svg
         decoration.svg
@@ -9,5 +9,5 @@ install(
         metadata.desktop
         restore.svg
     DESTINATION
-        ${CMAKE_INSTALL_PREFIX}/share/aurorae/themes/ukui-k01
+        ${CMAKE_INSTALL_PREFIX}/share/aurorae/themes/Ukui-classic-dark
 )
