@@ -1,7 +1,7 @@
 [Compositing]
 OpenGLIsUnsafe=false
 #UKUI for preview
-HiddenPreviews=6
+HiddenPreviews=5
 #UKUI animation speed
 AnimationSpeed=2
 
