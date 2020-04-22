@@ -289,13 +289,13 @@ void UserActionsMenu::init()
      m_shadeOperation->setCheckable(true);
      m_shadeOperation->setData(Options::ShadeOp);
 
-     m_noBorderOperation = advancedMenu->addAction(i18n("&No Border"));
-     m_noBorderOperation->setIcon(QIcon::fromTheme(QStringLiteral("edit-none-border")));
-     setShortcut(m_noBorderOperation, QStringLiteral("Window No Border"));
-     m_noBorderOperation->setCheckable(true);
-     m_noBorderOperation->setData(Options::NoBorderOp);
+/* UKUI comment for the moment
+ *   m_noBorderOperation = advancedMenu->addAction(i18n("&No Border"));
+ *   m_noBorderOperation->setIcon(QIcon::fromTheme(QStringLiteral("edit-none-border")));
+ *   setShortcut(m_noBorderOperation, QStringLiteral("Window No Border"));
+ *   m_noBorderOperation->setCheckable(true);
+ *   m_noBorderOperation->setData(Options::NoBorderOp);
  
-/* UKUI comment for the moment 
  *    advancedMenu->addSeparator();
  *
  *   m_shortcutOperation = advancedMenu->addAction(i18n("Set Window Short&cut..."));
@@ -408,11 +408,11 @@ void UserActionsMenu::menuAboutToShow()
     m_keepBelowOperation->setChecked(m_client->keepBelow());
     m_fullScreenOperation->setEnabled(m_client->userCanSetFullScreen());
     m_fullScreenOperation->setChecked(m_client->isFullScreen());
-    m_noBorderOperation->setEnabled(m_client->userCanSetNoBorder());
-    m_noBorderOperation->setChecked(m_client->noBorder());
+    //m_noBorderOperation->setEnabled(m_client->userCanSetNoBorder());
+    //m_noBorderOperation->setChecked(m_client->noBorder());
     m_minimizeOperation->setEnabled(m_client->isMinimizable());
     m_closeOperation->setEnabled(m_client->isCloseable());
-//    m_shortcutOperation->setEnabled(m_client->rules()->checkShortcut(QString()).isNull());
+    //m_shortcutOperation->setEnabled(m_client->rules()->checkShortcut(QString()).isNull());
 
     // drop the existing scripts menu
     delete m_scriptsMenu;
