@@ -112,7 +112,7 @@ KWinTabBoxConfig::KWinTabBoxConfig(QWidget* parent, const QVariantList& args)
     m_actionCollection->setConfigGroup("Navigation");
     m_actionCollection->setConfigGlobal(true);
     QAction* a;
-    ADD_SHORTCUT("Walk Through Windows", Qt::ALT + Qt::Key_Tab, m_primaryTabBoxUi->scAll);
+    //ADD_SHORTCUT("Walk Through Windows", Qt::ALT + Qt::Key_Tab, m_primaryTabBoxUi->scAll);
     ADD_SHORTCUT("Walk Through Windows (Reverse)", Qt::ALT + Qt::SHIFT + Qt::Key_Backtab,
                  m_primaryTabBoxUi->scAllReverse);
     ADD_SHORTCUT("Walk Through Windows Alternative", QKeySequence(), m_alternativeTabBoxUi->scAll);
@@ -438,7 +438,7 @@ void KWinTabBoxConfig::defaults()
         QAction *a = m_actionCollection->action(action);
         KGlobalAccel::self()->setShortcut(a, QList<QKeySequence>() << sequence, KGlobalAccel::NoAutoloading);
     };
-    RESET_SHORTCUT(m_primaryTabBoxUi->scAll, Qt::ALT + Qt::Key_Tab);
+    //RESET_SHORTCUT(m_primaryTabBoxUi->scAll, Qt::ALT + Qt::Key_Tab);
     RESET_SHORTCUT(m_primaryTabBoxUi->scAllReverse, Qt::ALT + Qt::SHIFT + Qt::Key_Backtab);
     RESET_SHORTCUT(m_alternativeTabBoxUi->scAll);
     RESET_SHORTCUT(m_alternativeTabBoxUi->scAllReverse);
