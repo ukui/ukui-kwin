@@ -39,6 +39,9 @@ TabBoxAlternative=true
 flipswitchEnabled=true
 highlightwindowEnabled=true
 
+[MouseBindings]
+CommandAllKey=Meta
+
 [TabBox]
 ActivitiesMode=1
 ApplicationsMode=0
