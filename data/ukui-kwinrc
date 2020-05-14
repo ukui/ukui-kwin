@@ -21,7 +21,12 @@ Placement=Random
 #UKUI not hide dialog
 HideUtilityWindowsForInactive=false
 
+[Effect-Blur]
+BlurStrength=9
+NoiseStrength=1
+
 [Plugins]
+blurEnabled=true
 #UKUI show desktop not aperture window
 kwin4_effect_windowapertureEnabled=false
 #UKUI disable window fade
