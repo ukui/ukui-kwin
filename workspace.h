@@ -329,6 +329,7 @@ public:
 
     void setShowingDesktop(bool showing);
     bool showingDesktop() const;
+    xcb_timestamp_t showingDesktopTimestamp() const;
 
     void sendPingToWindow(xcb_window_t w, xcb_timestamp_t timestamp);   // Called from X11Client::pingWindow()
 
@@ -620,6 +621,7 @@ private:
     QList<AbstractClient*> attention_chain;
 
     bool showing_desktop;
+    xcb_timestamp_t showing_desktop_timestamp;
 
     QList<Group *> groups;
 
@@ -760,6 +762,11 @@ inline SessionManager *Workspace::sessionManager() const
 inline bool Workspace::showingDesktop() const
 {
     return showing_desktop;
+}
+
+inline xcb_timestamp_t Workspace::showingDesktopTimestamp() const
+{
+    return showing_desktop_timestamp;
 }
 
 inline bool Workspace::globalShortcutsDisabled() const

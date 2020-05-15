@@ -2088,17 +2088,32 @@ void X11Client::takeFocus()
     }
     workspace()->setShouldGetFocus(this);
 
-    bool breakShowingDesktop = !keepAbove();
-    if (breakShowingDesktop) {
-        foreach (const X11Client *c, group()->members()) {
-            if (c->isDesktop()) {
-                breakShowingDesktop = false;
-                break;
-            }
+    bool breakShowingDesktop = true;
+    foreach (const X11Client *c, group()->members()) {
+        if (c->isDesktop()) {
+            breakShowingDesktop = false;
+            break;
         }
     }
+
     if (breakShowingDesktop)
-        workspace()->setShowingDesktop(false);
+    {
+        if (workspace()->showingDesktop()) {
+            // 最小化其它所有窗口
+            for (X11Client *c : workspace()->clientList()) {
+                if (this == c || c->isDock() || c->isDesktop() || skipTaskbar()) {
+                    continue;
+                }
+                // 在进入到显示桌面模式后可能还有活跃的窗口，此时不要最小化，(如进入这个模式后才新建的窗口，新建窗口的那一瞬间其实也已聚焦会进入该函数)
+                if (c->userTime() > workspace()->showingDesktopTimestamp()) {
+                    continue;
+                }
+
+                c->minimize(true);
+            }
+            workspace()->setShowingDesktop(false);
+        }
+    }
 }
 
 /**

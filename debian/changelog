@@ -1,3 +1,15 @@
+ukui-kwin (1.0.0kylin3) v101; urgency=medium
+
+  * When you use the "show desktop" function in the taskbar, the original dialog box will pop up automatically after you activate file. solve the issue of #212
+
+ -- chenchunan <chenchunan@kylinos.cn>  Fri, 15 May 2020 15:44:42 +0800
+
+ukui-kwin (1.0.0kylin2) v101; urgency=medium
+
+  * modify the default of BlurStrength and NoiseStrength with blur
+
+ -- chenchunan <chenchunan@kylinos.cn>  Thu, 14 May 2020 13:58:41 +0800
+
 ukui-kwin (1.0.0kylin1) v101; urgency=medium
 
   * ukui3.0 transfor to v10.1
