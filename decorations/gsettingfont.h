@@ -14,14 +14,13 @@ public:
     GSettingFont(QObject *parent = nullptr);
 
 private:
-    QGSettings* m_pSettings;
+
 
 signals:
     void Sig_fontChanged(int);
 
 public Q_SLOTS:
     void    setFontSize(int nFont);
-    void    onGSettingChanged();
 
 };
 

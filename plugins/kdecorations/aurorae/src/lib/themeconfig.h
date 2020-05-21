@@ -182,6 +182,10 @@ public:
         return m_decorationPosition;
     }
 
+    qreal getScaleFactor();
+
+    QStringList readFile(QString filepath);
+
     static QColor defaultActiveTextColor() {
         return QColor(Qt::black);
     }

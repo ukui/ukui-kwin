@@ -49,14 +49,6 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     , DecorationSettingsPrivate(parent)
     , m_borderSize(KDecoration2::BorderSize::Normal)
 {
-    m_nScaleFactor = 1;                       //放大系数
-    QDesktopWidget* m_pDeskWgt = QApplication::desktop();
-    QRect screenRect = m_pDeskWgt->screenGeometry();
-    if(screenRect.height() >= 2000)
-    {
-        m_nScaleFactor = 2;
-    }
-
     readSettings();
 
     auto c = connect(Compositor::self(), &Compositor::compositingToggled,
@@ -78,19 +70,6 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     connect(Workspace::self(), &Workspace::configChanged, this, &SettingsImpl::readSettings);
     connect(DecorationBridge::self(), &DecorationBridge::metaDataLoaded, this, &SettingsImpl::readSettings);
 
-    const QByteArray schema("org.ukui.style");
-    const QByteArray path("/org/ukui/style/");
-    m_pSettings = new QGSettings(schema, path, this);
-    connect(m_pSettings, SIGNAL(changed(const QString&)), this, SLOT(onGSettingChangedSlot()));
-
-    if (true == m_pSettings->keys().contains("systemFontSize"))
-    {
-        QString strAppName = m_pSettings->get("system-font-size").toString();
-        fputs("SettingsImpl::SettingsImpl,  获取到QGSettings值\n", stderr);
-        puts(strAppName.toLatin1().data());
-        puts(strAppName.toStdString().c_str());
-    }
-
     GSettingFont* p = new GSettingFont;
     connect(p, SIGNAL(Sig_fontChanged(int)), this, SLOT(onFontChanged(int)));
 
@@ -98,6 +77,27 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     if(connection.registerService("com.ukui.kwin"))
     {
         connection.registerObject("/Ukui/kwin", p, QDBusConnection::ExportAllSlots);
+    }
+}
+
+QStringList SettingsImpl::readFile(QString filepath)
+{
+    QStringList proRes;
+    QFile file(filepath);
+    if(file.exists()) {
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return QStringList();
+        }
+        QTextStream textStream(&file);
+        while(!textStream.atEnd()) {
+            QString line= textStream.readLine();
+            line.remove('\n');
+            proRes<<line;
+        }
+        file.close();
+        return proRes;
+    } else {
+        return QStringList();
     }
 }
 
@@ -192,27 +192,6 @@ static KDecoration2::BorderSize stringToSize(const QString &name)
     return it.value();
 }
 
-void SettingsImpl::onGSettingChangedSlot()
-{
-    fputs("SettingsImpl::onGSettingChangedSlot,  gsetting 生效吗\n", stderr);
-    if (false == m_pSettings->keys().contains("systemFontSize"))
-    {
-        return;
-    }
-
-    QString strFontSize = m_pSettings->get("system-font-size").toString();
-    bool bOk;
-    int nFontSize = strFontSize.toInt(&bOk);
-    if(false == bOk)
-    {
-        return;
-    }
-
-    m_font.setPixelSize(nFontSize);
-    emit decorationSettings()->fontChanged(m_font);
-    return;
-}
-
 void SettingsImpl::onFontChanged(int nFont)
 {
     m_font.setPixelSize(nFont * m_nScaleFactor);
@@ -257,6 +236,26 @@ void SettingsImpl::readSettings()
     if (size != m_borderSize) {
         m_borderSize = size;
         emit decorationSettings()->borderSizeChanged(m_borderSize);
+    }
+
+    m_nScaleFactor = 1;                         //放大系数
+    //从配置文件中.profile读取QT放大系数
+    QString filepath = getenv("HOME");
+    filepath += "/.profile";
+    QString scale;
+    QStringList res = readFile(filepath);
+    QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
+    for(int i = 0; i < res.length(); i++) {
+       QString str = res.at(i);
+       int pos = 0;
+       while ((pos = re.indexIn(str, pos)) != -1) {
+           scale = re.cap(2);
+           pos += re.matchedLength();
+       }
+    }
+    if(scale.toInt() > 0)
+    {
+        m_nScaleFactor = scale.toInt();
     }
 
     QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);

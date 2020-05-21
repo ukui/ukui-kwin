@@ -86,6 +86,51 @@ ThemeConfig::ThemeConfig()
 {
 }
 
+QStringList ThemeConfig::readFile(QString filepath)
+{
+    QStringList proRes;
+    QFile file(filepath);
+    if(file.exists()) {
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return QStringList();
+        }
+        QTextStream textStream(&file);
+        while(!textStream.atEnd()) {
+            QString line= textStream.readLine();
+            line.remove('\n');
+            proRes<<line;
+        }
+        file.close();
+        return proRes;
+    } else {
+        return QStringList();
+    }
+}
+
+qreal ThemeConfig::getScaleFactor()
+{
+    //从配置文件中.profile读取QT放大系数
+    QString filepath = getenv("HOME");
+    filepath += "/.profile";
+    QString scale;
+    QStringList res = readFile(filepath);
+    QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
+    for(int i = 0; i < res.length(); i++) {
+       QString str = res.at(i);
+       int pos = 0;
+       while ((pos = re.indexIn(str, pos)) != -1) {
+           scale = re.cap(2);
+           pos += re.matchedLength();
+       }
+    }
+    if(scale.toDouble() > 0)
+    {
+        return scale.toDouble();
+    }
+
+    return 1;
+}
+
 void ThemeConfig::load(const KConfig &conf)
 {
     KConfigGroup general(&conf, "General");
@@ -133,17 +178,8 @@ void ThemeConfig::load(const KConfig &conf)
         //const qreal dpi = primary->logicalDotsPerInchX();
         //scaleFactor = dpi / 96.0f;
 
-        QDesktopWidget* m_pDeskWgt = QApplication::desktop();
-        QRect screenRect = m_pDeskWgt->screenGeometry();
-        int nScreenHeight = screenRect.height();
-        if(nScreenHeight >= 2000)
-        {
-            scaleFactor = 2.0;
-        }
+        scaleFactor = getScaleFactor();
     }
-
-    //fputs("ThemeConfig::load,  打印放大系数\n", stderr);
-    //puts(QString::number(scaleFactor, 10, 4).toLatin1().data());
 
     KConfigGroup border(&conf, QStringLiteral("Layout"));
     // default values taken from KCommonDecoration::layoutMetric() in kcommondecoration.cpp

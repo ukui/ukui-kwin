@@ -55,6 +55,7 @@ public:
     QFont font() const override {
         return m_font;
     }
+    QStringList readFile(QString filepath);
 
 private:
     void readSettings();
@@ -71,7 +72,6 @@ private:
     int m_nScaleFactor;         //放大系数
 
 public Q_SLOTS:
-    void onGSettingChangedSlot();
     void onFontChanged(int nFont);
 
 };
