@@ -80,25 +80,28 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     }
 }
 
-QStringList SettingsImpl::readFile(QString filepath)
+QStringList SettingsImpl::readFile(QString strFilePath)
 {
-    QStringList proRes;
-    QFile file(filepath);
-    if(file.exists()) {
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            return QStringList();
-        }
-        QTextStream textStream(&file);
-        while(!textStream.atEnd()) {
-            QString line= textStream.readLine();
-            line.remove('\n');
-            proRes<<line;
-        }
-        file.close();
-        return proRes;
-    } else {
+    QFile file(strFilePath);
+
+    //文件不存在，直接返回
+    if(false == file.exists()) {
         return QStringList();
     }
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return QStringList();
+    }
+
+    QStringList strlistRes;
+    QTextStream textStream(&file);
+    while(!textStream.atEnd()) {
+        QString line= textStream.readLine();
+        line.remove('\n');
+        strlistRes<<line;
+    }
+    file.close();
+    return strlistRes;
 }
 
 SettingsImpl::~SettingsImpl() = default;
@@ -240,22 +243,22 @@ void SettingsImpl::readSettings()
 
     m_nScaleFactor = 1;                         //放大系数
     //从配置文件中.profile读取QT放大系数
-    QString filepath = getenv("HOME");
-    filepath += "/.profile";
-    QString scale;
-    QStringList res = readFile(filepath);
+    QString strFilePath = getenv("HOME");
+    strFilePath += "/.profile";
+    QString strScale;
+    QStringList strlistRes = readFile(strFilePath);
     QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
-    for(int i = 0; i < res.length(); i++) {
-       QString str = res.at(i);
-       int pos = 0;
-       while ((pos = re.indexIn(str, pos)) != -1) {
-           scale = re.cap(2);
-           pos += re.matchedLength();
+    for(int i = 0; i < strlistRes.length(); i++) {
+       QString str = strlistRes.at(i);
+       int nPos = 0;
+       while ((nPos = re.indexIn(str, nPos)) != -1) {
+           strScale = re.cap(2);
+           nPos += re.matchedLength();
        }
     }
-    if(scale.toInt() > 0)
+    if(strScale.toInt() > 0)
     {
-        m_nScaleFactor = scale.toInt();
+        m_nScaleFactor = strScale.toInt();
     }
 
     QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);

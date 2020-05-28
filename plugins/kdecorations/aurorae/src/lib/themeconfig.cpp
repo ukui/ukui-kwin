@@ -86,46 +86,49 @@ ThemeConfig::ThemeConfig()
 {
 }
 
-QStringList ThemeConfig::readFile(QString filepath)
+QStringList ThemeConfig::readFile(QString strFilePath)
 {
-    QStringList proRes;
-    QFile file(filepath);
-    if(file.exists()) {
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            return QStringList();
-        }
-        QTextStream textStream(&file);
-        while(!textStream.atEnd()) {
-            QString line= textStream.readLine();
-            line.remove('\n');
-            proRes<<line;
-        }
-        file.close();
-        return proRes;
-    } else {
+    QStringList strlistRes;
+    QFile file(strFilePath);
+
+    if(false == file.exists()) {
         return QStringList();
     }
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return QStringList();
+    }
+    QTextStream textStream(&file);
+    while(!textStream.atEnd()) {
+        QString line= textStream.readLine();
+        line.remove('\n');
+        strlistRes<<line;
+    }
+    file.close();
+    return strlistRes;
 }
 
+//从配置文件中.profile读取QT放大系数
 qreal ThemeConfig::getScaleFactor()
 {
-    //从配置文件中.profile读取QT放大系数
-    QString filepath = getenv("HOME");
-    filepath += "/.profile";
-    QString scale;
-    QStringList res = readFile(filepath);
+    QString strFilePath = getenv("HOME");
+    strFilePath += "/.profile";
+    QString strScale;
+    QStringList strlistRes = readFile(strFilePath);
     QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
-    for(int i = 0; i < res.length(); i++) {
-       QString str = res.at(i);
-       int pos = 0;
-       while ((pos = re.indexIn(str, pos)) != -1) {
-           scale = re.cap(2);
-           pos += re.matchedLength();
+
+    for(int i = 0; i < strlistRes.length(); i++) {
+       QString str = strlistRes.at(i);
+       int nPos = 0;
+       while ((nPos = re.indexIn(str, nPos)) != -1) {
+           strScale = re.cap(2);
+           nPos += re.matchedLength();
        }
     }
-    if(scale.toDouble() > 0)
+
+    if(strScale.toDouble() > 0)
     {
-        return scale.toDouble();
+        return strScale.toDouble();
     }
 
     return 1;
@@ -177,7 +180,7 @@ void ThemeConfig::load(const KConfig &conf)
     if (primary) {
         //const qreal dpi = primary->logicalDotsPerInchX();
         //scaleFactor = dpi / 96.0f;
-
+        //通过读取环境变量获取放大系数
         scaleFactor = getScaleFactor();
     }
 
