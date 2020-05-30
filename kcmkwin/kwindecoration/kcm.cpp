@@ -104,8 +104,7 @@ KCMKWinDecoration::KCMKWinDecoration(QObject *parent, const QVariantList &argume
     connect(this, &KCMKWinDecoration::borderSizeChanged, this, &KCMKWinDecoration::settingsChanged);
 
     // Update the themes when the color scheme or a theme's settings change
-    QDBusConnection::sessionBus()
-        .connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.ukui.KWin"), QStringLiteral("reloadConfig"),
+    QDBusConnection::sessionBus().connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.ukui.KWin"), QStringLiteral("reloadConfig"),
             this, SLOT(reloadKWinSettings()));
 
     QMetaObject::invokeMethod(m_themesModel, "init", Qt::QueuedConnection);

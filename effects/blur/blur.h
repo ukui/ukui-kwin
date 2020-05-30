@@ -69,6 +69,9 @@ public:
 
     bool eventFilter(QObject *watched, QEvent *event) override;
 
+    int getScaleFactor();
+    QStringList readFile(QString filepath);
+
 public Q_SLOTS:
     void slotWindowAdded(KWin::EffectWindow *w);
     void slotWindowDeleted(KWin::EffectWindow *w);

@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kwineffectquickview.h>
 
 #include "utils.h"
+#include "workspace.h"
 #include "x11client.h"
 #include "composite.h"
 #include "deleted.h"
@@ -542,6 +543,9 @@ void SceneOpenGL::handleGraphicsReset(GLenum status)
     qCDebug(KWIN_OPENGL) << "Attempting to reset compositing.";
     QMetaObject::invokeMethod(this, "resetCompositing", Qt::QueuedConnection);
 
+    //对于部分笔记本，在切换用户后再登回用户，可能会出现已有窗口渲染失效的情况(如提示：由于图形重置，桌面效果已被重启)
+    //但是桌面效果重启后，还是出现已有窗口渲染失效，下面增加如下，将所有工作区窗口再渲染一次。
+    Workspace::self()->forEachAbstractClient([](AbstractClient *c) { c->updateDecoration(true, true); });
     KNotification::event(QStringLiteral("graphicsreset"), i18n("Desktop effects were restarted due to a graphics reset"));
 }
 
