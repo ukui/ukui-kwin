@@ -936,7 +936,8 @@ void X11Compositor::suspend(X11Compositor::SuspendReason reason)
                     i18n("Desktop effects have been suspended by another application.<br/>"
                          "You can resume using the '%1' shortcut.",
                          shortcuts.first().toString(QKeySequence::NativeText));
-            KNotification::event(QStringLiteral("compositingsuspendeddbus"), message);
+            //KNotification::event(QStringLiteral("compositingsuspendeddbus"), message);
+            fputs("X11Compositor::suspend,  KWin窗口管理器，桌面特效被另一个程序中断，您可以使用“Alt+Shift+F12”快捷键恢复\n", stderr);
         }
     }
     stop();
