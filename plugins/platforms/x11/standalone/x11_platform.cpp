@@ -263,10 +263,11 @@ void X11StandalonePlatform::createOpenGLSafePoint(OpenGLSafePoint safePoint)
             m_openGLFreezeProtection->moveToThread(m_openGLFreezeProtectionThread);
             connect(m_openGLFreezeProtection, &QTimer::timeout, m_openGLFreezeProtection,
                 [configName] {
-                    const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
-                    auto group = KConfigGroup(KSharedConfig::openConfig(configName), "Compositing");
-                    group.writeEntry(unsafeKey, true);
-                    group.sync();
+                    //去掉kwin里面对OpenGL进行检测后修改OpenGLIsUnsafe配置为true的功能，只要检测显卡性能好就可以用kwin，用kwin就OpenGLIsUnsafe配置就不让自动修改。
+                    //const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
+                    //auto group = KConfigGroup(KSharedConfig::openConfig(configName), "Compositing");
+                    //group.writeEntry(unsafeKey, true);
+                    //group.sync();
                     KCrash::setDrKonqiEnabled(false);
                     qFatal("Freeze in OpenGL initialization detected");
                 }, Qt::DirectConnection);
