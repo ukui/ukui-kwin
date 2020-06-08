@@ -31,6 +31,8 @@ blurEnabled=true
 kwin4_effect_windowapertureEnabled=false
 #UKUI disable window fade
 kwin4_effect_fadeEnabled=false
+#UKUI true conflict with sogou input
+presentwindowsEnabled=false
 
 [Effect-CoverSwitch]
 TabBox=false
