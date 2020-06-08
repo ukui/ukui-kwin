@@ -206,11 +206,9 @@ bool X11StandalonePlatform::compositingPossible() const
     // first off, check whether we figured that we'll crash on detection because of a buggy driver
     KConfigGroup gl_workaround_group(kwinApp()->config(), "Compositing");
     const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
-    if (gl_workaround_group.readEntry("Backend", "OpenGL") == QLatin1String("OpenGL") && gl_workaround_group.readEntry(unsafeKey, false))
-    {
-        //对于从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略
-        //return false;
-    }
+    if (gl_workaround_group.readEntry("Backend", "OpenGL") == QLatin1String("OpenGL") &&
+        gl_workaround_group.readEntry(unsafeKey, false))
+        return false;
 
 
     if (!Xcb::Extensions::self()->isCompositeAvailable()) {
@@ -265,10 +263,11 @@ void X11StandalonePlatform::createOpenGLSafePoint(OpenGLSafePoint safePoint)
             m_openGLFreezeProtection->moveToThread(m_openGLFreezeProtectionThread);
             connect(m_openGLFreezeProtection, &QTimer::timeout, m_openGLFreezeProtection,
                 [configName] {
-                    const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
-                    auto group = KConfigGroup(KSharedConfig::openConfig(configName), "Compositing");
-                    group.writeEntry(unsafeKey, true);
-                    group.sync();
+                    //去掉kwin里面对OpenGL进行检测后修改OpenGLIsUnsafe配置为true的功能，只要检测显卡性能好就可以用kwin，用kwin就OpenGLIsUnsafe配置就不让自动修改。
+                    //const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
+                    //auto group = KConfigGroup(KSharedConfig::openConfig(configName), "Compositing");
+                    //group.writeEntry(unsafeKey, true);
+                    //group.sync();
                     KCrash::setDrKonqiEnabled(false);
                     qFatal("Freeze in OpenGL initialization detected");
                 }, Qt::DirectConnection);
