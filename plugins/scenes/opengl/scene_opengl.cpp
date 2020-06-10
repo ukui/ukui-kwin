@@ -2706,6 +2706,7 @@ Scene *OpenGLFactory::create(QObject *parent) const
     // Some broken drivers crash on glXQuery() so to prevent constant KWin crashes:
     if (kwinApp()->platform()->openGLCompositingIsBroken()) {
         qCWarning(KWIN_OPENGL) << "KWin has detected that your OpenGL library is unsafe to use";
+        fputs("OpenGLFactory::create,  OpenGL库不安全,暂不忽略OpenGLIsUnsafe参数\n", stderr);
         return nullptr;
     }
     kwinApp()->platform()->createOpenGLSafePoint(Platform::OpenGLSafePoint::PreInit);

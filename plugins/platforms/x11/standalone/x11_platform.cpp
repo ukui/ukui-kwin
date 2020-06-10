@@ -209,6 +209,7 @@ bool X11StandalonePlatform::compositingPossible() const
     if (gl_workaround_group.readEntry("Backend", "OpenGL") == QLatin1String("OpenGL") && gl_workaround_group.readEntry(unsafeKey, false))
     {
         //对于从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略
+        fputs("X11StandalonePlatform::compositingPossible,  从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略\n", stderr);
         //return false;
     }
 

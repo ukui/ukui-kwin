@@ -703,8 +703,7 @@ void Compositor::performCompositing()
         }
         m_framesToTestForSafety--;
         if (m_framesToTestForSafety == 0 && (m_scene->compositingType() & OpenGLCompositing)) {
-            kwinApp()->platform()->createOpenGLSafePoint(
-                Platform::OpenGLSafePoint::PostLastGuardedFrame);
+            kwinApp()->platform()->createOpenGLSafePoint(Platform::OpenGLSafePoint::PostLastGuardedFrame);
         }
     }
 
@@ -964,6 +963,7 @@ void X11Compositor::start()
             reasons << QStringLiteral("Disabled by Script");
         }
         qCDebug(KWIN_CORE) << "Compositing is suspended, reason:" << reasons;
+        qCCritical(KWIN_CORE) << "Compositing is suspended, reason:" << reasons;
         return;
     } else if (!kwinApp()->platform()->compositingPossible()) {
         qCCritical(KWIN_CORE) << "Compositing is not possible";
