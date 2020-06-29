@@ -29,6 +29,7 @@
 #include <QScreen> // for QGuiApplication
 #include <QTime>
 #include <QWindow>
+#include <QFile>
 #include <cmath> // for ceil()
 
 #include <KWayland/Server/surface_interface.h>
