@@ -29,7 +29,6 @@
 #include <QScreen> // for QGuiApplication
 #include <QTime>
 #include <QWindow>
-#include <QFile>
 #include <cmath> // for ceil()
 
 #include <KWayland/Server/surface_interface.h>
@@ -247,54 +246,6 @@ void BlurEffect::initBlurStrengthValues()
     }
 }
 
-QStringList BlurEffect::readFile(QString strFilePath)
-{
-    QStringList strlistRes;
-    QFile file(strFilePath);
-
-    if(false == file.exists()) {
-        return QStringList();
-    }
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return QStringList();
-    }
-    QTextStream textStream(&file);
-    while(!textStream.atEnd()) {
-        QString line= textStream.readLine();
-        line.remove('\n');
-        strlistRes<<line;
-    }
-    file.close();
-    return strlistRes;
-}
-
-//从配置文件中.profile读取QT放大系数
-int BlurEffect::getScaleFactor()
-{
-    QString strFilePath = getenv("HOME");
-    strFilePath += "/.profile";
-    QString strScale;
-    QStringList strlistRes = readFile(strFilePath);
-    QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
-
-    for(int i = 0; i < strlistRes.length(); i++) {
-       QString str = strlistRes.at(i);
-       int nPos = 0;
-       while ((nPos = re.indexIn(str, nPos)) != -1) {
-           strScale = re.cap(2);
-           nPos += re.matchedLength();
-       }
-    }
-
-    if(strScale.toInt() > 0)
-    {
-        return strScale.toInt();
-    }
-
-    return 1;
-}
-
 void BlurEffect::reconfigure(ReconfigureFlags flags)
 {
     Q_UNUSED(flags)
@@ -307,8 +258,7 @@ void BlurEffect::reconfigure(ReconfigureFlags flags)
     m_expandSize = blurOffsets[m_downSampleIterations - 1].expandSize;
     m_noiseStrength = BlurConfig::noiseStrength();
 
-    //m_scalingFactor = qMax(1.0, QGuiApplication::primaryScreen()->logicalDotsPerInch() / 96.0);
-    m_scalingFactor = getScaleFactor();    //毛玻璃效果噪音尺寸系数也通过读取缩放系数后生效
+    m_scalingFactor = qMax(1.0, QGuiApplication::primaryScreen()->logicalDotsPerInch() / 96.0);
 
     updateTexture();
 

@@ -54,8 +54,7 @@ public:
     }
     QFont font() const override {
         return m_font;
-    }
-    QStringList readFile(QString filepath);
+    }    
 
 private:
     void readSettings();

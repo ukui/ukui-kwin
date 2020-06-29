@@ -86,54 +86,6 @@ ThemeConfig::ThemeConfig()
 {
 }
 
-QStringList ThemeConfig::readFile(QString strFilePath)
-{
-    QStringList strlistRes;
-    QFile file(strFilePath);
-
-    if(false == file.exists()) {
-        return QStringList();
-    }
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return QStringList();
-    }
-    QTextStream textStream(&file);
-    while(!textStream.atEnd()) {
-        QString line= textStream.readLine();
-        line.remove('\n');
-        strlistRes<<line;
-    }
-    file.close();
-    return strlistRes;
-}
-
-//从配置文件中.profile读取QT放大系数
-qreal ThemeConfig::getScaleFactor()
-{
-    QString strFilePath = getenv("HOME");
-    strFilePath += "/.profile";
-    QString strScale;
-    QStringList strlistRes = readFile(strFilePath);
-    QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
-
-    for(int i = 0; i < strlistRes.length(); i++) {
-       QString str = strlistRes.at(i);
-       int nPos = 0;
-       while ((nPos = re.indexIn(str, nPos)) != -1) {
-           strScale = re.cap(2);
-           nPos += re.matchedLength();
-       }
-    }
-
-    if(strScale.toDouble() > 0)
-    {
-        return strScale.toDouble();
-    }
-
-    return 1;
-}
-
 void ThemeConfig::load(const KConfig &conf)
 {
     KConfigGroup general(&conf, "General");
@@ -178,10 +130,8 @@ void ThemeConfig::load(const KConfig &conf)
     QScreen *primary = QGuiApplication::primaryScreen();
 
     if (primary) {
-        //const qreal dpi = primary->logicalDotsPerInchX();
-        //scaleFactor = dpi / 96.0f;
-        //通过读取环境变量获取放大系数
-        scaleFactor = getScaleFactor();
+        const qreal dpi = primary->logicalDotsPerInchX();
+        scaleFactor = dpi / 96.0f;
     }
 
     KConfigGroup border(&conf, QStringLiteral("Layout"));

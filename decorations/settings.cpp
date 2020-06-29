@@ -80,30 +80,6 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     }
 }
 
-QStringList SettingsImpl::readFile(QString strFilePath)
-{
-    QFile file(strFilePath);
-
-    //文件不存在，直接返回
-    if(false == file.exists()) {
-        return QStringList();
-    }
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return QStringList();
-    }
-
-    QStringList strlistRes;
-    QTextStream textStream(&file);
-    while(!textStream.atEnd()) {
-        QString line= textStream.readLine();
-        line.remove('\n');
-        strlistRes<<line;
-    }
-    file.close();
-    return strlistRes;
-}
-
 SettingsImpl::~SettingsImpl() = default;
 
 bool SettingsImpl::isAlphaChannelSupported() const
@@ -242,23 +218,10 @@ void SettingsImpl::readSettings()
     }
 
     m_nScaleFactor = 1;                         //放大系数
-    //从配置文件中.profile读取QT放大系数
-    QString strFilePath = getenv("HOME");
-    strFilePath += "/.profile";
-    QString strScale;
-    QStringList strlistRes = readFile(strFilePath);
-    QRegExp re("export( QT_SCALE_FACTOR)?=(.*)$");
-    for(int i = 0; i < strlistRes.length(); i++) {
-       QString str = strlistRes.at(i);
-       int nPos = 0;
-       while ((nPos = re.indexIn(str, nPos)) != -1) {
-           strScale = re.cap(2);
-           nPos += re.matchedLength();
-       }
-    }
-    if(strScale.toInt() > 0)
-    {
-        m_nScaleFactor = strScale.toInt();
+    QScreen *primary = QGuiApplication::primaryScreen();
+    if (primary) {
+        const qreal dpi = primary->logicalDotsPerInchX();
+        m_nScaleFactor = dpi / 96.0f;
     }
 
     QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
