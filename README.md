@@ -1,6 +1,6 @@
 # ukui-kwin
 
-![build](https://github.com/ukui/ukui-kwin/workflows/build/badge.svg?branch=master)
+![build](https://github.com/ukui/ukui-kwin/workflows/Check%20build/badge.svg?branch=master)
 
 The next window manager is name ukui-kwin for UKUI3.0
 
