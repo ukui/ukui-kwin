@@ -83,11 +83,12 @@ void Cursor::loadThemeFromKConfig()
 
 void Cursor::updateTheme(const QString &name, int size)
 {
-    if (m_themeName != name || m_themeSize != size) {
+    //如果下面的判断存在，则会出现无法进入该分支，因不能销毁已有鼠标而不能生效，注释后，每次只要一来信号，立马销毁已有鼠标而创建新的(通过settings-deamon或者systemsettings设置应用鼠标样式)生效
+    //if (m_themeName != name || m_themeSize != size) {
         m_themeName = name;
         m_themeSize = size;
         emit themeChanged();
-    }
+    //}
 }
 
 void Cursor::slotKGlobalSettingsNotifyChange(int type, int arg)
