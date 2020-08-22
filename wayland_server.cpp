@@ -515,15 +515,15 @@ void WaylandServer::initWorkspace()
 void WaylandServer::initScreenLocker()
 {
     ScreenLocker::KSldApp::self();
-    ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
+    //ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
     ScreenLocker::KSldApp::self()->setGreeterEnvironment(kwinApp()->processStartupEnvironment());
     ScreenLocker::KSldApp::self()->initialize();
-
-    connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged, this,
-        [this] () {
-            m_screenLockerClientConnection = ScreenLocker::KSldApp::self()->greeterClientConnection();
-        }
-    );
+    //由于在ubuntu2010中kscreenlocker-dev接口已改变,为兼容ubuntu2010的编译，故在此处注释本函数代码，因为wayland代码本身不被ukui使用，故直接弃用
+    //connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged, this,
+    //    [this] () {
+    //        m_screenLockerClientConnection = ScreenLocker::KSldApp::self()->greeterClientConnection();
+    //    }
+    //);
 
     connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::unlocked, this,
         [this] () {
