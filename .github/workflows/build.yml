@@ -1,0 +1,89 @@
+name: Check build
+
+on:
+  push:
+    branches:
+      - master
+    
+  pull_request:
+    branches:
+      - master
+
+  schedule:
+    - cron: '0 0 * * *'
+  
+jobs:
+  archlinux:
+    name: on Archlinux
+    runs-on: ubuntu-20.04
+    container: docker.io/library/archlinux:latest
+    steps:
+      - name: Checkout ukui-kwin source code
+        uses: actions/checkout@v2
+      - name: Refresh pacman repository
+        run: pacman -Sy
+      - name: Install build dependencies
+        run: pacman -S --noconfirm base-devel cmake qt5-base qt5-tools gsettings-qt glib2 appstream breeze kinit kidletime kio knewstuff knotifications kpackage plasma-framework kservice ktextwidgets kwayland kwidgetsaddons kwindowsystem kxmlgui kcmutils kscreenlocker qt5-sensors qt5-x11extras libsm systemd-libs wayland libxkbcommon-x11 libx11 libxcb xcb-util xcb-util-wm xcb-util-keysyms xcb-util-renderutil xcb-util-errors xcb-util-cursor xcb-proto xcb-imdkit  qt5-xcb-private-headers libxcursor libxi pkg-config qt5-script extra-cmake-modules
+      - name: CMake configure & Make
+        run: |
+          mkdir build;
+          cd build;
+          cmake ..;
+          make -j$(nproc);
+
+  debian:
+    name: on Debian Sid
+    runs-on: ubuntu-20.04
+    container: docker.io/library/debian:sid
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - name: Checkout ukui-kwin source code
+        uses: actions/checkout@v2
+      - name: Update apt repository
+        run: apt-get update -y
+      - name: Install build dependcies
+        run: apt-get install -y build-essential cmake qt5-default build-essential cmake qt5-default breeze-dev cmake debhelper extra-cmake-modules kinit-dev kscreenlocker-dev libcap-dev libdrm-dev libegl1-mesa-dev libepoxy-dev libfontconfig1-dev libfreetype6-dev libgbm-dev libice-dev libinput-dev libkdecorations2-dev libkf5activities-dev libkf5completion-dev libkf5config-dev libkf5configwidgets-dev libkf5coreaddons-dev libkf5crash-dev libkf5declarative-dev libkf5doctools-dev libkf5globalaccel-dev libkf5i18n-dev libkf5iconthemes-dev libkf5idletime-dev libkf5kcmutils-dev libkf5kio-dev libkf5newstuff-dev libkf5notifications-dev libkf5package-dev libkf5plasma-dev libkf5service-dev libkf5textwidgets-dev libkf5wayland-dev libkf5widgetsaddons-dev libkf5windowsystem-dev libkf5xmlgui-dev  libqt5sensors5-dev libqt5x11extras5-dev  libsm-dev libudev-dev libwayland-dev  libx11-xcb-dev libxcb-composite0-dev libxcb-cursor-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev libxcb-util0-dev libxcb-xfixes0-dev libxcb-xtest0-dev libxcb1-dev libxcursor-dev libxi-dev libxkbcommon-dev pkg-config pkg-kde-tools qtbase5-dev qtbase5-private-dev qtdeclarative5-dev qtscript5-dev qttools5-dev libgsettings-qt-dev
+      - name: CMake configure & Make
+        run: |
+          mkdir build;
+          cd build;
+          cmake ..;
+          make -j$(nproc);
+  
+  fedora:
+    name: on Fedora 32
+    runs-on: ubuntu-20.04
+    container: docker.io/library/fedora:32
+    steps:
+      - name: Checkout ukui-kwin source code
+        uses: actions/checkout@v2
+      - name: Install build dependencies
+        run: dnf install -y which gcc gcc-c++ make cmake cmake-rpm-macros autoconf automake intltool rpm-build qt5-rpm-macros  extra-cmake-modules glib2-devel qt5-qtsvg-devel qt5-qtx11extras-devel qt5-qtbase-devel qt5-qttools-devel qt5-qtmultimedia-devel qt5-qtdeclarative-devel qt5-qtscript-devel qt5-qtsensors-devel qt5-qttools-static gsettings-qt-devel poppler-qt5-devel qt5-qtbase-static qt5-qtbase-private-devel kf5-kconfigwidgets-devel kf5-kcrash-devel kf5-kglobalaccel-devel kf5-ki18n-devel kf5-kiconthemes-devel kf5-kidletime-devel kf5-kinit-devel kf5-knotifications-devel kf5-kpackage-devel kf5-plasma-devel kf5-kwayland-devel kf5-kwidgetsaddons-devel kf5-kcompletion-devel kf5-kdeclarative-devel kf5-kcmutils-devel kf5-kio-devel kf5-knewstuff-devel kf5-kservice-devel kf5-ktextwidgets-devel kf5-kxmlgui-devel kf5-kactivities-devel kf5-kdoctools-devel kf5-kirigami2-devel kf5-kconfig-devel kf5-kcoreaddons-devel kf5-kwindowsystem-devel libxcb-devel xcb-util-devel xcb-util-cursor-devel xcb-util-keysyms-devel xcb-util-image-devel xcb-util-wm-devel xcb-util-renderutil-devel libxkbcommon-devel libxkbcommon-x11-devel libinput-devel systemd-devel libdrm-devel mesa-libgbm-devel libepoxy-devel libICE-devel libSM-devel mesa-libEGL-devel wayland-devel libwayland-client-devel libwayland-server-devel libwayland-cursor-devel kdecoration-devel kscreenlocker-devel libcap-devel xorg-x11-server-Xwayland  qt5-qtvirtualkeyboard-devel  libXi-devel  qt5-qtquickcontrols plasma-breeze-devel
+      - name: CMake configure & Make
+        run: |
+          mkdir build;
+          cd build;
+          cmake ..;
+          make -j$(nproc);
+
+  ubuntu:
+    name: on Ubuntu 20.04
+    runs-on: ubuntu-20.04
+    container: docker.io/library/ubuntu:focal
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - name: Checkout ukui-kwin source code
+        uses: actions/checkout@v2
+      - name: Update apt repository
+        run: apt-get update -y
+      - name: Install build dependcies
+        run: apt-get install -y build-essential cmake qt5-default breeze-dev cmake debhelper extra-cmake-modules kinit-dev kscreenlocker-dev libcap-dev libdrm-dev libegl1-mesa-dev libepoxy-dev libfontconfig1-dev libfreetype6-dev libgbm-dev libice-dev libinput-dev libkdecorations2-dev libkf5activities-dev libkf5completion-dev libkf5config-dev libkf5configwidgets-dev libkf5coreaddons-dev libkf5crash-dev libkf5declarative-dev libkf5doctools-dev libkf5globalaccel-dev libkf5i18n-dev libkf5iconthemes-dev libkf5idletime-dev libkf5kcmutils-dev libkf5kio-dev libkf5newstuff-dev libkf5notifications-dev libkf5package-dev libkf5plasma-dev libkf5service-dev libkf5textwidgets-dev libkf5wayland-dev libkf5widgetsaddons-dev libkf5windowsystem-dev libkf5xmlgui-dev  libqt5sensors5-dev libqt5x11extras5-dev  libsm-dev libudev-dev libwayland-dev  libx11-xcb-dev libxcb-composite0-dev libxcb-cursor-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev libxcb-util-dev libxcb-xfixes0-dev libxcb-xtest0-dev libxcb1-dev libxcursor-dev libxi-dev libxkbcommon-dev pkg-config pkg-kde-tools qtbase5-dev qtbase5-private-dev qtdeclarative5-dev qtscript5-dev qttools5-dev libgsettings-qt-dev
+        
+      - name: CMake configure & Make
+        run: |
+          mkdir build;
+          cd build;
+          cmake ..;
+          make -j$(nproc);
