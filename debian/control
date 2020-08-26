@@ -2,11 +2,11 @@ Source: ukui-kwin
 Section: x11
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
-Uploaders: Maximiliano Curia <maxy@debian.org>
+XSBC-Original-Maintainer: Kylin Team <ukui@kylinos.cn>
+Uploaders: handsome_feng <jianfengli@ubuntukylin.com>
 Build-Depends: breeze-dev (>= 4:5.18.3~),
                cmake (>= 3.1~),
-               debhelper (>= 11~),
+               debhelper-compat (= 13),
                extra-cmake-modules (>= 5.66.0~),
                kinit-dev (>= 5.66.0~),
                kscreenlocker-dev (>= 5.18.3~),
@@ -76,16 +76,16 @@ Build-Depends: breeze-dev (>= 4:5.18.3~),
                qtdeclarative5-dev (>= 5.9.0~),
                qtscript5-dev (>= 5.9.0~),
                qttools5-dev (>= 5.9.0~),
-	       libgsettings-qt-dev,
-Standards-Version: 4.1.4
-Homepage: https://projects.kde.org/projects/kde/workspace/ukui-kwin
-Vcs-Browser: https://code.launchpad.net/~kubuntu-packagers/kubuntu-packaging/+git/ukui-kwin
-Vcs-Git: https://git.launchpad.net/~kubuntu-packagers/kubuntu-packaging/+git/ukui-kwin
+               libgsettings-qt-dev,
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: https://github.com/ukui/ukui-kwin
+Vcs-Browser: https://github.com/ukui/ukui-kwin
+Vcs-Git: https://github.com/ukui/ukui-kwin.git
 
 Package: ukui-window-manager
 Architecture: all
 Section: oldlibs
-Priority: optional
 Depends: ukui-kwin-x11 (>= 1.0.0), ${misc:Depends}
 Description: transitional package for ukui-kwin-x11
  This transitional package allows one to migrate to the packages providing
@@ -97,7 +97,6 @@ Package: ukui-kwin
 Architecture: all
 Multi-Arch: no
 Section: oldlibs
-Priority: optional
 Depends: ukui-kwin-x11, ${misc:Depends}
 Description: Transitional dummy for ukui-kwin-x11
  This package is a transitional dummy to depend on the renamed ukui-kwin-x11 and

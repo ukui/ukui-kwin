@@ -3,160 +3,587 @@ Upstream-Name: kwin
 Source: git://anongit.kde.org/kwin
 
 Files: *
-Copyright: 2010, Alexandre Pereira <pereira.alex@gmail.com>
-           2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
-           2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
-           2012, Casian Andrei <skeletk13@gmail.com>
-           2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
-           2008, Cédric Borgese <cedric.borgese@gmail.com>
-           2012, Filip Wieladek <wattos@gmail.com>
-           2009-2014, Fredrik Höglund <fredrik@kde.org>
-           1989-1991, Free Software Foundation, Inc
-           2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
-           2010, Jorge Mata <matamax123@gmail.com>
-           2013, Kai Uwe Broulik <kde@privat.broulik.de>
-           2003, Karol Szwed <kszwed@kde.org>
-           2001-2008, Lubos Lunak <l.lunak@kde.org>
-           2008, Lubos Lunak <l.lunak@suse.cz>
-           2008-2009, Lucas Murray <lmurray@undefinedfire.com>
-           2014-2016, Marco Martin <mart@kde.org>
-           2009, Marco Martin <notmart@gmail.com>
-           2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
-           2012, Martin Gräßlin <m.graesslin@kde.org>
-           2008-2016, Martin Gräßlin <mgraesslin@kde.org>
-           1998-2000, Matthias Ettrich <ettrich@kde.org>
-           2009, Michael Zanetti <michael_zanetti@gmx.net>
-           2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
-           2011, NVIDIA Corporation
-           2010, Nokia Corporation and/or its subsidiary(-ies)
-           1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
-           2007, Philip Falkner <philip.falkner@gmail.com>
-           2011-2012, Philipp Knechtges <philipp-dev@knechtges.com>
-           2001, Rik Hemsley (rikkus) <rik@kde.org>
-           2006-2007, Rivo Laks <rivolaks@hot.ee>
-           2010, Rohan Prabhu <rohan@rohanprabhu.com>
-           2016, Roman Gilg <subdiff@gmail.com>
-           2003-2005, Sandro Giessl <sandro@giessl.com>
-           2010, Sebastian Sauer <sebsauer@kdab.com>
-           2011, Tamas Krutki <ktamasw@gmail.com>
-           2011-2012, The KWin team <kwin@kde.org>
-           2014-2015, Thomas Lübking <thomas.luebking@gmail.com>
-           2010-2011, Thomas Lübking <thomas.luebking@web.de>
-           2001, Waldo Bastian <bastian@kde.org>
-           2007-2014, Free Software Foundation
-           1997-2014, Free Software Foundation, Inc
-           2000, Jesús Bravo Álvarez
-           2008-2009, K Desktop Environment
-           1998, KDE Russian translation Team
-           2000-2001, KDE Team
-           2000-2002, KDE e.v
-           2007, KDE i18n Project for Vietnamese
-           1999-2002, Meni Livne <livne@kde.org>
-           2009, Rosetta Contributors and Canonical Ltd 2009
-           2010, Rosetta Contributors and Canonical Ltd 2010
-           2012, Rosetta Contributors and Canonical Ltd 2012
-           2002-2016, This_file_is_part_of_KDE
-           2001, translate.org.za
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
 License: GPL-2+
 
-Files: po/ca/*
-       po/ca@valencia/*
-       po/uk/*
-Copyright: 1998-2016, This_file_is_part_of_KDE
-License: LGPL-2.1+3+KDEeV
+Files: abstract_client.cpp
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2013, 2015, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
 
-License: LGPL-2.1+3+KDEeV
- This file is distributed under the license LGPL version 2.1 or
- version 3 or later versions approved by the membership of KDE e.V.
- --
- On Debian systems, the complete text of the GNU Lesser General Public License
- version 2.1 can be found in `/usr/share/common-licenses/LGPL-2.1', likewise,
- the complete text of the GNU Lesser General Public License version 3 can be
- found in `/usr/share/common-licenses/LGPL-3'.
+Files: abstract_client.h
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2015, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: abstract_opengl_context_attribute_builder.cpp
+  egl_context_attribute_builder.cpp
+  moving_client_x11_filter.cpp
+  moving_client_x11_filter.h
+  orientation_sensor.cpp
+  rootinfo_filter.cpp
+  rootinfo_filter.h
+  touch_hide_cursor_spy.cpp
+  touch_hide_cursor_spy.h
+  virtualkeyboard_dbus.cpp
+  was_user_interaction_x11_filter.cpp
+  was_user_interaction_x11_filter.h
+  window_property_notify_x11_filter.cpp
+  window_property_notify_x11_filter.h
+  xkb_qt_mapping.h
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: abstract_opengl_context_attribute_builder.h
+  egl_context_attribute_builder.h
+  orientation_sensor.h
+  virtualkeyboard_dbus.h
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: abstract_output.cpp
+  abstract_wayland_output.cpp
+  linux_dmabuf.cpp
+  outputscreens.cpp
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: abstract_output.h
+  abstract_wayland_output.h
+  linux_dmabuf.h
+  outputscreens.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: activation.cpp
+  events.cpp
+  group.cpp
+  group.h
+  kwinbindings.cpp
+  layers.cpp
+  sm.cpp
+  sm.h
+  utils.cpp
+Copyright: 2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: activities.cpp
+  client_machine.cpp
+  client_machine.h
+  cursor.cpp
+  debug_console.cpp
+  focuschain.cpp
+  focuschain.h
+  gestures.cpp
+  globalshortcuts.h
+  input_event.cpp
+  input_event.h
+  input_event_spy.cpp
+  keyboard_input.cpp
+  keyboard_layout.cpp
+  keyboard_layout.h
+  keyboard_layout_switching.cpp
+  keyboard_layout_switching.h
+  keyboard_repeat.cpp
+  keyboard_repeat.h
+  main_wayland.h
+  main_x11.h
+  modifier_only_shortcuts.cpp
+  screenlockerwatcher.cpp
+  shadow.cpp
+  thumbnailitem.cpp
+  thumbnailitem.h
+  udev.cpp
+  virtual_terminal.cpp
+  wayland_cursor_theme.cpp
+  xkb.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: activities.h
+  cursor.h
+  dbusinterface.cpp
+  dbusinterface.h
+  effectloader.cpp
+  effectloader.h
+  globalshortcuts.cpp
+  keyboard_input.h
+  logind.cpp
+  logind.h
+  main_wayland.cpp
+  screenlockerwatcher.h
+  screens.cpp
+  screens.h
+  udev.h
+  useractions.h
+  virtualdesktops.h
+  xcbutils.h
+  xkb.h
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: appmenu.cpp
+  appmenu.h
+Copyright: 2014-2020, kylinos.cn
+  2013, Martin Gräßlin <mgraesslin@kde.org>
+  2011, Lionel Chauvin <megabigbug@yahoo.fr>
+  2011, 2012, Cédric Bellegarde <gnumdk@gmail.com>
+License: GPL-2+
+
+Files: atoms.cpp
+  killwindow.cpp
+  killwindow.h
+  netinfo.cpp
+Copyright: 2012, 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: atoms.h
+  main_x11.cpp
+Copyright: 2014-2020, kylinos.cn
+  2009, 2013, 2014, Martin Gräßlin <mgraesslin@kde.org>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: autotests/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/abstract_client.h
+  autotests/workspace.h
+  autotests/x11client.h
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: autotests/drm/*
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/activation_test.cpp
+  autotests/integration/dont_crash_reinitialize_compositor.cpp
+  autotests/integration/scene_opengl_shadow_test.cpp
+  autotests/integration/scene_qpainter_shadow_test.cpp
+  autotests/integration/stacking_order_test.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/buffer_size_change_test.cpp
+  autotests/integration/colorcorrect_nightcolor_test.cpp
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: autotests/integration/dbus_interface_test.cpp
+Copyright: 2018, 2019, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2
+
+Files: autotests/integration/dont_crash_aurorae_destroy_deco.cpp
+  autotests/integration/globalshortcuts_test.cpp
+  autotests/integration/kwin_wayland_test.cpp
+  autotests/integration/kwin_wayland_test.h
+  autotests/integration/lockscreen.cpp
+  autotests/integration/modifier_only_shortcut_test.cpp
+  autotests/integration/window_rules_test.cpp
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/integration/dont_crash_cursor_physical_size_empty.cpp
+  autotests/integration/dont_crash_useractions_menu.cpp
+  autotests/integration/generic_scene_opengl_test.h
+  autotests/integration/idle_inhibition_test.cpp
+  autotests/integration/keymap_creation_failure_test.cpp
+  autotests/integration/kwinbindings_test.cpp
+  autotests/integration/scene_opengl_es_test.cpp
+  autotests/integration/showing_desktop_test.cpp
+  autotests/integration/virtual_desktop_test.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/effects/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/effects/fade_test.cpp
+  autotests/integration/effects/slidingpopups_test.cpp
+  autotests/integration/effects/translucency_test.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/effects/scripted_effects_test.cpp
+Copyright: 2018, 2019, David Edmundson <davidedmundson@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/effects/scripts/*
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: autotests/integration/effects/windowgeometry_test.cpp
+  autotests/integration/effects/wobbly_shade_test.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/fakes/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/helper/kill.cpp
+Copyright: 2019, David Edmundson <davidedmundson@kde.org>
+  2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/no_global_shortcuts_test.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/integration/placement_test.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2019, David Edmundson <davidedmundson@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/scripting/*
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: autotests/integration/scripting/minimizeall_test.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/scripting/screenedge_test.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/integration/xdgshellclient_rules_test.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2017, 2019, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/integration/xdgshellclient_test.cpp
+Copyright: 2019, David Edmundson <davidedmundson@kde.org>
+  2016, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/integration/xwayland_selections_test.cpp
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2013-2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/libinput/device_test.cpp
+  autotests/libinput/mock_libinput.cpp
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/libinput/switch_event_test.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: autotests/libkwineffects/data/*
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: autotests/libkwineffects/timelinetest.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
 
 Files: autotests/onscreennotificationtest.cpp
-       autotests/onscreennotificationtest.h
-       kcmkwin/kwindecoration/declarative-plugin/buttonsmodel.cpp
-       kcmkwin/kwindecoration/declarative-plugin/buttonsmodel.h
-       kcmkwin/kwindecoration/declarative-plugin/plugin.cpp
-       kcmkwin/kwindecoration/declarative-plugin/plugin.h
-       kcmkwin/kwindecoration/declarative-plugin/previewbridge.cpp
-       kcmkwin/kwindecoration/declarative-plugin/previewbridge.h
-       kcmkwin/kwindecoration/declarative-plugin/previewbutton.cpp
-       kcmkwin/kwindecoration/declarative-plugin/previewbutton.h
-       kcmkwin/kwindecoration/declarative-plugin/previewclient.cpp
-       kcmkwin/kwindecoration/declarative-plugin/previewclient.h
-       kcmkwin/kwindecoration/declarative-plugin/previewitem.cpp
-       kcmkwin/kwindecoration/declarative-plugin/previewitem.h
-       kcmkwin/kwindecoration/declarative-plugin/previewsettings.cpp
-       kcmkwin/kwindecoration/declarative-plugin/previewsettings.h
-       kcmkwin/kwindecoration/decorationmodel.cpp
-       kcmkwin/kwindecoration/decorationmodel.h
-       kcmkwin/kwindecoration/kcm.cpp
-       kcmkwin/kwindecoration/kcm.h
-       kcmkwin/kwindecoration/qml/*
-       onscreennotification.cpp
-       onscreennotification.h
-       osd.cpp
-       osd.h
-       popup_input_filter.cpp
-       popup_input_filter.h
-       qml/onscreennotification/plasma/main.qml
-       qml/outline/*
-       scripts/enforcedeco/*
-       tests/libinputtest.cpp
-       tests/normalhintsbasesizetest.cpp
-       tests/pointergesturestest.cpp
-       tests/pointergesturestest.qml
-       tests/screenedgeshowtest.cpp
-       tests/unmapdestroytest.qml
-       tests/waylandclienttest.cpp
-       tests/waylandclienttest.h
-       tests/x11shadowreader.cpp
-Copyright: 2014-2017, Martin Graesslin <mgraesslin@kde.org>
-License: GPL-2+3+KDEeV
+  autotests/onscreennotificationtest.h
+Copyright: 2016, 2017, Martin Graesslin <mgraesslin@kde.org>
+License: GPL-2
 
-Files: effects/dialogparent/package/metadata.desktop
-       effects/eyeonscreen/package/metadata.desktop
-       effects/fade/package/metadata.desktop
-       effects/fadedesktop/package/metadata.desktop
-       effects/frozenapp/package/metadata.desktop
-       effects/login/package/metadata.desktop
-       effects/logout/package/metadata.desktop
-       effects/maximize/package/metadata.desktop
-       effects/morphingpopups/package/metadata.desktop
-       effects/scalein/package/metadata.desktop
-       effects/translucency/package/metadata.desktop
-       effects/windowaperture/package/metadata.desktop
-       effects/wobblywindows/wobblywindows.cpp
-       effects/wobblywindows/wobblywindows.h
-       plugins/kdecorations/aurorae/themes/plastik/package/metadata.desktop
-       po/bg/kcmkwindecoration.po
-       po/bg/kcmkwinrules.po
-       po/bg/kcmkwm.po
-       po/bg/kwin.po
-       po/bg/kwin_clients.po
-       scripts/desktopchangeosd/metadata.desktop
-       scripts/enforcedeco/metadata.desktop
-       scripts/minimizeall/metadata.desktop
-       scripts/synchronizeskipswitcher/metadata.desktop
-       scripts/videowall/metadata.desktop
-Copyright: 2008, Cédric Borgese <cedric.borgese@gmail.com>
-License: GPL
+Files: autotests/opengl_context_attribute_builder_test.cpp
+  autotests/test_gbm_surface.cpp
+  autotests/test_xkb.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
 
-License: GPL
- This file is licensed under the GPL.
- --
- On Debian systems, the complete text of the GNU General Public License
- can be found in `/usr/share/common-licenses/GPL'.
+Files: autotests/test_virtualkeyboard_dbus.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: autotests/test_x11_timestamp_update.cpp
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
 
 Files: cmake/*
-Copyright: 2014, Alex Merry <alex.merry@kde.org>
-           2014, Fredrik Höglund <fredrik@kde.org>
-           2006-2007, Laurent Montel <montel@kde.org>
-           2014-2016, Martin Gräßlin <mgraesslin@kde.org>
-           2010, Rafael Fernández López <ereslibre@kde.org>
-           2016, Takahiro Hashimoto <kenya888@gmail.com>
+Copyright: 2016, Takahiro Hashimoto <kenya888@gmail.com>
+  2014-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2014, Fredrik Höglund <fredrik@kde.org>
+  2014, Alex Merry <alex.merry@kde.org>
+  2010, Rafael Fernández López <ereslibre@kde.org>
+  2006, 2007, Laurent Montel <montel@kde.org>
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -181,99 +608,2325 @@ License: BSD-3-clause
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+Files: colorcorrection/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: colorcorrection/colorcorrectdbusinterface.cpp
+  colorcorrection/colorcorrectdbusinterface.h
+  colorcorrection/manager.cpp
+  colorcorrection/manager.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: colorcorrection/constants.h
+  colorcorrection/suncalc.cpp
+  colorcorrection/suncalc.h
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: composite.cpp
+  deleted.h
+  rules.cpp
+  rules.h
+  scene.h
+  toplevel.h
+Copyright: 2014-2020, kylinos.cn
+  2004-2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: composite.h
+  screenedge.cpp
+Copyright: 2012, 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: data/*
+Copyright: 2014-2020, kylinos.cn
+  2004-2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2014, Scarlett Clark <scarlett@scarlettgatelyclark.com>
+License: GPL-2+
+
+Files: debug_console.h
+  gestures.h
+  input_event_spy.h
+  modifier_only_shortcuts.h
+  platform.cpp
+  platform.h
+  virtual_terminal.h
+  virtualkeyboard.cpp
+  virtualkeyboard.h
+  wayland_cursor_theme.h
+  wayland_server.cpp
+  wayland_server.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: decorations/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: decorations/decorationbridge.cpp
+  decorations/decorationbridge.h
+  decorations/decorationrenderer.h
+  decorations/settings.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: decorations/decorationpalette.cpp
+  decorations/decorationpalette.h
+Copyright: 2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014, Martin Gräßlin <mgraesslin@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+License: GPL-2+
+
+Files: decorations/gsettingfont.cpp
+  decorations/gsettingfont.h
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: deleted.cpp
+  scene.cpp
+  toplevel.cpp
+  unmanaged.cpp
+  unmanaged.h
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects.cpp
+  xcbutils.cpp
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects.h
+Copyright: 2014-2020, kylinos.cn
+  2009-2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: effects/backgroundcontrast/*
+Copyright: 2014, Marco Martin <mart@kde.org>
+  2010, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/backgroundcontrast/contrast.cpp
+Copyright: 2014, Marco Martin <mart@kde.org>
+  2011, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/blur/*
+Copyright: 2018, Alex Nemeth <alex.nemeth329@gmail.com>
+  2010, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/blur/blur.cpp
+Copyright: 2018, Alex Nemeth <alex.nemeth329@gmail.com>
+  2011, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/blur/blur_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, 2014, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/blur/blur_config.h
+Copyright: 2010, 2014, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: effects/colorpicker/*
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: effects/coverswitch/coverswitch_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/cube/cube_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/cubeslide/cubeslide_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/desktopgrid/*
+Copyright: 2014-2020, kylinos.cn
+  2009, Martin Gräßlin <mgraesslin@kde.org>
+  2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/desktopgrid/desktopgrid.h
+Copyright: 2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/desktopgrid/desktopgrid_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/desktopgrid/desktopgrid_config.h
+Copyright: 2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/dialogparent/*
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2013, 2015, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/diminactive/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2007, Lubos Lunak <l.lunak@kde.org>
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/diminactive/diminactive_config.cpp
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/diminactive/diminactive_config.h
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/dimscreen/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/eyeonscreen/*
+Copyright: 2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+License: GPL-2+
+
+Files: effects/fade/*
+Copyright: 2012, Martin Gräßlin <mgraesslin@kde.org>
+  2007, Philip Falkner <philip.falkner@gmail.com>
+License: GPL-2+
+
+Files: effects/fadedesktop/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2012, Martin Gräßlin <mgraesslin@kde.org>
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
+Files: effects/fadingpopups/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/fallapart/*
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/flipswitch/flipswitch_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/frozenapp/*
+Copyright: 2017, Kai Uwe Broulik <kde@privat.broulik.de>
+License: GPL-2+
+
+Files: effects/glide/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2009, Martin Gräßlin <mgraesslin@kde.org>
+  2007, Philip Falkner <philip.falkner@gmail.com>
+License: GPL-2+
+
+Files: effects/glide/glide_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, Fredrik Höglund <fredrik@kde.org>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+License: GPL-2+
+
+Files: effects/glide/glide_config.h
+Copyright: 2010, Fredrik Höglund <fredrik@kde.org>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+License: GPL-2+
+
+Files: effects/highlightwindow/*
+Copyright: 2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
+Files: effects/invert/*
+Copyright: 2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/invert/invert_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/invert/invert_config.h
+Copyright: 2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/login/*
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/logout/*
+Copyright: 2017, Marco Martin <mart@kde.org>
+  2013, Martin Gräßlin <mgraesslin@kde.org>
+  2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/lookingglass/*
+Copyright: 2007, Rivo Laks <rivolaks@hot.ee>
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/lookingglass/lookingglass_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/lookingglass/lookingglass_config.h
+Copyright: 2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/magiclamp/magiclamp_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/magnifier/*
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/magnifier/magnifier.cpp
+Copyright: 2011, Martin Gräßlin <mgraesslin@kde.org>
+  2007, Lubos Lunak <l.lunak@kde.org>
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/magnifier/magnifier_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/magnifier/magnifier_config.h
+Copyright: 2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/morphingpopups/*
+Copyright: 2016, Marco Martin <mart@kde.org>
+  2012, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/mouseclick/*
+Copyright: 2012, Filip Wieladek <wattos@gmail.com>
+License: GPL-2+
+
+Files: effects/mouseclick/mouseclick_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2012, Filip Wieladek <wattos@gmail.com>
+License: GPL-2+
+
+Files: effects/mousemark/*
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/mousemark/mousemark.cpp
+Copyright: 2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/mousemark/mousemark_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/mousemark/mousemark_config.h
+Copyright: 2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/presentwindows/*
+Copyright: 2014-2020, kylinos.cn
+  2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/presentwindows/presentwindows.h
+  effects/presentwindows/presentwindows_config.h
+Copyright: 2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/presentwindows/presentwindows_proxy.cpp
+  effects/presentwindows/presentwindows_proxy.h
+Copyright: 2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
+Files: effects/resize/resize_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/scale/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/screenshot/*
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/screenshot/screenshot.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: effects/sessionquit/*
+Copyright: 2018, 2019, David Edmundson <davidedmundson@kde.org>
+License: GPL-2+
+
+Files: effects/sheet/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2009, Martin Gräßlin <mgraesslin@kde.org>
+  2007, Philip Falkner <philip.falkner@gmail.com>
+License: GPL-2+
+
+Files: effects/showfps/*
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/showfps/showfps_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/showfps/showfps_config.h
+Copyright: 2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/showpaint/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/showpaint/showpaint.cpp
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/showpaint/showpaint.h
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/slide/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2008, Lucas Murray <lmurray@undefinedfire.com>
+  2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/slide/slide_config.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: effects/slide/slide_config.h
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/slideback/*
+Copyright: 2009, Michael Zanetti <michael_zanetti@gmx.net>
+License: GPL-2+
+
+Files: effects/slidingpopups/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2009, Marco Martin notmart@gmail.com
+License: GPL-2+
+
+Files: effects/snaphelper/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
+Files: effects/squash/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: effects/thumbnailaside/*
+Copyright: 2007, Lubos Lunak <l.lunak@kde.org>
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/thumbnailaside/thumbnailaside_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/thumbnailaside/thumbnailaside_config.h
+Copyright: 2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+License: GPL-2+
+
+Files: effects/touchpoints/*
+Copyright: 2016, Martin Gräßlin <mgraesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+License: GPL-2+
+
+Files: effects/trackmouse/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2010, Jorge Mata <matamax123@gmail.com>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/trackmouse/trackmouse_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, Jorge Mata <matamax123@gmail.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/trackmouse/trackmouse_config.h
+Copyright: 2010, Jorge Mata <matamax123@gmail.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/windowaperture/*
+Copyright: 2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+License: GPL-2+
+
+Files: effects/windowgeometry/*
+Copyright: 2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+License: GPL-2+
+
+Files: effects/windowgeometry/windowgeometry_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, Thomas Lübking <thomas.luebking@web.de>
+License: GPL-2+
+
+Files: effects/wobblywindows/*
+Copyright: 2008, Cédric Borgese <cedric.borgese@gmail.com>
+License: GPL
+
+Files: effects/wobblywindows/wobblywindows_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008, Lucas Murray <lmurray@undefinedfire.com>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+License: GPL-2+
+
+Files: effects/wobblywindows/wobblywindows_config.h
+Copyright: 2008, Lucas Murray <lmurray@undefinedfire.com>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+License: GPL-2+
+
+Files: effects/zoom/*
+Copyright: 2010, Sebastian Sauer <sebsauer@kdab.com>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: effects/zoom/zoom_config.cpp
+Copyright: 2014-2020, kylinos.cn
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: effects/zoom/zoom_config.h
+Copyright: 2010, Sebastian Sauer <sebsauer@kdab.com>
+  2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: fixqopengl.h
+Copyright: 2018, Bhushan Shah <bshah@kde.org>
+License: GPL-2+
+
+Files: geometrytip.cpp
+  geometrytip.h
+Copyright: 2003, Karol Szwed <kszwed@kde.org>
+License: GPL-2+
+
+Files: helpers/*
+Copyright: 2014-2020, kylinos.cn
+  2003, Lubos Lunak <l.lunak@kde.org>
+License: Expat
+
+Files: idle_inhibition.cpp
+  idle_inhibition.h
+  internal_client.cpp
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2015, 2017, 2019, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: input.cpp
+  pointer_input.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, Roman Gilg <subdiff@gmail.com>
+  2013, 2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: input.h
+  pointer_input.h
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+  2013, 2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: internal_client.h
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2017, 2019, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: kcmkwin/common/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/common/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwincompositing/compositing.cpp
+Copyright: 2014-2020, kylinos.cn
+  2013, Martin Gräßlin <mgraesslin@kde.org>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwincompositing/compositing.h
+Copyright: 2014-2020, kylinos.cn
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwincompositing/main.cpp
+Copyright: 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwindecoration/*
+Copyright: 2014, 2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2
+
+Files: kcmkwin/kwindecoration/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwindecoration/declarative-plugin/plugin.cpp
+  kcmkwin/kwindecoration/declarative-plugin/previewbridge.cpp
+Copyright: 2014-2020, kylinos.cn
+  2014, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2
+
+Files: kcmkwin/kwindecoration/declarative-plugin/qmldir
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwindecoration/kcm.cpp
+Copyright: 2019, Valerio Pilo <vpilo@coldshock.net>
+  2019, Cyril Rossi <cyril.rossi@enioka.com>
+  2014-2020, kylinos.cn
+License: LGPL-2
+
+Files: kcmkwin/kwindecoration/kcm.h
+Copyright: 2019, Valerio Pilo <vpilo@coldshock.net>
+  2019, Cyril Rossi <cyril.rossi@enioka.com>
+License: LGPL-2
+
+Files: kcmkwin/kwindecoration/utils.cpp
+  kcmkwin/kwindecoration/utils.h
+Copyright: 2019, Valerio Pilo <vpilo@coldshock.net>
+License: LGPL-2
+
+Files: kcmkwin/kwindesktop/animationsmodel.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: kcmkwin/kwindesktop/animationsmodel.h
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwindesktop/desktopsmodel.cpp
+Copyright: 2018, Marco Martin <mart@kde.org>
+  2018, Eike Hein <hein@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: kcmkwin/kwindesktop/desktopsmodel.h
+Copyright: 2018, Marco Martin <mart@kde.org>
+  2018, Eike Hein <hein@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwindesktop/virtualdesktops.cpp
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, Eike Hein <hein@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: kcmkwin/kwindesktop/virtualdesktops.h
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, Eike Hein <hein@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwineffects/*
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwineffects/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwineffects/kcm.cpp
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/main.cpp
+Copyright: 2014-2020, kylinos.cn
+  2001, Waldo Bastian <bastian@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/main.h
+Copyright: 2001, Waldo Bastian <bastian@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/mouse.cpp
+Copyright: 2014-2020, kylinos.cn
+  1998, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/mouse.h
+Copyright: 1998, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/windows.cpp
+Copyright: 2014-2020, kylinos.cn
+  2001, Waldo Bastian bastian@kde.org
+  1997, Patrick Dowler dowler@morgul.fsh.uvic.ca
+License: GPL-2+
+
+Files: kcmkwin/kwinoptions/windows.h
+Copyright: 2001, Waldo Bastian bastian@kde.org
+  1997, Patrick Dowler dowler@morgul.fsh.uvic.ca
+License: GPL-2+
+
+Files: kcmkwin/kwinrules/*
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinrules/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwinrules/detectwidget.cpp
+  kcmkwin/kwinrules/main.cpp
+  kcmkwin/kwinrules/ruleslist.cpp
+  kcmkwin/kwinrules/ruleswidget.h
+Copyright: 2014-2020, kylinos.cn
+  2004-2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinrules/yesnobox.h
+Copyright: 2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+License: GPL-2+
+
+Files: kcmkwin/kwinscreenedges/*
+Copyright: 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+License: GPL-2+
+
+Files: kcmkwin/kwinscreenedges/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwinscreenedges/main.cpp
+Copyright: 2014-2020, kylinos.cn
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwinscreenedges/main.h
+  kcmkwin/kwinscreenedges/touch.h
+Copyright: 2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
 Files: kcmkwin/kwinscreenedges/screenpreviewwidget.cpp
-       kcmkwin/kwinscreenedges/screenpreviewwidget.h
-       packageplugins/aurorae/aurorae.cpp
-       packageplugins/aurorae/aurorae.h
-       packageplugins/decoration/decoration.cpp
-       packageplugins/decoration/decoration.h
-       packageplugins/scripts/scripts.cpp
-       packageplugins/scripts/scripts.h
-       packageplugins/windowswitcher/windowswitcher.cpp
-       packageplugins/windowswitcher/windowswitcher.h
-Copyright: 2017, Demitrius Belai <demitriusbelai@gmail.com>
-           2017, Marco Martin <mart@kde.org>
-           2009, Marco Martin <notmart@gmail.com>
+  kcmkwin/kwinscreenedges/screenpreviewwidget.h
+Copyright: 2009, Marco Martin <notmart@gmail.com>
 License: LGPL-2+
 
-Files: kcmkwin/kwincompositing/test/modeltest.cpp
-       kcmkwin/kwincompositing/test/modeltest.h
-Copyright: 2013, Digia Plc and/or its subsidiary(-ies)
-License: GPL-3_or_LGPL-2.1-QTexception-1.1
- * $QT_BEGIN_LICENSE:LGPL$
- * Commercial License Usage
- * Licensees holding valid commercial Qt licenses may use this file in
- * accordance with the commercial license agreement provided with the
- * Software or, alternatively, in accordance with the terms contained in
- * a written agreement between you and Digia.  For licensing terms and
- * conditions see http://qt.digia.com/licensing.  For further information
- * use the contact form at http://qt.digia.com/contact-us.
- *
- * GNU Lesser General Public License Usage
- * Alternatively, this file may be used under the terms of the GNU Lesser
- * General Public License version 2.1 as published by the Free Software
- * Foundation and appearing in the file LICENSE.LGPL included in the
- * packaging of this file.  Please review the following information to
- * ensure the GNU Lesser General Public License version 2.1 requirements
- * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
- *
- * In addition, as a special exception, Digia gives you certain additional
- * rights.  These rights are described in the Digia Qt LGPL Exception
- * version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
- *
- * GNU General Public License Usage
- * Alternatively, this file may be used under the terms of the GNU
- * General Public License version 3.0 as published by the Free Software
- * Foundation and appearing in the file LICENSE.GPL included in the
- * packaging of this file.  Please review the following information to
- * ensure the GNU General Public License version 3.0 requirements will be
- * met: http://www.gnu.org/copyleft/gpl.html.
- *
- *
- * $QT_END_LICENSE$
- --
- On Debian systems, the complete text of the GNU General Public License
- version 3 can be found in `/usr/share/common-licenses/GPL-3', likewise, the
- complete text of the GNU Lesser General Public License version 2.1 can be
- found in `/usr/share/common-licenses/LGPL-2.1'.
+Files: kcmkwin/kwinscreenedges/touch.cpp
+Copyright: 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
 
-Files: plugins/platforms/hwcomposer/egl_hwcomposer_backend.cpp
-       plugins/platforms/hwcomposer/egl_hwcomposer_backend.h
-       plugins/platforms/hwcomposer/hwcomposer_backend.cpp
-       plugins/platforms/hwcomposer/hwcomposer_backend.h
-       plugins/platforms/hwcomposer/logging.cpp
-       plugins/platforms/hwcomposer/logging.h
-       plugins/platforms/hwcomposer/screens_hwcomposer.cpp
-       plugins/platforms/hwcomposer/screens_hwcomposer.h
+Files: kcmkwin/kwinscripts/main.cpp
+Copyright: 2014-2020, kylinos.cn
+  2011, Tamas Krutki <ktamasw@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwinscripts/module.cpp
+Copyright: 2014-2020, kylinos.cn
+  2012, Martin Gräßlin <mgraesslin@kde.org>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwinscripts/module.h
+Copyright: 2011, Tamas Krutki <ktamasw@gmail.com>
+License: GPL-2+
+
+Files: kcmkwin/kwintabbox/*
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: kcmkwin/kwintabbox/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: kcmkwin/kwintabbox/layoutpreview.h
+  kcmkwin/kwintabbox/main.h
+  kcmkwin/kwintabbox/thumbnailitem.h
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: libinput/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: libinput/connection.cpp
+  libinput/connection.h
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: libinput/device.cpp
+  libinput/device.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: libkwineffects/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2011, Thomas Lübking <thomas.luebking@web.de>
+License: GPL-2+
+
+Files: libkwineffects/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: libkwineffects/kwineffectquickview.cpp
+  libkwineffects/kwineffectquickview.h
+Copyright: 2018, 2019, David Edmundson <davidedmundson@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/kwineffects.cpp
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/kwineffects.h
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2010, 2011, Martin Gräßlin <mgraesslin@kde.org>
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/kwinglobals.h
+Copyright: 2014-2020, kylinos.cn
+  2004-2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/kwinglplatform.cpp
+  libkwineffects/kwinglplatform.h
+Copyright: 2010, 2014, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/kwingltexture.cpp
+  libkwineffects/kwingltexture_p.h
+Copyright: 2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, 2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: libkwineffects/kwingltexture.h
+  libkwineffects/kwinglutils.cpp
+  libkwineffects/kwinglutils.h
+Copyright: 2010, 2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: libkwineffects/kwinglutils_funcs.cpp
+  libkwineffects/kwinglutils_funcs.h
+Copyright: 2007, Rivo Laks <rivolaks@hot.ee>
+License: GPL-2+
+
+Files: libkwineffects/kwinxrenderutils.cpp
+  libkwineffects/kwinxrenderutils.h
+Copyright: 2004, 2006-2008, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: libkwineffects/logging.cpp
+  libkwineffects/logging_p.h
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: main.cpp
+  main.h
+  useractions.cpp
+  utils.h
+  x11client.cpp
+  x11client.h
+Copyright: 2014-2020, kylinos.cn
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: netinfo.h
+Copyright: 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: onscreennotification.cpp
+Copyright: 2016, Martin Graesslin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2
+
+Files: onscreennotification.h
+  osd.cpp
+  osd.h
+  popup_input_filter.cpp
+  popup_input_filter.h
+Copyright: 2016, 2017, Martin Graesslin <mgraesslin@kde.org>
+License: GPL-2
+
+Files: options.cpp
+  options.h
+Copyright: 2014-2020, kylinos.cn
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: outline.cpp
+  screenedge.h
+Copyright: 2014-2020, kylinos.cn
+  2013, Martin Gräßlin <mgraesslin@kde.org>
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: outline.h
+  overlaywindow.h
+Copyright: 2014-2020, kylinos.cn
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: overlaywindow.cpp
+Copyright: 2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: placement.cpp
+  placement.h
+Copyright: 2014-2020, kylinos.cn
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+  1997, to 2002, Cristian Tibirna <tibirna@kde.org>
+License: GPL-2+
+
+Files: platformsupport/*
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: platformsupport/scenes/opengl/abstract_egl_backend.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: platformsupport/scenes/opengl/abstract_egl_backend.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: platformsupport/scenes/opengl/backend.h
+  platformsupport/scenes/opengl/swap_profiler.h
+Copyright: 2014-2020, kylinos.cn
+  2009-2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: platformsupport/scenes/opengl/drm_fourcc.h
+Copyright: 2011, Intel Corporation
+License: GPL-2+
+
+Files: platformsupport/scenes/opengl/egl_dmabuf.cpp
+  platformsupport/scenes/opengl/egl_dmabuf.h
+Copyright: 2019, Roman Gilg <subdiff@gmail.com>
+  2018, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: platformsupport/scenes/qpainter/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/*
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/idletime/poller.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/*
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/src/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/src/aurorae.cpp
+  plugins/kdecorations/aurorae/src/decorationplugin.cpp
+  plugins/kdecorations/aurorae/src/decorationplugin.h
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/src/qml/*
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/themes/*
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/themes/plastik/code/plastikbutton.cpp
+Copyright: 2012, Martin Gräßlin <mgraesslin@kde.org>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/themes/plastik/code/plastikbutton.h
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kdecorations/aurorae/themes/plastik/code/qmldir
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: plugins/kglobalaccel/kglobalaccel_plugin.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/kpackage/*
+Copyright: 2017, Demitrius Belai <demitriusbelai@gmail.com>
+  2014-2020, kylinos.cn
+License: LGPL-2+
+
+Files: plugins/kpackage/aurorae/aurorae.h
+Copyright: 2017, Demitrius Belai <demitriusbelai@gmail.com>
+License: LGPL-2+
+
+Files: plugins/kpackage/decoration/decoration.h
+Copyright: 2017, Demitrius Belai <demitriusbelai@gmail.com>
+License: LGPL-2+
+
+Files: plugins/kpackage/effect/*
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+License: LGPL-2+
+
+Files: plugins/kpackage/effect/effect.h
+Copyright: 2018, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: LGPL-2+
+
+Files: plugins/kpackage/scripts/*
+Copyright: 2017, Marco Martin <mart@kde.org>
+  2014-2020, kylinos.cn
+License: LGPL-2+
+
+Files: plugins/kpackage/scripts/scripts.h
+Copyright: 2017, Marco Martin <mart@kde.org>
+License: LGPL-2+
+
+Files: plugins/kpackage/windowswitcher/*
+Copyright: 2017, Marco Martin <mart@kde.org>
+  2014-2020, kylinos.cn
+License: LGPL-2+
+
+Files: plugins/kpackage/windowswitcher/windowswitcher.h
+Copyright: 2017, Marco Martin <mart@kde.org>
+License: LGPL-2+
+
+Files: plugins/platforms/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/drm_backend.h
+  plugins/platforms/drm/drm_output.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/drm/drm_buffer_gbm.cpp
+  plugins/platforms/drm/drm_buffer_gbm.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2013-2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/drm_object.cpp
+  plugins/platforms/drm/drm_object.h
+  plugins/platforms/drm/drm_object_connector.cpp
+  plugins/platforms/drm/drm_object_connector.h
+  plugins/platforms/drm/drm_object_crtc.cpp
+  plugins/platforms/drm/drm_object_crtc.h
+  plugins/platforms/drm/drm_object_plane.cpp
+  plugins/platforms/drm/drm_object_plane.h
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: plugins/platforms/drm/drm_pointer.h
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2013, 2015, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/edid.cpp
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2015, 2017, 2019, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/edid.h
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/egl_stream_backend.cpp
+  plugins/platforms/drm/egl_stream_backend.h
+Copyright: 2019, NVIDIA Inc.
+License: GPL-2+
+
+Files: plugins/platforms/drm/gbm_surface.cpp
+  plugins/platforms/drm/gbm_surface.h
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/drm/remoteaccess_manager.cpp
+  plugins/platforms/drm/remoteaccess_manager.h
+Copyright: 2016, Oleg Chernovskiy <kanedias@xaker.ru>
+License: GPL-2+
+
+Files: plugins/platforms/fbdev/fb_backend.h
+Copyright: 2019, Roman Gilg <subdiff@gmail.com>
+  2015, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/hwcomposer/*
 Copyright: 2015, Martin Gräßlin <mgraesslin@kde.org>
 License: GPL-3+
 
-Files: killer/killer.cpp
-Copyright: 2003, Lubos Lunak <l.lunak@kde.org>
-License: Expat
+Files: plugins/platforms/hwcomposer/hwcomposer_backend.h
+Copyright: 2015, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-3+
+
+Files: plugins/platforms/virtual/virtual_backend.cpp
+  plugins/platforms/virtual/virtual_backend.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/virtual/virtual_output.cpp
+  plugins/platforms/virtual/virtual_output.h
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: plugins/platforms/wayland/*
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2013-2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/wayland/logging.cpp
+  plugins/platforms/wayland/logging.h
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/wayland/wayland_backend.cpp
+  plugins/platforms/wayland/wayland_backend.h
+Copyright: 2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+  2013, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/wayland/wayland_output.cpp
+  plugins/platforms/wayland/wayland_output.h
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: plugins/platforms/x11/*
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/common/eglonxbackend.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/common/ge_event_mem_mover.h
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/*
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/edge.cpp
+  plugins/platforms/x11/standalone/edge.h
+  plugins/platforms/x11/standalone/non_composited_outline.cpp
+Copyright: 2012, 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/effects_x11.cpp
+  plugins/platforms/x11/standalone/effects_x11.h
+  plugins/platforms/x11/standalone/glxbackend.cpp
+Copyright: 2009-2013, 2017, Martin Gräßlin <mgraesslin@kde.org>
+  2006, 2007, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/glxbackend.h
+  plugins/platforms/x11/standalone/logging.cpp
+  plugins/platforms/x11/standalone/logging.h
+  plugins/platforms/x11/standalone/screens_xrandr.cpp
+  plugins/platforms/x11/standalone/screens_xrandr.h
+  plugins/platforms/x11/standalone/x11_decoration_renderer.cpp
+  plugins/platforms/x11/standalone/x11_decoration_renderer.h
+  plugins/platforms/x11/standalone/x11cursor.cpp
+  plugins/platforms/x11/standalone/xinputintegration.cpp
+  plugins/platforms/x11/standalone/xinputintegration.h
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/non_composited_outline.h
+  plugins/platforms/x11/standalone/overlaywindow_x11.cpp
+Copyright: 2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/overlaywindow_x11.h
+Copyright: 2014-2020, kylinos.cn
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/windowselector.cpp
+  plugins/platforms/x11/standalone/windowselector.h
+Copyright: 2012, 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/x11_output.cpp
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/x11_output.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/x11_platform.cpp
+  plugins/platforms/x11/standalone/x11_platform.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/x11/standalone/x11cursor.h
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/windowed/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/platforms/x11/windowed/x11windowed_backend.h
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/platforms/x11/windowed/x11windowed_output.cpp
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: plugins/platforms/x11/windowed/x11windowed_output.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/qpa/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/qpa/backingstore.cpp
+  plugins/qpa/backingstore.h
+  plugins/qpa/integration.cpp
+  plugins/qpa/integration.h
+  plugins/qpa/window.cpp
+  plugins/qpa/window.h
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2013, 2015, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/qpa/eglhelpers.cpp
+Copyright: 2018, 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2015, 2017, 2019, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/qpa/eglhelpers.h
+  plugins/qpa/offscreensurface.cpp
+  plugins/qpa/offscreensurface.h
+Copyright: 2017-2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+License: GPL-2+
+
+Files: plugins/qpa/main.cpp
+Copyright: 2015-2017, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: plugins/scenes/*
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/opengl/*
+Copyright: 2010, Martin Gräßlin <mgraesslin@kde.org>
+  2010, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/opengl/scene_opengl.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2009-2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/opengl/scene_opengl.h
+Copyright: 2014-2020, kylinos.cn
+  2009-2011, Martin Gräßlin <mgraesslin@kde.org>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/qpainter/scene_qpainter.cpp
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/xrender/*
+Copyright: 2013, Martin Gräßlin <mgraesslin@kde.org>
+  2009, Fredrik Höglund <fredrik@kde.org>
+  2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: plugins/scenes/xrender/scene_xrender.h
+Copyright: 2014-2020, kylinos.cn
+  2004-2006, Lubos Lunak <l.lunak@kde.org>
+License: GPL-2+
+
+Files: plugins/windowsystem/*
+Copyright: 2017, 2019, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2
+
+Files: plugins/windowsystem/plugin.h
+Copyright: 2018, 2019, Martin Flöser <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2
+
+Files: qml/outline/*
+Copyright: 2014-2017, Martin Graesslin <mgraesslin@kde.org>
+License: GPL-2+3+KDEeV
+
+Files: scripting/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: scripting/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: scripting/genericscriptedconfig.cpp
+  scripting/screenedgeitem.cpp
+  scripting/scriptedeffect.cpp
+  scripting/scriptedeffect.h
+  scripting/scripting_model.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: scripting/meta.cpp
+  scripting/meta.h
+Copyright: 2010, Rohan Prabhu <rohan@rohanprabhu.com>
+License: GPL-2+
+
+Files: scripting/scripting.cpp
+  scripting/scripting.h
+Copyright: 2014-2020, kylinos.cn
+  2011, Martin Gräßlin <mgraesslin@kde.org>
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+License: GPL-2+
 
 Files: scripting/timer.cpp
 Copyright: 2007, Richard J. Moore <rich@kde.org>
 License: LGPL-2
 
-Files: doc/en/windowspecific/index.docbook
-Copyright: see the UserBase https://userbase.kde.org/index.php?title=KWin_Rules&action=history
-           Lauri.Watts
-License: GFDL-1.2+
+Files: scripting/workspace_wrapper.cpp
+  scripting/workspace_wrapper.h
+Copyright: 2011, 2012, Martin Gräßlin <mgraesslin@kde.org>
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+License: GPL-2+
 
-License: GFDL-1.2+
- Permission is granted to copy, distribute and/or modify this document
- under the terms of the GNU Free Documentation License, Version 1.2
- or any later version published by the Free Software Foundation;
- with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
- A copy of the license is included in the section entitled "GNU
- Free Documentation License".
- --
- The complete text of the GNU Free Documentation License version 1.2
- can be found in `/usr/share/common-licenses/GFDL-1.2'.
+Files: scripts/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
 
-Files: debian/*
-Copyright: 2014, Scarlett Clark <scarlett@scarlettgatelyclark.com>
+Files: scripts/Messages.sh
+Copyright: 2016, Roman Gilg <subdiff@gmail.com>
+  2015, Mika Allan Rauhala <mika.allan.rauhala@gmail.com>
+  2014-2016, Marco Martin <mart@kde.org>
+  2014, Hugo Pereira Da Costa <hugo.pereira@free.fr>
+  2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+  2013, Kai Uwe Broulik <kde@privat.broulik.de>
+  2013, Antonis Tsiapaliokas <kok3rs@gmail.com>
+  2012, Rosetta Contributors and Canonical Ltd 2012
+  2012, Martin Gräßlin <m.graesslin@kde.org>
+  2012, Filip Wieladek <wattos@gmail.com>
+  2012, Casian Andrei <skeletk13@gmail.com>
+  2011, Tamas Krutki <ktamasw@gmail.com>
+  2011, NVIDIA Corporation
+  2011, Arthur Arlt <a.arlt@stud.uni-heidelberg.de>
+  2011, 2012, The KWin team <kwin@kde.org>
+  2011, 2012, Philipp Knechtges <philipp-dev@knechtges.com>
+  2010, Sebastian Sauer <sebsauer@kdab.com>
+  2010, Rosetta Contributors and Canonical Ltd 2010
+  2010, Rohan Prabhu <rohan@rohanprabhu.com>
+  2010, Nokia Corporation and/or its subsidiary(-ies)
+  2010, Jorge Mata <matamax123@gmail.com>
+  2010, Alexandre Pereira <pereira.alex@gmail.com>
+  2010, 2011, Thomas Lübking <thomas.luebking@web.de>
+  2009-2014, Fredrik Höglund <fredrik@kde.org>
+  2009, Rosetta Contributors and Canonical Ltd 2009
+  2009, Michael Zanetti <michael_zanetti@gmx.net>
+  2009, Marco Martin <notmart@gmail.com>
+  2008-2016, Martin Gräßlin <mgraesslin@kde.org>
+  2008-2011, Martin Gräßlin <kde@martin-graesslin.com>
+  2008, Lubos Lunak <l.lunak@suse.cz>
+  2008, Cédric Borgese <cedric.borgese@gmail.com>
+  2008, 2009, Lucas Murray <lmurray@undefinedfire.com>
+  2008, 2009, K Desktop Environment
+  2007-2014, Free Software Foundation
+  2007, Philip Falkner <philip.falkner@gmail.com>
+  2007, KDE i18n Project for Vietnamese
+  2007, Christian Nitschkowski <christian.nitschkowski@kdemail.net>
+  2006, 2007, Rivo Laks <rivolaks@hot.ee>
+  2003-2005, Sandro Giessl <sandro@giessl.com>
+  2003, Karol Szwed <kszwed@kde.org>
+  2002-2016, This_file_is_part_of_KDE
+  2001-2008, Lubos Lunak <l.lunak@kde.org>
+  2001, translate.org.za
+  2001, Waldo Bastian <bastian@kde.org>
+  2001, Rik Hemsley (rikkus) <rik@kde.org>
+  2000-2002, KDE e.v
+  2000, Jesús Bravo Álvarez
+  2000, 2001, KDE Team
+  1999-2002, Meni Livne <livne@kde.org>
+  1998-2000, Matthias Ettrich <ettrich@kde.org>
+  1998, KDE Russian translation Team
+  1997, Patrick Dowler <dowler@morgul.fsh.uvic.ca>
+  1989-1991, 1997-2014, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: scripts/minimizeall/*
+Copyright: 2014, 2015, Thomas Lübking <thomas.luebking@gmail.com>
+License: GPL-2+
+
+Files: shadow.h
+Copyright: 2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: tabbox/*
+Copyright: 2008-2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: tabbox/tabbox.cpp
+  tabbox/tabbox.h
+Copyright: 2014-2020, kylinos.cn
+  2009, 2013, 2014, Martin Gräßlin <mgraesslin@kde.org>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: tabbox/tabboxhandler.cpp
+Copyright: 2014-2020, kylinos.cn
+  2008-2014, 2016, 2017, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: tabbox/x11_filter.cpp
+  tabbox/x11_filter.h
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: tablet_input.cpp
+  tablet_input.h
+Copyright: 2019, Aleix Pol Gonzalez <aleixpol@kde.org>
+License: GPL-2+
+
+Files: tabletmodemanager.cpp
+  tabletmodemanager.h
+Copyright: 2018, Marco Martin <mart@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2
+
+Files: tests/*
+Copyright: 2014, 2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2
+
+Files: tests/cursorhotspottest.cpp
+Copyright: 2017, 2019, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2
+
+Files: tests/orientationtest.cpp
+Copyright: 2017, 2018, Martin Flöser <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: tests/pointerconstraintstest.cpp
+Copyright: 2018, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
+License: LGPL-2.1 or LGPL-3
+
+Files: tests/pointerconstraintstest.h
+Copyright: 2018, Roman Gilg <subdiff@gmail.com>
+License: LGPL-2.1 or LGPL-3
+
+Files: tests/pointergesturestest.cpp
+Copyright: 2016, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2
+
+Files: touch_input.cpp
+  touch_input.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2013-2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: virtualdesktops.cpp
+Copyright: 2014-2020, kylinos.cn
+  2012, Martin Gräßlin <mgraesslin@kde.org>
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+License: GPL-2+
+
+Files: virtualdesktopsdbustypes.cpp
+  virtualdesktopsdbustypes.h
+Copyright: 2018, Marco Martin <mart@kde.org>
+License: GPL-2+
+
+Files: workspace.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: workspace.h
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2014-2020, kylinos.cn
+  2009, Lucas Murray <lmurray@undefinedfire.com>
+  2003, Lubos Lunak <l.lunak@kde.org>
+  1999, 2000, Matthias Ettrich <ettrich@kde.org>
+License: GPL-2+
+
+Files: x11eventfilter.cpp
+Copyright: 2010, 2014, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: x11eventfilter.h
+Copyright: 2014-2020, kylinos.cn
+  2010, 2014, Fredrik Höglund <fredrik@kde.org>
+License: GPL-2+
+
+Files: xdgshellclient.cpp
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, David Edmundson <davidedmundson@kde.org>
+  2015, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: xdgshellclient.h
+Copyright: 2019, Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+  2018, David Edmundson <davidedmundson@kde.org>
+  2015, Martin Gräßlin <mgraesslin@kde.org>
+  2014-2020, kylinos.cn
+License: GPL-2+
+
+Files: xwl/*
+Copyright: 2016-2019, Roman Gilg <subdiff@gmail.com>
+License: GPL-2+
+
+Files: xwl/xwayland.cpp
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2013-2016, Martin Gräßlin <mgraesslin@kde.org>
+License: GPL-2+
+
+Files: xwl/xwayland_interface.h
+Copyright: 2017-2019, Roman Gilg <subdiff@gmail.com>
+  2014-2020, kylinos.cn
 License: GPL-2+
 
 License: Expat
@@ -294,6 +2947,25 @@ License: Expat
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  DEALINGS IN THE SOFTWARE.
+
+License: GPL
+ This file is licensed under the GPL.
+ --
+ On Debian systems, the complete text of the GNU General Public License
+ can be found in `/usr/share/common-licenses/GPL'.
+
+License: GPL-2
+ This software is Copyright (c) 2020 by X. Ample.
+ .
+ This is free software, licensed under:
+ .
+   The GNU General Public License, Version 2, June 1991
+ .
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 dated June, 1991.
+ On Debian systems, the complete text of version 2 of the GNU General
+ Public License can be found in '/usr/share/common-licenses/GPL-2'.
 
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
@@ -384,3 +3056,19 @@ License: LGPL-2+
  --
  On Debian systems, the complete text of the GNU Library General Public
  License version 2 can be found in `/usr/share/common-licenses/LGPL-2'.
+
+License: LGPL-2.1
+ This software is Copyright (c) 2020 by X. Ample.
+ .
+ This is free software, licensed under:
+ .
+   The GNU Lesser General Public License, Version 2.1, February 1999
+ .
+ This program is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as published by the
+ Free Software Foundation; version 2.1 of the License.
+ On Debian systems, the complete text of version 2.1 of the GNU Lesser
+ General Public License can be found in '/usr/share/common-licenses/LGPL-2.1'.
+
+License: LGPL-3
+ Please fill license LGPL-2.1 or LGPL-3 from header of tests/pointerconstraintstest.cpp

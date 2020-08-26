@@ -9,8 +9,6 @@ include /usr/share/pkg-kde-tools/qt-kde-team/2/l10n-packages.mk
 %:
 	dh $@ --with kf5,pkgkde_symbolshelper --buildsystem kf5 --without build_stamp
 
-override_dh_strip:
-	dh_strip --dbgsym-migration='ukui-kwin-dbg'
 
 override_dh_auto_test:
 	# Disable auto tests at build time
