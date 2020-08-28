@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Id": "UKUI",
+        "ServiceTypes": [
+            "org.kde.kdecoration2"
+        ]
+    },
+    "org.kde.kdecoration2": {
+        "blur": false,
+        "kcmodule": false
+    }
+}
