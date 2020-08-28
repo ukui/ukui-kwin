@@ -76,5 +76,5 @@ SwitchingMode=0
 [org.kde.kdecoration2]
 ButtonsOnLeft=
 ButtonsOnRight=IAX
-library=org.ukui.kwin.aurorae
-theme=__aurorae__svg__Ukui-classic
+library=UKUI
+theme=UKUI

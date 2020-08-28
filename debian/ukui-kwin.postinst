@@ -1,0 +1,9 @@
+#! /bin/bash
+for file in `ls /home` #注意此处这是两个反引号，表示运行系统命令
+do
+	if [ -f "/home/"$file"/.config/ukui-kwinrc" ] #注意此处之间一定要加上空格，否则会报错
+	then
+		sed -i '/library=/d' "/home/"$file"/.config/ukui-kwinrc"
+		sed -i '/theme=/d' "/home/"$file"/.config/ukui-kwinrc"
+	fi
+done
