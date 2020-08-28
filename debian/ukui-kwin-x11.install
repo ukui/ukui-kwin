@@ -1,3 +1,4 @@
 usr/bin/ukui-kwin_x11
+usr/share/applications/
 usr/lib/*/libkdeinit5_ukui-kwin_x11.so
 usr/lib/*/qt5/plugins/org.ukui.kwin.platforms/KWinX11Platform.so

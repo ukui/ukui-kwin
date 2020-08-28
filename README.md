@@ -5,11 +5,15 @@
 The window manager for UKUI desktop environment.
 
 ## Description
-Ukui-kwin is forked from kwin.
+Ukui-kwin is the default window manager for UKUI desktop environment, and is forked from kwin.
 
-The first setp we only rename these binaries and data files and change some codes necessarily to make sure it won't conflict with kwin.
+The first step we only rename these binaries and data files and change some necessary codes to make sure it won't conflict with kwin.
 
-The further step we want to make big diffrences on ukui-kwin and feed back to kwin
+Second, That Kwin suggest plasma will introduce the whole KDE desktop environment, We don't need it.
+
+Third, In order to adapt to UKUI's desktop. According to our desktop environment requirements, some core code needs to be repaired, otherwise it will affect the use of some other of UKUI's components; we also need to customize some plug-ins according to our desktop requirements, such as shortcut keys, theme styles, mouse patterns, etc.
+
+Last, We need to introduce special proprietary configuration according to our requirements.
 
 ## Dependencies
 All of ukui-kwin's dependencies are found through CMake. CMake will report what is missing.

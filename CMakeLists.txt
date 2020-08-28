@@ -726,6 +726,7 @@ add_subdirectory(plugins)
 install(FILES ukui-kwin.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}.kcfg)
 install(FILES colorcorrection/colorcorrect_settings.kcfg DESTINATION ${KCFG_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}_colorcorrect.kcfg)
 install(FILES ukui-kwin.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR} RENAME ${UKUI_KWIN_NAME}.notifyrc)
+install(FILES ukui-kwin.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
 install(
     FILES
         org.ukui.KWin.VirtualDesktopManager.xml
@@ -743,10 +744,10 @@ install(FILES scripting/kwinscript.desktop DESTINATION ${SERVICETYPES_INSTALL_DI
 
 add_subdirectory(qml)
 
-if (BUILD_TESTING)
-    add_subdirectory(autotests)
-    add_subdirectory(tests)
-endif()
+#if (BUILD_TESTING)
+#    add_subdirectory(autotests)
+#    add_subdirectory(tests)
+#endif()
 
 #if (KF5DocTools_FOUND)
 #    add_subdirectory(doc)

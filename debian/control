@@ -6,7 +6,7 @@ XSBC-Original-Maintainer: Kylin Team <ukui@kylinos.cn>
 Uploaders: handsome_feng <jianfengli@ubuntukylin.com>
 Build-Depends: breeze-dev (>= 4:5.18.3~),
                cmake (>= 3.1~),
-               debhelper-compat (= 13),
+               debhelper (>= 11~),
                extra-cmake-modules (>= 5.66.0~),
                kinit-dev (>= 5.66.0~),
                kscreenlocker-dev (>= 5.18.3~),
