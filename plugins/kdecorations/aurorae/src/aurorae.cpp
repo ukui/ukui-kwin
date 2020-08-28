@@ -434,9 +434,7 @@ void Decoration::updateShadow()
     }
     bool updateShadow = false;
     const auto oldShadow = shadow();
-    if (m_padding &&
-            (m_padding->left() > 0 || m_padding->top() > 0 || m_padding->right() > 0 || m_padding->bottom() > 0) &&
-            !client().data()->isMaximized()) {
+    if (m_padding && (m_padding->left() > 0 || m_padding->top() > 0 || m_padding->right() > 0 || m_padding->bottom() > 0) && !client().data()->isMaximized()) {
         if (oldShadow.isNull()) {
             updateShadow = true;
         } else {

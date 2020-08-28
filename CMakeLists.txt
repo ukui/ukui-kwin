@@ -54,6 +54,7 @@ include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0 -DQT_USE_QSTRINGBUILDER -DQT_NO_URL_CAST_FROM_STRING)
+add_definitions("-Wall -g")
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -420,7 +421,6 @@ set(kwin_KDEINIT_SRCS
     decorations/decorationrenderer.cpp
     decorations/decorations_logging.cpp
     decorations/settings.cpp
-    decorations/gsettingfont.cpp
     deleted.cpp
     effectloader.cpp
     effects.cpp

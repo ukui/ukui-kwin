@@ -51,6 +51,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Qt
 #include <QMetaProperty>
 #include <QPainter>
+#include <QScreen>
+
 
 namespace KWin
 {
@@ -58,7 +60,7 @@ namespace Decoration
 {
 
 static const QString s_aurorae = QStringLiteral("org.ukui.kwin.aurorae");
-static const QString s_pluginName = QStringLiteral("org.kde.kdecoration2");
+static const QString s_pluginDirectory = QStringLiteral("org.kde.kdecoration2");
 #if HAVE_BREEZE_DECO
 static const QString s_defaultPlugin = QStringLiteral(BREEZE_KDECORATION_PLUGIN_ID);
 #else
@@ -94,12 +96,12 @@ QString DecorationBridge::readPlugin()
     //Try to get a default from look and feel
     KConfigGroup cg(m_lnfConfig, "ukui-kwinrc");
     cg = KConfigGroup(&cg, "org.kde.kdecoration2");
-    return kwinApp()->config()->group(s_pluginName).readEntry("library", cg.readEntry("library", s_defaultPlugin));
+    return kwinApp()->config()->group(s_pluginDirectory).readEntry("library", cg.readEntry("library", s_defaultPlugin));
 }
 
 static bool readNoPlugin()
 {
-    return kwinApp()->config()->group(s_pluginName).readEntry("NoPlugin", false);
+    return kwinApp()->config()->group(s_pluginDirectory).readEntry("NoPlugin", false);
 }
 
 QString DecorationBridge::readTheme() const
@@ -107,12 +109,12 @@ QString DecorationBridge::readTheme() const
     //Try to get a default from look and feel
     KConfigGroup cg(m_lnfConfig, "ukui-kwinrc");
     cg = KConfigGroup(&cg, "org.kde.kdecoration2");
-    return kwinApp()->config()->group(s_pluginName).readEntry("theme", cg.readEntry("theme", m_defaultTheme));
+    return kwinApp()->config()->group(s_pluginDirectory).readEntry("theme", cg.readEntry("theme", m_defaultTheme));
 }
 
 void DecorationBridge::readDecorationOptions()
 {
-    m_showToolTips = kwinApp()->config()->group(s_pluginName).readEntry("ShowToolTips", true);
+    m_showToolTips = kwinApp()->config()->group(s_pluginDirectory).readEntry("ShowToolTips", true);
 }
 
 void DecorationBridge::init()
@@ -125,35 +127,50 @@ void DecorationBridge::init()
         }
         return;
     }
-    m_plugin = readPlugin();
+    m_pluginLibraryName = readPlugin();
+    fputs("DecorationBridge::init,  打印插件名称\n", stderr);
+    puts(m_pluginLibraryName.toStdString().c_str());   //打印变量，汉字亦可
     m_settings = QSharedPointer<KDecoration2::DecorationSettings>::create(this);
     initPlugin();
     if (!m_factory) {
-        if (m_plugin != s_defaultPlugin) {
+        if (m_pluginLibraryName != s_defaultPlugin) {
             // try loading default plugin
-            m_plugin = s_defaultPlugin;
+            m_pluginLibraryName = s_defaultPlugin;
             initPlugin();
         }
         // default plugin failed to load, try fallback
         if (!m_factory) {
-            m_plugin = s_aurorae;
+            m_pluginLibraryName = s_aurorae;
             initPlugin();
         }
     }
     if (waylandServer()) {
         waylandServer()->decorationManager()->setDefaultMode(m_factory ? ServerSideDecorationManagerInterface::Mode::Server : ServerSideDecorationManagerInterface::Mode::None);
     }
+
+    //读取dpi值
+    m_dpi = 96;
+    QScreen *primary = QGuiApplication::primaryScreen();
+    if (primary) {
+        m_dpi = primary->logicalDotsPerInchX();
+        if(m_dpi < 30)
+        {
+            m_dpi = 30;     //设置一个限度，不允许dpi小于30
+        }
+    }
 }
 
 void DecorationBridge::initPlugin()
 {
-    const auto offers = KPluginLoader::findPluginsById(s_pluginName, m_plugin);
+    const auto offers = KPluginLoader::findPluginsById(s_pluginDirectory, m_pluginLibraryName);
     if (offers.isEmpty()) {
         qCWarning(KWIN_DECORATIONS) << "Could not locate decoration plugin";
         return;
     }
     qCDebug(KWIN_DECORATIONS) << "Trying to load decoration plugin: " << offers.first().fileName();
     KPluginLoader loader(offers.first().fileName());
+    fputs("DecorationBridge::initPlugin,  初始化插件\n", stderr);
+    puts(offers.first().fileName().toStdString().c_str());   //打印变量，汉字亦可
     KPluginFactory *factory = loader.factory();
     if (!factory) {
         qCWarning(KWIN_DECORATIONS) << "Error loading plugin:" << loader.errorString();
@@ -177,7 +194,7 @@ void DecorationBridge::reconfigure()
         // no plugin setting changed
         if (m_noPlugin) {
             // decorations disabled now
-            m_plugin = QString();
+            m_pluginLibraryName = QString();
             delete m_factory;
             m_factory = nullptr;
             m_settings.clear();
@@ -190,16 +207,16 @@ void DecorationBridge::reconfigure()
     }
 
     const QString newPlugin = readPlugin();
-    if (newPlugin != m_plugin) {
+    if (newPlugin != m_pluginLibraryName) {
         // plugin changed, recreate everything
         auto oldFactory = m_factory;
-        const auto oldPluginName = m_plugin;
-        m_plugin = newPlugin;
+        const auto oldPluginName = m_pluginLibraryName;
+        m_pluginLibraryName = newPlugin;
         initPlugin();
         if (m_factory == oldFactory) {
             // loading new plugin failed
             m_factory = oldFactory;
-            m_plugin = oldPluginName;
+            m_pluginLibraryName = oldPluginName;
         } else {
             recreateDecorations();
             // TODO: unload and destroy old plugin
@@ -223,7 +240,7 @@ void DecorationBridge::loadMetaData(const QJsonObject &object)
     m_defaultTheme = QString();
 
     // load the settings
-    const QJsonValue decoSettings = object.value(s_pluginName);
+    const QJsonValue decoSettings = object.value(s_pluginDirectory);
     if (decoSettings.isUndefined()) {
         // no settings
         return;
@@ -289,6 +306,8 @@ KDecoration2::Decoration *DecorationBridge::createDecoration(AbstractClient *cli
     if (!m_theme.isEmpty()) {
         args.insert(QStringLiteral("theme"), m_theme);
     }
+    args.insert(QStringLiteral("dpi"), m_dpi);  //每创建一个渲染端，就把dpi值带过去，后面每新建一个客户就不需要反复获取获取dpi值
+
     auto deco = m_factory->create<KDecoration2::Decoration>(client, QVariantList({args}));
     deco->setSettings(m_settings);
     deco->init();
@@ -317,7 +336,7 @@ QString settingsProperty(const QVariant &variant)
 QString DecorationBridge::supportInformation() const
 {
     QString b;
-    b.append(QStringLiteral("Plugin: %1\n").arg(m_plugin));
+    b.append(QStringLiteral("Plugin: %1\n").arg(m_pluginLibraryName));
     b.append(QStringLiteral("Theme: %1\n").arg(m_theme));
     b.append(QStringLiteral("Plugin recommends border size: %1\n").arg(m_recommendedBorderSize.isNull() ? "No" : m_recommendedBorderSize));
     b.append(QStringLiteral("Blur: %1\n").arg(m_blur));

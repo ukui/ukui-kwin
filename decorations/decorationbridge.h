@@ -97,11 +97,12 @@ private:
     bool m_blur;
     bool m_showToolTips;
     QString m_recommendedBorderSize;
-    QString m_plugin;
+    QString m_pluginLibraryName;
     QString m_defaultTheme;
     QString m_theme;
     QSharedPointer<KDecoration2::DecorationSettings> m_settings;
     bool m_noPlugin;
+    int m_dpi;      //dpi值
     KWIN_SINGLETON(DecorationBridge)
 };
 } // Decoration

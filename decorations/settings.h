@@ -24,9 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 
-#include <QGSettings>
-#include <QtDBus>
-
 class KConfigGroup;
 
 namespace KWin
@@ -54,7 +51,7 @@ public:
     }
     QFont font() const override {
         return m_font;
-    }    
+    }
 
 private:
     void readSettings();
@@ -67,12 +64,6 @@ private:
     bool m_autoBorderSize = true;
     bool m_closeDoubleClickMenu = false;
     QFont m_font;
-    QGSettings* m_pSettings;
-    int m_nScaleFactor;         //放大系数
-
-public Q_SLOTS:
-    void onFontChanged(int nFont);
-
 };
 } // Decoration
 } // KWin

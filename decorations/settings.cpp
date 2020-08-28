@@ -24,7 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 #include "settings.h"
-#include "gsettingfont.h"
 // KWin
 #include "decorationbridge.h"
 #include "composite.h"
@@ -33,12 +32,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "appmenu.h"
 
 #include <config-ukui-kwin.h>
-#include <KDecoration2/DecorationSettings>
-#include <KConfigGroup>
-#include <QFontDatabase>
-#include <QtWidgets>
 
-#define DEFAULT_FONTSIZE 15
+#include <KDecoration2/DecorationSettings>
+
+#include <KConfigGroup>
+
+#include <QFontDatabase>
 
 namespace KWin
 {
@@ -69,15 +68,6 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     );
     connect(Workspace::self(), &Workspace::configChanged, this, &SettingsImpl::readSettings);
     connect(DecorationBridge::self(), &DecorationBridge::metaDataLoaded, this, &SettingsImpl::readSettings);
-
-    GSettingFont* p = new GSettingFont;
-    connect(p, SIGNAL(Sig_fontChanged(int)), this, SLOT(onFontChanged(int)));
-
-    QDBusConnection connection = QDBusConnection::sessionBus();
-    if(connection.registerService("com.ukui.kwin"))
-    {
-        connection.registerObject("/Ukui/kwin", p, QDBusConnection::ExportAllSlots);
-    }
 }
 
 SettingsImpl::~SettingsImpl() = default;
@@ -171,13 +161,6 @@ static KDecoration2::BorderSize stringToSize(const QString &name)
     return it.value();
 }
 
-void SettingsImpl::onFontChanged(int nFont)
-{
-    m_font.setPixelSize(nFont * m_nScaleFactor);
-    emit decorationSettings()->fontChanged(m_font);
-    return;
-}
-
 void SettingsImpl::readSettings()
 {
     KConfigGroup config = kwinApp()->config()->group(QStringLiteral("org.kde.kdecoration2"));
@@ -216,16 +199,7 @@ void SettingsImpl::readSettings()
         m_borderSize = size;
         emit decorationSettings()->borderSizeChanged(m_borderSize);
     }
-
-    m_nScaleFactor = 1;                         //放大系数
-    QScreen *primary = QGuiApplication::primaryScreen();
-    if (primary) {
-        const qreal dpi = primary->logicalDotsPerInchX();
-        m_nScaleFactor = dpi / 96.0f;
-    }
-
-    QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
-    font.setPixelSize(DEFAULT_FONTSIZE * m_nScaleFactor);
+    const QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
     if (font != m_font) {
         m_font = font;
         emit decorationSettings()->fontChanged(m_font);
