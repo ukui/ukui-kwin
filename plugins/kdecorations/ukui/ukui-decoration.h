@@ -32,42 +32,6 @@ class DecorationButtonGroup;
 
 namespace UKUI {
 
-struct ShadowParams {
-    ShadowParams()
-        : offset(QPoint(0, 0))
-        , radius(0)
-        , opacity(0) {}
-
-    ShadowParams(const QPoint &offset, int radius, qreal opacity)
-        : offset(offset)
-        , radius(radius)
-        , opacity(opacity) {}
-
-    QPoint offset;
-    int radius;
-    qreal opacity;
-};
-
-struct CompositeShadowParams {
-    CompositeShadowParams() = default;
-
-    CompositeShadowParams(
-            const QPoint &offset,
-            const ShadowParams &shadow1,
-            const ShadowParams &shadow2)
-        : offset(offset)
-        , shadow1(shadow1)
-        , shadow2(shadow2) {}
-
-    bool isNone() const {
-        return qMax(shadow1.radius, shadow2.radius) == 0;
-    }
-
-    QPoint offset;
-    ShadowParams shadow1;
-    ShadowParams shadow2;
-};
-
 class Decoration : public KDecoration2::Decoration
 {
     Q_OBJECT
@@ -75,8 +39,8 @@ public:
     explicit Decoration(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     void init();
-
     void paint(QPainter *painter, const QRect &repaintRegion) override;
+
     QPair<QRect,Qt::Alignment> captionRect() const;
     QColor titleBarColor() const;
     QColor fontColor() const;
@@ -101,10 +65,10 @@ private:
 
 
 public slots:
-    void updateButtonsGeomerty();
+    void updateButtonsGeometry();
     void calculateBorders();
     void updateTitleBar();
-    void updateShadow();
+    void updateShadow(bool bActive = false);
     void themeChanged();
 
 private:

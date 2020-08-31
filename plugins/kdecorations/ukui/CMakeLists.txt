@@ -32,8 +32,8 @@ add_library(kwin-style-ukui SHARED
   ukui-decoration.h
   button.cpp
   button.h
-  breezeboxshadowrenderer.cpp
-  breezeboxshadowrenderer.h
+  shadow-helper.cpp
+  shadow-helper.h
   xatom-helper.cpp
   xatom-helper.h
   kwin-style-ukui.json
