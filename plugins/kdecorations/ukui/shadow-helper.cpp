@@ -74,9 +74,7 @@ QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(ShadowHel
         int maxRadius = qMax(maxTopRadius, maxBottomRadius);
         QRect innerRect = QRect(shadow_border + maxRadius, shadow_border + maxRadius, INNERRECT_WIDTH, INNERRECT_WIDTH);
         shadow->setInnerShadowRect(innerRect);
-
         shadow->setPadding(QMargins(shadow_border, shadow_border, shadow_border, shadow_border));
-
         m_activeShadowsCache.insert(unityBorderRadius, shadow);
         return shadow;
     }
@@ -94,9 +92,7 @@ QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(ShadowHel
         int maxRadius = qMax(maxTopRadius, maxBottomRadius);
         QRect innerRect = QRect(shadow_border + maxRadius, shadow_border + maxRadius, INNERRECT_WIDTH, INNERRECT_WIDTH);
         shadow->setInnerShadowRect(innerRect);
-
         shadow->setPadding(QMargins(shadow_border, shadow_border, shadow_border, shadow_border));
-
         m_inactiveShadowsCache.insert(unityBorderRadius, shadow);
         return shadow;
         break;
@@ -114,26 +110,11 @@ ShadowHelper::ShadowHelper()
 
 QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_border, qreal darkness, int borderRadiusTopLeft, int borderRadiusTopRight, int borderRadiusBottomLeft, int borderRadiusBottomRight)
 {
-    if (borderRadiusTopLeft < 1) {
-        borderRadiusTopLeft = 0;
-    }
-    if (borderRadiusTopRight < 1) {
-        borderRadiusTopRight = 0;
-    }
-    if (borderRadiusBottomLeft < 1) {
-        borderRadiusBottomLeft = 0;
-    }
-    if (borderRadiusBottomRight < 1) {
-        borderRadiusBottomRight = 0;
-    }
-
     int maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
     int maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
     int maxRadius = qMax(maxTopRadius, maxBottomRadius);
     QPixmap pix(QSize(2 * maxRadius + 2 * shadow_border + INNERRECT_WIDTH, 2 * maxRadius + 2 * shadow_border + INNERRECT_WIDTH));
     pix.fill(Qt::transparent);
-
-    auto pixSize = pix.size();
 
     int squareWidth = 2 * maxRadius + INNERRECT_WIDTH;
 
