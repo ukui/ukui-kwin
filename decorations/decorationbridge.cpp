@@ -128,8 +128,7 @@ void DecorationBridge::init()
         return;
     }
     m_pluginLibraryName = readPlugin();
-    fputs("DecorationBridge::init,  打印插件名称\n", stderr);
-    puts(m_pluginLibraryName.toStdString().c_str());   //打印变量，汉字亦可
+    printf("DecorationBridge::init, 打印插件名称:%s\n", m_pluginLibraryName.toStdString().c_str());
     m_settings = QSharedPointer<KDecoration2::DecorationSettings>::create(this);
     initPlugin();
     if (!m_factory) {
@@ -169,8 +168,7 @@ void DecorationBridge::initPlugin()
     }
     qCDebug(KWIN_DECORATIONS) << "Trying to load decoration plugin: " << offers.first().fileName();
     KPluginLoader loader(offers.first().fileName());
-    fputs("DecorationBridge::initPlugin,  初始化插件\n", stderr);
-    puts(offers.first().fileName().toStdString().c_str());   //打印变量，汉字亦可
+    printf("DecorationBridge::initPlugin,  初始化插件:%s\n", offers.first().fileName().toStdString().c_str());
     KPluginFactory *factory = loader.factory();
     if (!factory) {
         qCWarning(KWIN_DECORATIONS) << "Error loading plugin:" << loader.errorString();
