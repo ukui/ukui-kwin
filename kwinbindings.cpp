@@ -51,13 +51,13 @@ DEF(I18N_NOOP("Window Operations Menu"),
 DEF2("Window Close", I18N_NOOP("Close Window"),
      Qt::ALT + Qt::Key_F4, slotWindowClose);
 DEF2("Window Maximize", I18N_NOOP("Maximize Window"),
-     Qt::META + Qt::Key_PageUp, slotWindowMaximize);
+     Qt::ALT + Qt::Key_F10, slotWindowMaximize);
 DEF2("Window Maximize Vertical", I18N_NOOP("Maximize Window Vertically"),
      0, slotWindowMaximizeVertical);
 DEF2("Window Maximize Horizontal", I18N_NOOP("Maximize Window Horizontally"),
      0, slotWindowMaximizeHorizontal);
 DEF2("Window Minimize", I18N_NOOP("Minimize Window"),
-     Qt::META + Qt::Key_PageDown, slotWindowMinimize);
+     Qt::ALT + Qt::Key_F9, slotWindowMinimize);
 DEF2("Window Shade", I18N_NOOP("Shade Window"),
      0, slotWindowShade);
 DEF2("Window Move", I18N_NOOP("Move Window"),

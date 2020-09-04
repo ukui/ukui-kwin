@@ -83,15 +83,7 @@ Homepage: https://github.com/ukui/ukui-kwin
 Vcs-Browser: https://github.com/ukui/ukui-kwin
 Vcs-Git: https://github.com/ukui/ukui-kwin.git
 
-Package: ukui-window-manager
-Architecture: all
-Section: oldlibs
-Depends: ukui-kwin-x11 (>= 1.0.0), ${misc:Depends}
-Description: transitional package for ukui-kwin-x11
- This transitional package allows one to migrate to the packages providing
- the X11 version of the UKUI window manager.
- .
- It can be safely removed after the installation.
+
 
 Package: ukui-kwin
 Architecture: all
@@ -145,129 +137,8 @@ Description: UKUI window manager data files
  .
  This package contains the data files
 
-Package: ukui-kwin-dev
-Section: libdevel
-Architecture: any
-Depends: ukui-kwin-common (= ${binary:Version}),
-         libegl1-mesa-dev (>= 1.2~),
-         libepoxy-dev (>= 1.2),
-         libkf5config-dev (>= 5.66.0~),
-         libkf5coreaddons-dev (>= 5.66.0~),
-         libkf5windowsystem-dev (>= 5.66.0~),
-         libqt5x11extras5-dev (>= 5.9.0~),
-         libxcb-xfixes0-dev,
-         qtbase5-dev (>= 5.9.0~),
-         ${misc:Depends},
-         ${shlibs:Depends},
-Breaks: kde-workspace-dev
-Replaces: kde-workspace-dev
-Description: UKUI window manager - devel files
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package is part of the UKUI project.
 
-Package: ukui-kwin-wayland
-Architecture: any
-Depends: kwayland-integration (>= 5.18.0),
-         ukui-kwin-common (= ${binary:Version}),
-         ukui-kwin-wayland-backend-drm (= ${binary:Version}) | ukui-kwin-wayland-backend-fbdev (= ${binary:Version}) | ukui-kwin-wayland-backend-x11 (= ${binary:Version}) | ukui-kwin-wayland-backend-virtual (= ${binary:Version}) | ukui-kwin-wayland-backend-wayland (= ${binary:Version}),
-         libcap2-bin [linux-any],
-         xwayland,
-         ${misc:Depends},
-         ${shlibs:Depends},
-Provides: ukui-kwin
-Description: UKUI window manager, wayland version, PREVIEW release
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package provides the wayland version, which is still a work in progress
- project, and is available as a PREVIEW release. Don't expect the same
- stability as with the x11 version.
 
-Package: ukui-kwin-wayland-backend-drm
-Section: libs
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: ukui-kwin-wayland-backend
-Description: UKUI window manager drm plugin
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package is part of the UKUI project
-
-Package: ukui-kwin-wayland-backend-fbdev
-Section: libs
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: ukui-kwin-wayland-backend
-Description: UKUI window manager drm plugin
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package is part of the UKUI project
-
-Package: ukui-kwin-wayland-backend-virtual
-Section: libs
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: ukui-kwin-wayland-backend
-Description: UKUI window manager drm plugin
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This backend allows running ukui-kwin-wayland in headless mode,
- useful for testing, or in the Cloud.
-
-Package: ukui-kwin-wayland-backend-wayland
-Section: libs
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: ukui-kwin-wayland-backend
-Description: UKUI window manager drm plugin
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package is part of the UKUI project
-
-Package: ukui-kwin-wayland-backend-x11
-Section: libs
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: ukui-kwin-wayland-backend
-Description: UKUI window manager drm plugin
- Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
- gives you complete control over your windows, making sure
- they're not in the way but aid you in your task. It paints
- the window decoration, the bar on top of every window with
- (configurable) buttons like close, maximize and minimize.
- It also handles placing of windows and switching between them.
- .
- This package is part of the UKUI project
 
 Package: ukui-kwin-x11
 Architecture: any

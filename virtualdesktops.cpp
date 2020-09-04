@@ -842,26 +842,22 @@ void VirtualDesktopManager::initShortcuts()
     //QAction *slotRightAction = addAction(QStringLiteral("Switch One Desktop to the Right"), i18n("Switch One Desktop to the Right"), &VirtualDesktopManager::slotRight);
     //KGlobalAccel::setGlobalShortcut(slotRightAction, QKeySequence(Qt::CTRL + Qt::META + Qt::Key_Right));
     const QString toDesktop1 = QStringLiteral("Switch One Desktop to the Right");
-    const KLocalizedString toDesktopLabel1 = ki18n("Switch One Desktop to the Right");
-    addAction(toDesktop1, toDesktopLabel1, 1, QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Right), &VirtualDesktopManager::slotRight);
+    addAction(toDesktop1, i18n(toDesktop1.toStdString().c_str()), QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Right), &VirtualDesktopManager::slotRight);
 
     //QAction *slotLeftAction = addAction(QStringLiteral("Switch One Desktop to the Left"), i18n("Switch One Desktop to the Left"), &VirtualDesktopManager::slotLeft);
     //KGlobalAccel::setGlobalShortcut(slotLeftAction, QKeySequence(Qt::CTRL + Qt::META + Qt::Key_Left));
     const QString toDesktop2 = QStringLiteral("Switch One Desktop to the Left");
-    const KLocalizedString toDesktopLabel2 = ki18n("Switch One Desktop to the Left");
-    addAction(toDesktop2, toDesktopLabel2, 1, QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Left), &VirtualDesktopManager::slotLeft);
+    addAction(toDesktop2, i18n(toDesktop2.toStdString().c_str()), QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Left), &VirtualDesktopManager::slotLeft);
 
     //QAction *slotUpAction = addAction(QStringLiteral("Switch One Desktop Up"), i18n("Switch One Desktop Up"), &VirtualDesktopManager::slotUp);
     //KGlobalAccel::setGlobalShortcut(slotUpAction, QKeySequence(Qt::CTRL + Qt::META + Qt::Key_Up));
     const QString toDesktop3 = QStringLiteral("Switch One Desktop Up");
-    const KLocalizedString toDesktopLabel3 = ki18n("Switch One Desktop Up");
-    addAction(toDesktop3, toDesktopLabel3, 1, QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Up), &VirtualDesktopManager::slotUp);
+    addAction(toDesktop3, i18n(toDesktop3.toStdString().c_str()), QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Up), &VirtualDesktopManager::slotUp);
 
     //QAction *slotDownAction = addAction(QStringLiteral("Switch One Desktop Down"), i18n("Switch One Desktop Down"), &VirtualDesktopManager::slotDown);
     //KGlobalAccel::setGlobalShortcut(slotDownAction, QKeySequence(Qt::CTRL + Qt::META + Qt::Key_Down));
     const QString toDesktop4 = QStringLiteral("Switch One Desktop Down");
-    const KLocalizedString toDesktopLabel4 = ki18n("Switch One Desktop Down");
-    addAction(toDesktop4, toDesktopLabel4, 1, QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Down), &VirtualDesktopManager::slotDown);
+    addAction(toDesktop4, i18n(toDesktop4.toStdString().c_str()), QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_Down), &VirtualDesktopManager::slotDown);
 
     // axis events
     input()->registerAxisShortcut(Qt::ControlModifier | Qt::AltModifier, PointerAxisDown,
@@ -891,6 +887,17 @@ QAction *VirtualDesktopManager::addAction(const QString &name, const KLocalizedS
     a->setObjectName(name.arg(value));
     a->setText(label.subs(value).toString());
     a->setData(value);
+    KGlobalAccel::setGlobalShortcut(a, key);
+    input()->registerShortcut(key, a, this, slot);
+    return a;
+}
+
+QAction *VirtualDesktopManager::addAction(const QString &name, const QString &label, const QKeySequence &key, void (VirtualDesktopManager::*slot)())
+{
+    QAction *a = new QAction(this);
+    a->setProperty("componentName", QStringLiteral(UKUI_KWIN_NAME));
+    a->setObjectName(name);
+    a->setText(label);
     KGlobalAccel::setGlobalShortcut(a, key);
     input()->registerShortcut(key, a, this, slot);
     return a;
