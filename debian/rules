@@ -1,7 +1,15 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
+DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+
 export DEB_LDFLAGS_MAINT_APPEND := -Wl,--as-needed
+
+# Workaround for FT1500A
+ifneq (,$(filter $(DEB_HOST_ARCH_CPU), arm64))
+  export DEB_CFLAGS_MAINT_APPEND := -D__KYLIN_FT1500A_DISPLAY__
+  export DEB_CXXFLAGS_MAINT_APPEND := -D__KYLIN_FT1500A_DISPLAY__
+endif
 
 l10npkgs_firstversion_ok := 4:4.14.0-2
 include /usr/share/pkg-kde-tools/qt-kde-team/2/l10n-packages.mk

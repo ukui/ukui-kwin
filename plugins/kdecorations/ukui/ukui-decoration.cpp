@@ -23,7 +23,7 @@
 #include "ukui-decoration.h"
 #include "button.h"
 #include "xatom-helper.h"
-#include "shadow-helper.h"
+#include "breezeboxshadowrenderer.h"
 
 #include <QVariant>
 #include <QPainter>
@@ -37,10 +37,7 @@
 #include <KDecoration2/DecorationButtonGroup>
 
 #define CUSOR_BORDER  10                //边框伸展光标范围
-#define SHADOW_BORDER 100               //阴影边框大小：30小边框、100中边框、200大边框
-#define ACTIVE_DARKNESS 1.5             //阴影颜色深度：1.0深、1.5很深、2.0超深
-#define INACTIVE_DARKNESS 1.0           //阴影颜色深度：1.0深、1.5很深、2.0超深
-#define RADIUS 4                        //窗体圆角
+#define Frame_FrameRadius 6             //窗体圆角
 
 
 K_PLUGIN_FACTORY_WITH_JSON(
@@ -48,6 +45,58 @@ K_PLUGIN_FACTORY_WITH_JSON(
     "kwin-style-ukui.json",
     registerPlugin<UKUI::Decoration>();
 )
+
+//static int g_sDecoCount = 0;
+//static int g_shadowSizeEnum = 3;
+static int g_shadowStrength = 255;
+static QColor g_shadowColor = Qt::black;
+static QSharedPointer<KDecoration2::DecorationShadow> g_sShadow;
+
+using namespace UKUI;
+
+const CompositeShadowParams g_shadowParams[] = {
+    // None
+    CompositeShadowParams(),
+    // Small
+    CompositeShadowParams(
+        QPoint(0, 4),
+        ShadowParams(QPoint(0, 0), 16, 1),
+        ShadowParams(QPoint(0, -2), 8, 0.4)),
+    // Medium
+    CompositeShadowParams(
+        QPoint(0, 8),
+        ShadowParams(QPoint(0, 0), 32, 0.9),
+        ShadowParams(QPoint(0, -4), 16, 0.3)),
+    // Large
+    CompositeShadowParams(
+        QPoint(0, 12),
+        ShadowParams(QPoint(0, 0), 48, 0.8),
+        ShadowParams(QPoint(0, -6), 24, 0.2)),
+    // Very large
+    CompositeShadowParams(
+        QPoint(0, 16),
+        ShadowParams(QPoint(0, 0), 64, 0.7),
+        ShadowParams(QPoint(0, -8), 32, 0.1)),
+};
+
+inline CompositeShadowParams lookupShadowParams(int size)
+{
+    switch (size) {
+    case 0:
+        return g_shadowParams[0];
+    case 1:
+        return g_shadowParams[1];
+    case 2:
+        return g_shadowParams[2];
+    case 3:
+        return g_shadowParams[3];
+    case 4:
+        return g_shadowParams[4];
+    default:
+        // Fallback to the Large size.
+        return g_shadowParams[3];
+    }
+}
 
 using namespace UKUI;
 
@@ -95,7 +144,8 @@ void Decoration::init()
 
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::themeChanged));
-        connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
+        connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
+        //connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
         connect(client().data(), &KDecoration2::DecoratedClient::captionChanged, this,
             [this]()
@@ -110,58 +160,79 @@ void Decoration::init()
     } else {
         setBorders(QMargins(0, 0, 0, 0));
         setResizeOnlyBorders(QMargins(CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER));
-
-        connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
+        //connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
     }
 
     updateShadow();
     update();
 }
 
-void Decoration::updateShadow(bool bActive)
+void Decoration::updateShadow()
 {
-    bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
-    if (!isDecoBorderOnly) {
-        if(true == bActive)
-        {
-            auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, RADIUS, RADIUS, RADIUS, RADIUS);
-            shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
-            setShadow(shadow);
+    if(!g_sShadow){
+        const CompositeShadowParams params = lookupShadowParams(3);
+        if (params.isNone()) {
+            g_sShadow.clear();
+            setShadow(g_sShadow);
         }
-        else
-        {
-            auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Inactive, SHADOW_BORDER, INACTIVE_DARKNESS, RADIUS, RADIUS, RADIUS, RADIUS);
-            shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
-            setShadow(shadow);
-        }
-    }
-    else
-    {
-        auto borderRadius = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
 
-        if(true == bActive)
-        {
-            auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active,
-                                                                    SHADOW_BORDER,
-                                                                    ACTIVE_DARKNESS,
-                                                                    borderRadius.topLeft,
-                                                                    borderRadius.topRight,
-                                                                    borderRadius.bottomLeft,
-                                                                    borderRadius.bottomRight);
-            setShadow(shadow);
-        }
-        else
-        {
-            auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Inactive,
-                                                                    SHADOW_BORDER,
-                                                                    INACTIVE_DARKNESS,
-                                                                    borderRadius.topLeft,
-                                                                    borderRadius.topRight,
-                                                                    borderRadius.bottomLeft,
-                                                                    borderRadius.bottomRight);
-            setShadow(shadow);
-        }
+        auto withOpacity = [](const QColor &color, qreal opacity)->QColor {
+            QColor c(color);
+            c.setAlphaF(opacity);
+            return c;
+        };
+
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
+            .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
+
+        BoxShadowRenderer shadowRenderer;
+        shadowRenderer.setBorderRadius(Frame_FrameRadius + 0.5);
+        shadowRenderer.setBoxSize(boxSize);
+        shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
+
+        const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
+        shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius, withOpacity(g_shadowColor, params.shadow1.opacity * strength));
+        shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius, withOpacity(g_shadowColor, params.shadow2.opacity * strength));
+
+        QImage shadowTexture = shadowRenderer.render();
+
+        QPainter painter(&shadowTexture);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        const QRect outerRect = shadowTexture.rect();
+
+        QRect boxRect(QPoint(0, 0), boxSize);
+        boxRect.moveCenter(outerRect.center());
+
+        // Mask out inner rect.
+        const QMargins padding = QMargins(
+            boxRect.left() - outerRect.left() - 3 - params.offset.x(),
+            boxRect.top() - outerRect.top() - 3 - params.offset.y(),
+            outerRect.right() - boxRect.right() - 3 + params.offset.x(),
+            outerRect.bottom() - boxRect.bottom() - 3 + params.offset.y());
+        const QRect innerRect = outerRect - padding;
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::black);
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+        painter.drawRoundedRect(innerRect, Frame_FrameRadius + 0.5, Frame_FrameRadius + 0.5);
+
+        // Draw outline.
+        painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
+        painter.setBrush(Qt::NoBrush);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        painter.drawRoundedRect(innerRect, Frame_FrameRadius - 0.5, Frame_FrameRadius - 0.5);
+
+        painter.end();
+
+        g_sShadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
+        g_sShadow->setPadding(padding);
+        g_sShadow->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
+        g_sShadow->setShadow(shadowTexture);
     }
+
+    setShadow(g_sShadow);
+    update();
 }
 
 void Decoration::updateTitleBar()
@@ -238,7 +309,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
         painter->setBrush(frameColor());
-        painter->drawRoundedRect(rect, RADIUS, RADIUS);
+        painter->drawRoundedRect(rect, Frame_FrameRadius, Frame_FrameRadius);
+        auto rectLeftBottom = QRect(0, rect.height() - Frame_FrameRadius, Frame_FrameRadius, Frame_FrameRadius);
+        painter->drawRoundedRect(rectLeftBottom, 3, 3); //左下角补角
+        auto rectRightBottom = QRect(rect.width() - Frame_FrameRadius, rect.height() - Frame_FrameRadius, Frame_FrameRadius, Frame_FrameRadius);
+        painter->drawRoundedRect(rectRightBottom, 3, 3);
     }
     painter->restore();
 
