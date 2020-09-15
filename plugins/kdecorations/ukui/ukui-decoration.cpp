@@ -138,6 +138,27 @@ void Decoration::init()
         calculateBorders();
         //button
         m_buttons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &UKUI::Button::create);
+        m_buttons->setSpacing(0);
+
+        m_nButtonCout = 0;
+        for (const QPointer<KDecoration2::DecorationButton>& button : m_buttons->buttons()) {
+            if(KDecoration2::DecorationButtonType::Minimize == button.data()->type() && true == client().data()->isMinimizeable())
+            {
+                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+                m_nButtonCout++;
+            }
+            if(KDecoration2::DecorationButtonType::Maximize == button.data()->type() && true == client().data()->isMaximizeable())
+            {
+                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+                m_nButtonCout++;
+            }
+            if(KDecoration2::DecorationButtonType::Close == button.data()->type() && true == client().data()->isCloseable())
+            {
+                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+                m_nButtonCout++;
+            }
+        }
+
         updateButtonsGeometry();
         connect(settings().data(), &KDecoration2::DecorationSettings::decorationButtonsRightChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
@@ -244,7 +265,7 @@ void Decoration::updateTitleBar()
     }
     auto c = client().data();
     const int x = c->isMaximized() ? 0 : m_borderLeft;  //当不是最大化时，带边框，x从左边框起计算
-    const int width =  c->width() - 3 * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
+    const int width =  c->width() - m_nButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
     setTitleBar(QRect(x, 0, width, borderTop()));
 }
 
@@ -324,7 +345,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     painter->setFont(font);
     painter->setPen(fontColor());
 
-    const auto cR = captionRect();
+    const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignHCenter);
     const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
     painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
 
@@ -334,27 +355,12 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
 void Decoration::updateButtonsGeometry()
 {
-    m_buttons->setSpacing(0);
-    for (const QPointer<KDecoration2::DecorationButton>& button : m_buttons->buttons()) {
-        button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
-    }
-
     auto c = client().data();
     //由于上边檐是m_ButtonMarginTop，为了美观按钮组右边空白也应该是m_ButtonMarginTop这么多，但是当窗体不是最大化时，本身带有边框，故需要向右偏移m_borderLeft和m_borderRight
-    auto posX = c->width() - 3 * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight));
+    auto posX = c->width() - m_nButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight));
     m_buttons->setPos(QPoint(posX, m_ButtonMarginTop));
 
     update();
-}
-
-QPair<QRect,Qt::Alignment> Decoration::captionRect() const
-{
-    auto c = client().data();
-    const int x = c->isMaximized() ? 0 : m_borderLeft;
-    const int width =  c->width() - 3 * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
-
-    const QRect maxRect(x, 0, width, borderTop());
-    return qMakePair(maxRect, Qt::AlignVCenter | Qt::AlignHCenter);
 }
 
 QColor Decoration::fontColor()const

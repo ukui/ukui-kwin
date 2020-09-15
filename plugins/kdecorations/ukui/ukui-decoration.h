@@ -77,7 +77,6 @@ public:
     void init();
     void paint(QPainter *painter, const QRect &repaintRegion) override;
 
-    QPair<QRect,Qt::Alignment> captionRect() const;
     QColor titleBarColor() const;
     QColor fontColor() const;
     QColor frameColor() const;
@@ -99,6 +98,7 @@ private:
     QColor m_fontActiveColor;   //活动字体颜色
     QColor m_fontInactiveColor; //非活动字体颜色
 
+    int m_nButtonCout;
 
 public slots:
     void updateButtonsGeometry();

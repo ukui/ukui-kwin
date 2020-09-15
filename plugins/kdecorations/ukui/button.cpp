@@ -32,10 +32,22 @@ Button *Button::create(KDecoration2::DecorationButtonType type, KDecoration2::De
     auto b = new Button(type, d, parent);
     switch (type) {
         case KDecoration2::DecorationButtonType::Close:
-            b->setVisible(true);
+            b->setVisible(d->client().data()->isCloseable());
             break;
+
+        case KDecoration2::DecorationButtonType::Maximize:
+            b->setVisible( d->client().data()->isMaximizeable());
+            //QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Button::setVisible );
+            break;
+
+        case KDecoration2::DecorationButtonType::Minimize:
+            b->setVisible( d->client().data()->isMinimizeable());
+            //QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Button::setVisible );
+            break;
+
         case KDecoration2::DecorationButtonType::ContextHelp:
             b->setVisible(false);
+
         default:
             break;
     }
@@ -55,6 +67,11 @@ Button::Button(KDecoration2::DecorationButtonType type, UKUI::Decoration *decora
 
 void Button::paint(QPainter *painter, const QRect &repaintRegion)
 {
+    if(false == isVisible())
+    {
+        return;
+    }
+
     painter->save();
     //printf("\nButton::paint, x:%f, y:%f, w:%f, h:%f\n", geometry().x(), geometry().y(), geometry().width(), geometry().height());
     painter->setPen(Qt::NoPen);
