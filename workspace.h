@@ -603,7 +603,7 @@ private:
     AbstractClient* delayfocus_client;
     QPoint focusMousePos;
 
-    QList<X11Client *> clients;
+    QList<X11Client *> clients;     //desktop不属于X11Client，不在clients列表内
     QList<AbstractClient*> m_allClients;
     QList<X11Client *> desktops;
     QList<Unmanaged *> unmanaged;
@@ -611,7 +611,7 @@ private:
     QList<InternalClient *> m_internalClients;
 
     QList<Toplevel *> unconstrained_stacking_order; // Topmost last
-    QList<Toplevel *> stacking_order; // Topmost last
+    QList<Toplevel *> stacking_order; // Topmost last   至少比clients多一个desktop窗口，还可以多包含XdgShellClient
     QVector<xcb_window_t> manual_overlays; //Topmost last
     bool force_restacking;
     QList<Toplevel *> x_stacking; // From XQueryTree()

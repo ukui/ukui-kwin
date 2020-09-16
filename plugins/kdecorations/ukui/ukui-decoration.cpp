@@ -141,20 +141,24 @@ void Decoration::init()
         m_buttons->setSpacing(0);
 
         m_nButtonCout = 0;
-        for (const QPointer<KDecoration2::DecorationButton>& button : m_buttons->buttons()) {
-            if(KDecoration2::DecorationButtonType::Minimize == button.data()->type() && true == client().data()->isMinimizeable())
+        for (const QPointer<KDecoration2::DecorationButton>& button : m_buttons->buttons())
+        {
+            button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+            if(false == button.data()->isVisible())
             {
-                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+                continue;
+            }
+
+            if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
+            {
                 m_nButtonCout++;
             }
-            if(KDecoration2::DecorationButtonType::Maximize == button.data()->type() && true == client().data()->isMaximizeable())
+            if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
             {
-                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
                 m_nButtonCout++;
             }
-            if(KDecoration2::DecorationButtonType::Close == button.data()->type() && true == client().data()->isCloseable())
+            if(KDecoration2::DecorationButtonType::Close == button.data()->type())
             {
-                button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
                 m_nButtonCout++;
             }
         }
@@ -288,7 +292,6 @@ void Decoration::calculateBorders()
 void Decoration::themeChanged()
 {
     QString configFileName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/kdeglobals";
-    //printf("\nDecoration::themeChanged:%s\n", QStandardPaths::writableLocation(QStandardPaths::HomeLocation).toStdString().c_str());
     QSettings* themeSettings = new QSettings(configFileName, QSettings::IniFormat);
 
     themeSettings->beginGroup("Theme");

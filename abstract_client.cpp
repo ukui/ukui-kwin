@@ -256,8 +256,7 @@ void AbstractClient::updateLayer()
         return;
     StackingUpdatesBlocker blocker(workspace());
     invalidateLayer(); // invalidate, will be updated when doing restacking
-    for (auto it = transients().constBegin(),
-                                  end = transients().constEnd(); it != end; ++it)
+    for (auto it = transients().constBegin(), end = transients().constEnd(); it != end; ++it)
         (*it)->updateLayer();
 }
 
