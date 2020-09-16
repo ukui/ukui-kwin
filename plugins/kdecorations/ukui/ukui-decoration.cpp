@@ -125,9 +125,7 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
     m_nFont = 12;
 
-    m_frameColor = QColor(255, 255, 255);
-    m_fontActiveColor= QColor(0, 0, 0);
-    m_fontInactiveColor= QColor(105, 105, 105);
+    themeUpdate();
 }
 
 void Decoration::init()
@@ -168,7 +166,7 @@ void Decoration::init()
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
 
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
-        connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::themeChanged));
+        connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::themeUpdate));
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         //connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
@@ -289,7 +287,7 @@ void Decoration::calculateBorders()
     }
 }
 
-void Decoration::themeChanged()
+void Decoration::themeUpdate()
 {
     QString configFileName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/kdeglobals";
     QSettings* themeSettings = new QSettings(configFileName, QSettings::IniFormat);

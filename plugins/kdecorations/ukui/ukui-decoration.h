@@ -105,7 +105,7 @@ public slots:
     void calculateBorders();
     void updateTitleBar();
     void updateShadow();
-    void themeChanged();
+    void themeUpdate();
 
 private:
     KDecoration2::DecorationButtonGroup *m_buttons = nullptr;
