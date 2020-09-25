@@ -31,6 +31,14 @@ Button *Button::create(KDecoration2::DecorationButtonType type, KDecoration2::De
     auto d = static_cast<UKUI::Decoration *>(decoration);
     auto b = new Button(type, d, parent);
     switch (type) {
+        case KDecoration2::DecorationButtonType::Menu:
+            QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::iconChanged, b, [b]() {b->update();});
+            break;
+
+        case KDecoration2::DecorationButtonType::OnAllDesktops:
+            b->setVisible(false);
+            break;
+
         case KDecoration2::DecorationButtonType::Close:
             b->setVisible(d->client().data()->isCloseable());
             break;
@@ -72,39 +80,61 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         return;
     }
 
+    if(!decoration())
+    {
+        return;
+    }
+
     painter->save();
     //printf("\nButton::paint, x:%f, y:%f, w:%f, h:%f\n", geometry().x(), geometry().y(), geometry().width(), geometry().height());
     painter->setPen(Qt::NoPen);
+    switch (type()) {
+        case KDecoration2::DecorationButtonType::Close:
+            if(isPressed())
+            {
+                painter->setBrush(QColor(215, 52, 53));   //关闭按钮底色
+            }
+            else if(isHovered())
+            {
+                painter->setBrush(QColor(240, 65, 52));   //关闭按钮底色
+            }
+            else
+            {
+                painter->setBrush(backgroundColor());
+            }
+            break;
 
-    if(isPressed())
-    {
-        if(KDecoration2::DecorationButtonType::Close == type())
-        {
-            painter->setBrush(QColor(205, 0, 0));   //关闭按钮底色
-        }
-        else
-        {
-            painter->setBrush(QColor(0, 0, 205));   //其他按钮底色
-        }
+        case KDecoration2::DecorationButtonType::Maximize:
+        case KDecoration2::DecorationButtonType::Minimize:
+            if(isPressed())
+            {
+                painter->setBrush(QColor(50, 87, 202));   //其他按钮底色
+            }
+            else if(isHovered())
+            {
+                painter->setBrush(QColor(61, 107, 229));   //其他按钮底色
+            }
+            else
+            {
+                painter->setBrush(backgroundColor());
+            }
+            break;
+
+        default:
+            break;
     }
-    else if(isHovered())
+
+    // menu button
+    if(type() == KDecoration2::DecorationButtonType::Menu)
     {
-        if(KDecoration2::DecorationButtonType::Close == type())
-        {
-            painter->setBrush(QColor(255, 0, 0));   //关闭按钮底色
-        }
-        else
-        {
-            painter->setBrush(QColor(0, 0, 255));   //其他按钮底色
-        }
+        const QRectF iconRect(geometry().topLeft(), geometry().size().toSize());
+        decoration()->client().data()->icon().paint(painter, iconRect.toRect());
     }
     else
     {
-        painter->setBrush(backgroundColor());
+        painter->drawRoundedRect(geometry(), 3, 3);
+        drawIcon( painter );
     }
-
-    painter->drawRoundedRect(geometry(), 3, 3);
-    drawIcon(painter);
 
     painter->restore();
 }
@@ -117,49 +147,57 @@ void Button::drawIcon( QPainter *painter ) const
     painter->translate(geometry().topLeft());
     //printf("\n Button::drawIcon geometry().topLeft().x:%f geometry().topLeft().y:%f geometry().width():%f\n",geometry().topLeft().x(), geometry().topLeft().y(), geometry().width());
     const qreal width(geometry().width());
-    painter->scale(width/18, width/18);   //因为下面的线条框架都是按18*18的框架比例画的。
+    painter->scale(width/30, width/30);   //因为下面的线条框架都是按30*30的框架比例画的。
 
+    QPen pen;
+    pen.setWidthF(30/width);     //按钮图标线宽为1个单位
     if(isPressed() || isHovered())
     {
-        painter->setPen(backgroundColor());
+        pen.setColor(backgroundColor());
     }
     else
     {
-        painter->setPen(foregroundColor());
+        pen.setColor(foregroundColor());
     }
 
+    painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);
 
     switch(type())
     {
         case KDecoration2::DecorationButtonType::Close:
         {
-            painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
-            painter->drawLine( 12, 6, 6, 12 );
+            painter->drawLine(QPointF(9, 9), QPointF(21, 21));
+            painter->drawLine(QPointF(9, 21), QPointF(21, 9));
             break;
         }
 
         case KDecoration2::DecorationButtonType::Maximize:
         {
-            if( isChecked() )   //还原
+            if(isChecked())   //还原
             {
-                painter->drawLine( QPointF( 7, 7 ), QPointF( 7, 6 ) );
-                painter->drawArc(7, 5, 2, 2, 90 * 16, 90 * 16);
-                painter->drawLine( QPointF( 8, 5 ), QPointF( 11, 5 ) );
-                painter->drawArc(10, 5, 2, 2, 0, 90 * 16);
-                painter->drawLine( QPointF( 12, 6 ), QPointF( 12, 9 ) );
-                painter->drawArc(10, 8, 2, 2, 270 * 16, 90 * 16);
-                painter->drawLine( QPointF( 11, 10 ), QPointF( 10, 10 ) );
-                painter->drawRoundedRect(QRect(5, 7, 5, 5), 1, 1);
-            } else {            //最大化
-                painter->drawRoundedRect(QRect(6, 6, 6, 6), 1, 1);
+                painter->drawLine(QPointF(11, 11), QPointF(11, 10));
+                painter->drawArc(11, 8, 4, 4, 90 * 16, 90 * 16);
+
+                painter->drawLine(QPointF(13, 8), QPointF(19, 8));
+                painter->drawArc(17, 8, 4, 4, 0, 90 * 16);
+
+                painter->drawLine(QPointF(21, 10), QPointF(21, 16));
+                painter->drawArc(17, 14, 4, 4, 270 * 16, 90 * 16);
+
+                painter->drawLine(QPointF(19, 18), QPointF(18, 18));
+
+                painter->drawRoundedRect(QRect(8, 11, 10, 10), 2, 2);
+            } else
+            {                   //最大化
+                painter->drawRoundedRect(QRect(9, 9, 12, 12), 2, 2);
             }
             break;
         }
 
         case KDecoration2::DecorationButtonType::Minimize:
         {
-            painter->drawLine(QPointF(6, 9), QPointF(12, 9));
+            painter->drawLine(QPointF(10, 14.5), QPointF(20, 14.5));
             break;
         }
 

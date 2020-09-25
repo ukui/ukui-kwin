@@ -98,7 +98,11 @@ private:
     QColor m_fontActiveColor;   //活动字体颜色
     QColor m_fontInactiveColor; //非活动字体颜色
 
-    int m_nButtonCout;
+    int m_nleftButtonCout;
+    int m_nrightButtonCout;
+
+    KDecoration2::DecorationButtonGroup* m_leftButtons;
+    KDecoration2::DecorationButtonGroup* m_rightButtons;
 
 public slots:
     void updateButtonsGeometry();
@@ -107,8 +111,6 @@ public slots:
     void updateShadow();
     void themeUpdate();
 
-private:
-    KDecoration2::DecorationButtonGroup *m_buttons = nullptr;
 };
 
 }

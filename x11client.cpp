@@ -2106,6 +2106,16 @@ void X11Client::takeFocus()
                 }
                 // 在进入到显示桌面模式后可能还有活跃的窗口，此时不要最小化，(如进入这个模式后才新建的窗口，新建窗口的那一瞬间其实也已聚焦会进入该函数)
                 if (c->userTime() > workspace()->showingDesktopTimestamp()) {
+                    //在显示桌面前，假如某一个terminal是顶层窗口，则在显示桌面后，如果新开一个terminal，老的c->userTime()用的组的用户时间，比显示桌面早，导致进入该分支，直接continue
+                    //所以加入注释下foreach后，导致老的terminal直接continue，而不会最小化，2个terminal同时出现。放开注释后，可使自己最小化，但慎放开注释
+                    //foreach (const X11Client *c2, group()->members()) {
+                    //    if(c == c2)
+                    //    {
+                    //        c->minimize(true);
+                    //        printf("%s,X11Client::takeFocus, break, continue, caption:%s\n", strPushDate.toStdString().c_str(), c->caption().toStdString().c_str());
+                    //        break;
+                    //    }
+                    //}
                     continue;
                 }
 

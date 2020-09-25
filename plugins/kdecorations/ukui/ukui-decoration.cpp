@@ -37,7 +37,9 @@
 #include <KDecoration2/DecorationButtonGroup>
 
 #define CUSOR_BORDER  10                //边框伸展光标范围
-#define Frame_FrameRadius 6             //窗体圆角
+#define Frame_TopRadius 6               //窗体顶部圆角
+#define Frame_BottomRadius 3            //窗体底部圆角
+
 
 
 K_PLUGIN_FACTORY_WITH_JSON(
@@ -60,7 +62,7 @@ const CompositeShadowParams g_shadowParams[] = {
     // Small
     CompositeShadowParams(
         QPoint(0, 4),
-        ShadowParams(QPoint(0, 0), 16, 1),
+        ShadowParams(QPoint(0, 0), 16, 0.8),      //ShadowParams(QPoint(0, 0), 16, 1),
         ShadowParams(QPoint(0, -2), 8, 0.4)),
     // Medium
     CompositeShadowParams(
@@ -125,6 +127,8 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
     m_nFont = 12;
 
+    m_leftButtons = nullptr;
+    m_rightButtons = nullptr;
     themeUpdate();
 }
 
@@ -135,11 +139,29 @@ void Decoration::init()
     if (!isDecoBorderOnly) {
         calculateBorders();
         //button
-        m_buttons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &UKUI::Button::create);
-        m_buttons->setSpacing(0);
+        m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &UKUI::Button::create);
+        m_leftButtons->setSpacing(0);
+        printf("Decoration::init m_leftButtons size:%d\n",m_leftButtons->buttons().size());
+        m_nleftButtonCout = 0;
+        for (const QPointer<KDecoration2::DecorationButton>& button : m_leftButtons->buttons())
+        {
+            button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+            if(false == button.data()->isVisible())
+            {
+                continue;
+            }
 
-        m_nButtonCout = 0;
-        for (const QPointer<KDecoration2::DecorationButton>& button : m_buttons->buttons())
+            if(KDecoration2::DecorationButtonType::Menu == button.data()->type())
+            {
+                m_nleftButtonCout++;
+            }
+        }
+
+        m_rightButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &UKUI::Button::create);
+        m_rightButtons->setSpacing(0);
+
+        m_nrightButtonCout = 0;
+        for (const QPointer<KDecoration2::DecorationButton>& button : m_rightButtons->buttons())
         {
             button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
             if(false == button.data()->isVisible())
@@ -149,15 +171,15 @@ void Decoration::init()
 
             if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
             {
-                m_nButtonCout++;
+                m_nrightButtonCout++;
             }
             if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
             {
-                m_nButtonCout++;
+                m_nrightButtonCout++;
             }
             if(KDecoration2::DecorationButtonType::Close == button.data()->type())
             {
-                m_nButtonCout++;
+                m_nrightButtonCout++;
             }
         }
 
@@ -193,7 +215,7 @@ void Decoration::init()
 void Decoration::updateShadow()
 {
     if(!g_sShadow){
-        const CompositeShadowParams params = lookupShadowParams(3);
+        const CompositeShadowParams params = lookupShadowParams(1);
         if (params.isNone()) {
             g_sShadow.clear();
             setShadow(g_sShadow);
@@ -209,7 +231,7 @@ void Decoration::updateShadow()
             .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
-        shadowRenderer.setBorderRadius(Frame_FrameRadius + 0.5);
+        shadowRenderer.setBorderRadius(Frame_TopRadius + 0.5);
         shadowRenderer.setBoxSize(boxSize);
         shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
@@ -238,13 +260,13 @@ void Decoration::updateShadow()
         painter.setPen(Qt::NoPen);
         painter.setBrush(Qt::black);
         painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-        painter.drawRoundedRect(innerRect, Frame_FrameRadius + 0.5, Frame_FrameRadius + 0.5);
+        painter.drawRoundedRect(innerRect, Frame_TopRadius + 0.5, Frame_TopRadius + 0.5);
 
         // Draw outline.
         painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
         painter.setBrush(Qt::NoBrush);
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        painter.drawRoundedRect(innerRect, Frame_FrameRadius - 0.5, Frame_FrameRadius - 0.5);
+        painter.drawRoundedRect(innerRect, Frame_TopRadius - 0.5, Frame_TopRadius - 0.5);
 
         painter.end();
 
@@ -266,8 +288,8 @@ void Decoration::updateTitleBar()
         return;
     }
     auto c = client().data();
-    const int x = c->isMaximized() ? 0 : m_borderLeft;  //当不是最大化时，带边框，x从左边框起计算
-    const int width =  c->width() - m_nButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
+    const int x = c->isMaximized() ? m_ButtonMarginTop + m_nleftButtonCout * m_buttonWidth : m_ButtonMarginTop + m_borderLeft + m_nleftButtonCout * m_buttonWidth;  //当不是最大化时，带边框，x从左边框起计算
+    const int width =  c->width() - x - m_nrightButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
     setTitleBar(QRect(x, 0, width, borderTop()));
 }
 
@@ -331,11 +353,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
         painter->setBrush(frameColor());
-        painter->drawRoundedRect(rect, Frame_FrameRadius, Frame_FrameRadius);
-        auto rectLeftBottom = QRect(0, rect.height() - Frame_FrameRadius, Frame_FrameRadius, Frame_FrameRadius);
-        painter->drawRoundedRect(rectLeftBottom, 3, 3); //左下角补角
-        auto rectRightBottom = QRect(rect.width() - Frame_FrameRadius, rect.height() - Frame_FrameRadius, Frame_FrameRadius, Frame_FrameRadius);
-        painter->drawRoundedRect(rectRightBottom, 3, 3);
+        painter->drawRoundedRect(rect, Frame_TopRadius, Frame_TopRadius);
+        auto rectLeftBottom = QRect(0, rect.height() - Frame_TopRadius * 2, Frame_TopRadius * 2, Frame_TopRadius * 2);
+        painter->drawRoundedRect(rectLeftBottom, Frame_BottomRadius, Frame_BottomRadius);   //左下角补角
+        auto rectRightBottom = QRect(rect.width() - Frame_TopRadius * 2, rect.height() - Frame_TopRadius * 2, Frame_TopRadius * 2, Frame_TopRadius * 2);
+        painter->drawRoundedRect(rectRightBottom, Frame_BottomRadius, Frame_BottomRadius);
     }
     painter->restore();
 
@@ -346,20 +368,24 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     painter->setFont(font);
     painter->setPen(fontColor());
 
-    const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignHCenter);
+    const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignLeft);
     const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
     painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
 
     //按钮组刷颜色
-    m_buttons->paint(painter, repaintRegion);
+    m_leftButtons->paint(painter, repaintRegion);
+    m_rightButtons->paint(painter, repaintRegion);
 }
 
 void Decoration::updateButtonsGeometry()
 {
     auto c = client().data();
+
+    m_leftButtons->setPos(QPoint((c->isMaximized() ? 0 : m_borderLeft) + m_ButtonMarginTop, m_ButtonMarginTop));
+
     //由于上边檐是m_ButtonMarginTop，为了美观按钮组右边空白也应该是m_ButtonMarginTop这么多，但是当窗体不是最大化时，本身带有边框，故需要向右偏移m_borderLeft和m_borderRight
-    auto posX = c->width() - m_nButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight));
-    m_buttons->setPos(QPoint(posX, m_ButtonMarginTop));
+    auto posX = c->width() - m_nrightButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight));
+    m_rightButtons->setPos(QPoint(posX, m_ButtonMarginTop));
 
     update();
 }

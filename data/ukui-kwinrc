@@ -74,7 +74,7 @@ ShowTabBox=true
 SwitchingMode=0
 
 [org.kde.kdecoration2]
-ButtonsOnLeft=
+ButtonsOnLeft=M
 ButtonsOnRight=IAX
 library=UKUI
 theme=UKUI
