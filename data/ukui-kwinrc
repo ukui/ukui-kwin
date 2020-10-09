@@ -33,6 +33,7 @@ kwin4_effect_windowapertureEnabled=false
 kwin4_effect_fadeEnabled=false
 #UKUI true conflict with sogou input
 presentwindowsEnabled=false
+kwin4_effect_morphingpopupsEnabled=false
 
 [Effect-CoverSwitch]
 TabBox=false

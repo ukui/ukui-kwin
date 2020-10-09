@@ -6,4 +6,8 @@ do
 		sed -i '/library=/d' "/home/"$file"/.config/ukui-kwinrc"
 		sed -i '/theme=/d' "/home/"$file"/.config/ukui-kwinrc"
 	fi
+	if [ -f "/home/"$file"/.config/kglobalshortcutsrc" ] #注意此处之间一定要加上空格，否则会报错
+	then
+		rm /home/"$file"/.config/kglobalshortcutsrc
+	fi
 done
