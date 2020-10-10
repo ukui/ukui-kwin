@@ -740,7 +740,7 @@ install(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ukui-kwin_export.h DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 
 # Install the UKUIKWin/Script service type
-install(FILES scripting/kwinscript.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR}/ukui-kwin)
+install(FILES scripting/ukuikwinscript.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
 add_subdirectory(qml)
 

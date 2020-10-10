@@ -66,7 +66,7 @@ macro(KWIN4_ADD_EFFECT name)
 endmacro()
 
 # Install the UKUIKWin/Effect service type
-install(FILES kwineffect.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR}/ukui-kwin)
+install(FILES ukuikwineffect.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR}/ukui-kwin)
 
 # Create initial variables
 set(kwin4_effect_include_directories)

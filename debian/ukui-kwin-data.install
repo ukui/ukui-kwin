@@ -16,7 +16,6 @@ usr/share/kservices5/kcm_ukuikwin_effects.desktop
 usr/share/kservices5/kcm_ukuikwin_virtualdesktops.desktop
 usr/share/kservices5/ukuikwin*.desktop
 usr/share/kservices5/ukui-kwin/
-usr/share/kservicetypes5/ukui-kwin/
 usr/share/kservicetypes5/ukuikwin*.desktop
 usr/share/ukui-kwin/
 usr/share/locale/*/*/kcm-ukui-kwin-scripts.mo
