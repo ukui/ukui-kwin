@@ -116,21 +116,21 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
             nDpi = it.value().toInt();
         }
     }
+    int nScaler = qRound(nDpi / 96.0f);
+    m_borderLeft = nScaler * 1;
+    m_borderTop = nScaler * 38;
+    m_borderRight = nScaler * 1;
+    m_borderBottom = nScaler * 1;
 
-    m_borderLeft = qRound((nDpi / 96.0f) * 1);
-    m_borderTop = qRound((nDpi / 96.0f) * 38);
-    m_borderRight = qRound((nDpi / 96.0f) * 1);
-    m_borderBottom = qRound((nDpi / 96.0f) * 1);
+    m_buttonWidth = nScaler * 30;
+    m_buttonHeight = nScaler * 30;
 
-    m_buttonWidth = qRound((nDpi / 96.0f) * 30);
-    m_buttonHeight = qRound((nDpi / 96.0f) * 30);
+    m_leftButtonWidth = nScaler * 24;
+    m_leftButtonHeight = nScaler * 24;
 
-    m_leftButtonWidth = qRound((nDpi / 96.0f) * 24);
-    m_leftButtonHeight = qRound((nDpi / 96.0f) * 24);
+    m_ButtonMarginTop = nScaler * 4;
 
-    m_ButtonMarginTop = qRound((nDpi / 96.0f) * 4);
-
-    m_buttonSpacing = qRound((nDpi / 96.0f) * 4);
+    m_buttonSpacing = nScaler * 4;
 
     m_leftButtons = nullptr;
     m_rightButtons = nullptr;
@@ -139,8 +139,7 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
 void Decoration::init()
 {
-    bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
-    //printf("\nbegin init ukui-style now:%d\n",isDecoBorderOnly);
+    bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框    
     if (!isDecoBorderOnly) {
         calculateBorders();
         //button

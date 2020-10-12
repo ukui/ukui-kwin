@@ -37,6 +37,8 @@ namespace UKUI {
         explicit Button(QObject *parent = nullptr, const QVariantList &args = QVariantList());
         explicit Button(KDecoration2::DecorationButtonType type, UKUI::Decoration *decoration, QObject *parent);
 
+        ~Button();
+
         //* button creation
         static Button *create(KDecoration2::DecorationButtonType type, KDecoration2::Decoration *decoration, QObject *parent);
 
