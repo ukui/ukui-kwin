@@ -40,6 +40,8 @@
 #define Frame_TopRadius 6               //窗体顶部圆角
 #define Frame_BottomRadius 3            //窗体底部圆角
 
+#define Font_Size   11                  //字体大小
+
 
 
 K_PLUGIN_FACTORY_WITH_JSON(
@@ -123,9 +125,12 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     m_buttonWidth = qRound((nDpi / 96.0f) * 30);
     m_buttonHeight = qRound((nDpi / 96.0f) * 30);
 
+    m_leftButtonWidth = qRound((nDpi / 96.0f) * 24);
+    m_leftButtonHeight = qRound((nDpi / 96.0f) * 24);
+
     m_ButtonMarginTop = qRound((nDpi / 96.0f) * 4);
 
-    m_nFont = 12;
+    m_buttonSpacing = qRound((nDpi / 96.0f) * 4);
 
     m_leftButtons = nullptr;
     m_rightButtons = nullptr;
@@ -140,12 +145,12 @@ void Decoration::init()
         calculateBorders();
         //button
         m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &UKUI::Button::create);
-        m_leftButtons->setSpacing(0);
+        m_leftButtons->setSpacing(m_buttonSpacing);
         printf("Decoration::init m_leftButtons size:%d\n",m_leftButtons->buttons().size());
         m_nleftButtonCout = 0;
         for (const QPointer<KDecoration2::DecorationButton>& button : m_leftButtons->buttons())
         {
-            button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+            button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_leftButtonWidth, m_leftButtonHeight)));
             if(false == button.data()->isVisible())
             {
                 continue;
@@ -158,7 +163,7 @@ void Decoration::init()
         }
 
         m_rightButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &UKUI::Button::create);
-        m_rightButtons->setSpacing(0);
+        m_rightButtons->setSpacing(m_buttonSpacing);
 
         m_nrightButtonCout = 0;
         for (const QPointer<KDecoration2::DecorationButton>& button : m_rightButtons->buttons())
@@ -288,15 +293,16 @@ void Decoration::updateTitleBar()
         return;
     }
     auto c = client().data();
-    const int x = c->isMaximized() ? m_ButtonMarginTop + m_nleftButtonCout * m_buttonWidth : m_ButtonMarginTop + m_borderLeft + m_nleftButtonCout * m_buttonWidth;  //当不是最大化时，带边框，x从左边框起计算
-    const int width =  c->width() - x - m_nrightButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : m_borderRight);  //当不是最大化有边框时，标题宽度可向右偏移右边框宽度
+    const int x = (m_ButtonMarginTop + m_buttonSpacing) * 2 + m_nleftButtonCout * m_leftButtonWidth;
+    const int width =  c->width() + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight))
+            - (m_ButtonMarginTop + m_buttonSpacing) * 2 - m_nleftButtonCout * m_leftButtonWidth         //减去左侧按钮空间
+            - m_nrightButtonCout * (m_buttonWidth + m_buttonSpacing);                                   //减去右侧按钮空间
     setTitleBar(QRect(x, 0, width, borderTop()));
 }
 
 void Decoration::calculateBorders()
 {    
-    const bool maximized = client().data()->isMaximized();
-
+    bool maximized = client().data()->isMaximized();
     if(true == maximized)
     {
         setBorders(QMargins(0, m_borderTop, 0, 0));     //真正的边框尺寸
@@ -315,11 +321,11 @@ void Decoration::themeUpdate()
     QSettings* themeSettings = new QSettings(configFileName, QSettings::IniFormat);
 
     themeSettings->beginGroup("Theme");
-    int themeId = themeSettings->value("Style").toInt();
+    m_themeId = themeSettings->value("Style").toInt();
     themeSettings->endGroup();
     delete themeSettings;
 
-    if(1 == themeId)
+    if(1 == m_themeId)
     {
         m_frameColor = QColor(31, 32, 34);
         m_fontActiveColor= QColor(207, 207, 207);
@@ -363,7 +369,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
     //写标题
     QFont font;
-    font.setPointSize(m_nFont);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
+    font.setPointSize(Font_Size);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
     //font.setFamily();
     painter->setFont(font);
     painter->setPen(fontColor());
@@ -381,10 +387,10 @@ void Decoration::updateButtonsGeometry()
 {
     auto c = client().data();
 
-    m_leftButtons->setPos(QPoint((c->isMaximized() ? 0 : m_borderLeft) + m_ButtonMarginTop, m_ButtonMarginTop));
+    m_leftButtons->setPos(QPoint(m_ButtonMarginTop + m_buttonSpacing, m_ButtonMarginTop + m_buttonSpacing));
 
-    //由于上边檐是m_ButtonMarginTop，为了美观按钮组右边空白也应该是m_ButtonMarginTop这么多，但是当窗体不是最大化时，本身带有边框，故需要向右偏移m_borderLeft和m_borderRight
-    auto posX = c->width() - m_nrightButtonCout * m_buttonWidth - m_ButtonMarginTop + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight));
+    //由于上边檐是m_ButtonMarginTop，右侧有m_nrightButtonCout个按钮和按钮间隙
+    auto posX = c->width() + (c->isMaximized() ? 0 : (m_borderLeft + m_borderRight)) - m_nrightButtonCout * (m_buttonWidth +  m_buttonSpacing);
     m_rightButtons->setPos(QPoint(posX, m_ButtonMarginTop));
 
     update();
@@ -406,12 +412,6 @@ QColor Decoration::fontColor()const
 QColor Decoration::frameColor() const
 {
     return m_frameColor;
-}
-
-QColor Decoration::titleBarColor() const
-{
-    auto c = client().data();
-    return c->color(KDecoration2::ColorGroup::Inactive, KDecoration2::ColorRole::TitleBar);
 }
 
 

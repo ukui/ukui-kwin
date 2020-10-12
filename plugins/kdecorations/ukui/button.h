@@ -42,10 +42,6 @@ namespace UKUI {
 
         //* render
         void paint(QPainter *painter, const QRect &repaintRegion) override;
-        void drawIcon( QPainter *) const;
-        QColor foregroundColor() const;
-        QColor backgroundColor() const;
-
     };
 }
 

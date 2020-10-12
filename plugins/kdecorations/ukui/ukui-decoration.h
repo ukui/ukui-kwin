@@ -77,9 +77,9 @@ public:
     void init();
     void paint(QPainter *painter, const QRect &repaintRegion) override;
 
-    QColor titleBarColor() const;
     QColor fontColor() const;
     QColor frameColor() const;
+    int themeId(){return m_themeId;}
 
 private:
     int m_borderLeft;
@@ -90,9 +90,12 @@ private:
     int m_buttonWidth;          //按钮宽度
     int m_buttonHeight;         //按钮高度
 
+    int m_leftButtonWidth;      //左侧按钮高度
+    int m_leftButtonHeight;     //左侧按钮宽度
+
     int m_ButtonMarginTop;      //按钮上空白
 
-    int m_nFont;                //字体大小    
+    int m_buttonSpacing;        //按钮空隙
 
     QColor m_frameColor;        //框体颜色
     QColor m_fontActiveColor;   //活动字体颜色
@@ -100,6 +103,8 @@ private:
 
     int m_nleftButtonCout;
     int m_nrightButtonCout;
+
+    int m_themeId;
 
     KDecoration2::DecorationButtonGroup* m_leftButtons;
     KDecoration2::DecorationButtonGroup* m_rightButtons;

@@ -37,6 +37,7 @@ add_library(kwin-style-ukui SHARED
   xatom-helper.cpp
   xatom-helper.h
   kwin-style-ukui.json
+  icon.qrc
   #${TS_FILES}
 )
 

@@ -1,0 +1,22 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>icon/普通-最小化-白.png</file>
+        <file>icon/普通-最小化-黑.png</file>
+        <file>icon/悬停-最小化.png</file>
+        <file>icon/点击-最小化.png</file>
+        <file>icon/普通-最大化-白.png</file>
+        <file>icon/普通-最大化-黑.png</file>
+        <file>icon/悬停-最大化.png</file>
+        <file>icon/点击-最大化.png</file>
+        <file>icon/普通-还原-白.png</file>
+        <file>icon/普通-还原-黑.png</file>
+        <file>icon/悬停-还原.png</file>
+        <file>icon/点击-还原.png</file>
+        <file>icon/普通-关闭-白.png</file>
+        <file>icon/普通-关闭-黑.png</file>
+        <file>icon/悬停-关闭.png</file>
+        <file>icon/点击-关闭.png</file>
+    </qresource>
+
+</RCC>
