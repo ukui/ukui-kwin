@@ -283,11 +283,11 @@ void UserActionsMenu::init()
      m_fullScreenOperation->setCheckable(true);
      m_fullScreenOperation->setData(Options::FullScreenOp);
  
-     m_shadeOperation = advancedMenu->addAction(i18n("&Shade"));
-     m_shadeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-shade")));
-     setShortcut(m_shadeOperation, QStringLiteral("Window Shade"));
-     m_shadeOperation->setCheckable(true);
-     m_shadeOperation->setData(Options::ShadeOp);
+     //m_shadeOperation = advancedMenu->addAction(i18n("&Shade"));
+     //m_shadeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-shade")));
+     //setShortcut(m_shadeOperation, QStringLiteral("Window Shade"));
+     //m_shadeOperation->setCheckable(true);
+     //m_shadeOperation->setData(Options::ShadeOp);
 
 /* UKUI comment for the moment
  *   m_noBorderOperation = advancedMenu->addAction(i18n("&No Border"));
@@ -402,8 +402,8 @@ void UserActionsMenu::menuAboutToShow()
     m_moveOperation->setEnabled(m_client->isMovableAcrossScreens());
     m_maximizeOperation->setEnabled(m_client->isMaximizable());
     m_maximizeOperation->setChecked(m_client->maximizeMode() == MaximizeFull);
-    m_shadeOperation->setEnabled(m_client->isShadeable());
-    m_shadeOperation->setChecked(m_client->shadeMode() != ShadeNone);
+    //m_shadeOperation->setEnabled(m_client->isShadeable());
+    //m_shadeOperation->setChecked(m_client->shadeMode() != ShadeNone);
     m_keepAboveOperation->setChecked(m_client->keepAbove());
     m_keepBelowOperation->setChecked(m_client->keepBelow());
     m_fullScreenOperation->setEnabled(m_client->userCanSetFullScreen());
