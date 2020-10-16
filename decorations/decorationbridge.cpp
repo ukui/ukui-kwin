@@ -53,6 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPainter>
 #include <QScreen>
 #include <QtDBus>
+#include <QGSettings>
 
 
 namespace KWin
@@ -159,13 +160,11 @@ void DecorationBridge::init()
         }
     }
 
-    const QByteArray id("org.ukui.style");
-    const QByteArray path("/org/ukui/style/");
-    m_pSettings = new QGSettings(id, path, this);
+    QGSettings* pThemeSettings = new QGSettings("org.ukui.style", "/org/ukui/style/", this);
 
     QString strTheme;
-    if (true == m_pSettings->keys().contains("styleName")){
-        strTheme = m_pSettings->get("style-name").toString();
+    if (true == pThemeSettings->keys().contains("styleName")){
+        strTheme = pThemeSettings->get("style-name").toString();
         printf("DecorationBridge::init theme:%s\n", strTheme.toStdString().c_str());
     }
 

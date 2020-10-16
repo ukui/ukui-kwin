@@ -34,7 +34,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 #include <QSharedPointer>
-#include <QGSettings>
 
 class KPluginFactory;
 
@@ -108,7 +107,6 @@ private:
     bool m_noPlugin;
     int m_dpi;          //dpi值
     int m_themeId;      //主题id
-    QGSettings* m_pSettings;
     KWIN_SINGLETON(DecorationBridge)
 };
 } // Decoration
