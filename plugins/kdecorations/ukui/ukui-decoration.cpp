@@ -39,6 +39,9 @@
 #include <KDecoration2/DecorationSettings>
 #include <KDecoration2/DecorationButtonGroup>
 
+#include <KConfigGroup>
+#include <KSharedConfig>
+
 #define CUSOR_BORDER  10                //边框伸展光标范围
 #define Frame_TopRadius 6               //窗体顶部圆角
 #define Frame_BottomRadius 3            //窗体底部圆角
@@ -340,12 +343,46 @@ void Decoration::themeUpdate(int themeId)
         m_frameColor = QColor(31, 32, 34);
         m_fontActiveColor= QColor(207, 207, 207);
         m_fontInactiveColor= QColor(105, 105, 105);
+
+        //修改标题栏右键菜单颜色
+        auto config = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
+        KConfigGroup viewConfig(config, QStringLiteral("Colors:View"));
+        viewConfig.writeEntry("BackgroundAlternate", QColor(49,54,59));
+        viewConfig.writeEntry("BackgroundNormal", QColor(35,38,41));
+        viewConfig.writeEntry("DecorationHover", QColor(61,174,233));
+        viewConfig.writeEntry("ForegroundInactive", QColor(189,195,199));
+        viewConfig.writeEntry("ForegroundNormal", QColor(239,240,241));
+
+        KConfigGroup windowConfig(config, QStringLiteral("Colors:Window"));
+        windowConfig.writeEntry("BackgroundAlternate", QColor(77,77,77));
+        windowConfig.writeEntry("BackgroundNormal", QColor(49,54,59));
+        windowConfig.writeEntry("DecorationHover", QColor(61,174,233));
+        windowConfig.writeEntry("ForegroundInactive", QColor(189,195,199));
+        windowConfig.writeEntry("ForegroundNormal", QColor(239,240,241));
+        config->sync();
+
     }
     else
     {
         m_frameColor = QColor(255, 255, 255);
         m_fontActiveColor= QColor(0, 0, 0);
         m_fontInactiveColor= QColor(105, 105, 105);
+
+        auto config = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
+        KConfigGroup viewConfig(config, QStringLiteral("Colors:View"));
+        viewConfig.writeEntry("BackgroundAlternate", QColor(239,240,241));
+        viewConfig.writeEntry("BackgroundNormal", QColor(252,252,252));
+        viewConfig.writeEntry("DecorationHover", QColor(147,206,233));
+        viewConfig.writeEntry("ForegroundInactive", QColor(127,140,141));
+        viewConfig.writeEntry("ForegroundNormal", QColor(35,38,39));
+
+        KConfigGroup windowConfig(config, QStringLiteral("Colors:Window"));
+        windowConfig.writeEntry("BackgroundAlternate", QColor(189,195,199));
+        windowConfig.writeEntry("BackgroundNormal", QColor(239,240,241));
+        windowConfig.writeEntry("DecorationHover", QColor(147,206,233));
+        windowConfig.writeEntry("ForegroundInactive", QColor(127,140,141));
+        windowConfig.writeEntry("ForegroundNormal", QColor(35,38,39));
+        config->sync();
     }
 
     update();

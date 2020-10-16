@@ -10,10 +10,20 @@ AnimationSpeed=2
 BorderActivate=9
 BorderActivateAll=9
 BorderActivateClass=9
+TouchBorderActivate=7
+TouchBorderActivateAll=9
+TouchBorderActivateClass=9
 
 [Desktops]
 Number=4
 Rows=2
+[Effect-Cube]
+TouchBorderActivate=9
+TouchBorderActivateCylinder=9
+TouchBorderActivateSphere=9
+
+[Effect-DesktopGrid]
+TouchBorderActivate=9
 
 [Windows]
 #UKUI placement
@@ -61,6 +71,14 @@ MultiScreenMode=0
 ShowDesktopMode=0
 ShowTabBox=true
 SwitchingMode=0
+BorderActivate=9
+BorderAlternativeActivate=9
+
+[TouchEdges]
+Bottom=None
+Left=None
+Right=None
+Top=None
 
 [TabBoxAlternative]
 ActivitiesMode=1
