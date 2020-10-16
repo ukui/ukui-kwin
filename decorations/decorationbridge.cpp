@@ -52,6 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMetaProperty>
 #include <QPainter>
 #include <QScreen>
+#include <QtDBus>
 
 
 namespace KWin
@@ -157,6 +158,41 @@ void DecorationBridge::init()
             m_dpi = 30;     //设置一个限度，不允许dpi小于30
         }
     }
+
+    const QByteArray id("org.ukui.style");
+    const QByteArray path("/org/ukui/style/");
+    m_pSettings = new QGSettings(id, path, this);
+
+    QString strTheme;
+    if (true == m_pSettings->keys().contains("styleName")){
+        strTheme = m_pSettings->get("style-name").toString();
+        printf("DecorationBridge::init theme:%s\n", strTheme.toStdString().c_str());
+    }
+
+    if("ukui-white" == strTheme)
+    {
+        m_themeId = 0;
+    }
+    else if("ukui-black" == strTheme)
+    {
+        m_themeId = 1;
+    }
+    else
+    {
+        m_themeId = 0;
+    }
+
+    QDBusConnection::sessionBus().connect(QString(),
+                                          QStringLiteral("/KGlobalSettings"),
+                                          QStringLiteral("org.kde.KGlobalSettings"),
+                                          QStringLiteral("slotThemeChange"),
+                                          this, SLOT(slotThemeUpdate(int)));
+
+}
+
+void DecorationBridge::slotThemeUpdate(int themeId)
+{
+    m_themeId = themeId;
 }
 
 void DecorationBridge::initPlugin()
@@ -305,6 +341,8 @@ KDecoration2::Decoration *DecorationBridge::createDecoration(AbstractClient *cli
         args.insert(QStringLiteral("theme"), m_theme);
     }
     args.insert(QStringLiteral("dpi"), m_dpi);  //每创建一个渲染端，就把dpi值带过去，后面每新建一个客户就不需要反复获取获取dpi值
+
+    args.insert(QStringLiteral("themeId"), m_themeId);  //针对UKUI定制的主题id
 
     auto deco = m_factory->create<KDecoration2::Decoration>(client, QVariantList({args}));
     deco->setSettings(m_settings);

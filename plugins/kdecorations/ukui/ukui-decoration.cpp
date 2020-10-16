@@ -22,6 +22,9 @@
 
 #include "ukui-decoration.h"
 #include "button.h"
+
+#include <QtDBus>       //必须放xatom-helper.h前面
+
 #include "xatom-helper.h"
 #include "breezeboxshadowrenderer.h"
 
@@ -108,12 +111,19 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     : KDecoration2::Decoration(parent, args)
 {
     int nDpi = 96;
+    m_themeId = 0;
     if (false == args.isEmpty())
     {
         const auto map = args.first().toMap();
         auto it = map.constFind(QStringLiteral("dpi"));
         if (it != map.constEnd()) {
             nDpi = it.value().toInt();
+        }
+
+        it = map.constFind(QStringLiteral("themeId"));
+        if (it != map.constEnd()) {
+            m_themeId = it.value().toBool();
+            printf("Decoration::Decoration themeId:%d\n",m_themeId);
         }
     }
     int nScaler = qRound(nDpi / 96.0f);
@@ -134,7 +144,14 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
     m_leftButtons = nullptr;
     m_rightButtons = nullptr;
-    themeUpdate();
+
+    QDBusConnection::sessionBus().connect(QString(),
+                                          QStringLiteral("/KGlobalSettings"),
+                                          QStringLiteral("org.kde.KGlobalSettings"),
+                                          QStringLiteral("slotThemeChange"),
+                                          this, SLOT(themeUpdate(int)));
+
+    themeUpdate(m_themeId);
 }
 
 void Decoration::init()
@@ -192,7 +209,7 @@ void Decoration::init()
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
 
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
-        connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::themeUpdate));
+        //connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::themeUpdate));
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         //connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
@@ -314,16 +331,10 @@ void Decoration::calculateBorders()
     }
 }
 
-void Decoration::themeUpdate()
+void Decoration::themeUpdate(int themeId)
 {
-    QString configFileName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/kdeglobals";
-    QSettings* themeSettings = new QSettings(configFileName, QSettings::IniFormat);
-
-    themeSettings->beginGroup("Theme");
-    m_themeId = themeSettings->value("Style").toInt();
-    themeSettings->endGroup();
-    delete themeSettings;
-
+    m_themeId = themeId;
+    printf("Decoration::themeUpdate themeId:%d\n",m_themeId);
     if(1 == m_themeId)
     {
         m_frameColor = QColor(31, 32, 34);
@@ -336,6 +347,8 @@ void Decoration::themeUpdate()
         m_fontActiveColor= QColor(0, 0, 0);
         m_fontInactiveColor= QColor(105, 105, 105);
     }
+
+    update();
 }
 
 void Decoration::paint(QPainter *painter, const QRect &repaintRegion)

@@ -19,13 +19,13 @@
 // Include some code from kwin core in order to avoid
 // double implementation.
 
-#include "ruleslist.h"
 #include "../../cursor.cpp"
 #include "../../plugins/platforms/x11/standalone/x11cursor.cpp"
 #include "../../rules.cpp"
 #include "../../placement.cpp"
 #include "../../options.cpp"
 #include "../../utils.cpp"
+
 
 KWin::InputRedirection *KWin::InputRedirection::s_self = nullptr;
 

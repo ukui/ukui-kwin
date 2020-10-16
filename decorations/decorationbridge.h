@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 #include <QSharedPointer>
+#include <QGSettings>
 
 class KPluginFactory;
 
@@ -85,6 +86,9 @@ public:
 Q_SIGNALS:
     void metaDataLoaded();
 
+public Q_SLOTS:
+    void slotThemeUpdate(int);
+
 private:
     QString readPlugin();
     void loadMetaData(const QJsonObject &object);
@@ -102,7 +106,9 @@ private:
     QString m_theme;
     QSharedPointer<KDecoration2::DecorationSettings> m_settings;
     bool m_noPlugin;
-    int m_dpi;      //dpi值
+    int m_dpi;          //dpi值
+    int m_themeId;      //主题id
+    QGSettings* m_pSettings;
     KWIN_SINGLETON(DecorationBridge)
 };
 } // Decoration

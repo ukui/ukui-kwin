@@ -114,7 +114,7 @@ public slots:
     void calculateBorders();
     void updateTitleBar();
     void updateShadow();
-    void themeUpdate();
+    void themeUpdate(int themeId);
 
 };
 

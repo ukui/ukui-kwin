@@ -23,7 +23,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Gui LinguistTools X11Extras REQUIRED)
+find_package(Qt5 COMPONENTS Gui LinguistTools DBus X11Extras REQUIRED)
 
 #set(TS_FILES kwin-style-ukui_zh_CN.ts)
 
@@ -47,8 +47,8 @@ find_package(KDecoration2)
 find_package(KF5CoreAddons)
 find_package(KF5WindowSystem)
 find_package(KF5GuiAddons)
-target_link_libraries(kwin-style-ukui PUBLIC KDecoration2::KDecoration KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::X11Extras KF5::GuiAddons -lX11)
-target_link_libraries(test-csd PUBLIC KDecoration2::KDecoration KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::X11Extras KF5::GuiAddons -lX11)
+target_link_libraries(kwin-style-ukui PUBLIC KDecoration2::KDecoration KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::DBus Qt5::X11Extras KF5::GuiAddons -lX11)
+target_link_libraries(test-csd PUBLIC KDecoration2::KDecoration KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::DBus Qt5::X11Extras KF5::GuiAddons -lX11)
 
 #target_compile_definitions(kwin-style-ukui PUBLIC KWINSTYLEUKUI_LIBRARY)
 
