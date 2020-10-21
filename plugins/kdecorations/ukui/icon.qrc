@@ -1,20 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>icon/点击-关闭.svg</file>
-        <file>icon/点击-还原.svg</file>
-        <file>icon/点击-最大化.svg</file>
-        <file>icon/点击-最小化.svg</file>
-        <file>icon/普通-关闭-白.svg</file>
-        <file>icon/普通-关闭-黑.svg</file>
-        <file>icon/普通-还原-白.svg</file>
-        <file>icon/普通-还原-黑.svg</file>
-        <file>icon/普通-最大化-白.svg</file>
-        <file>icon/普通-最大化-黑.svg</file>
-        <file>icon/普通-最小化-白.svg</file>
-        <file>icon/普通-最小化-黑.svg</file>
-        <file>icon/悬停-关闭.svg</file>
-        <file>icon/悬停-还原.svg</file>
-        <file>icon/悬停-最大化.svg</file>
-        <file>icon/悬停-最小化.svg</file>
+        <file>icon/clicked-close.svg</file>
+        <file>icon/clicked-maximize.svg</file>
+        <file>icon/clicked-minimize.svg</file>
+        <file>icon/clicked-restore.svg</file>
+        <file>icon/common-close-black.svg</file>
+        <file>icon/common-close-white.svg</file>
+        <file>icon/common-maximize-black.svg</file>
+        <file>icon/common-maximize-white.svg</file>
+        <file>icon/common-minimize-black.svg</file>
+        <file>icon/common-minimize-white.svg</file>
+        <file>icon/common-restore-black.svg</file>
+        <file>icon/common-restore-white.svg</file>
+        <file>icon/hover-close.svg</file>
+        <file>icon/hover-maximize.svg</file>
+        <file>icon/hover-minimize.svg</file>
+        <file>icon/hover-restore.svg</file>
     </qresource>
 </RCC>

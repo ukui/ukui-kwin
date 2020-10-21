@@ -105,21 +105,21 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         case KDecoration2::DecorationButtonType::Minimize:
             if(isPressed())
             {
-                strPath = ":icon/点击-最小化.svg";
+                strPath = ":icon/clicked-minimize.svg";
             }
             else if(isHovered())
             {
-                strPath = ":icon/悬停-最小化.svg";
+                strPath = ":icon/hover-minimize.svg";
             }
             else
             {
                 if(0 == d->themeId())
                 {
-                    strPath = ":icon/普通-最小化-黑.svg";
+                    strPath = ":icon/common-minimize-black.svg";
                 }
                 else
                 {
-                    strPath = ":icon/普通-最小化-白.svg";
+                    strPath = ":icon/common-minimize-white.svg";
                 }
             }
             break;
@@ -129,22 +129,22 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
             {
                 if(isChecked()) //还原
                 {
-                    strPath = ":icon/点击-还原.svg";
+                    strPath = ":icon/clicked-restore.svg";
                 }
                 else            //最大化
                 {
-                    strPath = ":icon/点击-最大化.svg";
+                    strPath = ":icon/clicked-maximize.svg";
                 }
             }
             else if(isHovered())
             {
                 if(isChecked()) //还原
                 {
-                    strPath = ":icon/悬停-还原.svg";
+                    strPath = ":icon/hover-restore.svg";
                 }
                 else            //最大化
                 {
-                    strPath = ":icon/悬停-最大化.svg";
+                    strPath = ":icon/hover-maximize.svg";
                 }
             }
             else
@@ -153,21 +153,21 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
                 {
                     if(0 == d->themeId())
                     {
-                        strPath = ":icon/普通-还原-黑.svg";
+                        strPath = ":icon/common-restore-black.svg";
                     }
                     else
                     {
-                        strPath = ":icon/普通-还原-白.svg";
+                        strPath = ":icon/common-restore-white.svg";
                     }
                 } else          //最大化
                 {
                     if(0 == d->themeId())
                     {
-                        strPath = ":icon/普通-最大化-黑.svg";
+                        strPath = ":icon/common-maximize-black.svg";
                     }
                     else
                     {
-                        strPath = ":icon/普通-最大化-白.svg";
+                        strPath = ":icon/common-maximize-white.svg";
                     }
                 }
             }
@@ -176,21 +176,21 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         case KDecoration2::DecorationButtonType::Close:
             if(isPressed())
             {
-                strPath = ":icon/点击-关闭.svg";
+                strPath = ":icon/clicked-close.svg";
             }
             else if(isHovered())
             {
-                strPath = ":icon/悬停-关闭.svg";
+                strPath = ":icon/hover-close.svg";
             }
             else
             {
                 if(0 == d->themeId())
                 {
-                    strPath = ":icon/普通-关闭-黑.svg";
+                    strPath = ":icon/common-close-black.svg";
                 }
                 else
                 {
-                    strPath = ":icon/普通-关闭-白.svg";
+                    strPath = ":icon/common-close-white.svg";
                 }
             }
             break;
