@@ -163,6 +163,7 @@ X11Client::X11Client()
     check_active_modal = false;
 
     max_mode = MaximizeRestore;
+    bFalseCloseFlag = false;
 
     //Client to workspace connections require that each
     //client constructed be connected to the workspace wrapper
@@ -1808,7 +1809,22 @@ bool X11Client::isCloseable() const
 void X11Client::closeWindow()
 {
     if (!isCloseable())
+    {
         return;
+    }
+
+    //在任务栏关闭有进程的终端，终端不会将带有确认关闭的对话框一同切换至前端
+    for(auto it = group()->members().constBegin(); it != group()->members().constEnd(); ++it)
+    {
+        //当终端或文本编辑器已经有确认关闭对话框之后，2个窗口都已经最小化至任务栏，此时从任务栏关闭main窗口进入下分支
+        if (this->hasTransient(*it, true))
+        {
+            unminimize();
+            (*it)->unminimize();
+            printf("X11Client::closeWindow ==========unminimize:%s\n", caption().toStdString().c_str());
+            return;
+        }
+    }
 
     // Update user time, because the window may create a confirming dialog.
     updateUserTime();
@@ -1816,6 +1832,9 @@ void X11Client::closeWindow()
     if (info->supportsProtocol(NET::DeleteWindowProtocol)) {
         sendClientMessage(window(), atoms->wm_protocols, atoms->wm_delete_window);
         pingWindow();
+        printf("X11Client::closeWindow =====bFalseCloseFlag=====this:%s\n", this->caption().toStdString().c_str());
+        bFalseCloseFlag = true;
+
     } else // Client will not react on wm_delete_window. We have not choice
         // but destroy his connection to the XServer.
         killWindow();
@@ -3445,11 +3464,13 @@ QList<AbstractClient*> X11Client::mainClients() const
         return QList<AbstractClient*>{const_cast< AbstractClient* >(t)};
     QList<AbstractClient*> result;
     Q_ASSERT(group());
-    for (auto it = group()->members().constBegin();
-            it != group()->members().constEnd();
-            ++it)
+    for (auto it = group()->members().constBegin(); it != group()->members().constEnd(); ++it)
+    {
         if ((*it)->hasTransient(this, false))
+        {
             result.append(*it);
+        }
+    }
     return result;
 }
 

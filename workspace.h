@@ -603,7 +603,7 @@ private:
     AbstractClient* delayfocus_client;
     QPoint focusMousePos;
 
-    QList<X11Client *> clients;     //desktop不属于X11Client，不在clients列表内
+    QList<X11Client *> clients;     //desktop不属于X11Client，不在clients列表内,但是一个X11Client客户端
     QList<AbstractClient*> m_allClients;
     QList<X11Client *> desktops;
     QList<Unmanaged *> unmanaged;

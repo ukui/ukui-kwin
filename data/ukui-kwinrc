@@ -44,6 +44,8 @@ kwin4_effect_fadeEnabled=false
 #UKUI true conflict with sogou input
 presentwindowsEnabled=false
 kwin4_effect_morphingpopupsEnabled=false
+flipswitchEnabled=true
+highlightwindowEnabled=true
 
 [Effect-CoverSwitch]
 TabBox=false
@@ -52,10 +54,6 @@ TabBoxAlternative=false
 [Effect-FlipSwitch]
 TabBox=true
 TabBoxAlternative=true
-
-[Plugins]
-flipswitchEnabled=true
-highlightwindowEnabled=true
 
 [MouseBindings]
 CommandAllKey=Meta
@@ -73,6 +71,8 @@ ShowTabBox=true
 SwitchingMode=0
 BorderActivate=9
 BorderAlternativeActivate=9
+TouchBorderActivate=9
+TouchBorderAlternativeActivate=9
 
 [TouchEdges]
 Bottom=None

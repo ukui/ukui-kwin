@@ -110,7 +110,7 @@ public:
     bool isTransient() const override;
     bool groupTransient() const override;
     bool wasOriginallyGroupTransient() const;
-    QList<AbstractClient*> mainClients() const override; // Call once before loop , is not indirect
+    QList<AbstractClient*> mainClients() const override; // Call once before loop , is not indirect   对话框isDialog后面的窗口就是mainClients()，则它属于Modal窗口类型
     bool hasTransient(const AbstractClient* c, bool indirect) const override;
     void checkTransient(xcb_window_t w);
     AbstractClient* findModal(bool allow_itself = false) override;
@@ -332,6 +332,9 @@ public:
     void handleSync();
 
     static void cleanupX11();
+
+    bool getFalseCloseFlag() {return bFalseCloseFlag;}
+    void setFalseCloseFlag(bool bFlag) {bFalseCloseFlag = bFlag;}
 
 public Q_SLOTS:
     void closeWindow() override;
@@ -569,6 +572,7 @@ private:
     QMetaObject::Connection m_edgeGeometryTrackingConnection;
 
     QMargins m_clientFrameExtents;
+    bool bFalseCloseFlag;       //客户端假性关闭标志
 };
 
 inline xcb_window_t X11Client::wrapperId() const

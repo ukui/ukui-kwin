@@ -683,6 +683,25 @@ void Workspace::addClient(X11Client *c)
     if (c->isUtility() || c->isMenu() || c->isToolbar())
         updateToolWindows(true);
     updateTabbox();
+
+    //在任务栏关闭有进程的终端，终端不会将带有确认关闭的对话框一同切换至前端
+    for(auto it = c->group()->members().constBegin(); it != c->group()->members().constEnd(); ++it)
+    {
+        if(false == (*it)->getFalseCloseFlag())
+        {
+            continue;
+        }
+
+        //当之前被关闭的主窗口由于新增确认关闭对话框，并未真正关闭，在此之前已将假性关闭标志(bFalseCloseFlag)置为true,并且主窗口此时新增确认关闭对话框
+        if ((*it)->hasTransient(c, true))
+        {
+            (*it)->unminimize();
+            c->unminimize();
+
+            printf("Workspace::addClient ==========unminimize:%s\n", c->caption().toStdString().c_str());
+            (*it)->setFalseCloseFlag(false);
+        }
+    }
 }
 
 void Workspace::addUnmanaged(Unmanaged* c)
