@@ -13,3 +13,4 @@ install(TARGETS ukui_kwin5_update_default_rules DESTINATION ${LIB_INSTALL_DIR}/k
 
 install(FILES org_ukui_kwin.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 install(FILES ukui-kwinrc DESTINATION /etc/xdg)
+install(FILES LowPerformanceCPU.list DESTINATION /etc/xdg)

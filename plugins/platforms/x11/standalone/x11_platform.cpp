@@ -60,6 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QThread>
 #include <QOpenGLContext>
 #include <QX11Info>
+#include <QFile>
 
 namespace KWin
 {
@@ -201,8 +202,68 @@ QString X11StandalonePlatform::compositingNotPossibleReason() const
     return QString();
 }
 
+bool X11StandalonePlatform::isLowPerformanceCPU() const
+{
+    //从系统文件中读取CPU信息
+    QFile file;
+    QString strCPUInfoList;
+    file.setFileName("/proc/cpuinfo");
+    bool bRet = file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(false == bRet)
+    {
+        file.close();
+        return false;
+    }
+    strCPUInfoList = QString(file.readAll());
+    file.close();
+
+    //解析CPU信息，提取model name
+    QStringList lines = strCPUInfoList.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+    QString strLocalCPUInfo;
+    foreach (QString line, lines) {
+        if (line.startsWith("model name")) {
+            strLocalCPUInfo = line.split(":").at(1).trimmed();
+            break;
+        }
+    }
+
+    if("" == strLocalCPUInfo)
+    {
+        return false;
+    }
+
+    QFile fileConfig;
+    fileConfig.setFileName("/etc/xdg/LowPerformanceCPU.list");
+    bRet = fileConfig.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(false == bRet)
+    {
+        fileConfig.close();
+        return false;
+    }
+    QString strCPUConfigList = QString(fileConfig.readAll());
+    fileConfig.close();
+
+    QStringList lines2 = strCPUConfigList.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+    foreach (QString line, lines2) {
+        if (strLocalCPUInfo == line) {
+            printf("X11StandalonePlatform::isLowPerformanceCPU=======匹配\n");
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool X11StandalonePlatform::compositingPossible() const
 {
+    //低性能CPU型号判断，如果是低性能CPU则将渲染后端设为XRender
+    if(this->isLowPerformanceCPU())
+    {
+        KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
+        kwinConfig.writeEntry("Backend", "XRender");
+        kwinConfig.sync();
+    }
+
     // first off, check whether we figured that we'll crash on detection because of a buggy driver
     KConfigGroup gl_workaround_group(kwinApp()->config(), "Compositing");
     const QString unsafeKey(QLatin1String("OpenGLIsUnsafe") + (kwinApp()->isX11MultiHead() ? QString::number(kwinApp()->x11ScreenNumber()) : QString()));
