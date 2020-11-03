@@ -243,9 +243,14 @@ bool X11StandalonePlatform::isLowPerformanceCPU() const
     QString strCPUConfigList = QString(fileConfig.readAll());
     fileConfig.close();
 
+    if("" == strCPUConfigList)
+    {
+        return false;
+    }
+
     QStringList lines2 = strCPUConfigList.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
     foreach (QString line, lines2) {
-        if (strLocalCPUInfo == line) {
+        if (strLocalCPUInfo.contains(line, Qt::CaseSensitive)) {
             printf("X11StandalonePlatform::isLowPerformanceCPU=======匹配\n");
             return true;
         }
