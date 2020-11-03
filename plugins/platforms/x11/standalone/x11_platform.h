@@ -102,7 +102,7 @@ private:
 
     template <typename T>
     void doUpdateOutputs();
-    bool isLowPerformanceCPU() const;
+    void adaptCPUPerformance() const;
 
     XInputIntegration *m_xinputIntegration = nullptr;
     QThread *m_openGLFreezeProtectionThread = nullptr;

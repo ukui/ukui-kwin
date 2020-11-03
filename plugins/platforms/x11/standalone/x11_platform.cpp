@@ -202,7 +202,7 @@ QString X11StandalonePlatform::compositingNotPossibleReason() const
     return QString();
 }
 
-bool X11StandalonePlatform::isLowPerformanceCPU() const
+void X11StandalonePlatform::adaptCPUPerformance() const
 {
     //从系统文件中读取CPU信息
     QFile file;
@@ -212,7 +212,7 @@ bool X11StandalonePlatform::isLowPerformanceCPU() const
     if(false == bRet)
     {
         file.close();
-        return false;
+        return;
     }
     strCPUInfoList = QString(file.readAll());
     file.close();
@@ -229,7 +229,7 @@ bool X11StandalonePlatform::isLowPerformanceCPU() const
 
     if("" == strLocalCPUInfo)
     {
-        return false;
+        return;
     }
 
     QFile fileConfig;
@@ -238,36 +238,53 @@ bool X11StandalonePlatform::isLowPerformanceCPU() const
     if(false == bRet)
     {
         fileConfig.close();
-        return false;
+        return;
     }
-    QString strCPUConfigList = QString(fileConfig.readAll());
+    QString strCPUConfig = QString(fileConfig.readAll());
     fileConfig.close();
 
-    if("" == strCPUConfigList)
+    if("" == strCPUConfig)
     {
-        return false;
+        return;
     }
 
-    QStringList lines2 = strCPUConfigList.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+    QStringList lines2 = strCPUConfig.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+    bool bXRender = false;
+    bool bBlurDisable = false;
     foreach (QString line, lines2) {
-        if (strLocalCPUInfo.contains(line, Qt::CaseSensitive)) {
-            printf("X11StandalonePlatform::isLowPerformanceCPU=======匹配\n");
-            return true;
+        if("[XRender]" == line)
+        {
+            bXRender = true;
+            bBlurDisable = false;
+        }
+        if("[blurDisable]" == line)
+        {
+            bXRender = false;
+            bBlurDisable = true;
+        }
+        if (true == bXRender && strLocalCPUInfo.contains(line, Qt::CaseSensitive)) {
+            printf("X11StandalonePlatform::adaptCPUPerformance=======匹配\n");
+            //低性能CPU型号判断，如果是低性能CPU则将渲染后端设为XRender
+            KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
+            kwinConfig.writeEntry("Backend", "XRender");
+            kwinConfig.sync();
+        }
+
+        if (true == bBlurDisable && strLocalCPUInfo.contains(line, Qt::CaseSensitive)) {
+            //显卡差，开多了文件管理器就会卡，需去除毛玻璃
+            KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
+            kwinConfig.writeEntry("blurEnabled", "false");
+            kwinConfig.sync();
         }
     }
 
-    return false;
+    return;
 }
 
 bool X11StandalonePlatform::compositingPossible() const
 {
-    //低性能CPU型号判断，如果是低性能CPU则将渲染后端设为XRender
-    if(this->isLowPerformanceCPU())
-    {
-        KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
-        kwinConfig.writeEntry("Backend", "XRender");
-        kwinConfig.sync();
-    }
+    //适配CPU性能
+    adaptCPUPerformance();
 
     // first off, check whether we figured that we'll crash on detection because of a buggy driver
     KConfigGroup gl_workaround_group(kwinApp()->config(), "Compositing");
