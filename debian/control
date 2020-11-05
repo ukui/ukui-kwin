@@ -148,6 +148,8 @@ Depends: ukui-kwin-common (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
 Provides: ukui-kwin, x-window-manager
+Replaces: ukui-kwin-data (<< 1.0.0+1104)
+Breaks: ukui-kwin-data (<< 1.0.0+1104)
 Description: UKUI window manager drm plugin
  Ukui-kwin  is the window manager for the UKUI3.0 Desktop. It
  gives you complete control over your windows, making sure
