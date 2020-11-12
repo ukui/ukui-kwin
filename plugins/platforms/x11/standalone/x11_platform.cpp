@@ -61,6 +61,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QOpenGLContext>
 #include <QX11Info>
 #include <QFile>
+#include <QDir>
+
+
+#define CPU_INFO	"/proc/cpuinfo"
+#define LOW_PERFORMANCE_CPU_LIST	"/etc/xdg/LowPerformanceCPU.list"
+#define LOW_VGA_PCI_LIST	"/etc/xdg/LowVgaPci.list"
+#define PCIE_DEVICE_PATH	"/sys/bus/pci/devices/"
 
 namespace KWin
 {
@@ -207,7 +214,7 @@ void X11StandalonePlatform::adaptCPUPerformance() const
     //从系统文件中读取CPU信息
     QFile file;
     QString strCPUInfoList;
-    file.setFileName("/proc/cpuinfo");
+    file.setFileName(CPU_INFO);
     bool bRet = file.open(QIODevice::ReadOnly | QIODevice::Text);
     if(false == bRet)
     {
@@ -233,7 +240,7 @@ void X11StandalonePlatform::adaptCPUPerformance() const
     }
 
     QFile fileConfig;
-    fileConfig.setFileName("/etc/xdg/LowPerformanceCPU.list");
+    fileConfig.setFileName(LOW_PERFORMANCE_CPU_LIST);
     bRet = fileConfig.open(QIODevice::ReadOnly | QIODevice::Text);
     if(false == bRet)
     {
@@ -281,10 +288,89 @@ void X11StandalonePlatform::adaptCPUPerformance() const
     return;
 }
 
+void X11StandalonePlatform::adaptVga() const
+{
+    QFile file;
+    QString strPreDefinePcieInfo;
+    file.setFileName(LOW_VGA_PCI_LIST);
+    bool bRet = file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(false == bRet)
+    {
+        file.close();
+        return;
+    }
+    strPreDefinePcieInfo = QString(file.readAll());
+    file.close();
+
+    //获取预定义pcie信息
+    QStringList lines = strPreDefinePcieInfo.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
+    QMap<int, int> qMapPreDefinePcieInfo;
+    bool ok;
+    foreach (QString line, lines) {
+        QStringList stringList = line.split(":");
+        qMapPreDefinePcieInfo.insert(stringList[0].toInt(&ok, 16), stringList[1].toInt(&ok, 16));
+        printf("X11StandalonePlatform::adaptVga===vid:%s pid:%s\n", stringList[0].toStdString().c_str(), stringList[1].toStdString().c_str());
+    }
+
+
+    //根据本机pcie信息遍历匹配预定义信息
+    QDir dir(PCIE_DEVICE_PATH);
+    if (!dir.exists())
+    {
+        return;
+    }
+
+    // 遍历PCIE_DEVICE_PATH目录，获取当前PCIE设备列表
+    dir.setFilter(QDir::Dirs);
+    QStringList busList = dir.entryList();
+    busList.removeOne(".");
+    busList.removeOne("..");
+
+    foreach(QString bus, busList) {
+        QString path;
+        QFile file;
+        QByteArray charArray;
+        bool ok;
+        int vid;
+        int pid;
+
+        // 读取设备vid
+        path = dir.absoluteFilePath(bus + "/" + "vendor");
+        file.setFileName(path);
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        charArray = file.readAll();
+        file.close();
+        vid = QString(charArray).toInt(&ok, 16);
+
+        // 读取设备pid
+        path = dir.absoluteFilePath(bus + "/" + "device");
+        file.setFileName(path);
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        charArray = file.readAll();
+        file.close();
+        pid = QString(charArray).toInt(&ok, 16);
+
+        QMap<int, int>::const_iterator iter1 = qMapPreDefinePcieInfo.find(vid);
+        if(iter1 != qMapPreDefinePcieInfo.end() && pid == iter1.value())        //找到,并且vid和pid完全匹配
+        {
+            printf("X11StandalonePlatform::adaptVga=======匹配\n");
+            //显卡vid和pid完全匹配,属于低性能显卡
+            KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
+            kwinConfig.writeEntry("Backend", "XRender");
+            kwinConfig.sync();
+            return;
+        }
+    }
+
+    return;
+}
+
 bool X11StandalonePlatform::compositingPossible() const
 {
     //适配CPU性能
     adaptCPUPerformance();
+
+    adaptVga();
 
     // first off, check whether we figured that we'll crash on detection because of a buggy driver
     KConfigGroup gl_workaround_group(kwinApp()->config(), "Compositing");

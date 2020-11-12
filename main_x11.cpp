@@ -310,7 +310,7 @@ void ApplicationX11::crashChecking()
         system(buf);
         ::exit(1);
     }
-    if (crashes >= 2) {
+    if (crashes >= 3) {        //由2改为3，对于某些机器开启账户超过8个以上，第8个账户会出现15秒内2次检测不通过而关闭混成器
         // Disable compositing if we have had too many crashes
         qCDebug(KWIN_CORE) << "Too many crashes recently, disabling compositing";
         KConfigGroup compgroup(KSharedConfig::openConfig(), "Compositing");
