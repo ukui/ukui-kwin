@@ -62,12 +62,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QX11Info>
 #include <QFile>
 #include <QDir>
+#include <QGSettings>
 
 
 #define CPU_INFO	"/proc/cpuinfo"
 #define LOW_PERFORMANCE_CPU_LIST	"/etc/xdg/LowPerformanceCPU.list"
 #define LOW_VGA_PCI_LIST	"/etc/xdg/LowVgaPci.list"
 #define PCIE_DEVICE_PATH	"/sys/bus/pci/devices/"
+#define UKUI_TRANSPARENCY_SETTING "org.ukui.control-center.personalise"
+#define PERSONALSIE_TRAN_KEY   "transparency"
 
 namespace KWin
 {
@@ -209,7 +212,7 @@ QString X11StandalonePlatform::compositingNotPossibleReason() const
     return QString();
 }
 
-void X11StandalonePlatform::adaptCPUPerformance() const
+bool X11StandalonePlatform::adaptCPUPerformance() const
 {
     //从系统文件中读取CPU信息
     QFile file;
@@ -219,7 +222,7 @@ void X11StandalonePlatform::adaptCPUPerformance() const
     if(false == bRet)
     {
         file.close();
-        return;
+        return false;
     }
     strCPUInfoList = QString(file.readAll());
     file.close();
@@ -236,7 +239,7 @@ void X11StandalonePlatform::adaptCPUPerformance() const
 
     if("" == strLocalCPUInfo)
     {
-        return;
+        return false;
     }
 
     QFile fileConfig;
@@ -245,14 +248,14 @@ void X11StandalonePlatform::adaptCPUPerformance() const
     if(false == bRet)
     {
         fileConfig.close();
-        return;
+        return false;
     }
     QString strCPUConfig = QString(fileConfig.readAll());
     fileConfig.close();
 
     if("" == strCPUConfig)
     {
-        return;
+        return false;
     }
 
     QStringList lines2 = strCPUConfig.split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
@@ -275,6 +278,7 @@ void X11StandalonePlatform::adaptCPUPerformance() const
             KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
             kwinConfig.writeEntry("Backend", "XRender");
             kwinConfig.sync();
+            return true;
         }
 
         if (true == bBlurDisable && strLocalCPUInfo.contains(line, Qt::CaseSensitive)) {
@@ -285,10 +289,10 @@ void X11StandalonePlatform::adaptCPUPerformance() const
         }
     }
 
-    return;
+    return false;
 }
 
-void X11StandalonePlatform::adaptVga() const
+bool X11StandalonePlatform::adaptVga() const
 {
     QFile file;
     QString strPreDefinePcieInfo;
@@ -297,7 +301,7 @@ void X11StandalonePlatform::adaptVga() const
     if(false == bRet)
     {
         file.close();
-        return;
+        return false;
     }
     strPreDefinePcieInfo = QString(file.readAll());
     file.close();
@@ -317,7 +321,7 @@ void X11StandalonePlatform::adaptVga() const
     QDir dir(PCIE_DEVICE_PATH);
     if (!dir.exists())
     {
-        return;
+        return false;
     }
 
     // 遍历PCIE_DEVICE_PATH目录，获取当前PCIE设备列表
@@ -358,19 +362,22 @@ void X11StandalonePlatform::adaptVga() const
             KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
             kwinConfig.writeEntry("Backend", "XRender");
             kwinConfig.sync();
-            return;
+            return true;
         }
     }
 
-    return;
+    return false;
 }
 
 bool X11StandalonePlatform::compositingPossible() const
 {
-    //适配CPU性能
-    adaptCPUPerformance();
-
-    adaptVga();
+    //适配CPU性能或显卡性能,当使用XRender作为渲染后端时,则没有毛玻璃效果,设置一个0.95的透明度
+    if(true == adaptCPUPerformance() || true == adaptVga())
+    {
+        QGSettings* pTransparency = new QGSettings(UKUI_TRANSPARENCY_SETTING);
+        pTransparency->set(PERSONALSIE_TRAN_KEY, 0.95);
+        delete pTransparency;
+    }
 
     // first off, check whether we figured that we'll crash on detection because of a buggy driver
     KConfigGroup gl_workaround_group(kwinApp()->config(), "Compositing");

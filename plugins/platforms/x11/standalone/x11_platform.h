@@ -102,8 +102,8 @@ private:
 
     template <typename T>
     void doUpdateOutputs();
-    void adaptCPUPerformance() const;
-    void adaptVga() const;
+    bool adaptCPUPerformance() const;
+    bool adaptVga() const;
 
     XInputIntegration *m_xinputIntegration = nullptr;
     QThread *m_openGLFreezeProtectionThread = nullptr;
