@@ -71,6 +71,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PCIE_DEVICE_PATH	"/sys/bus/pci/devices/"
 #define UKUI_TRANSPARENCY_SETTING "org.ukui.control-center.personalise"
 #define PERSONALSIE_TRAN_KEY   "transparency"
+#define PERSONALSIE_EFFECT_KEY   "effect"
+
 
 namespace KWin
 {
@@ -376,6 +378,7 @@ bool X11StandalonePlatform::compositingPossible() const
     {
         QGSettings* pTransparency = new QGSettings(UKUI_TRANSPARENCY_SETTING);
         pTransparency->set(PERSONALSIE_TRAN_KEY, 0.95);
+        pTransparency->set(PERSONALSIE_EFFECT_KEY, false);
         delete pTransparency;
     }
 
