@@ -148,19 +148,20 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     m_leftButtons = nullptr;
     m_rightButtons = nullptr;
 
-    QDBusConnection::sessionBus().connect(QString(),
-                                          QStringLiteral("/KGlobalSettings"),
-                                          QStringLiteral("org.kde.KGlobalSettings"),
-                                          QStringLiteral("slotThemeChange"),
-                                          this, SLOT(themeUpdate(int)));
-
-    themeUpdate(m_themeId);
 }
 
 void Decoration::init()
 {
     bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框    
     if (!isDecoBorderOnly) {
+        QDBusConnection::sessionBus().connect(QString(),
+                                              QStringLiteral("/KGlobalSettings"),
+                                              QStringLiteral("org.kde.KGlobalSettings"),
+                                              QStringLiteral("slotThemeChange"),
+                                              this, SLOT(themeUpdate(int)));
+
+        themeUpdate(m_themeId);
+
         calculateBorders();
         //button
         m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &UKUI::Button::create);

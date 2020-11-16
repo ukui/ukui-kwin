@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icon/clicked-close.svg</file>
-        <file>icon/clicked-maximize.svg</file>
-        <file>icon/clicked-minimize.svg</file>
-        <file>icon/clicked-restore.svg</file>
         <file>icon/common-close-black.svg</file>
         <file>icon/common-close-white.svg</file>
         <file>icon/common-maximize-black.svg</file>
@@ -13,8 +10,17 @@
         <file>icon/common-restore-black.svg</file>
         <file>icon/common-restore-white.svg</file>
         <file>icon/hover-close.svg</file>
-        <file>icon/hover-maximize.svg</file>
-        <file>icon/hover-minimize.svg</file>
-        <file>icon/hover-restore.svg</file>
+        <file>icon/clicked-maximize-black.svg</file>
+        <file>icon/clicked-maximize-white.svg</file>
+        <file>icon/clicked-minimize-black.svg</file>
+        <file>icon/clicked-minimize-white.svg</file>
+        <file>icon/clicked-restore-black.svg</file>
+        <file>icon/clicked-restore-white.svg</file>
+        <file>icon/hover-maximize-black.svg</file>
+        <file>icon/hover-maximize-white.svg</file>
+        <file>icon/hover-minimize-black.svg</file>
+        <file>icon/hover-minimize-white.svg</file>
+        <file>icon/hover-restore-black.svg</file>
+        <file>icon/hover-restore-white.svg</file>
     </qresource>
 </RCC>

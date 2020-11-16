@@ -105,11 +105,25 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         case KDecoration2::DecorationButtonType::Minimize:
             if(isPressed())
             {
-                strPath = ":icon/clicked-minimize.svg";
+                if(0 == d->themeId())
+                {
+                    strPath = ":icon/clicked-minimize-black.svg";
+                }
+                else
+                {
+                    strPath = ":icon/clicked-minimize-white.svg";
+                }
             }
             else if(isHovered())
             {
-                strPath = ":icon/hover-minimize.svg";
+                if(0 == d->themeId())
+                {
+                    strPath = ":icon/hover-minimize-black.svg";
+                }
+                else
+                {
+                    strPath = ":icon/hover-minimize-white.svg";
+                }
             }
             else
             {
@@ -129,22 +143,50 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
             {
                 if(isChecked()) //还原
                 {
-                    strPath = ":icon/clicked-restore.svg";
+                    if(0 == d->themeId())
+                    {
+                        strPath = ":icon/clicked-restore-black.svg";
+                    }
+                    else
+                    {
+                        strPath = ":icon/clicked-restore-white.svg";
+                    }
                 }
                 else            //最大化
                 {
-                    strPath = ":icon/clicked-maximize.svg";
+                    if(0 == d->themeId())
+                    {
+                        strPath = ":icon/clicked-maximize-black.svg";
+                    }
+                    else
+                    {
+                        strPath = ":icon/clicked-maximize-white.svg";
+                    }
                 }
             }
             else if(isHovered())
             {
                 if(isChecked()) //还原
                 {
-                    strPath = ":icon/hover-restore.svg";
+                    if(0 == d->themeId())
+                    {
+                        strPath = ":icon/hover-restore-black.svg";
+                    }
+                    else
+                    {
+                        strPath = ":icon/hover-restore-white.svg";
+                    }
                 }
                 else            //最大化
                 {
-                    strPath = ":icon/hover-maximize.svg";
+                    if(0 == d->themeId())
+                    {
+                        strPath = ":icon/hover-maximize-black.svg";
+                    }
+                    else
+                    {
+                        strPath = ":icon/hover-maximize-white.svg";
+                    }
                 }
             }
             else
