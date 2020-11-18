@@ -1,0 +1,24 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "lanyue@ubuntukylin.com",
+                "Name": "Yue Lan"
+            }
+        ],
+        "Description": "An window border radius effect imlement depends on _UNITY_GTK_BORDER_RADIUS protocol",
+        "Description[zh_CN]": "_UNITY_GTK_BORDER_RADIUS窗口圆角协议的特效实现",
+        "EnabledByDefault": true,
+        "Id": "org.ukui.ubr",
+        "License": "GPL",
+        "Name": "Unity Border Radius Effect",
+        "Name[zh_CN]": "窗口圆角效果",
+        "ServiceTypes": [
+            "KWin/Effect"
+        ],
+        "org.ukui.kwin.effect": {
+            "exclusiveGroup": "appearance"
+        }
+    }
+}
+

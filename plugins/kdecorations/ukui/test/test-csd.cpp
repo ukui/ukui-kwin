@@ -58,7 +58,7 @@ void WindowEffect::draw(QPainter *painter)
         const QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &offset);
         painter->translate(offset);
         QPainterPath path;
-        path.addRoundedRect(pixmap.rect(), 20, 20);
+        path.addRoundedRect(pixmap.rect(), 0, 0);
         painter->setClipPath(path);
         painter->fillRect(pixmap.rect(), qApp->palette().window());
         painter->drawPixmap(QPoint(), pixmap);
@@ -68,7 +68,7 @@ void WindowEffect::draw(QPainter *painter)
         painter->setWorldTransform(QTransform());
         painter->translate(offset);
         QPainterPath path;
-        path.addRoundedRect(pixmap.rect(), 20, 20);
+        path.addRoundedRect(pixmap.rect(), 0, 0);
         painter->setClipPath(path);
         painter->fillRect(pixmap.rect(), qApp->palette().window());
         painter->drawPixmap(QPoint(), pixmap);
@@ -91,14 +91,14 @@ int main(int argc, char *argv[]) {
     XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
 
     UnityCorners corners;
-    corners.topLeft = 20;
-    corners.topRight = 20;
-    corners.bottomLeft = 20;
-    corners.bottomRight = 20;
-    XAtomHelper::getInstance()->setWindowBorderRadius(w.winId(), corners);
-    auto result = XAtomHelper::getInstance()->getWindowBorderRadius(w.winId());
-    qDebug()<<result.topLeft<<result.topRight<<result.bottomLeft<<result.bottomRight;
-
+    corners.topLeft = 12;
+    corners.topRight = 12;
+    corners.bottomLeft = 12;
+    corners.bottomRight = 12;
+    // XAtomHelper::getInstance()->setWindowBorderRadius(w.winId(), corners);
+    // auto result = XAtomHelper::getInstance()->getWindowBorderRadius(w.winId());
+    // qDebug()<<result.topLeft<<result.topRight<<result.bottomLeft<<result.bottomRight;
+    XAtomHelper::getInstance()->setUKUIDecoraiontHint(w.winId(), true);
     //w.setWindowFlag(Qt::FramelessWindowHint);
     w.show();
 

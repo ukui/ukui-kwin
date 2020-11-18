@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=kwin_ubr_config
+X-KDE-ParentComponents=kwin_effect_ubr
+
+Name=Unity Border Radius
+Name[zh_CN]=窗口圆角

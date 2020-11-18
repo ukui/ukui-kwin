@@ -176,7 +176,7 @@ void DecorationBridge::init()
     {
         m_themeId = 1;
     }
-    else
+    else    //默认ukui-default
     {
         m_themeId = 0;
     }

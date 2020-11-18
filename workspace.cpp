@@ -697,8 +697,6 @@ void Workspace::addClient(X11Client *c)
         {
             (*it)->unminimize();
             c->unminimize();
-
-            printf("Workspace::addClient ==========unminimize:%s\n", c->caption().toStdString().c_str());
             (*it)->setFalseCloseFlag(false);
         }
     }

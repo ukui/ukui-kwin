@@ -70,7 +70,8 @@ enum class BuiltInEffect
     TrackMouse,
     WindowGeometry,
     WobblyWindows,
-    Zoom
+    Zoom,
+    UBR
 };
 
 namespace BuiltInEffects

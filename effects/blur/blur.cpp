@@ -584,7 +584,21 @@ void BlurEffect::drawWindow(EffectWindow *w, int mask, const QRegion &region, Wi
 {
     const QRect screen = GLRenderTarget::virtualScreenGeometry();
     if (shouldBlur(w, mask, data)) {
-        QRegion shape = region & blurRegion(w).translated(w->pos()) & screen;
+        QRegion ubrRegion = w->geometry();
+        if (!w->data(1000).isValid()) {
+            QVector4D ubr = qvariant_cast<QVector4D>(w->data(1001));
+            if (!ubr.isNull()) {
+                if (ubr.x() == ubr.y() && ubr.y() == ubr.z() && ubr.z() == ubr.w()) {
+                    QPainterPath ubrPath;
+                    ubrPath.addRoundedRect(w->geometry(), ubr.x(), ubr.x());
+                    ubrRegion = ubrPath.toFillPolygon().toPolygon();
+                } else {
+                    // FIXME: implement unregular ubr blur region.
+                }
+            }
+        }
+
+        QRegion shape = region & blurRegion(w).translated(w->pos()) & screen & ubrRegion;
 
         // let's do the evil parts - someone wants to blur behind a transformed window
         const bool translated = data.xTranslation() || data.yTranslation();

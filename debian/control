@@ -77,6 +77,7 @@ Build-Depends: breeze-dev (>= 4:5.18.3~),
                qtscript5-dev (>= 5.9.0~),
                qttools5-dev (>= 5.9.0~),
                libgsettings-qt-dev,
+               kwin-dev,
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://github.com/ukui/ukui-kwin

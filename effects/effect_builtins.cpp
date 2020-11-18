@@ -59,6 +59,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "startupfeedback/startupfeedback.h"
 #include "trackmouse/trackmouse.h"
 #include "wobblywindows/wobblywindows.h"
+#include "ubr/ubreffect.h"
 #endif
 
 #include <KLocalizedString>
@@ -652,6 +653,21 @@ EFFECT_FALLBACK
         nullptr
 #endif
 EFFECT_FALLBACK
+    }, {
+        QStringLiteral("ubr"),
+        i18ndc("kwin_effects", "Name of a KWin Effect", "UBR"),
+        i18ndc("kwin_effects", "Comment describing the KWin Effect", "UnityBorderRadius"),
+        QStringLiteral("Appearance"),
+        QString(),
+        QUrl(),
+        true,
+        true,
+#ifdef EFFECT_BUILTINS
+        &createHelper<UBREffect>,
+        &BlurEffect::supported,
+        nullptr
+#endif
+EFFECT_FALLBACK
     }
     };
     return s_effectData;
@@ -725,7 +741,7 @@ QStringList availableEffectNames()
 QList< BuiltInEffect > availableEffects()
 {
     QList<BuiltInEffect> result;
-    for (int i = index(BuiltInEffect::Invalid) + 1; i <= index(BuiltInEffect::Zoom); ++i) {
+    for (int i = index(BuiltInEffect::Invalid) + 1; i <= index(BuiltInEffect::UBR); ++i) {
         result << BuiltInEffect(i);
     }
     return result;

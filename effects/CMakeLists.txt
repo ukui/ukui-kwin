@@ -103,6 +103,10 @@ set(kwin4_effect_builtins_sources
     windowgeometry/windowgeometry.cpp
     wobblywindows/wobblywindows.cpp
     zoom/zoom.cpp
+    ubr/ubreffect.cpp
+    ubr/xatom-helper.cpp
+    ubr/ubrtexturehelper.cpp
+    ubr/shaderhelper.cpp
 )
 
 qt5_add_resources(kwin4_effect_builtins_sources shaders.qrc)
@@ -199,6 +203,7 @@ include(snaphelper/CMakeLists.txt)
 include(startupfeedback/CMakeLists.txt)
 add_subdirectory(trackmouse)
 add_subdirectory(wobblywindows)
+add_subdirectory(ubr)
 
 ###############################################################################
 

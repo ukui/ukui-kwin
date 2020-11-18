@@ -34,6 +34,8 @@ add_library(kwin-style-ukui SHARED
   button.h
   breezeboxshadowrenderer.cpp
   breezeboxshadowrenderer.h
+  shadow-helper.cpp
+  shadow-helper.h
   xatom-helper.cpp
   xatom-helper.h
   kwin-style-ukui.json
@@ -47,7 +49,7 @@ find_package(KDecoration2)
 find_package(KF5CoreAddons)
 find_package(KF5WindowSystem)
 find_package(KF5GuiAddons)
-target_link_libraries(kwin-style-ukui PUBLIC KDecoration2::KDecoration KF5::ConfigWidgets KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::DBus Qt5::X11Extras KF5::GuiAddons -lX11)
+target_link_libraries(kwin-style-ukui PUBLIC KDecoration2::KDecoration KF5::ConfigWidgets KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::DBus Qt5::X11Extras KF5::GuiAddons kwineffects -lX11)
 target_link_libraries(test-csd PUBLIC KDecoration2::KDecoration KF5::CoreAddons KF5::WindowSystem PRIVATE Qt5::Gui Qt5::DBus Qt5::X11Extras KF5::GuiAddons -lX11)
 
 #target_compile_definitions(kwin-style-ukui PUBLIC KWINSTYLEUKUI_LIBRARY)
