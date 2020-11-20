@@ -46,7 +46,7 @@ jobs:
           cmake ../;
           make -j$(nproc);
   ubuntu-latest:
-    name: on Ubuntu Rolling
+    name: on Ubuntu Latest
     runs-on: ubuntu-20.04
     container: docker.io/library/ubuntu:latest
     env:
