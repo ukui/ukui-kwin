@@ -26,6 +26,7 @@
 
 #include <QGuiApplication>
 #include <QMatrix4x4>
+#include <QPainterPath>
 #include <QScreen> // for QGuiApplication
 #include <QTime>
 #include <QWindow>
