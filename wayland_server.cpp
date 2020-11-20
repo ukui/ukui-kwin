@@ -285,7 +285,7 @@ public:
     }
 };
 
-bool WaylandServer::init(const QByteArray &socketName, InitalizationFlags flags)
+bool WaylandServer::init(const QByteArray &socketName, InitializationFlags flags)
 {
     m_initFlags = flags;
     m_display = new KWinDisplay(this);
@@ -514,16 +514,63 @@ void WaylandServer::initWorkspace()
 
 void WaylandServer::initScreenLocker()
 {
+//当kscreenlocker-dev版本大于5.19时，主要用于2010版本，否则如果是5.18版本则可用于2004版本
+#ifdef KSCREENLOCKER_5_19_PLUS
+    auto *screenLockerApp = ScreenLocker::KSldApp::self();
+
+      ScreenLocker::KSldApp::self()->setGreeterEnvironment(kwinApp()->processStartupEnvironment());
+      ScreenLocker::KSldApp::self()->initialize();
+
+      connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::aboutToLock, this,
+          [this, screenLockerApp] () {
+              if (m_screenLockerClientConnection) {
+                  // Already sent data to KScreenLocker.
+                  return;
+              }
+              int clientFd = createScreenLockerConnection();
+              if (clientFd < 0) {
+                  return;
+              }
+              ScreenLocker::KSldApp::self()->setWaylandFd(clientFd);
+
+              for (auto *seat : m_display->seats()) {
+                  connect(seat, &KWayland::Server::SeatInterface::timestampChanged,
+                          screenLockerApp, &ScreenLocker::KSldApp::userActivity);
+              }
+          }
+      );
+
+      connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::unlocked, this,
+          [this, screenLockerApp] () {
+              if (m_screenLockerClientConnection) {
+                  m_screenLockerClientConnection->destroy();
+                  delete m_screenLockerClientConnection;
+                  m_screenLockerClientConnection = nullptr;
+              }
+
+              for (auto *seat : m_display->seats()) {
+                  disconnect(seat, &KWayland::Server::SeatInterface::timestampChanged,
+                             screenLockerApp, &ScreenLocker::KSldApp::userActivity);
+              }
+              ScreenLocker::KSldApp::self()->setWaylandFd(-1);
+          }
+      );
+
+      if (m_initFlags.testFlag(InitializationFlag::LockScreen)) {
+          ScreenLocker::KSldApp::self()->lock(ScreenLocker::EstablishLock::Immediate);
+      }
+      emit initialized();
+#else
     ScreenLocker::KSldApp::self();
-    //ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
+    ScreenLocker::KSldApp::self()->setWaylandDisplay(m_display);
     ScreenLocker::KSldApp::self()->setGreeterEnvironment(kwinApp()->processStartupEnvironment());
     ScreenLocker::KSldApp::self()->initialize();
     //由于在ubuntu2010中kscreenlocker-dev接口已改变,为兼容ubuntu2010的编译，故在此处注释本函数代码，因为wayland代码本身不被ukui使用，故直接弃用
-    //connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged, this,
-    //    [this] () {
-    //        m_screenLockerClientConnection = ScreenLocker::KSldApp::self()->greeterClientConnection();
-    //    }
-    //);
+    connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::greeterClientConnectionChanged, this,
+        [this] () {
+            m_screenLockerClientConnection = ScreenLocker::KSldApp::self()->greeterClientConnection();
+        }
+    );
 
     connect(ScreenLocker::KSldApp::self(), &ScreenLocker::KSldApp::unlocked, this,
         [this] () {
@@ -531,10 +578,11 @@ void WaylandServer::initScreenLocker()
         }
     );
 
-    if (m_initFlags.testFlag(InitalizationFlag::LockScreen)) {
+    if (m_initFlags.testFlag(InitializationFlag::LockScreen)) {
         ScreenLocker::KSldApp::self()->lock(ScreenLocker::EstablishLock::Immediate);
     }
     emit initialized();
+#endif
 }
 
 WaylandServer::SocketPairConnection WaylandServer::createConnection()
@@ -548,6 +596,18 @@ WaylandServer::SocketPairConnection WaylandServer::createConnection()
     ret.connection = m_display->createClient(sx[0]);
     ret.fd = sx[1];
     return ret;
+}
+
+int WaylandServer::createScreenLockerConnection()
+{
+    const auto socket = createConnection();
+    if (!socket.connection) {
+        return -1;
+    }
+    m_screenLockerClientConnection = socket.connection;
+    connect(m_screenLockerClientConnection, &KWayland::Server::ClientConnection::disconnected,
+            this, [this] { m_screenLockerClientConnection = nullptr; });
+    return socket.fd;
 }
 
 int WaylandServer::createXWaylandConnection()
@@ -768,12 +828,12 @@ bool WaylandServer::isScreenLocked() const
 
 bool WaylandServer::hasScreenLockerIntegration() const
 {
-    return !m_initFlags.testFlag(InitalizationFlag::NoLockScreenIntegration);
+    return !m_initFlags.testFlag(InitializationFlag::NoLockScreenIntegration);
 }
 
 bool WaylandServer::hasGlobalShortcutSupport() const
 {
-    return !m_initFlags.testFlag(InitalizationFlag::NoGlobalShortcuts);
+    return !m_initFlags.testFlag(InitializationFlag::NoGlobalShortcuts);
 }
 
 void WaylandServer::simulateUserActivity()

@@ -131,6 +131,12 @@ set_package_properties(KScreenLocker PROPERTIES
     PURPOSE "For screenlocker integration in kwin_wayland"
 )
 
+find_package(ECM REQUIRED)
+
+if(KScreenLocker_VERSION VERSION_GREATER "5.19")
+    add_compile_definitions(KSCREENLOCKER_5_19_PLUS)
+endif()
+
 find_package(Breeze 5.9.0 CONFIG)
 set_package_properties(Breeze PROPERTIES
     TYPE OPTIONAL
