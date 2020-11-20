@@ -166,7 +166,7 @@ QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_bord
     QPainter painter(&pix);
     painter.save();
     painter.translate(shadow_border, shadow_border);
-    painter.fillPath(windowRelativePath, Qt::black);
+    painter.fillPath(windowRelativePath, QColor(26,26,26));
     painter.restore();
 
     QImage rawImg = pix.toImage();
@@ -180,6 +180,7 @@ QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_bord
     painter2.setCompositionMode(QPainter::CompositionMode_Clear);
     painter2.fillPath(windowRelativePath, Qt::transparent);
     painter2.restore();
+    painter2.end();
 
     // handle darkness
     QImage newImg = target.toImage();
@@ -194,5 +195,58 @@ QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_bord
     }
 
     QPixmap darkerTarget = QPixmap::fromImage(newImg);
+    painter2.begin(&darkerTarget);
+
+    auto borderPath = caculateRelativePainterPath(borderRadiusTopLeft + 0.5, borderRadiusTopRight + 0.5, borderRadiusBottomLeft + 0.5, borderRadiusBottomRight + 0.5);
+    painter2.setCompositionMode(QPainter::CompositionMode_DestinationOver);
+    painter2.setRenderHint(QPainter::HighQualityAntialiasing);
+    QColor borderColor = QColor(26, 26, 26);
+    borderColor.setAlphaF(0.05);
+    painter2.setPen(borderColor);
+    painter2.setBrush(Qt::NoBrush);
+    painter2.translate(shadow_border, shadow_border);
+    painter2.translate(-0.5, -0.5);
+    painter2.drawPath(borderPath);
+
     return darkerTarget;
+}
+
+QPainterPath ShadowHelper::caculateRelativePainterPath(qreal borderRadiusTopLeft, qreal borderRadiusTopRight, qreal borderRadiusBottomLeft, qreal borderRadiusBottomRight)
+{
+    qreal maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
+    qreal maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
+    qreal maxRadius = qMax(maxTopRadius, maxBottomRadius);
+    maxRadius = qMax(12.0, maxRadius);
+
+    qreal squareWidth = 2 * maxRadius + INNERRECT_WIDTH;
+
+    QPainterPath windowRelativePath;
+    windowRelativePath.setFillRule(Qt::WindingFill);
+    QPointF currentPos;
+
+    // move to top left arc start point
+    windowRelativePath.moveTo(borderRadiusTopLeft, 0);
+    // top left arc
+    auto topLeftBorderRadiusRect = QRectF(0, 0, 2 * borderRadiusTopLeft, 2 * borderRadiusTopLeft);
+    windowRelativePath.arcTo(topLeftBorderRadiusRect, 90, 90);
+    // move to bottom left arc start point
+    currentPos = QPointF(0, maxRadius + INNERRECT_WIDTH + maxRadius - borderRadiusBottomLeft);
+    //windowRelativePath.moveTo(currentPos);
+    // bottom left arc
+    auto bottomLeftRect = QRectF(0, currentPos.y() - borderRadiusBottomLeft, 2 * borderRadiusBottomLeft, 2 * borderRadiusBottomLeft);
+    windowRelativePath.arcTo(bottomLeftRect, 180, 90);
+    // move to bottom right arc start point
+    currentPos = QPointF(2 * maxRadius + INNERRECT_WIDTH - borderRadiusBottomRight, 2 * maxRadius + INNERRECT_WIDTH);
+    //windowRelativePath.moveTo(currentPos);
+    // bottom right arc
+    auto bottomRightRect = QRectF(currentPos.x() - borderRadiusBottomRight, currentPos.y() - 2 * borderRadiusBottomRight, 2 * borderRadiusBottomRight, 2 * borderRadiusBottomRight);
+    windowRelativePath.arcTo(bottomRightRect, 270, 90);
+    // move to top right arc start point
+    currentPos = QPointF(2 * maxRadius + INNERRECT_WIDTH, borderRadiusTopRight);
+    //windowRelativePath.moveTo(currentPos);
+    // top right arc
+    auto topRightRect = QRectF(squareWidth - 2 * borderRadiusTopRight, 0, 2 * borderRadiusTopRight, 2 * borderRadiusTopRight);
+    windowRelativePath.arcTo(topRightRect, 0, 90);
+
+    return windowRelativePath;
 }

@@ -65,6 +65,11 @@ private:
 
     QMap<QList<int>, QSharedPointer<KDecoration2::DecorationShadow>> m_inactiveShadowsCache;
     QMap<QList<int>, QSharedPointer<KDecoration2::DecorationShadow>> m_activeShadowsCache;
+
+    QPainterPath caculateRelativePainterPath(qreal borderRadiusTopLeft = 0,
+                                             qreal borderRadiusTopRight = 0,
+                                             qreal borderRadiusBottomLeft = 0,
+                                             qreal borderRadiusBottomRight = 0);
 };
 
 }
