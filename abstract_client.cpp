@@ -1072,6 +1072,11 @@ void AbstractClient::handleMoveResize(int x, int y, int x_root, int y_root)
         }
         // When doing a restricted move we must always keep 100px of the titlebar
         // visible to allow the user to be able to move it again.
+        if (r.height() == 0)
+        {
+            r.setHeight(38);
+            r.setWidth(moveResizeGeom.width());
+        }
         requiredPixels = qMin(100 * (transposed ? r.width() : r.height()),
                               moveResizeGeom.width() * moveResizeGeom.height());
         return r;

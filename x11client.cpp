@@ -2131,19 +2131,28 @@ void X11Client::takeFocus()
                 // 在进入到显示桌面模式后可能还有活跃的窗口，此时不要最小化，(如进入这个模式后才新建的窗口，新建窗口的那一瞬间其实也已聚焦会进入该函数)
                 if (c->userTime() > workspace()->showingDesktopTimestamp()) {
                     //在显示桌面前，假如某一个terminal是顶层窗口，则在显示桌面后，如果新开一个terminal，老的c->userTime()用的组的用户时间，比显示桌面早，导致进入该分支，直接continue
-                    //所以加入注释下foreach后，导致老的terminal直接continue，而不会最小化，2个terminal同时出现。放开注释后，可使自己最小化，但慎放开注释
-                    //foreach (const X11Client *c2, group()->members()) {
-                    //    if(c == c2)
-                    //    {
-                    //        c->minimize(true);
-                    //        printf("%s,X11Client::takeFocus, break, continue, caption:%s\n", strPushDate.toStdString().c_str(), c->caption().toStdString().c_str());
-                    //        break;
-                    //    }
-                    //}
+                    //导致老的terminal直接continue，而不会最小化，2个terminal同时出现。加入以下foreach语句，可使老的terminal最小化
+                    foreach (const X11Client *c2, group()->members()) {
+                        if(c == c2)
+                        {
+                            c->minimize(true);
+                            printf("X11Client::takeFocus, break, continue, caption:%s\n", c->caption().toStdString().c_str());
+                            break;
+                        }
+                    }
                     continue;
                 }
 
-                c->minimize(true);
+                //对某一个窗口(如归档管理器)，新建文件(产生一个它的瞬时窗口)，然后，显示桌面后，立马从任务栏激活归档管理器，此时新建文件takeFocus，如果找到新建文件的主窗口，则主窗口也应该激活
+                //否则，此时关闭新建文件后，桌面立马takeFocus，主窗口会立马消失；其他情况统统最小化处理
+                if (c->hasTransient(this, true))
+                {
+                    c->unminimize();
+                }
+                else
+                {
+                    c->minimize(true);
+                }
             }
             workspace()->setShowingDesktop(false);
         }

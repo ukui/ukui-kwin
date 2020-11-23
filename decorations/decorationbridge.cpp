@@ -168,11 +168,11 @@ void DecorationBridge::init()
         printf("DecorationBridge::init theme:%s\n", strTheme.toStdString().c_str());
     }
 
-    if("ukui-white" == strTheme)
+    if("ukui-light" == strTheme)
     {
         m_themeId = 0;
     }
-    else if("ukui-black" == strTheme)
+    else if("ukui-dark" == strTheme)
     {
         m_themeId = 1;
     }
