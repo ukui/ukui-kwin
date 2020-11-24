@@ -29,11 +29,7 @@
 #include "shadow-helper.h"
 #include "xatom-helper.h"
 
-#include <QVariant>
 #include <QPainter>
-#include <QMessageLogger>
-#include <QSettings>
-#include <QStandardPaths>
 
 #include <KPluginFactory>
 #include <KDecoration2/DecoratedClient>
@@ -146,6 +142,11 @@ void Decoration::init()
 
             if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
             {
+                if(false == XAtomHelper::isShowMinimizeButton(client().data()->windowId()))
+                {
+                    button.data()->setVisible(false);
+                    continue;
+                }
                 m_nrightButtonCout++;
             }
             if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
@@ -344,16 +345,18 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     //写标题
     QFont font;
     font.setPointSize(Font_Size);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
-    //font.setFamily();
     painter->setFont(font);
     painter->setPen(fontColor());
 
     const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignLeft);
     const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
-    painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
+    if(false == client().data()->isModal())     //isModal时，不显示图标按钮，不写标题
+    {
+        painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
+        m_leftButtons->paint(painter, repaintRegion);
+    }
 
     //按钮组刷颜色
-    m_leftButtons->paint(painter, repaintRegion);
     m_rightButtons->paint(painter, repaintRegion);
 }
 

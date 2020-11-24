@@ -1909,11 +1909,11 @@ void Workspace::updateMinimizedOfTransients(AbstractClient* c)
 {
     // if mainwindow is minimized or shaded, minimize transients too
     if (c->isMinimized()) {
-        for (auto it = c->transients().constBegin();
-                it != c->transients().constEnd();
-                ++it) {
-            if ((*it)->isModal())
-                continue; // there's no reason to hide modal dialogs with the main client
+        for (auto it = c->transients().constBegin(); it != c->transients().constEnd(); ++it) {
+//            if ((*it)->isModal())         //还是注释，不然主窗口无法将Modal窗口连带最小化
+//            {
+//                continue; // there's no reason to hide modal dialogs with the main client
+//            }
             // but to keep them to eg. watch progress or whatever
             if (!(*it)->isMinimized()) {
                 (*it)->minimize();
@@ -1926,9 +1926,7 @@ void Workspace::updateMinimizedOfTransients(AbstractClient* c)
         }
     } else {
         // else unmiminize the transients
-        for (auto it = c->transients().constBegin();
-                it != c->transients().constEnd();
-                ++it) {
+        for (auto it = c->transients().constBegin(); it != c->transients().constEnd(); ++it) {
             if ((*it)->isMinimized()) {
                 (*it)->unminimize();
                 updateMinimizedOfTransients((*it));

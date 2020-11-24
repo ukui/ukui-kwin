@@ -86,6 +86,7 @@ public:
 
     static bool isWindowDecorateBorderOnly(int winId);
     static bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
+    static bool isShowMinimizeButton(int winId);
     bool isUKUICsdSupported();
     bool isUKUIDecorationWindow(int winId);
 

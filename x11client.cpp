@@ -1401,11 +1401,6 @@ void X11Client::finishCompositing(ReleaseReason releaseReason)
  */
 bool X11Client::isMinimizable() const
 {
-    //新增限定，Dialog窗口禁用最小化按钮
-    if (isDialog())
-    {
-        return false;
-    }
     if (isSpecialWindow() && !isTransient())
         return false;
     if (!rules()->checkMinimize(true))

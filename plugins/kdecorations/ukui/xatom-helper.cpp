@@ -63,6 +63,22 @@ bool XAtomHelper::isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint)
     return isDeco;
 }
 
+bool XAtomHelper::isShowMinimizeButton(int winId)
+{
+    MotifWmHints hint = getInstance()->getWindowMotifHint(winId);
+    printf("%d, %x, %x, %x\n", winId, hint.flags, hint.functions, hint.decorations);
+    if (!(hint.flags & MWM_HINTS_FUNCTIONS)) {
+        return true;
+    }
+    if (hint.functions & MWM_FUNC_ALL) {
+        return true;
+    }
+    if (!(hint.functions & MWM_FUNC_MINIMIZE)) {
+        return false;
+    }
+    return true;
+}
+
 bool XAtomHelper::isUKUICsdSupported()
 {
     // fixme:

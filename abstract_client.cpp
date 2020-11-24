@@ -616,7 +616,9 @@ void AbstractClient::setMinimized(bool set)
 void AbstractClient::minimize(bool avoid_animation)
 {
     if (!isMinimizable() || isMinimized())
+    {
         return;
+    }
 
     if (isShade() && info) // NETWM restriction - KWindowInfo::isMinimized() == Hidden && !Shaded
         info->setState(NET::States(), NET::Shaded);
@@ -1072,6 +1074,7 @@ void AbstractClient::handleMoveResize(int x, int y, int x_root, int y_root)
         }
         // When doing a restricted move we must always keep 100px of the titlebar
         // visible to allow the user to be able to move it again.
+        //当拖动无边框窗体时，设置一个38的高度，让窗体不至于拖至任务栏下方
         if (r.height() == 0)
         {
             r.setHeight(38);
