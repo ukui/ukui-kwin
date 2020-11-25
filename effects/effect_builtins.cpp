@@ -664,8 +664,8 @@ EFFECT_FALLBACK
         true,
 #ifdef EFFECT_BUILTINS
         &createHelper<UBREffect>,
-        &BlurEffect::supported,
-        nullptr
+        &UBREffect::supported,
+        &UBREffect::enabledByDefault
 #endif
 EFFECT_FALLBACK
     }
