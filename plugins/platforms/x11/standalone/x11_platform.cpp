@@ -389,6 +389,11 @@ bool X11StandalonePlatform::compositingPossible() const
     {
         //对于从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略
         fputs("X11StandalonePlatform::compositingPossible,  从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略\n", stderr);
+        //当读取Backend为OpenGL，并且OpenGLIsUnsafe为true时，由于无法开启毛玻璃，固也设置所有应用的透明度为0.95
+        QGSettings* pTransparency = new QGSettings(UKUI_TRANSPARENCY_SETTING);
+        pTransparency->set(PERSONALSIE_TRAN_KEY, 0.95);
+        pTransparency->set(PERSONALSIE_EFFECT_KEY, false);
+        delete pTransparency;
         //return false;
     }
 

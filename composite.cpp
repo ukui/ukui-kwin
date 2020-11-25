@@ -951,6 +951,15 @@ void X11Compositor::resume(X11Compositor::SuspendReason reason)
 
 void X11Compositor::start()
 {
+    QDBusMessage message = QDBusMessage::createMethodCall("org.gnome.SessionManager",
+                                   "/org/gnome/SessionManager",
+                                   "org.gnome.SessionManager",
+                                   "startupfinished");
+    QList<QVariant> args;
+    args.append("ukui-kwin");
+    args.append("startupfinished");
+    message.setArguments(args);
+
     if (m_suspended) {
         QStringList reasons;
         if (m_suspended & UserSuspend) {
@@ -964,50 +973,19 @@ void X11Compositor::start()
         }
         qCDebug(KWIN_CORE) << "Compositing is suspended, reason:" << reasons;
         qCCritical(KWIN_CORE) << "Compositing is suspended, reason:" << reasons;
-        QDBusMessage message = QDBusMessage::createMethodCall("org.gnome.SessionManager",
-                                       "/org/gnome/SessionManager",
-                                       "org.gnome.SessionManager",
-                                       "startupfinished");
-        QList<QVariant> args;
-        args.append("ukui-kwin");
-        args.append("startupfinished");
-        message.setArguments(args);
         QDBusConnection::sessionBus().send(message);
         return;
     } else if (!kwinApp()->platform()->compositingPossible()) {
         qCCritical(KWIN_CORE) << "Compositing is not possible";
-        QDBusMessage message = QDBusMessage::createMethodCall("org.gnome.SessionManager",
-                                       "/org/gnome/SessionManager",
-                                       "org.gnome.SessionManager",
-                                       "startupfinished");
-        QList<QVariant> args;
-        args.append("ukui-kwin");
-        args.append("startupfinished");
-        message.setArguments(args);
         QDBusConnection::sessionBus().send(message);
         return;
     }
     if (!Compositor::setupStart()) {
         // Internal setup failed, abort.
-        QDBusMessage message = QDBusMessage::createMethodCall("org.gnome.SessionManager",
-                                       "/org/gnome/SessionManager",
-                                       "org.gnome.SessionManager",
-                                       "startupfinished");
-        QList<QVariant> args;
-        args.append("ukui-kwin");
-        args.append("startupfinished");
-        message.setArguments(args);
         QDBusConnection::sessionBus().send(message);
         return;
     }
-    QDBusMessage message = QDBusMessage::createMethodCall("org.gnome.SessionManager",
-                                   "/org/gnome/SessionManager",
-                                   "org.gnome.SessionManager",
-                                   "startupfinished");
-    QList<QVariant> args;
-    args.append("ukui-kwin");
-    args.append("startupfinished");
-    message.setArguments(args);
+
     QDBusConnection::sessionBus().send(message);
     m_xrrRefreshRate = KWin::currentRefreshRate();
     startupWithWorkspace();

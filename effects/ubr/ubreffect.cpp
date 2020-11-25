@@ -38,7 +38,7 @@
 
 #include <QVector4D>
 
-#define UNITY_BORDER_RADIUS 16
+#define UNITY_BORDER_RADIUS 6
 
 static QList<KWin::EffectWindow *> maximizedWindows;
 

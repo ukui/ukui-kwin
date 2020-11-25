@@ -45,7 +45,7 @@
 #define SHADOW_BORDER 30                //阴影边框大小：30小边框、100中边框、200大边框
 #define ACTIVE_DARKNESS 0.45             //阴影颜色深度：1.0深、1.5很深、2.0超深
 #define INACTIVE_DARKNESS 1.0           //阴影颜色深度：1.0深、1.5很深、2.0超深
-#define RADIUS 16
+#define RADIUS 6
 
 
 K_PLUGIN_FACTORY_WITH_JSON(
@@ -339,6 +339,12 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->setPen(Qt::NoPen);
         painter->setBrush(frameColor());
         painter->drawRoundedRect(rect, RADIUS, RADIUS);
+
+        auto rectLeftBottom = QRect(0, rect.height() - RADIUS * 2, RADIUS * 2, RADIUS * 2);
+        painter->drawRoundedRect(rectLeftBottom, 0, 0);   //左下角补角
+        auto rectRightBottom = QRect(rect.width() - RADIUS * 2, rect.height() - RADIUS * 2, RADIUS * 2, RADIUS * 2);
+        painter->drawRoundedRect(rectRightBottom, 0, 0);
+
     }
     painter->restore();
 
