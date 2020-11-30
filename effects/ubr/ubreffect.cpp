@@ -52,6 +52,9 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
     setDepthfunc = (ToplevelSetDepth) QLibrary::resolve("ukui-kwin.so." + qApp->applicationVersion(), "_ZN4KWin8Toplevel8setDepthEi");
 
     m_ubrShader = ShaderHelper::getShader();
+    if (!m_ubrShader->isValid()) {
+        m_ubrShader = KWin::ShaderManager::instance()->generateCustomShader(KWin::ShaderTrait::MapTexture|KWin::ShaderTrait::Modulate|KWin::ShaderTrait::AdjustSaturation);
+    }
 
     // use kwindow system?
     //KWin::effects->findWindow()
