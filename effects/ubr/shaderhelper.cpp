@@ -36,12 +36,6 @@ KWin::GLShader *ShaderHelper::getShader()
     KWin::GLPlatform * const gl = KWin::GLPlatform::instance();
     QByteArray varying, output, textureLookup;
 
-    // caculate corner coord relatived with topleft corner, used for corner texture sampling.
-    QByteArray cornerCoord = "    vec2 cornerCoord = vec2(texcoordC.x * scale.x, texcoordC.y * scale.y);\n";
-    QByteArray cornerCoordTR = "    vec2 cornerCoord = vec2((1 - texcoordC.x) * scale1.x, texcoordC.y * scale1.y);\n";
-    QByteArray cornerCoordBL = "    vec2 cornerCoord = vec2(texcoordC.x * scale2.x, (1 - texcoordC.y) * scale2.y);\n";
-    QByteArray cornerCoordBR = "    vec2 cornerCoord = vec2((1 - texcoordC.x) * scale3.x, (1 - texcoordC.y) * scale3.y);\n";
-
     if (!gl->isGLES()) {
         const bool glsl_140 = gl->glslVersion() >= KWin::kVersionNumber(1, 40);
 
@@ -116,15 +110,15 @@ KWin::GLShader *ShaderHelper::getShader()
                   "        vec2 cornerCoord = vec2(texcoordC.x * scale.x, texcoordC.y * scale.y);\n"
                   "        var = " << textureLookup << "(topleft, cornerCoord);\n"
                   "    } else {\n"
-                  "        vec2 cornerCoordBL = vec2(texcoordC.x * scale2.x, (1 - texcoordC.y) * scale2.y);\n"
+                  "        vec2 cornerCoordBL = vec2(texcoordC.x * scale2.x, (1.0 - texcoordC.y) * scale2.y);\n"
                   "        var = " << textureLookup << "(bottomleft, cornerCoordBL);\n"
                   "    }\n"
                   "} else {\n"
                   "    if (texcoordC.y < 0.5) {\n"
-                  "        vec2 cornerCoordTR = vec2((1 - texcoordC.x) * scale1.x, texcoordC.y * scale1.y);\n"
+                  "        vec2 cornerCoordTR = vec2((1.0 - texcoordC.x) * scale1.x, texcoordC.y * scale1.y);\n"
                   "        var = " << textureLookup << "(topright, cornerCoordTR);\n"
                   "    } else {\n"
-                  "        vec2 cornerCoordBR = vec2((1 - texcoordC.x) * scale3.x, (1 - texcoordC.y) * scale3.y);\n"
+                  "        vec2 cornerCoordBR = vec2((1.0 - texcoordC.x) * scale3.x, (1.0 - texcoordC.y) * scale3.y);\n"
                   "        var = " << textureLookup << "(bottomright, cornerCoordBR);\n"
                   "    }\n"
                   "}\n";
