@@ -191,6 +191,17 @@ UBREffect::~UBREffect()
     }
 }
 
+bool UBREffect::supported()
+{
+    bool supported = KWin::effects->isOpenGLCompositing() && KWin::GLRenderTarget::supported() && KWin::GLRenderTarget::blitSupported();
+    return supported;
+}
+
+bool UBREffect::enabledByDefault()
+{
+    return true;
+}
+
 void UBREffect::prePaintScreen(KWin::ScreenPrePaintData &data, int time)
 {
     KWin::Effect::prePaintScreen(data, time);

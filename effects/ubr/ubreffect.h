@@ -40,6 +40,9 @@ public:
     explicit UBREffect(QObject *parent = nullptr, const QVariantList &args = QVariantList());
     ~UBREffect();
 
+    static bool supported();
+    static bool enabledByDefault();
+
     void prePaintScreen(KWin::ScreenPrePaintData &data, int time) override;
     void prePaintWindow(KWin::EffectWindow* w, KWin::WindowPrePaintData& data, int time) override;
     void drawWindow(KWin::EffectWindow* w, int mask, const QRegion& region, KWin::WindowPaintData& data) override;
