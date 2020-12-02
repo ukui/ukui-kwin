@@ -3,7 +3,7 @@
  This file is part of the UKUI project
  The ukui-kwin is forked from kwin
 
-Copyright (C) 2014-2020 kylinos.cn                                        
+Copyright (C) 2014-2020 kylinos.cn
 
  KWin - the KDE window manager
  This file is part of the KDE project.

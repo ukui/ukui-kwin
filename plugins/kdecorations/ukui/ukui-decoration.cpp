@@ -356,13 +356,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
     const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignLeft);
     const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
-    if(false == client().data()->isModal())     //isModal时，不显示图标按钮，不写标题
-    {
-        painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
-        m_leftButtons->paint(painter, repaintRegion);
-    }
+
+    painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
 
     //按钮组刷颜色
+    m_leftButtons->paint(painter, repaintRegion);
     m_rightButtons->paint(painter, repaintRegion);
 }
 

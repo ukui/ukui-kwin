@@ -364,6 +364,11 @@ bool X11StandalonePlatform::adaptVga() const
             KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
             kwinConfig.writeEntry("Backend", "XRender");
             kwinConfig.sync();
+
+            //关动画,由于0709:0001显卡,不仅不支持毛玻璃,连动画都带不起来
+            KConfigGroup kConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
+            kConfig.writeEntry("kwin4_effect_maximizeEnabled", "false");
+            kConfig.sync();
             return true;
         }
     }

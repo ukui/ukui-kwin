@@ -329,7 +329,6 @@ void ApplicationX11::notifyKSplash()
                                                                             QStringLiteral("setStage"));
     ksplashProgressMessage.setArguments(QList<QVariant>() << QStringLiteral("wm"));
     QDBusConnection::sessionBus().asyncCall(ksplashProgressMessage);
-
 }
 
 void ApplicationX11::crashHandler(int signal)
