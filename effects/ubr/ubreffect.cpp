@@ -85,16 +85,16 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
 
         if (!window->data(UnityBorderRadius).isValid()) {
             auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(id);
-            if (ubr.topLeft == 0) {
+            if (ubr.topLeft <= 0) {
                 ubr.topLeft = UNITY_BORDER_RADIUS;
             }
-            if (ubr.topRight == 0) {
+            if (ubr.topRight <= 0) {
                 ubr.topRight = UNITY_BORDER_RADIUS;
             }
-            if (ubr.bottomLeft == 0) {
+            if (ubr.bottomLeft <= 0) {
                 ubr.bottomLeft = UNITY_BORDER_RADIUS;
             }
-            if (ubr.bottomRight == 0) {
+            if (ubr.bottomRight <= 0) {
                 ubr.bottomRight = UNITY_BORDER_RADIUS;
             }
             window->setData(UnityBorderRadius, QVector4D(ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight));
@@ -127,16 +127,16 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
         }
 
         auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(id);
-        if (ubr.topLeft == 0) {
+        if (ubr.topLeft <= 0) {
             ubr.topLeft = UNITY_BORDER_RADIUS;
         }
-        if (ubr.topRight == 0) {
+        if (ubr.topRight <= 0) {
             ubr.topRight = UNITY_BORDER_RADIUS;
         }
-        if (ubr.bottomLeft == 0) {
+        if (ubr.bottomLeft <= 0) {
             ubr.bottomLeft = UNITY_BORDER_RADIUS;
         }
-        if (ubr.bottomRight == 0) {
+        if (ubr.bottomRight <= 0) {
             ubr.bottomRight = UNITY_BORDER_RADIUS;
         }
         window->setData(UnityBorderRadius, QVector4D(ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight));

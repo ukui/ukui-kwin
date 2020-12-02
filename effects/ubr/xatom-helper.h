@@ -25,7 +25,7 @@
 
 #include <QObject>
 
-#include <NETWM>
+#include <xcb/xcb_atom.h>
 
 struct UnityCorners {
     ulong topLeft = 0;
@@ -96,15 +96,16 @@ public:
     void setWindowMotifHint(int winId, const MotifWmHints &hints);
     MotifWmHints getWindowMotifHint(int winId);
 
+    bool isShowMinimizeButton(int winId);
 private:
     explicit XAtomHelper(QObject *parent = nullptr);
 
-    ulong registerUKUICsdNetWmSupportAtom();
+    xcb_atom_t registerUKUICsdNetWmSupportAtom();
     void unregisterUKUICsdNetWmSupportAtom();
 
-    ulong m_motifWMHintsAtom = 0L;
-    ulong m_unityBorderRadiusAtom = 0L;
-    ulong m_ukuiDecorationAtion = 0L;
+    xcb_atom_t m_motifWMHintsAtom = 0;
+    xcb_atom_t m_unityBorderRadiusAtom = 0;
+    xcb_atom_t m_ukuiDecorationAtion = 0;
 };
 
 #endif // XATOMHELPER_H

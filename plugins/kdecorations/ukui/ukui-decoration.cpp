@@ -98,7 +98,8 @@ void Decoration::init()
 {
     XAtomHelper::getInstance()->setUKUIDecoraiontHint(client().data()->windowId(), true);
 
-    bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
+    bool isDecoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
+    m_decoBorderOnly = isDecoBorderOnly;
     if (!isDecoBorderOnly) {
         QDBusConnection::sessionBus().connect(QString(),
                                               QStringLiteral("/KGlobalSettings"),
@@ -142,7 +143,7 @@ void Decoration::init()
 
             if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
             {
-                if(false == XAtomHelper::isShowMinimizeButton(client().data()->windowId()))
+                if(false == XAtomHelper::getInstance()->isShowMinimizeButton(client().data()->windowId()))
                 {
                     button.data()->setVisible(false);
                     continue;
@@ -223,14 +224,28 @@ void Decoration::updateShadow()
         return;
     }
 
-    auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, RADIUS, RADIUS, RADIUS, RADIUS);
+    auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
+    if (ubr.topLeft <= 0) {
+        ubr.topLeft = RADIUS;
+    }
+    if (ubr.topRight <= 0) {
+        ubr.topRight = RADIUS;
+    }
+    if (ubr.bottomLeft <= 0) {
+        ubr.bottomLeft = RADIUS;
+    }
+    if (ubr.bottomRight <= 0) {
+        ubr.bottomRight = RADIUS;
+    }
+
+    auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight);
     shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
     setShadow(shadow);
 }
 
 void Decoration::updateTitleBar()
 {
-    bool isDecoBorderOnly = XAtomHelper::isWindowDecorateBorderOnly(client().data()->windowId());
+    bool isDecoBorderOnly = m_decoBorderOnly;
     if (isDecoBorderOnly)
     {
         return;
