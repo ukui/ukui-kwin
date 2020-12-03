@@ -28,7 +28,6 @@
 #include <kwineffects.h>
 #include <kwinglutils.h>
 #include <kwinglplatform.h>
-#include <KWindowSystem>
 
 #include <QPainterPath>
 #include <QX11Info>
@@ -56,118 +55,54 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
         m_ubrShader = KWin::ShaderManager::instance()->generateCustomShader(KWin::ShaderTrait::MapTexture|KWin::ShaderTrait::Modulate|KWin::ShaderTrait::AdjustSaturation);
     }
 
-    // use kwindow system?
-    //KWin::effects->findWindow()
     auto effectsManager = KWin::effects;
 
-    auto windowSystem = KWindowSystem::self();
-
-    for (auto id : windowSystem->windows()) {
-        auto window = effectsManager->findWindow(id);
-
-        bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(id);
+    for (auto window : effectsManager->stackingOrder()) {
+        bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
 
-        KWindowInfo info(id, NET::WMState);
-        NETWinInfo netInfo(QX11Info::connection(), id, QX11Info::appRootWindow(), NET::Property(), NET::WM2GTKFrameExtents);
-        auto gtkFrameExtent = netInfo.gtkFrameExtents();
-        if (gtkFrameExtent.left > 0 || gtkFrameExtent.top > 0 || gtkFrameExtent.right > 0 || gtkFrameExtent.bottom > 0) {
-            window->setData(IgnoreUBR, true);
-        }
-
-        if (info.hasState(NET::MaxHoriz) || info.hasState(NET::MaxVert)) {
-            maximizedWindows.prepend(window);
-        }
-
-        if (XAtomHelper::isFrameLessWindow(id)) {
-            window->setData(IgnoreUBR, true);
-        }
-
         if (!window->data(UnityBorderRadius).isValid()) {
-            auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(id);
-            if (ubr.topLeft == 0) {
+            auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(window);
+            if (ubr.topLeft <= 0) {
                 ubr.topLeft = UNITY_BORDER_RADIUS;
             }
-            if (ubr.topRight == 0) {
+            if (ubr.topRight <= 0) {
                 ubr.topRight = UNITY_BORDER_RADIUS;
             }
-            if (ubr.bottomLeft == 0) {
+            if (ubr.bottomLeft <= 0) {
                 ubr.bottomLeft = UNITY_BORDER_RADIUS;
             }
-            if (ubr.bottomRight == 0) {
+            if (ubr.bottomRight <= 0) {
                 ubr.bottomRight = UNITY_BORDER_RADIUS;
             }
             window->setData(UnityBorderRadius, QVector4D(ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight));
         }
 
-        bool isCSD = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(id);
+        bool isCSD = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(window);
         window->setData(IsCSD, isCSD);
     }
 
-    connect(windowSystem, &KWindowSystem::windowAdded, this, [=](WId id){
-        auto window = effectsManager->findWindow(id);
-
-        bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(id);
+    connect(effectsManager, &KWin::EffectsHandler::windowAdded, this, [=](KWin::EffectWindow *window){
+        bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
 
-        KWindowInfo info(id, NET::WMState);
-        NETWinInfo netInfo(QX11Info::connection(), id, QX11Info::appRootWindow(), NET::Property(), NET::WM2GTKFrameExtents);
-        auto gtkFrameExtent = netInfo.gtkFrameExtents();
-        if (gtkFrameExtent.left > 0 || gtkFrameExtent.top > 0 || gtkFrameExtent.right > 0 || gtkFrameExtent.bottom > 0) {
-            window->setData(IgnoreUBR, true);
-        }
-
-        if (info.hasState(NET::MaxHoriz) || info.hasState(NET::MaxVert)) {
-            maximizedWindows.prepend(window);
-        }
-
-        // skip frame less window.
-        if (XAtomHelper::isFrameLessWindow(id)) {
-            window->setData(IgnoreUBR, true);
-        }
-
-        auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(id);
-        if (ubr.topLeft == 0) {
+        auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(window);
+        if (ubr.topLeft <= 0) {
             ubr.topLeft = UNITY_BORDER_RADIUS;
         }
-        if (ubr.topRight == 0) {
+        if (ubr.topRight <= 0) {
             ubr.topRight = UNITY_BORDER_RADIUS;
         }
-        if (ubr.bottomLeft == 0) {
+        if (ubr.bottomLeft <= 0) {
             ubr.bottomLeft = UNITY_BORDER_RADIUS;
         }
-        if (ubr.bottomRight == 0) {
+        if (ubr.bottomRight <= 0) {
             ubr.bottomRight = UNITY_BORDER_RADIUS;
         }
         window->setData(UnityBorderRadius, QVector4D(ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight));
 
-        bool isCSD = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(id);
+        bool isCSD = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(window);
         window->setData(IsCSD, isCSD);
-    });
-    connect(windowSystem, QOverload<WId, NET::Properties, NET::Properties2>::of(&KWindowSystem::windowChanged), this, [=](WId id, NET::Properties properties1){
-        if (properties1 & NET::Property::WMGeometry) {
-            auto window = effectsManager->findWindow(id);
-            maximizedWindows.removeOne(window);
-            KWindowInfo info(id, NET::WMState);
-            if (info.hasState(NET::MaxHoriz) || info.hasState(NET::MaxVert)) {
-                maximizedWindows.prepend(window);
-            }
-        }
-    });
-
-    for (auto window : effectsManager->stackingOrder()) {
-        if (window->isFullScreen()) {
-            maximizedWindows.prepend(window);
-        }
-        // FIXME: get window maximized state by xatom.
-        //window->readProperty()
-    }
-
-    connect(effectsManager, &KWin::EffectsHandler::windowMaximizedStateChanged, this, [=](KWin::EffectWindow *window, bool hMax, bool vMax){
-        maximizedWindows.removeOne(window);
-        if (hMax || vMax) {
-            maximizedWindows.prepend(window);
-        }
     });
 
     connect(effectsManager, &KWin::EffectsHandler::windowDeleted, this, [=](KWin::EffectWindow *window){

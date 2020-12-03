@@ -25,8 +25,7 @@
 
 #include <QObject>
 
-#include <X11/Xlib.h>
-#include <NETWM>
+#include <xcb/xcb_atom.h>
 
 struct UnityCorners {
     ulong topLeft = 0;
@@ -84,9 +83,8 @@ public:
 
     static bool isFrameLessWindow(int winId);
 
-    static bool isWindowDecorateBorderOnly(int winId);
-    static bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
-    static bool isShowMinimizeButton(int winId);
+    bool isWindowDecorateBorderOnly(int winId);
+    bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
     bool isUKUICsdSupported();
     bool isUKUIDecorationWindow(int winId);
 
@@ -98,15 +96,16 @@ public:
     void setWindowMotifHint(int winId, const MotifWmHints &hints);
     MotifWmHints getWindowMotifHint(int winId);
 
+    bool isShowMinimizeButton(int winId);
 private:
     explicit XAtomHelper(QObject *parent = nullptr);
 
-    Atom registerUKUICsdNetWmSupportAtom();
+    xcb_atom_t registerUKUICsdNetWmSupportAtom();
     void unregisterUKUICsdNetWmSupportAtom();
 
-    Atom m_motifWMHintsAtom = None;
-    Atom m_unityBorderRadiusAtom = None;
-    Atom m_ukuiDecorationAtion = None;
+    xcb_atom_t m_motifWMHintsAtom = 0;
+    xcb_atom_t m_unityBorderRadiusAtom = 0;
+    xcb_atom_t m_ukuiDecorationAtion = 0;
 };
 
 #endif // XATOMHELPER_H

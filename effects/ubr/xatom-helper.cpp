@@ -20,16 +20,12 @@
  *
  */
 
+#include <kwinglobals.h>
 #include "xatom-helper.h"
 
 #include <limits.h>
 
-#include <QX11Info>
-
-#include <X11/Xlib.h>
-#include <X11/X.h>
-#include <X11/Xatom.h>
-#include <NETWM>
+#include <xcb/xcb_util.h>
 
 static XAtomHelper *global_instance = nullptr;
 
@@ -37,6 +33,31 @@ XAtomHelper *XAtomHelper::getInstance()
 {
     if (!global_instance)
         global_instance = new XAtomHelper;
+
+    if (!KWin::connection())
+        return global_instance;
+
+    if (!global_instance->m_motifWMHintsAtom) {
+        QString tmp("_MOTIF_WM_HINTS");
+        xcb_intern_atom_cookie_t cookie1 = xcb_intern_atom(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+        tmp = "_UNITY_GTK_BORDER_RADIUS";
+        xcb_intern_atom_cookie_t cookie2 = xcb_intern_atom(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+        tmp = "_KWIN_UKUI_DECORAION";
+        xcb_intern_atom_cookie_t cookie3 = xcb_intern_atom(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+
+        xcb_intern_atom_reply_t *reply1 = xcb_intern_atom_reply(KWin::connection(), cookie1, nullptr);
+        global_instance->m_motifWMHintsAtom = reply1->atom;
+        free(reply1);
+
+        xcb_intern_atom_reply_t *reply2 = xcb_intern_atom_reply(KWin::connection(), cookie2, nullptr);
+        global_instance->m_unityBorderRadiusAtom = reply2->atom;
+        free(reply2);
+
+        xcb_intern_atom_reply_t *reply3 = xcb_intern_atom_reply(KWin::connection(), cookie3, nullptr);
+        global_instance->m_ukuiDecorationAtion = reply3->atom;
+        free(reply3);
+    }
+
     return global_instance;
 }
 
@@ -54,12 +75,30 @@ bool XAtomHelper::isWindowDecorateBorderOnly(int winId)
     return isWindowMotifHintDecorateBorderOnly(getInstance()->getWindowMotifHint(winId));
 }
 
+bool XAtomHelper::isWindowDecorateBorderOnly(KWin::EffectWindow *w)
+{
+    MotifWmHints hints;
+    auto data = w->readProperty(m_motifWMHintsAtom, m_motifWMHintsAtom, 32);
+
+    if (data.length() != 5 * sizeof(int))
+        return false;
+
+    hints.flags = static_cast<ulong>(data.data()[0]);
+    hints.functions = static_cast<ulong>(data.data()[1 * sizeof(int)]);
+    hints.decorations = static_cast<ulong>(data.data()[2 * sizeof(int)]);
+    hints.input_mode = static_cast<ulong>(data.data()[3 * sizeof(int)]);
+    hints.status = static_cast<ulong>(data.data()[4 * sizeof(int)]);
+
+    return isWindowMotifHintDecorateBorderOnly(hints);
+}
+
 bool XAtomHelper::isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint)
 {
     bool isDeco = false;
-    if (hint.flags & MWM_HINTS_DECORATIONS && hint.flags != MWM_HINTS_DECORATIONS) {
-        if (hint.decorations == MWM_DECOR_BORDER)
+    if (hint.flags & MWM_HINTS_DECORATIONS) {
+        if (hint.decorations == MWM_DECOR_BORDER) {
             isDeco = true;
+        }
     }
     return isDeco;
 }
@@ -72,145 +111,229 @@ bool XAtomHelper::isUKUICsdSupported()
 
 bool XAtomHelper::isUKUIDecorationWindow(int winId)
 {
-    if (m_ukuiDecorationAtion == None)
+    if (m_ukuiDecorationAtion == 0)
         return false;
 
-    Atom type;
-    int format;
-    ulong nitems;
-    ulong bytes_after;
     uchar *data;
 
     bool isUKUIDecoration = false;
 
-    XGetWindowProperty(QX11Info::display(), winId, m_ukuiDecorationAtion,
-                       0, LONG_MAX, false,
-                       m_ukuiDecorationAtion, &type,
-                       &format, &nitems,
-                       &bytes_after, &data);
+    xcb_generic_error_t *error = nullptr;
 
-    if (type == m_ukuiDecorationAtion) {
-        if (nitems == 1) {
-            isUKUIDecoration = data[0];
-        }
+    xcb_get_property_cookie_t cookie = xcb_get_property(KWin::connection(), false, winId, m_ukuiDecorationAtion, XCB_ATOM_ANY, 0, 1);
+    xcb_get_property_reply_t *reply = xcb_get_property_reply(KWin::connection(), cookie, &error);
+    if (!reply)
+        return false;
+
+    if (error) {
+        free(error);
+        free(reply);
+        return false;
+    }
+
+    data = (uchar *)xcb_get_property_value(reply);
+    free(reply);
+    if (data) {
+        isUKUIDecoration = data[0];
+        //free(data);
     }
 
     return isUKUIDecoration;
 }
 
+bool XAtomHelper::isUKUIDecorationWindow(KWin::EffectWindow *w)
+{
+    auto data = w->readProperty(m_ukuiDecorationAtion, m_ukuiDecorationAtion, 32);
+    if (data.length() != 1 * sizeof(int))
+        return false;
+    return !data.isEmpty();
+}
+
 UnityCorners XAtomHelper::getWindowBorderRadius(int winId)
 {
     UnityCorners corners;
+    corners.topLeft = 0;
+    corners.topRight = 0;
+    corners.bottomLeft = 0;
+    corners.bottomRight = 0;
 
-    Atom type;
-    int format;
-    ulong nitems;
-    ulong bytes_after;
     uchar *data;
 
-    if (m_unityBorderRadiusAtom != None) {
-        XGetWindowProperty(QX11Info::display(), winId, m_unityBorderRadiusAtom,
-                           0, LONG_MAX, false,
-                           XA_CARDINAL, &type,
-                           &format, &nitems,
-                           &bytes_after, &data);
+    xcb_get_property_cookie_t cookie = xcb_get_property(KWin::connection(), false, winId, m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 0, sizeof(UnityCorners)/sizeof(ulong));
+    xcb_generic_error_t *error = nullptr;
+    xcb_get_property_reply_t *reply = xcb_get_property_reply(KWin::connection(), cookie, &error);
+    if (!reply)
+        return corners;
 
-        if (type == XA_CARDINAL) {
-            if (nitems == 4) {
-                corners.topLeft = static_cast<ulong>(data[0]);
-                corners.topRight = static_cast<ulong>(data[1*sizeof (ulong)]);
-                corners.bottomLeft = static_cast<ulong>(data[2*sizeof (ulong)]);
-                corners.bottomRight = static_cast<ulong>(data[3*sizeof (ulong)]);
-            }
-            XFree(data);
-        }
+    if (error) {
+        free(error);
+        free(reply);
+        return corners;
     }
+
+    if (xcb_get_property_value_length(reply) != 4 * sizeof(int)) {
+        free(reply);
+        return corners;
+    }
+
+    data = (uchar*)xcb_get_property_value(reply);
+    free(reply);
+
+    if (data) {
+        corners.topLeft = static_cast<ulong>(data[0]);
+        corners.topRight = static_cast<ulong>(data[1*sizeof (int)]);
+        corners.bottomLeft = static_cast<ulong>(data[2*sizeof (int)]);
+        corners.bottomRight = static_cast<ulong>(data[3*sizeof (int)]);
+        //free(data);
+    }
+
+    return corners;
+}
+
+UnityCorners XAtomHelper::getWindowBorderRadius(KWin::EffectWindow *w)
+{
+    auto data = w->readProperty(m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 32);
+    UnityCorners corners;
+
+    if (data.length() != 4 * sizeof(int))
+        return corners;
+
+    corners.topLeft = static_cast<ulong>(data.data()[0]);
+    corners.topRight = static_cast<ulong>(data.data()[1 * sizeof(int)]);
+    corners.bottomLeft = static_cast<ulong>(data.data()[2 * sizeof(int)]);
+    corners.bottomRight = static_cast<ulong>(data.data()[3 * sizeof(int)]);
 
     return corners;
 }
 
 void XAtomHelper::setWindowBorderRadius(int winId, const UnityCorners &data)
 {
-    if (m_unityBorderRadiusAtom == None)
+    if (m_unityBorderRadiusAtom == 0)
         return;
 
     ulong corners[4] = {data.topLeft, data.topRight, data.bottomLeft, data.bottomRight};
 
-    XChangeProperty(QX11Info::display(), winId, m_unityBorderRadiusAtom, XA_CARDINAL,
-                    32, XCB_PROP_MODE_REPLACE, (const unsigned char *) &corners, sizeof (corners)/sizeof (corners[0]));
+    xcb_change_property(KWin::connection(), XCB_PROP_MODE_REPLACE, winId, m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 32, sizeof(corners)/sizeof(corners[0]), &corners);
+    xcb_flush(KWin::connection());
 }
 
 void XAtomHelper::setWindowBorderRadius(int winId, int topLeft, int topRight, int bottomLeft, int bottomRight)
 {
-    if (m_unityBorderRadiusAtom == None)
+    if (m_unityBorderRadiusAtom == 0)
         return;
 
     ulong corners[4] = {(ulong)topLeft, (ulong)topRight, (ulong)bottomLeft, (ulong)bottomRight};
 
-    XChangeProperty(QX11Info::display(), winId, m_unityBorderRadiusAtom, XA_CARDINAL,
-                    32, XCB_PROP_MODE_REPLACE, (const unsigned char *) &corners, sizeof (corners)/sizeof (corners[0]));
+    xcb_change_property(KWin::connection(), XCB_PROP_MODE_REPLACE, winId, m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 32, sizeof(corners)/sizeof(corners[0]), &corners);
+    xcb_flush(KWin::connection());
 }
 
 void XAtomHelper::setUKUIDecoraiontHint(int winId, bool set)
 {
-    if (m_ukuiDecorationAtion == None)
+    if (m_ukuiDecorationAtion == 0)
         return;
 
-    XChangeProperty(QX11Info::display(), winId, m_ukuiDecorationAtion, m_ukuiDecorationAtion, 32, XCB_PROP_MODE_REPLACE, (const unsigned char *) &set, 1);
+    xcb_change_property(KWin::connection(), XCB_PROP_MODE_REPLACE, winId, m_ukuiDecorationAtion, m_ukuiDecorationAtion, 32, 1, &set);
+    xcb_flush(KWin::connection());
 }
 
 void XAtomHelper::setWindowMotifHint(int winId, const MotifWmHints &hints)
 {
-    if (m_unityBorderRadiusAtom == None)
+    if (m_unityBorderRadiusAtom == 0)
         return;
 
-    XChangeProperty(QX11Info::display(), winId, m_motifWMHintsAtom, m_motifWMHintsAtom,
-                    32, XCB_PROP_MODE_REPLACE, (const unsigned char *)&hints, sizeof (MotifWmHints)/ sizeof (ulong));
+    xcb_change_property(KWin::connection(), XCB_PROP_MODE_REPLACE, winId, m_motifWMHintsAtom, m_motifWMHintsAtom,
+                        32, sizeof (MotifWmHints)/ sizeof (ulong), &hints);
+    xcb_flush(KWin::connection());
 }
 
 MotifWmHints XAtomHelper::getWindowMotifHint(int winId)
 {
     MotifWmHints hints;
 
-    if (m_unityBorderRadiusAtom == None)
+    if (m_motifWMHintsAtom == 0)
         return hints;
 
     uchar *data;
-    Atom type;
-    int format;
-    ulong nitems;
-    ulong bytes_after;
 
-    XGetWindowProperty(QX11Info::display(), winId, m_motifWMHintsAtom,
-                       0, sizeof (MotifWmHints)/sizeof (long), false, AnyPropertyType, &type,
-                       &format, &nitems, &bytes_after, &data);
+    xcb_generic_error_t *error = nullptr;
 
-    if (type == None) {
+    xcb_get_property_cookie_t cookie = xcb_get_property(KWin::connection(), false, winId, m_motifWMHintsAtom, XCB_ATOM_ANY, 0, sizeof (MotifWmHints)/ sizeof (ulong));
+    xcb_get_property_reply_t *reply = xcb_get_property_reply(KWin::connection(), cookie, &error);
+    if (!reply)
         return hints;
-    } else {
-        hints = *(MotifWmHints *)data;
-        XFree(data);
+
+    if (error) {
+        free(error);
+        free(reply);
+        return hints;
     }
+
+    if (reply->length != 5) {
+        free(reply);
+        return hints;
+    }
+
+    data = (uchar*)xcb_get_property_value(reply);
+    free(reply);
+    if (!data)
+        return hints;
+    hints.flags = data[0];
+    hints.functions = data[sizeof(int)];
+    hints.decorations = data[sizeof(int)*2];
+    hints.input_mode = data[sizeof(int)*3];
+    hints.status = data[sizeof(int)*4];
+
     return hints;
 }
 
 XAtomHelper::XAtomHelper(QObject *parent) : QObject(parent)
 {
-    if (!QX11Info::isPlatformX11())
+    if (!KWin::connection())
         return;
 
-    m_motifWMHintsAtom = XInternAtom(QX11Info::display(), "_MOTIF_WM_HINTS", true);
-    m_unityBorderRadiusAtom = XInternAtom(QX11Info::display(), "_UNITY_GTK_BORDER_RADIUS", false);
-    m_ukuiDecorationAtion = XInternAtom(QX11Info::display(), "_KWIN_UKUI_DECORAION", false);
+    QString tmp("_MOTIF_WM_HINTS");
+    xcb_intern_atom_cookie_t cookie1 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+    tmp = "_UNITY_GTK_BORDER_RADIUS";
+    xcb_intern_atom_cookie_t cookie2 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+    tmp = "_KWIN_UKUI_DECORAION";
+    xcb_intern_atom_cookie_t cookie3 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+
+    xcb_intern_atom_reply_t *reply1 = xcb_intern_atom_reply(KWin::connection(), cookie1, nullptr);
+    m_motifWMHintsAtom = reply1->atom;
+    free(reply1);
+
+    xcb_intern_atom_reply_t *reply2 = xcb_intern_atom_reply(KWin::connection(), cookie2, nullptr);
+    m_unityBorderRadiusAtom = reply2->atom;
+    free(reply2);
+
+    xcb_intern_atom_reply_t *reply3 = xcb_intern_atom_reply(KWin::connection(), cookie3, nullptr);
+    m_ukuiDecorationAtion = reply3->atom;
+    free(reply3);
 }
 
-Atom XAtomHelper::registerUKUICsdNetWmSupportAtom()
+xcb_atom_t XAtomHelper::registerUKUICsdNetWmSupportAtom()
 {
     // fixme:
-    return None;
+    return 0;
 }
 
 void XAtomHelper::unregisterUKUICsdNetWmSupportAtom()
 {
     // fixme:
+}
+
+bool XAtomHelper::isShowMinimizeButton(int winId)
+{
+    MotifWmHints hint = getInstance()->getWindowMotifHint(winId);
+    if (!(hint.flags & MWM_HINTS_FUNCTIONS)) {
+        return true;
+    }
+    if (hint.functions & MWM_FUNC_ALL) {
+        return true;
+    }
+    if (!(hint.functions & MWM_FUNC_MINIMIZE)) {
+        return false;
+    }
+    return true;
 }
