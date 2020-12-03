@@ -92,15 +92,15 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
     m_leftButtons = nullptr;
     m_rightButtons = nullptr;
+    m_decoBorderOnly = false;
 }
 
 void Decoration::init()
 {
     XAtomHelper::getInstance()->setUKUIDecoraiontHint(client().data()->windowId(), true);
 
-    bool isDecoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
-    m_decoBorderOnly = isDecoBorderOnly;
-    if (!isDecoBorderOnly) {
+    m_decoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
+    if (!m_decoBorderOnly) {
         QDBusConnection::sessionBus().connect(QString(),
                                               QStringLiteral("/KGlobalSettings"),
                                               QStringLiteral("org.kde.KGlobalSettings"),
@@ -245,8 +245,7 @@ void Decoration::updateShadow()
 
 void Decoration::updateTitleBar()
 {
-    bool isDecoBorderOnly = m_decoBorderOnly;
-    if (isDecoBorderOnly)
+    if (m_decoBorderOnly)
     {
         return;
     }

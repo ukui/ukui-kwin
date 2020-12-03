@@ -364,11 +364,6 @@ bool X11StandalonePlatform::adaptVga() const
             KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
             kwinConfig.writeEntry("Backend", "XRender");
             kwinConfig.sync();
-
-            //关动画,由于0709:0001显卡,不仅不支持毛玻璃,连动画都带不起来
-            KConfigGroup kConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
-            kConfig.writeEntry("kwin4_effect_maximizeEnabled", "false");
-            kConfig.sync();
             return true;
         }
     }
@@ -381,6 +376,11 @@ bool X11StandalonePlatform::compositingPossible() const
     //适配CPU性能或显卡性能,当使用XRender作为渲染后端时,则没有毛玻璃效果,设置一个0.95的透明度
     if(true == adaptCPUPerformance() || true == adaptVga())
     {
+        //对于机器性能差的,尤其是某些国产机器,需关闭动画效果,因为显卡等带不起该效果
+        KConfigGroup kConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
+        kConfig.writeEntry("kwin4_effect_maximizeEnabled", "false");
+        kConfig.sync();
+
         QGSettings* pTransparency = new QGSettings(UKUI_TRANSPARENCY_SETTING);
         pTransparency->set(PERSONALSIE_TRAN_KEY, 0.95);
         pTransparency->set(PERSONALSIE_EFFECT_KEY, false);

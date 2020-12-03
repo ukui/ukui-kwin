@@ -109,7 +109,7 @@ private:
     KDecoration2::DecorationButtonGroup* m_leftButtons;
     KDecoration2::DecorationButtonGroup* m_rightButtons;
 
-    bool m_decoBorderOnly = false;
+    bool m_decoBorderOnly;
 
 public slots:
     void updateButtonsGeometry();
