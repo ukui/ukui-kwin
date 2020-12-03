@@ -25,6 +25,7 @@
 
 #include <QObject>
 
+#include <kwineffects.h>
 #include <xcb/xcb_atom.h>
 
 struct UnityCorners {
@@ -84,11 +85,14 @@ public:
     static bool isFrameLessWindow(int winId);
 
     bool isWindowDecorateBorderOnly(int winId);
+    bool isWindowDecorateBorderOnly(KWin::EffectWindow *w);
     bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
     bool isUKUICsdSupported();
     bool isUKUIDecorationWindow(int winId);
+    bool isUKUIDecorationWindow(KWin::EffectWindow *w);
 
     UnityCorners getWindowBorderRadius(int winId);
+    UnityCorners getWindowBorderRadius(KWin::EffectWindow *w);
     void setWindowBorderRadius(int winId, const UnityCorners &data);
     void setWindowBorderRadius(int winId, int topLeft, int topRight, int bottomLeft, int bottomRight);
     void setUKUIDecoraiontHint(int winId, bool set = true);

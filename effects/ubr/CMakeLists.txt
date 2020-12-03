@@ -24,7 +24,7 @@ target_link_libraries(
     PUBLIC
     Qt5::Core Qt5::Gui
     PRIVATE
-    KF5::CoreAddons KF5::WindowSystem KF5::ConfigCore KF5::WindowSystem Qt5::X11Extras
+    KF5::CoreAddons KF5::ConfigCore Qt5::X11Extras
     kwineffects
     kwinglutils
     X11
@@ -46,7 +46,7 @@ target_link_libraries(
     Qt5::Core Qt5::Gui
     PRIVATE
     KF5::I18n
-    KF5::CoreAddons KF5::WindowSystem KF5::ConfigCore KF5::ConfigGui KF5::ConfigWidgets
+    KF5::CoreAddons KF5::ConfigCore KF5::ConfigGui KF5::ConfigWidgets
 )
 
 kcoreaddons_desktop_to_json(kwin_ubr_config ubr_config.desktop SERVICE_TYPE kcmodule.desktop)

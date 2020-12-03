@@ -75,6 +75,23 @@ bool XAtomHelper::isWindowDecorateBorderOnly(int winId)
     return isWindowMotifHintDecorateBorderOnly(getInstance()->getWindowMotifHint(winId));
 }
 
+bool XAtomHelper::isWindowDecorateBorderOnly(KWin::EffectWindow *w)
+{
+    MotifWmHints hints;
+    auto data = w->readProperty(m_motifWMHintsAtom, m_motifWMHintsAtom, 32);
+
+    if (data.length() != 5 * sizeof(int))
+        return false;
+
+    hints.flags = static_cast<ulong>(data.data()[0]);
+    hints.functions = static_cast<ulong>(data.data()[1 * sizeof(int)]);
+    hints.decorations = static_cast<ulong>(data.data()[2 * sizeof(int)]);
+    hints.input_mode = static_cast<ulong>(data.data()[3 * sizeof(int)]);
+    hints.status = static_cast<ulong>(data.data()[4 * sizeof(int)]);
+
+    return isWindowMotifHintDecorateBorderOnly(hints);
+}
+
 bool XAtomHelper::isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint)
 {
     bool isDeco = false;
@@ -124,6 +141,14 @@ bool XAtomHelper::isUKUIDecorationWindow(int winId)
     return isUKUIDecoration;
 }
 
+bool XAtomHelper::isUKUIDecorationWindow(KWin::EffectWindow *w)
+{
+    auto data = w->readProperty(m_ukuiDecorationAtion, m_ukuiDecorationAtion, 32);
+    if (data.length() != 1 * sizeof(int))
+        return false;
+    return !data.isEmpty();
+}
+
 UnityCorners XAtomHelper::getWindowBorderRadius(int winId)
 {
     UnityCorners corners;
@@ -161,6 +186,22 @@ UnityCorners XAtomHelper::getWindowBorderRadius(int winId)
         corners.bottomRight = static_cast<ulong>(data[3*sizeof (int)]);
         //free(data);
     }
+
+    return corners;
+}
+
+UnityCorners XAtomHelper::getWindowBorderRadius(KWin::EffectWindow *w)
+{
+    auto data = w->readProperty(m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 32);
+    UnityCorners corners;
+
+    if (data.length() != 4 * sizeof(int))
+        return corners;
+
+    corners.topLeft = static_cast<ulong>(data.data()[0]);
+    corners.topRight = static_cast<ulong>(data.data()[1 * sizeof(int)]);
+    corners.bottomLeft = static_cast<ulong>(data.data()[2 * sizeof(int)]);
+    corners.bottomRight = static_cast<ulong>(data.data()[3 * sizeof(int)]);
 
     return corners;
 }
