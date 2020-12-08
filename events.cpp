@@ -1182,6 +1182,13 @@ void X11Client::NETMoveResize(int x_root, int y_root, NET::Direction direction)
         // the expectation is that the cursor is already at the provided position,
         // thus it's more a safety measurement
         Cursor::setPos(QPoint(x_root, y_root));
+        //QDateTime dateTime(QDateTime::currentDateTime());
+        //printf("%s X11Client::NETMoveResize======kwinApp()->x11Time():%d==m_userTime:%d\n", dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz").toStdString().c_str(), kwinApp()->x11Time(), this->m_userTime);
+        //对于某些无边框窗体时，如果在系统比较卡的时候，容易出现拖动窗体，但是该事件来得太晚，而出现光标拖动而不能释放的问题，此处设置时间卡顿时间超过600ms，则忽略该事件
+        if((kwinApp()->x11Time() - this->m_userTime) > 600)
+        {
+            return;
+        }
         performMouseCommand(Options::MouseMove, QPoint(x_root, y_root));
     } else if (isMoveResize() && direction == NET::MoveResizeCancel) {
         finishMoveResize(true);
