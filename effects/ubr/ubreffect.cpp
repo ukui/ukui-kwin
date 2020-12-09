@@ -59,7 +59,9 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
 
     for (auto window : effectsManager->stackingOrder()) {
 
-        //FIXME: init with maximized window
+        bool isWindowMaximized = XAtomHelper::getInstance()->isWindowMaximized(window);
+        if (isWindowMaximized)
+            maximizedWindows.append(window);
 
         bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
@@ -87,7 +89,9 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
 
     connect(effectsManager, &KWin::EffectsHandler::windowAdded, this, [=](KWin::EffectWindow *window){
 
-        //FIXME: init with maximized window
+        bool isWindowMaximized = XAtomHelper::getInstance()->isWindowMaximized(window);
+        if (isWindowMaximized)
+            maximizedWindows.append(window);
 
         bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
