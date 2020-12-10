@@ -101,6 +101,8 @@ public:
     MotifWmHints getWindowMotifHint(int winId);
 
     bool isShowMinimizeButton(int winId);
+
+    bool isWindowMaximized(KWin::EffectWindow *w);
 private:
     explicit XAtomHelper(QObject *parent = nullptr);
 
@@ -110,6 +112,10 @@ private:
     xcb_atom_t m_motifWMHintsAtom = 0;
     xcb_atom_t m_unityBorderRadiusAtom = 0;
     xcb_atom_t m_ukuiDecorationAtion = 0;
+
+    xcb_atom_t m_netWMStateAtom = 0;
+    xcb_atom_t m_netWMStateMaxHorzAtom = 0;
+    xcb_atom_t m_netWMStateMaxVertAtom = 0;
 };
 
 #endif // XATOMHELPER_H

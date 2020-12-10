@@ -299,6 +299,15 @@ XAtomHelper::XAtomHelper(QObject *parent) : QObject(parent)
     tmp = "_KWIN_UKUI_DECORAION";
     xcb_intern_atom_cookie_t cookie3 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
 
+    tmp = "_NET_WM_STATE";
+    xcb_intern_atom_cookie_t cookie4 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+
+    tmp = "_NET_WM_STATE_MAXIMIZED_HORZ";
+    xcb_intern_atom_cookie_t cookie5 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+
+    tmp = "_NET_WM_STATE_MAXIMIZED_VERT";
+    xcb_intern_atom_cookie_t cookie6 = xcb_intern_atom_unchecked(KWin::connection(), false, tmp.length(), tmp.toUtf8());
+
     xcb_intern_atom_reply_t *reply1 = xcb_intern_atom_reply(KWin::connection(), cookie1, nullptr);
     m_motifWMHintsAtom = reply1->atom;
     free(reply1);
@@ -310,6 +319,18 @@ XAtomHelper::XAtomHelper(QObject *parent) : QObject(parent)
     xcb_intern_atom_reply_t *reply3 = xcb_intern_atom_reply(KWin::connection(), cookie3, nullptr);
     m_ukuiDecorationAtion = reply3->atom;
     free(reply3);
+
+    xcb_intern_atom_reply_t *reply4 = xcb_intern_atom_reply(KWin::connection(), cookie4, nullptr);
+    m_netWMStateAtom = reply4->atom;
+    free(reply4);
+
+    xcb_intern_atom_reply_t *reply5 = xcb_intern_atom_reply(KWin::connection(), cookie5, nullptr);
+    m_netWMStateMaxHorzAtom = reply5->atom;
+    free(reply5);
+
+    xcb_intern_atom_reply_t *reply6 = xcb_intern_atom_reply(KWin::connection(), cookie6, nullptr);
+    m_netWMStateMaxVertAtom = reply6->atom;
+    free(reply6);
 }
 
 xcb_atom_t XAtomHelper::registerUKUICsdNetWmSupportAtom()
@@ -336,4 +357,22 @@ bool XAtomHelper::isShowMinimizeButton(int winId)
         return false;
     }
     return true;
+}
+
+bool XAtomHelper::isWindowMaximized(KWin::EffectWindow *w)
+{
+    if (m_netWMStateAtom == 0)
+        return false;
+
+    auto data = w->readProperty(m_netWMStateAtom, XCB_ATOM_ATOM, 32);
+    if (!data.isEmpty()) {
+        for (int i = 0; i < data.length(); i += sizeof(xcb_atom_t)) {
+            // why have to add 512 offset?
+            xcb_atom_t atom = static_cast<xcb_atom_t>(data.data()[i]) + 512;
+            if (atom == m_netWMStateMaxHorzAtom || atom == m_netWMStateMaxVertAtom)
+                return true;
+        }
+    }
+
+    return false;
 }

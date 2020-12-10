@@ -58,6 +58,11 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
     auto effectsManager = KWin::effects;
 
     for (auto window : effectsManager->stackingOrder()) {
+
+        bool isWindowMaximized = XAtomHelper::getInstance()->isWindowMaximized(window);
+        if (isWindowMaximized)
+            maximizedWindows.append(window);
+
         bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
 
@@ -83,6 +88,11 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
     }
 
     connect(effectsManager, &KWin::EffectsHandler::windowAdded, this, [=](KWin::EffectWindow *window){
+
+        bool isWindowMaximized = XAtomHelper::getInstance()->isWindowMaximized(window);
+        if (isWindowMaximized)
+            maximizedWindows.append(window);
+
         bool isUKUIDecoration = XAtomHelper::getInstance()->isUKUIDecorationWindow(window);
         window->setData(IsUKUIDecoration, isUKUIDecoration);
 
@@ -112,6 +122,14 @@ UBREffect::UBREffect(QObject *parent, const QVariantList &args)
         window->setData(UnityBorderRadius, QVariant());
         window->setData(IsCSD, QVariant());
         window->setData(IsUKUIDecoration, QVariant());
+    });
+
+    connect(effectsManager, &KWin::EffectsHandler::windowMaximizedStateChanged, this, [=](KWin::EffectWindow *w, bool maxHorz, bool maxVert){
+        if (maxHorz || maxVert) {
+            maximizedWindows.append(w);
+        } else {
+            maximizedWindows.removeOne(w);
+        }
     });
 }
 
