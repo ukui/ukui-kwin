@@ -448,6 +448,11 @@ bool X11Client::manage(xcb_window_t w, bool isMapped)
     getWmOpaqueRegion();
     readSkipCloseAnimation(skipCloseAnimationCookie);
 
+    //像model类等窗口，都归类为略过任务栏一类
+    if(true == isTransient())
+    {
+        setSkipTaskbar(true);   // Also hide from taskbar
+    }
     // TODO: Try to obey all state information from info->state()
 
     setOriginalSkipTaskbar((info->state() & NET::SkipTaskbar) != 0);
