@@ -2037,7 +2037,9 @@ void Workspace::updateClientArea(bool force)
     }
     for (auto it = clients.constBegin(); it != clients.constEnd(); ++it) {
         if (!(*it)->hasStrut())
+        {
             continue;
+        }
         QRect r = (*it)->adjustedClientArea(desktopArea, desktopArea);
         // sanity check that a strut doesn't exclude a complete screen geometry
         // this is a violation to EWMH, as KWin just ignores the strut

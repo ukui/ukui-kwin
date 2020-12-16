@@ -558,9 +558,10 @@ void UserActionsMenu::desktopPopupAboutToShow()
         }
     }
 
-    m_desktopMenu->addSeparator();
-    action = m_desktopMenu->addAction(i18nc("Create a new desktop and move there the window", "&New Desktop"));
-    action->setData(vds->count() + 1);
+    //注释掉标题栏右键移动桌面到新建桌面
+    //    m_desktopMenu->addSeparator();
+    //    action = m_desktopMenu->addAction(i18nc("Create a new desktop and move there the window", "&New Desktop"));
+    //    action->setData(vds->count() + 1);
 
     if (vds->count() >= vds->maximum())
         action->setEnabled(false);
@@ -611,9 +612,10 @@ void UserActionsMenu::multipleDesktopsPopupAboutToShow()
         }
     }
 
-    m_multipleDesktopsMenu->addSeparator();
-    action = m_multipleDesktopsMenu->addAction(i18nc("Create a new desktop and move there the window", "&New Desktop"));
-    action->setData(vds->count() + 1);
+    //注释掉标题栏右键移动桌面到新建桌面
+    //    m_multipleDesktopsMenu->addSeparator();
+    //    action = m_multipleDesktopsMenu->addAction(i18nc("Create a new desktop and move there the window", "&New Desktop"));
+    //    action->setData(vds->count() + 1);
 
     if (vds->count() >= vds->maximum())
         action->setEnabled(false);
