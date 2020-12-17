@@ -217,7 +217,8 @@ void Decoration::init()
 void Decoration::updateShadow()
 {
     auto edges = this->client().data()->adjacentScreenEdges();
-    if (edges) {
+    // maximized window doesn't have shadow, so skipping it.
+    if (edges && !client().data()->isMaximized()) {
         auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, 0, 0, 0, 0);
         shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
         setShadow(shadow);
