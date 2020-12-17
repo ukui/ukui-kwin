@@ -124,6 +124,10 @@ UnityCorners XAtomHelper::getWindowBorderRadius(int winId)
     corners.bottomLeft = 0;
     corners.bottomRight = 0;
 
+    if (0 == winId) {
+        return corners;
+    }
+
     uchar *data;
 
     xcb_get_property_cookie_t cookie = xcb_get_property(KWin::connection(), false, winId, m_unityBorderRadiusAtom, XCB_ATOM_CARDINAL, 0, sizeof(UnityCorners)/sizeof(ulong));
