@@ -81,7 +81,7 @@ class XAtomHelper : public QObject
 public:
     static XAtomHelper *getInstance();
 
-    static bool isFrameLessWindow(int winId);
+    bool isFrameLessWindow(int winId);
 
     bool isWindowDecorateBorderOnly(int winId);
     bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
