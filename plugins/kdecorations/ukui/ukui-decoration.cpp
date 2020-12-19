@@ -215,14 +215,18 @@ void Decoration::init()
 
 void Decoration::updateShadow()
 {
-    auto edges = this->client().data()->adjacentScreenEdges();
-    // maximized window doesn't have shadow, so skipping it.
-    if (edges && !client().data()->isMaximized()) {
-        auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, 0, 0, 0, 0);
-        shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
-        setShadow(shadow);
-        return;
-    }
+    // FIXME: there is a displayment issue while using shortcut to change window
+    // adjust screen edge. we have to comment these codes, however the shadow shape
+    // will still not be correct for the window which on screen edges.
+
+//    auto edges = this->client().data()->adjacentScreenEdges();
+//    // maximized window doesn't have shadow, so skipping it.
+//    if (edges && !client().data()->isMaximized()) {
+//        auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, 0, 0, 0, 0);
+//        shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
+//        setShadow(shadow);
+//        return;
+//    }
 
     auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
     if (ubr.topLeft <= 0) {
