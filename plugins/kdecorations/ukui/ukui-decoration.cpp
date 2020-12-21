@@ -207,7 +207,7 @@ void Decoration::init()
         }
     });
 
-    connect(this->client().data(), &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateShadow);
+    //connect(this->client().data(), &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateShadow);
 
     updateShadow();
     update();
@@ -216,7 +216,7 @@ void Decoration::init()
 void Decoration::updateShadow()
 {
     // FIXME: there is a displayment issue while using shortcut to change window
-    // adjust screen edge. we have to comment these codes, however the shadow shape
+    // adjacent screen edge. we have to comment these codes, however the shadow shape
     // will still not be correct for the window which on screen edges.
 
 //    auto edges = this->client().data()->adjacentScreenEdges();
