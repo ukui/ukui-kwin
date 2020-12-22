@@ -109,6 +109,8 @@ private:
     KDecoration2::DecorationButtonGroup* m_leftButtons;
     KDecoration2::DecorationButtonGroup* m_rightButtons;
 
+    int m_shadowRadius = 0;
+
 public slots:
     void updateButtonsGeometry();
     void calculateBorders();
