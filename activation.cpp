@@ -394,7 +394,16 @@ void Workspace::takeActivity(AbstractClient* c, ActivityFlags flags)
     }
 
     if (flags & ActivityFocus)
+    {
         c->takeFocus();
+        //当终端新建配置文件之后，首选弹出一个瞬态窗口“新建配置文件”，输入文件名后，瞬态窗口“新建配置文件”毁灭，瞬时新增一个“编辑配置文件”瞬态窗口
+        //如果不在该瞬态窗口聚焦后，设置为活动窗口(使active_client为c)，则后面由于“新建配置文件”瞬态窗口会进入Workspace::clientHidden，
+        //使之Workspace::activateNextClient，而active_client就是第一个瞬态窗口“新建配置文件”，导致会激活终端主窗口。
+        if(true == c->isTransient())
+        {
+            c->setActive(true);
+        }
+    }
     if (flags & ActivityRaise)
         workspace()->raiseClient(c);
 

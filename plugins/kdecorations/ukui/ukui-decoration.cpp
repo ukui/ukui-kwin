@@ -43,8 +43,7 @@
 #define Font_Size   11                  //字体大小
 #define CUSOR_BORDER  10                //边框伸展光标范围
 #define SHADOW_BORDER 30                //阴影边框大小：30小边框、100中边框、200大边框
-#define ACTIVE_DARKNESS 0.45             //阴影颜色深度：1.0深、1.5很深、2.0超深
-#define INACTIVE_DARKNESS 1.0           //阴影颜色深度：1.0深、1.5很深、2.0超深
+#define ACTIVE_DARKNESS 0.45            //阴影颜色深度：1.0深、1.5很深、2.0超深
 #define RADIUS 6
 
 
