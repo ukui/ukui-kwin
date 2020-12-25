@@ -40,16 +40,13 @@ Button *Button::create(KDecoration2::DecorationButtonType type, KDecoration2::De
             break;
 
         case KDecoration2::DecorationButtonType::Close:
-            b->setVisible(d->client().data()->isCloseable());
             break;
 
         case KDecoration2::DecorationButtonType::Maximize:
-            b->setVisible( d->client().data()->isMaximizeable());
             //QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Button::setVisible );
             break;
 
         case KDecoration2::DecorationButtonType::Minimize:
-            b->setVisible( d->client().data()->isMinimizeable());
             //QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Button::setVisible );
             break;
 

@@ -112,6 +112,7 @@ private:
 public slots:
     void updateButtonsGeometry();
     void calculateBorders();
+    void calculateRightButtonCout();
     void updateTitleBar();
     void updateShadow();
     void themeUpdate(int themeId);

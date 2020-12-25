@@ -130,40 +130,13 @@ void Decoration::init()
         m_rightButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &UKUI::Button::create);
         m_rightButtons->setSpacing(m_buttonSpacing);
 
-        m_nrightButtonCout = 0;
-        for (const QPointer<KDecoration2::DecorationButton>& button : m_rightButtons->buttons())
-        {
-            button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
-            if(false == button.data()->isVisible())
-            {
-                continue;
-            }
+        calculateRightButtonCout();
 
-            if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
-            {
-                if(false == XAtomHelper::getInstance()->isShowMinimizeButton(client().data()->windowId()))
-                {
-                    button.data()->setVisible(false);
-                    continue;
-                }
-                m_nrightButtonCout++;
-            }
-            if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
-            {
-                m_nrightButtonCout++;
-            }
-            if(KDecoration2::DecorationButtonType::Close == button.data()->type())
-            {
-                m_nrightButtonCout++;
-            }
-        }
-
-        updateButtonsGeometry();
         connect(settings().data(), &KDecoration2::DecorationSettings::decorationButtonsRightChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
-        //connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
+        connect(client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, this, &Decoration::calculateRightButtonCout); //安装兼容应用全屏后还原，可最大化按钮有改变
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
         connect(client().data(), &KDecoration2::DecoratedClient::captionChanged, this,
             [this]()
@@ -174,7 +147,6 @@ void Decoration::init()
 
         connect(client().data(), &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
-        updateTitleBar();
     } else {
         setBorders(QMargins(0, 0, 0, 0));
         setResizeOnlyBorders(QMargins(CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER));
@@ -206,27 +178,12 @@ void Decoration::init()
         }
     });
 
-    //connect(this->client().data(), &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateShadow);
-
     updateShadow();
     update();
 }
 
 void Decoration::updateShadow()
 {
-    // FIXME: there is a displayment issue while using shortcut to change window
-    // adjacent screen edge. we have to comment these codes, however the shadow shape
-    // will still not be correct for the window which on screen edges.
-
-//    auto edges = this->client().data()->adjacentScreenEdges();
-//    // maximized window doesn't have shadow, so skipping it.
-//    if (edges && !client().data()->isMaximized()) {
-//        auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, 0, 0, 0, 0);
-//        shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
-//        setShadow(shadow);
-//        return;
-//    }
-
     auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
     if (ubr.topLeft <= 0) {
         ubr.topLeft = RADIUS;
@@ -274,6 +231,51 @@ void Decoration::calculateBorders()
         setBorders(QMargins(m_borderLeft, m_borderTop, m_borderRight, m_borderBottom));                     //真正的边框尺寸
         setResizeOnlyBorders(QMargins(CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER, CUSOR_BORDER));             //边框伸展光标范围
     }
+}
+
+void Decoration::calculateRightButtonCout()
+{
+    m_nrightButtonCout = 0;
+    for (const QPointer<KDecoration2::DecorationButton>& button : m_rightButtons->buttons())
+    {
+        if(KDecoration2::DecorationButtonType::Minimize == button.data()->type() &&
+          (false == client().data()->isMinimizeable() || false == XAtomHelper::getInstance()->isShowMinimizeButton(client().data()->windowId())))
+        {
+            button.data()->setVisible(false);
+            continue;
+        }
+
+        //安卓兼容应用全屏后还原，从可最大化转变为不可最大化，此处增加隐藏按钮设定
+        if(KDecoration2::DecorationButtonType::Maximize == button.data()->type() && false == client().data()->isMaximizeable())
+        {
+            button.data()->setVisible(false);
+            continue;
+        }
+
+        if(KDecoration2::DecorationButtonType::Close == button.data()->type() && false == client().data()->isCloseable())
+        {
+            button.data()->setVisible(false);
+            continue;
+        }
+
+        button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
+
+        if(KDecoration2::DecorationButtonType::Minimize == button.data()->type())
+        {
+            m_nrightButtonCout++;
+        }
+        if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
+        {
+            m_nrightButtonCout++;
+        }
+        if(KDecoration2::DecorationButtonType::Close == button.data()->type())
+        {
+            m_nrightButtonCout++;
+        }
+    }
+
+    updateButtonsGeometry();
+    updateTitleBar();
 }
 
 void Decoration::themeUpdate(int themeId)
