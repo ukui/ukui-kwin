@@ -1079,10 +1079,17 @@ void Workspace::performWindowOperation(AbstractClient* c, Options::WindowOperati
     case Options::CloseOp:
         QMetaObject::invokeMethod(c, "closeWindow", Qt::QueuedConnection);
         break;
-    case Options::MaximizeOp:
+    case Options::MaximizeOp: {
+        //当窗体不是在活动(或者说顶层)时，对最大化还原按钮进行点击，对其激活并提升至顶层。
+        if(false == c->isActive())
+        {
+            c->performMouseCommand(Options::MouseActivateAndRaise, Cursor::pos());
+        }
+
         c->maximize(c->maximizeMode() == MaximizeFull
                     ? MaximizeRestore : MaximizeFull);
         break;
+    }
     case Options::HMaximizeOp:
         c->maximize(c->maximizeMode() ^ MaximizeHorizontal);
         break;
