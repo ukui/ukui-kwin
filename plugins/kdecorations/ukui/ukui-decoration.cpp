@@ -38,9 +38,9 @@
 
 #include <KConfigGroup>
 #include <KSharedConfig>
-#include <QExplicitlySharedDataPointer>
 
-#define Font_Size   11                  //字体大小
+
+#define FONT_SIZE   11                  //字体大小
 #define CUSOR_BORDER  10                //边框伸展光标范围
 #define SHADOW_BORDER 30                //阴影边框大小：30小边框、100中边框、200大边框
 #define ACTIVE_DARKNESS 0.45            //阴影颜色深度：1.0深、1.5很深、2.0超深
@@ -97,7 +97,7 @@ void Decoration::init()
 {
     m_shadowRadius = RADIUS;
 
-    // validate configure file to get current backend.
+    //从读取配置文件的方式，判断kwin是否能开启毛玻璃效果，如果不能，则阴影圆角为0.
     auto config = KSharedConfig::openConfig("ukui-kwinrc");
     auto group = KConfigGroup(config, "Compositing");
     if (group.readEntry("Backend") == "XRender" || group.readEntry("OpenGLIsUnsafe") == "true" || group.readEntry("Enabled") == "false") {
@@ -379,7 +379,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
     //写标题
     QFont font;
-    font.setPointSize(Font_Size);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
+    font.setPointSize(FONT_SIZE);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
     painter->setFont(font);
     painter->setPen(fontColor());
 
