@@ -149,7 +149,7 @@ UBREffect::~UBREffect()
 
 bool UBREffect::supported()
 {
-    bool supported = KWin::effects->isOpenGLCompositing() && KWin::GLRenderTarget::supported() && KWin::GLRenderTarget::blitSupported();
+    bool supported = KWin::effects->isOpenGLCompositing() && KWin::GLRenderTarget::supported();
     return supported;
 }
 

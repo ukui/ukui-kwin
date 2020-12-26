@@ -38,7 +38,7 @@
 
 #include <KConfigGroup>
 #include <KSharedConfig>
-
+#include <QExplicitlySharedDataPointer>
 
 #define Font_Size   11                  //字体大小
 #define CUSOR_BORDER  10                //边框伸展光标范围
@@ -95,6 +95,15 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 
 void Decoration::init()
 {
+    m_shadowRadius = RADIUS;
+
+    // validate configure file to get current backend.
+    auto config = KSharedConfig::openConfig("ukui-kwinrc");
+    auto group = KConfigGroup(config, "Compositing");
+    if (group.readEntry("Backend") == "XRender" || group.readEntry("OpenGLIsUnsafe") == "true" || group.readEntry("Enabled") == "false") {
+        m_shadowRadius = 0;
+    }
+
     XAtomHelper::getInstance()->setUKUIDecoraiontHint(client().data()->windowId(), true);
 
     bool isDecoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
@@ -186,16 +195,16 @@ void Decoration::updateShadow()
 {
     auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
     if (ubr.topLeft <= 0) {
-        ubr.topLeft = RADIUS;
+        ubr.topLeft = m_shadowRadius;
     }
     if (ubr.topRight <= 0) {
-        ubr.topRight = RADIUS;
+        ubr.topRight = m_shadowRadius;
     }
     if (ubr.bottomLeft <= 0) {
-        ubr.bottomLeft = RADIUS;
+        ubr.bottomLeft = m_shadowRadius;
     }
     if (ubr.bottomRight <= 0) {
-        ubr.bottomRight = RADIUS;
+        ubr.bottomRight = m_shadowRadius;
     }
 
     auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight);
@@ -358,11 +367,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
         painter->setBrush(frameColor());
-        painter->drawRoundedRect(rect, RADIUS, RADIUS);
+        painter->drawRoundedRect(rect, m_shadowRadius, m_shadowRadius);
 
-        auto rectLeftBottom = QRect(0, rect.height() - RADIUS * 2, RADIUS * 2, RADIUS * 2);
+        auto rectLeftBottom = QRect(0, rect.height() - m_shadowRadius * 2, m_shadowRadius * 2, m_shadowRadius * 2);
         painter->drawRoundedRect(rectLeftBottom, 0, 0);   //左下角补角
-        auto rectRightBottom = QRect(rect.width() - RADIUS * 2, rect.height() - RADIUS * 2, RADIUS * 2, RADIUS * 2);
+        auto rectRightBottom = QRect(rect.width() - m_shadowRadius * 2, rect.height() - m_shadowRadius * 2, m_shadowRadius * 2, m_shadowRadius * 2);
         painter->drawRoundedRect(rectRightBottom, 0, 0);
 
     }
