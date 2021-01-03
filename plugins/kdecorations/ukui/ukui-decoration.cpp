@@ -104,6 +104,7 @@ void Decoration::init()
         m_shadowRadius = 0;
     }
 
+
     XAtomHelper::getInstance()->setUKUIDecoraiontHint(client().data()->windowId(), true);
 
     bool isDecoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
@@ -194,6 +195,8 @@ void Decoration::init()
 void Decoration::updateShadow()
 {
     auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
+    
+    // 控制左上、右上的阴影，ubr不生效时，阴影也应该是0
     if (ubr.topLeft <= 0) {
         ubr.topLeft = m_shadowRadius;
     }
@@ -367,6 +370,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
         painter->setBrush(frameColor());
+        // 控制左上、右上的阴影
         painter->drawRoundedRect(rect, m_shadowRadius, m_shadowRadius);
 
         auto rectLeftBottom = QRect(0, rect.height() - m_shadowRadius * 2, m_shadowRadius * 2, m_shadowRadius * 2);
