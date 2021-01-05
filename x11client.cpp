@@ -2124,6 +2124,7 @@ void X11Client::takeFocus()
         if (workspace()->showingDesktop()) {
             // 最小化其它所有窗口
             for (X11Client *c : workspace()->clientList()) {
+                //由skipTaskbar()改为c->skipTaskbar(), 对于图像查看器打开二级窗口打开图像是一个瞬态窗口(skipTaskbar),如果不忽略,则会被最小化,导致激活图像查看器后看不到打开图像窗口
                 if (this == c || c->isDock() || c->isDesktop() || c->skipTaskbar()) {
                     continue;
                 }
@@ -2142,14 +2143,27 @@ void X11Client::takeFocus()
                     continue;
                 }
 
-                //对某一个窗口(如归档管理器)，新建文件(产生一个它的瞬时窗口)，然后，显示桌面后，立马从任务栏激活归档管理器，此时新建文件takeFocus，如果找到新建文件的主窗口，则主窗口也应该激活
-                //否则，此时关闭新建文件后，桌面立马takeFocus，主窗口会立马消失；其他情况统统最小化处理
+                //对某一个窗口(如归档管理器)，新建文件(产生一个它的瞬时窗口)，然后，显示桌面后，立马从任务栏激活归档管理器，此时瞬态窗口新建takeFocus，
+                //如果找到新建窗口的主窗口，则主窗口也应该激活，否则，此时关闭新建文件后，桌面立马takeFocus，主窗口会立马消失；其他情况统统最小化处理
                 if (c->hasTransient(this, true))
                 {
                     c->unminimize();
                 }
                 else
                 {
+                    //当某窗口有瞬态窗口,但瞬态窗口不是该激活窗口时,除了该窗口需要最小化,其瞬态窗口也需最小化
+                    //例子:当开启了带有关于二级窗口的文件管理器和终端,显示桌面后,激活终端时,才不会出现文件管理器窗口
+                    if(c->transients().count() > 0)
+                    {
+                        for (auto it = c->transients().constBegin(); it != c->transients().constEnd(); ++it) {
+                            X11Client* pTransients = qobject_cast<X11Client *>(*it);
+                            if (!pTransients)
+                            {
+                                continue;
+                            }
+                            pTransients->minimize(true);
+                        }
+                    }
                     c->minimize(true);
                 }
             }
