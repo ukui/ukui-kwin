@@ -315,7 +315,7 @@ bool X11StandalonePlatform::adaptVga() const
     foreach (QString line, lines) {
         QStringList stringList = line.split(":");
         qMapPreDefinePcieInfo.insert(stringList[0].toInt(&ok, 16), stringList[1].toInt(&ok, 16));
-        printf("X11StandalonePlatform::adaptVga===vid:%s pid:%s\n", stringList[0].toStdString().c_str(), stringList[1].toStdString().c_str());
+        qInfo() <<"X11StandalonePlatform::adaptVga===vid:" << stringList[0] << ", pid:" << stringList[1];
     }
 
 
@@ -359,7 +359,7 @@ bool X11StandalonePlatform::adaptVga() const
         QMap<int, int>::const_iterator iter1 = qMapPreDefinePcieInfo.find(vid);
         if(iter1 != qMapPreDefinePcieInfo.end() && pid == iter1.value())        //找到,并且vid和pid完全匹配
         {
-            printf("X11StandalonePlatform::adaptVga=======匹配\n");
+            qInfo() <<"X11StandalonePlatform::adaptVga=======匹配";
             //显卡vid和pid完全匹配,属于低性能显卡
             KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
             kwinConfig.writeEntry("Backend", "XRender");
@@ -401,7 +401,7 @@ bool X11StandalonePlatform::compositingPossible() const
     if (gl_workaround_group.readEntry("Backend", "OpenGL") == QLatin1String("OpenGL") && gl_workaround_group.readEntry(unsafeKey, false))
     {
         //对于从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略
-        fputs("X11StandalonePlatform::compositingPossible,  从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略\n", stderr);
+        qInfo() << "X11StandalonePlatform::compositingPossible,  从配置文件中读取的参数OpenGLIsUnsafe为true直接忽略";
         //当读取Backend为OpenGL，并且OpenGLIsUnsafe为true时，由于无法开启毛玻璃，固也设置所有应用的透明度为0.95
         if (QGSettings::isSchemaInstalled(UKUI_TRANSPARENCY_SETTING)){
             QGSettings* pTransparency = new QGSettings(UKUI_TRANSPARENCY_SETTING);

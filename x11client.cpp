@@ -193,6 +193,7 @@ X11Client::X11Client()
  */
 X11Client::~X11Client()
 {
+    qDebug() << "X11Client::~X11Client, ======= caption:" << this->caption();
     if (m_killHelperPID && !::kill(m_killHelperPID, 0)) { // means the process is alive
         ::kill(m_killHelperPID, SIGTERM);
         m_killHelperPID = 0;

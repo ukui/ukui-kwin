@@ -130,7 +130,7 @@ void DecorationBridge::init()
         return;
     }
     m_pluginLibraryName = readPlugin();
-    printf("DecorationBridge::init, 打印插件名称:%s\n", m_pluginLibraryName.toStdString().c_str());
+    qDebug() << "DecorationBridge::init, 打印插件名称:" << m_pluginLibraryName;
     m_settings = QSharedPointer<KDecoration2::DecorationSettings>::create(this);
     initPlugin();
     if (!m_factory) {
@@ -165,7 +165,7 @@ void DecorationBridge::init()
     QString strTheme;
     if (true == pThemeSettings->keys().contains("styleName")){
         strTheme = pThemeSettings->get("style-name").toString();
-        printf("DecorationBridge::init theme:%s\n", strTheme.toStdString().c_str());
+        qDebug() << "DecorationBridge::init theme:" << strTheme;
     }
 
     if("ukui-light" == strTheme)
@@ -203,7 +203,7 @@ void DecorationBridge::initPlugin()
     }
     qCDebug(KWIN_DECORATIONS) << "Trying to load decoration plugin: " << offers.first().fileName();
     KPluginLoader loader(offers.first().fileName());
-    printf("DecorationBridge::initPlugin,  初始化插件:%s\n", offers.first().fileName().toStdString().c_str());
+    qDebug() << "DecorationBridge::initPlugin,  初始化插件:" << offers.first().fileName();
     KPluginFactory *factory = loader.factory();
     if (!factory) {
         qCWarning(KWIN_DECORATIONS) << "Error loading plugin:" << loader.errorString();
