@@ -450,7 +450,7 @@ bool X11Client::manage(xcb_window_t w, bool isMapped)
     readSkipCloseAnimation(skipCloseAnimationCookie);
 
     //像model类等窗口，都归类为略过任务栏一类
-    if(true == isTransient())
+    if(true == isTransient() && 0 != mainClients().count())
     {
         setSkipTaskbar(true);   // Also hide from taskbar
     }
