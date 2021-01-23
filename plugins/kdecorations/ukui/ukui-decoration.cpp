@@ -258,16 +258,30 @@ void Decoration::calculateRightButtonCout()
         }
 
         //安卓兼容应用全屏后还原，从可最大化转变为不可最大化，此处增加隐藏按钮设定
-        if(KDecoration2::DecorationButtonType::Maximize == button.data()->type() && false == client().data()->isMaximizeable())
+        if(KDecoration2::DecorationButtonType::Maximize == button.data()->type())
         {
-            button.data()->setVisible(false);
-            continue;
+            if(false == client().data()->isMaximizeable())
+            {
+                button.data()->setVisible(false);
+                continue;
+            }
+            else
+            {
+                button.data()->setVisible(true);
+            }
         }
 
-        if(KDecoration2::DecorationButtonType::Close == button.data()->type() && false == client().data()->isCloseable())
+        if(KDecoration2::DecorationButtonType::Close == button.data()->type())
         {
-            button.data()->setVisible(false);
-            continue;
+            if(false == client().data()->isCloseable())
+            {
+                button.data()->setVisible(false);
+                continue;
+            }
+            else
+            {
+                button.data()->setVisible(true);
+            }
         }
 
         button.data()->setGeometry(QRectF(QPointF(0, 0), QSizeF(m_buttonWidth, m_buttonHeight)));
