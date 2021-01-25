@@ -1126,8 +1126,10 @@ void Workspace::performWindowOperation(AbstractClient* c, Options::WindowOperati
         StackingUpdatesBlocker blocker(this);
         bool was = c->keepBelow();
         c->setKeepBelow(!c->keepBelow());
-        if (was && !c->keepBelow())
+        if (!was && c->keepBelow())
+        {
             lowerClient(c);
+        }
         break;
     }
     case Options::OperationsOp:
