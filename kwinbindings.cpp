@@ -146,6 +146,8 @@ for (int i = 0; i < 8; ++i) {
 DEF(I18N_NOOP("Window to Next Screen"),            0, slotWindowToNextScreen);
 DEF(I18N_NOOP("Window to Previous Screen"),        0, slotWindowToPrevScreen);
 DEF(I18N_NOOP("Show Desktop"),                     Qt::META + Qt::Key_D, slotToggleShowDesktop);
+DEF(I18N_NOOP("Always Show Desktop"),              Qt::META + Qt::Key_S, slotAlwaysShowDesktop);
+DEF(I18N_NOOP("Always Restore Desktop"),           Qt::META + Qt::Key_R, slotAlwaysRestoreDesktop);
 
 for (int i = 0; i < 8; ++i) {
     DEF3(I18N_NOOP("Switch to Screen %1"),         0, slotSwitchToScreen, i);
