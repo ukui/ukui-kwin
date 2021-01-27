@@ -277,11 +277,11 @@ void UserActionsMenu::init()
      m_keepBelowOperation->setCheckable(true);
      m_keepBelowOperation->setData(Options::KeepBelowOp);
  
-     m_fullScreenOperation = advancedMenu->addAction(i18n("&Fullscreen"));
-     m_fullScreenOperation->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
-     setShortcut(m_fullScreenOperation, QStringLiteral("Window Fullscreen"));
-     m_fullScreenOperation->setCheckable(true);
-     m_fullScreenOperation->setData(Options::FullScreenOp);
+     //m_fullScreenOperation = advancedMenu->addAction(i18n("&Fullscreen"));
+     //m_fullScreenOperation->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
+     //setShortcut(m_fullScreenOperation, QStringLiteral("Window Fullscreen"));
+     //m_fullScreenOperation->setCheckable(true);
+     //m_fullScreenOperation->setData(Options::FullScreenOp);
  
      //m_shadeOperation = advancedMenu->addAction(i18n("&Shade"));
      //m_shadeOperation->setIcon(QIcon::fromTheme(QStringLiteral("window-shade")));
@@ -406,8 +406,8 @@ void UserActionsMenu::menuAboutToShow()
     //m_shadeOperation->setChecked(m_client->shadeMode() != ShadeNone);
     m_keepAboveOperation->setChecked(m_client->keepAbove());
     m_keepBelowOperation->setChecked(m_client->keepBelow());
-    m_fullScreenOperation->setEnabled(m_client->userCanSetFullScreen());
-    m_fullScreenOperation->setChecked(m_client->isFullScreen());
+    //m_fullScreenOperation->setEnabled(m_client->userCanSetFullScreen());
+    //m_fullScreenOperation->setChecked(m_client->isFullScreen());
     //m_noBorderOperation->setEnabled(m_client->userCanSetNoBorder());
     //m_noBorderOperation->setChecked(m_client->noBorder());
     m_minimizeOperation->setEnabled(m_client->isMinimizable());
