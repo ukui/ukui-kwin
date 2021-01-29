@@ -177,6 +177,7 @@ X11Client::X11Client()
         xcb_cursor_t nativeCursor = Cursor::x11Cursor(cursor);
         m_wrapper.defineCursor(nativeCursor);
         m_frame.defineCursor(nativeCursor);
+        m_client.defineCursor(nativeCursor);
         if (m_decoInputExtent.isValid())
             m_decoInputExtent.defineCursor(nativeCursor);
         if (isMoveResize()) {
