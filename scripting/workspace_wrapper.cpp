@@ -133,8 +133,6 @@ void WorkspaceWrapper::name( ) { \
 SLOTWRAPPER(slotSwitchToNextScreen)
 SLOTWRAPPER(slotWindowToNextScreen)
 SLOTWRAPPER(slotToggleShowDesktop)
-SLOTWRAPPER(slotAlwaysShowDesktop)
-SLOTWRAPPER(slotAlwaysRestoreDesktop)
 
 SLOTWRAPPER(slotWindowMaximize)
 SLOTWRAPPER(slotWindowMaximizeVertical)

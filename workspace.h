@@ -441,8 +441,6 @@ public Q_SLOTS:
     void slotSwitchToPrevScreen();
     void slotWindowToPrevScreen();
     void slotToggleShowDesktop();
-    void slotAlwaysShowDesktop();
-    void slotAlwaysRestoreDesktop();
 
     void slotWindowMaximize();
     void slotWindowMaximizeVertical();

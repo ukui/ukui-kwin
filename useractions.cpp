@@ -1417,22 +1417,6 @@ void Workspace::slotToggleShowDesktop()
     setShowingDesktop(!showingDesktop());
 }
 
-/**
- * Always show desktop.
- */
-void Workspace::slotAlwaysShowDesktop()
-{
-    setShowingDesktop(true);
-}
-
-/**
- * Always restore desktop.
- */
-void Workspace::slotAlwaysRestoreDesktop()
-{
-    setShowingDesktop(false);
-}
-
 template <typename Direction>
 void windowToDesktop(AbstractClient *c)
 {
