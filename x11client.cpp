@@ -2105,6 +2105,11 @@ void X11Client::setOnAllActivities(bool on)
  */
 void X11Client::takeFocus()
 {
+    foreach( AbstractClient* c, mainClients()) {
+        if (X11Client *mc = dynamic_cast<X11Client *>(c)) {
+            workspace()->raiseClient(mc);
+        }
+    }
     if (rules()->checkAcceptFocus(info->input()))
         m_client.focus();
     else

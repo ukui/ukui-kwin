@@ -924,7 +924,7 @@ void X11Compositor::suspend(X11Compositor::SuspendReason reason)
 {
     Q_ASSERT(reason != NoReasonSuspend);
     m_suspended |= reason;
-
+    qDebug() << "X11Compositor::suspend in";
     if (reason & ScriptSuspend) {
         // When disabled show a shortcut how the user can get back compositing.
         const auto shortcuts = KGlobalAccel::self()->shortcut(
@@ -944,6 +944,7 @@ void X11Compositor::suspend(X11Compositor::SuspendReason reason)
 
 void X11Compositor::resume(X11Compositor::SuspendReason reason)
 {
+    qDebug() << "X11Compositor::resume in";
     Q_ASSERT(reason != NoReasonSuspend);
     m_suspended &= ~reason;
     start();
