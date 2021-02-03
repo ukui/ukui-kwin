@@ -752,7 +752,20 @@ void UserActionsMenu::slotSendToDesktop(QAction *action)
         vds->setCount(desk);
     }
 
-    ws->sendClientToDesktop(m_client.data(), desk, false);
+    //当m_client存在主窗口时，则不将m_client直接发至其他桌面，而是将他的主窗口发至其他桌面，因为sendClientToDesktop函数会把它的瞬态窗口通通发送至其他桌面
+    //由此可避免瞬态窗口发送至所有桌面后，又发送至其他某一个桌面，主窗口还残留在当前桌面的问题。
+    if(m_client.data()->mainClients().count() > 0)
+    {
+        foreach( AbstractClient* client, m_client.data()->mainClients()) {
+            if (client) {
+                ws->sendClientToDesktop(client, desk, false);
+            }
+        }
+    }
+    else
+    {
+        ws->sendClientToDesktop(m_client.data(), desk, false);
+    }
 }
 
 void UserActionsMenu::slotToggleOnVirtualDesktop(QAction *action)
