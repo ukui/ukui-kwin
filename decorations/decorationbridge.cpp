@@ -54,6 +54,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScreen>
 #include <QtDBus>
 #include <QGSettings>
+#include <QFontDatabase>
 
 
 namespace KWin
@@ -182,16 +183,9 @@ void DecorationBridge::init()
     }
 
 
-    QGSettings* pFontSettings = new QGSettings("org.ukui.style", "/org/ukui/style/", this);
-    m_nFont = 11;
-    if (true == pFontSettings->keys().contains("systemFontSize")){
-        m_nFont = pFontSettings->get("system-font-size").toInt();
-    }
-
-    m_strFontFamily = "";
-    if (true == pFontSettings->keys().contains("systemFont")){
-        m_strFontFamily = pFontSettings->get("system-font").toString();
-    }
+    const QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
+    m_nFont = font.pointSize();
+    m_strFontFamily = font.family();
 
     QDBusConnection::sessionBus().connect(QString(),
                                           QStringLiteral("/KGlobalSettings"),
