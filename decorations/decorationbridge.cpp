@@ -181,17 +181,46 @@ void DecorationBridge::init()
         m_themeId = 0;
     }
 
+
+    QGSettings* pFontSettings = new QGSettings("org.ukui.style", "/org/ukui/style/", this);
+    m_nFont = 11;
+    if (true == pFontSettings->keys().contains("systemFontSize")){
+        m_nFont = pFontSettings->get("system-font-size").toInt();
+    }
+
+    m_strFontFamily = "";
+    if (true == pFontSettings->keys().contains("systemFont")){
+        m_strFontFamily = pFontSettings->get("system-font").toString();
+    }
+
     QDBusConnection::sessionBus().connect(QString(),
                                           QStringLiteral("/KGlobalSettings"),
                                           QStringLiteral("org.kde.KGlobalSettings"),
                                           QStringLiteral("slotThemeChange"),
                                           this, SLOT(slotThemeUpdate(int)));
 
+    QDBusConnection::sessionBus().connect(QString(),
+                                          QStringLiteral("/KGlobalSettings"),
+                                          QStringLiteral("org.kde.KGlobalSettings"),
+                                          QStringLiteral("slotFontChange"),
+                                          this, SLOT(fontUpdate(int, QString)));
+
 }
 
 void DecorationBridge::slotThemeUpdate(int themeId)
 {
     m_themeId = themeId;
+}
+
+void DecorationBridge::fontUpdate(int nfont, QString strFamily)
+{
+    m_nFont = nfont;
+    m_strFontFamily = strFamily;
+    QFont font;
+    font.setPointSize(nfont);
+    font.setFamily(strFamily);
+
+    emit sig_updateFont(font);
 }
 
 void DecorationBridge::initPlugin()
@@ -342,6 +371,10 @@ KDecoration2::Decoration *DecorationBridge::createDecoration(AbstractClient *cli
     args.insert(QStringLiteral("dpi"), m_dpi);  //每创建一个渲染端，就把dpi值带过去，后面每新建一个客户就不需要反复获取获取dpi值
 
     args.insert(QStringLiteral("themeId"), m_themeId);  //针对UKUI定制的主题id
+
+    args.insert(QStringLiteral("systemFontSize"), m_nFont);     //标题栏字体大小
+
+    args.insert(QStringLiteral("systemFont"), m_strFontFamily); //标题栏字体类型
 
     auto deco = m_factory->create<KDecoration2::Decoration>(client, QVariantList({args}));
     deco->setSettings(m_settings);

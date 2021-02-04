@@ -64,6 +64,9 @@ private:
     bool m_autoBorderSize = true;
     bool m_closeDoubleClickMenu = false;
     QFont m_font;
+
+public slots:
+    void updateFont(QFont font);
 };
 } // Decoration
 } // KWin

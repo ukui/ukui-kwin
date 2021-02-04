@@ -60,6 +60,7 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
 {
     int nDpi = 96;
     m_themeId = 0;
+    m_Font.setPointSize(FONT_SIZE);     //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
     if (false == args.isEmpty())
     {
         const auto map = args.first().toMap();
@@ -71,6 +72,16 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
         it = map.constFind(QStringLiteral("themeId"));
         if (it != map.constEnd()) {
             m_themeId = it.value().toBool();
+        }
+
+        it = map.constFind(QStringLiteral("systemFontSize"));
+        if (it != map.constEnd()) {
+            m_Font.setPointSize(it.value().toInt());
+        }
+
+        it = map.constFind(QStringLiteral("systemFont"));
+        if (it != map.constEnd()) {
+            m_Font.setFamily(it.value().toString());
         }
     }
     int nScaler = qRound(nDpi / 96.0f);
@@ -143,6 +154,7 @@ void Decoration::init()
         calculateRightButtonCout();
 
         connect(settings().data(), &KDecoration2::DecorationSettings::decorationButtonsRightChanged, this, &UKUI::Decoration::updateButtonsGeometry);
+        connect(settings().data(), &KDecoration2::DecorationSettings::fontChanged, this, &UKUI::Decoration::updatefont);
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
@@ -190,6 +202,11 @@ void Decoration::init()
 
     updateShadow();
     update();
+}
+
+void Decoration::updatefont(QFont font)
+{
+    m_Font = font;
 }
 
 void Decoration::updateShadow()
@@ -396,9 +413,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     painter->restore();
 
     //写标题
-    QFont font;
-    font.setPointSize(FONT_SIZE);         //setPointSize可以根据dpi自动调整，所以m_nFont不需要乘缩放系数，而setPixelSize会写死
-    painter->setFont(font);
+    painter->setFont(m_Font);
     painter->setPen(fontColor());
 
     const auto cR = qMakePair(titleBar(), Qt::AlignVCenter | Qt::AlignLeft);

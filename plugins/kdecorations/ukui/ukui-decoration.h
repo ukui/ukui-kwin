@@ -25,6 +25,7 @@
 
 #include <KDecoration2/Decoration>
 #include <KPluginFactory>
+#include <QFont>
 
 namespace KDecoration2 {
 class DecorationButtonGroup;
@@ -110,6 +111,7 @@ private:
     KDecoration2::DecorationButtonGroup* m_rightButtons;
 
     int m_shadowRadius;
+    QFont m_Font;
 
 public slots:
     void updateButtonsGeometry();
@@ -118,6 +120,7 @@ public slots:
     void updateTitleBar();
     void updateShadow();
     void themeUpdate(int themeId);
+    void updatefont(QFont font);
 
 };
 

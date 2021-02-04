@@ -84,9 +84,11 @@ public:
 
 Q_SIGNALS:
     void metaDataLoaded();
+    void sig_updateFont(QFont);
 
 public Q_SLOTS:
     void slotThemeUpdate(int);
+    void fontUpdate(int nfont, QString strFamily);
 
 private:
     QString readPlugin();
@@ -107,6 +109,8 @@ private:
     bool m_noPlugin;
     int m_dpi;          //dpi值
     int m_themeId;      //主题id
+    int m_nFont;
+    QString m_strFontFamily;
     KWIN_SINGLETON(DecorationBridge)
 };
 } // Decoration

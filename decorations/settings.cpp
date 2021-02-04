@@ -68,6 +68,9 @@ SettingsImpl::SettingsImpl(KDecoration2::DecorationSettings *parent)
     );
     connect(Workspace::self(), &Workspace::configChanged, this, &SettingsImpl::readSettings);
     connect(DecorationBridge::self(), &DecorationBridge::metaDataLoaded, this, &SettingsImpl::readSettings);
+    connect(DecorationBridge::self(), &DecorationBridge::sig_updateFont, this, &SettingsImpl::updateFont);
+
+
 }
 
 SettingsImpl::~SettingsImpl() = default;
@@ -159,6 +162,14 @@ static KDecoration2::BorderSize stringToSize(const QString &name)
         return KDecoration2::BorderSize::Normal;
     }
     return it.value();
+}
+
+void SettingsImpl::updateFont(QFont font)
+{
+    if (font != m_font) {
+        m_font = font;
+        emit decorationSettings()->fontChanged(m_font);
+    }
 }
 
 void SettingsImpl::readSettings()
