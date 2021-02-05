@@ -894,10 +894,17 @@ void X11Client::updateMouseGrab()
         // (it is unobscured if it the topmost in the unconstrained stacking order, i.e. it is
         // the most recently raised window)
         bool not_obscured = workspace()->topClientOnDesktop(VirtualDesktopManager::self()->current(), -1, true, false) == this;
+        //当新插入一个屏幕时,此时workspace最顶层窗口并不是本窗口,而是桌面,此时是一种特殊情况,还是属于无障碍情况,否则grabButton(XCB_NONE)后,当前窗口滚动条不可用
+        if(true == workspace()->topClientOnDesktop(VirtualDesktopManager::self()->current(), -1, true, false)->isDesktop())
+        {
+            not_obscured = true;
+        }
+
         if (!options->isClickRaise() || not_obscured)
             ungrabButton(XCB_NONE);
         else
             grabButton(XCB_NONE);
+
         ungrabButton(XCB_MOD_MASK_SHIFT);
         ungrabButton(XCB_MOD_MASK_CONTROL);
         ungrabButton(XCB_MOD_MASK_CONTROL | XCB_MOD_MASK_SHIFT);
