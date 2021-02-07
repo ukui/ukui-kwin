@@ -831,11 +831,18 @@ bool X11Client::manage(xcb_window_t w, bool isMapped)
     if (isShown(true)) {
         bool allow;
         if (session)
+        {
             allow = session->active &&
                     (!workspace()->wasUserInteraction() || workspace()->activeClient() == nullptr ||
                      workspace()->activeClient()->isDesktop());
+        }
         else
-            allow = workspace()->allowClientActivation(this, userTime(), false);
+        {
+            //暂时将userTime()修改为xTime()时间,xTime()是最新时间,基本可以保证新开启窗口激活置顶,解决火狐浏览器从开始菜单启动偶尔不能置顶的问题;
+            //以及普通用户修改时区，弹出的授权窗口未置顶的问题.
+            //allow = workspace()->allowClientActivation(this, userTime(), false);
+            allow = workspace()->allowClientActivation(this, xTime(), false);
+        }
 
         const bool isSessionSaving = workspace()->sessionManager()->state() == SessionState::Saving;
 
