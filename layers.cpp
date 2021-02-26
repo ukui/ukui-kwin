@@ -250,9 +250,7 @@ AbstractClient* Workspace::topClientOnDesktop(int desktop, int screen, bool unco
         list = stacking_order;
     else
         list = unconstrained_stacking_order;
-    for (int i = list.size() - 1;
-            i >= 0;
-            --i) {
+    for (int i = list.size() - 1; i >= 0; --i) {
         AbstractClient *c = qobject_cast<AbstractClient*>(list.at(i));
         if (!c) {
             continue;

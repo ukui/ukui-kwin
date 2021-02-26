@@ -54,6 +54,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <QWindow>
 
+#include <qlogging.h>
+#include <QDir>
+#include <QTime>
+#include <QStandardPaths>
+
 // system
 #if HAVE_SYS_PRCTL_H
 #include <sys/prctl.h>
@@ -61,6 +66,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #if HAVE_SYS_PROCCTL_H
 #include <sys/procctl.h>
 #endif
+
+#define DOUBLE 2
+#define MAX_FILE_SIZE 1024*1024
+#define LOG_FILE0 "ukui_kwin_0.log"
+#define LOG_FILE1 "ukui_kwin_1.log"
+#define LOG_FILE_PATH "/.cache/ukui-kwin/log"
 
 #if HAVE_LIBCAP
 #include <sys/capability.h>
@@ -369,8 +380,96 @@ void dropNiceCapability()
 
 } // namespace
 
+void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    QByteArray currentTime = QTime::currentTime().toString().toLocal8Bit();
+
+    QString name[DOUBLE] = {LOG_FILE0, LOG_FILE1};
+    FILE *log_file = nullptr;
+    QString logFilePath;
+    int fileSize;
+    static int i = 0;
+    QDir dir;
+    bool flag = 0;
+
+    logFilePath = QDir::homePath() + LOG_FILE_PATH;
+    if (dir.mkpath(logFilePath)) {
+        flag = 1;
+    }
+    if (flag) {
+        logFilePath = logFilePath + "/" + name[i];
+        log_file = fopen(logFilePath.toLocal8Bit().constData(), "a+");
+    }
+
+    const char *file = context.file ? context.file : "";
+    int n = 0;
+    for (int i = 0; i < strlen(file); ++i) {
+        if(file[i] == '\/')
+        {
+            n = i;
+        }
+    }
+
+    int j = 0;
+    int k = 0;
+    const char *function = context.function ? context.function : "";
+    for (int i = 0; i < strlen(function); ++i) {
+        if(function[i] == ' ') {
+            j = i;
+        }
+
+        if(function[i] == '(') {
+            k = i;
+            break;
+        }
+    }
+
+    char szFunction[k + 1] = {'\0'};
+    memset(szFunction, 0, k + 1);
+    strncpy(szFunction, function, k);
+    const char *func = (const char *)szFunction;
+
+    switch (type) {
+    case QtDebugMsg:
+        if (!log_file) {
+            break;
+        }
+        fprintf(log_file, "Debug: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        break;
+    case QtInfoMsg:
+        fprintf(log_file? log_file: stdout, "Info: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        break;
+    case QtWarningMsg:
+        fprintf(log_file? log_file: stderr, "Warning: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        break;
+    case QtCriticalMsg:
+        fprintf(log_file? log_file: stderr, "Critical: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        break;
+    case QtFatalMsg:
+        fprintf(log_file? log_file: stderr, "Fatal: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        break;
+    }
+
+    if (log_file) {
+        fileSize = ftell(log_file);
+        if (fileSize >= MAX_FILE_SIZE) {
+            i = (i + 1) % DOUBLE;
+            logFilePath = QDir::homePath() + LOG_FILE_PATH + "/" + name[i];
+            if (QFile::exists(logFilePath)) {
+                QFile temp(logFilePath);
+                temp.remove();
+            }
+        }
+        fclose(log_file);
+    }
+}
+
 int main(int argc, char * argv[])
 {
+    qInstallMessageHandler(messageOutput);
+    qDebug() << "==================wayland main in===========================";
+
     if (getuid() == 0) {
         std::cerr << "kwin_wayland does not support running as root." << std::endl;
         return 1;
