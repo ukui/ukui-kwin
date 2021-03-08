@@ -207,6 +207,7 @@ void Decoration::init()
 void Decoration::updatefont(QFont font)
 {
     m_Font = font;
+    update();
 }
 
 void Decoration::updateShadow()
