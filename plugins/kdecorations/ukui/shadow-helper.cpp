@@ -46,21 +46,21 @@ ShadowHelper *ShadowHelper::globalInstance()
 
 void ShadowHelper::releaseShadows()
 {
-    for (auto shadow : m_activeShadowsCache) {
+    for (auto shadow : m_shadowsCache) {
         shadow.clear();
     }
-
-    for (auto shadow : m_inactiveShadowsCache) {
-        shadow.clear();
-    }
-
-    m_activeShadowsCache.clear();
-    m_inactiveShadowsCache.clear();
+    m_shadowsCache.clear();
 }
 
-QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(ShadowHelper::State state, int shadow_border, qreal darkness, int borderRadiusTopLeft, int borderRadiusTopRight, int borderRadiusBottomLeft, int borderRadiusBottomRight)
+QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(const ShadowIndex &index)
 {
-    QList<int> unityBorderRadius;
+    int borderRadiusTopLeft = index.topLeft();
+    int borderRadiusTopRight = index.topRight();
+    int borderRadiusBottomLeft = index.bottomLeft();
+    int borderRadiusBottomRight = index.bottomRight();
+    qreal darkness = index.darkness();
+    qreal shadow_border = index.borderWidth();
+
     if (borderRadiusTopLeft < 1) {
         borderRadiusTopLeft = 1;
     }
@@ -73,50 +73,25 @@ QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(ShadowHel
     if (borderRadiusBottomRight < 1) {
         borderRadiusBottomRight = 1;
     }
-    unityBorderRadius<<borderRadiusTopLeft<<borderRadiusTopRight<<borderRadiusBottomLeft<<borderRadiusBottomRight;
 
-    switch (state) {
-    case Active: {
-        if (auto shadow = m_activeShadowsCache.value(unityBorderRadius)) {
-            if (!shadow.isNull())
-                return shadow;
-        }
-
-        auto shadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
-        auto pix = this->getShadowPixmap(state, shadow_border, darkness, borderRadiusTopLeft, borderRadiusTopRight, borderRadiusBottomLeft, borderRadiusBottomRight);
-        auto img = pix.toImage();
-        shadow->setShadow(img);
-        int maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
-        int maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
-        int maxRadius = qMax(maxTopRadius, maxBottomRadius);
-        maxRadius = qMax(12, maxRadius);
-        QRect innerRect = QRect(shadow_border + maxRadius, shadow_border + maxRadius, INNERRECT_WIDTH, INNERRECT_WIDTH);
-        shadow->setInnerShadowRect(innerRect);
-        shadow->setPadding(QMargins(shadow_border, shadow_border, shadow_border, shadow_border));
-        m_activeShadowsCache.insert(unityBorderRadius, shadow);
+    auto shadow = m_shadowsCache.value(index);
+    if (!shadow.isNull())
         return shadow;
-    }
-    default: {
-        if (auto shadow = m_inactiveShadowsCache.value(unityBorderRadius)) {
-            if (!shadow.isNull())
-                return shadow;
-        }
 
-        auto shadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
-        auto pix = this->getShadowPixmap(Inactive, shadow_border, darkness, borderRadiusTopLeft, borderRadiusTopRight, borderRadiusBottomLeft, borderRadiusBottomRight);
-        auto img = pix.toImage();
-        shadow->setShadow(img);
-        int maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
-        int maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
-        int maxRadius = qMax(maxTopRadius, maxBottomRadius);
-        maxRadius = qMax(12, maxRadius);
-        QRect innerRect = QRect(shadow_border + maxRadius, shadow_border + maxRadius, INNERRECT_WIDTH, INNERRECT_WIDTH);
-        shadow->setInnerShadowRect(innerRect);
-        shadow->setPadding(QMargins(shadow_border, shadow_border, shadow_border, shadow_border));
-        m_inactiveShadowsCache.insert(unityBorderRadius, shadow);
-        return shadow;
-    }
-    }
+    shadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
+    auto pix = this->getShadowPixmap(index.color(), shadow_border, darkness, borderRadiusTopLeft, borderRadiusTopRight, borderRadiusBottomLeft, borderRadiusBottomRight);
+    auto img = pix.toImage();
+    shadow->setShadow(img);
+    int maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
+    int maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
+    int maxRadius = qMax(maxTopRadius, maxBottomRadius);
+    maxRadius = qMax(12, maxRadius);
+    QRect innerRect = QRect(shadow_border + maxRadius, shadow_border + maxRadius, INNERRECT_WIDTH, INNERRECT_WIDTH);
+    shadow->setInnerShadowRect(innerRect);
+    shadow->setPadding(QMargins(shadow_border, shadow_border, shadow_border, shadow_border));
+
+    m_shadowsCache.insert(index, shadow);
+    return shadow;
 }
 
 ShadowHelper::ShadowHelper()
@@ -124,7 +99,7 @@ ShadowHelper::ShadowHelper()
 
 }
 
-QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_border, qreal darkness, int borderRadiusTopLeft, int borderRadiusTopRight, int borderRadiusBottomLeft, int borderRadiusBottomRight)
+QPixmap ShadowHelper::getShadowPixmap(const QColor &color, int shadow_border, qreal darkness, int borderRadiusTopLeft, int borderRadiusTopRight, int borderRadiusBottomLeft, int borderRadiusBottomRight)
 {
     int maxTopRadius = qMax(borderRadiusTopLeft, borderRadiusTopRight);
     int maxBottomRadius = qMax(borderRadiusBottomLeft, borderRadiusBottomRight);
@@ -166,7 +141,7 @@ QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_bord
     QPainter painter(&pix);
     painter.save();
     painter.translate(shadow_border, shadow_border);
-    painter.fillPath(windowRelativePath, QColor(26,26,26));
+    painter.fillPath(windowRelativePath, color);
     painter.restore();
 
     QImage rawImg = pix.toImage();
@@ -200,9 +175,9 @@ QPixmap ShadowHelper::getShadowPixmap(ShadowHelper::State state, int shadow_bord
     auto borderPath = caculateRelativePainterPath(borderRadiusTopLeft + 0.5, borderRadiusTopRight + 0.5, borderRadiusBottomLeft + 0.5, borderRadiusBottomRight + 0.5);
     painter2.setCompositionMode(QPainter::CompositionMode_DestinationOver);
     painter2.setRenderHint(QPainter::HighQualityAntialiasing);
-    QColor borderColor = QColor(26, 26, 26);
+    QColor borderColor = color;
     borderColor.setAlphaF(0.05);
-    painter2.setPen(borderColor);
+    painter2.setPen(QPen(borderColor, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter2.setBrush(Qt::NoBrush);
     painter2.translate(shadow_border, shadow_border);
     painter2.translate(-0.5, -0.5);
@@ -249,4 +224,82 @@ QPainterPath ShadowHelper::caculateRelativePainterPath(qreal borderRadiusTopLeft
     windowRelativePath.arcTo(topRightRect, 0, 90);
 
     return windowRelativePath;
+}
+
+ShadowIndex::ShadowIndex(const QColor &color, int topLeft, int topRight, int bottomLeft, int bottomRight, qreal darkness, int borderWidth)
+{
+    m_color = color;
+    m_topLeft = topLeft;
+    m_topRight = topRight;
+    m_bottomLeft = bottomLeft;
+    m_bottomRight = bottomRight;
+    m_darkness = darkness;
+    m_borderWidth = borderWidth;
+}
+
+bool ShadowIndex::operator ==(const ShadowIndex &index)
+{
+    if (m_color != index.m_color) {
+        return false;
+    }
+    if (m_topLeft != index.m_topLeft) {
+        return false;
+    }
+    if (m_topRight != index.m_topRight) {
+        return false;
+    }
+    if (m_bottomLeft != index.m_bottomLeft) {
+        return false;
+    }
+    if (m_bottomRight != index.m_bottomRight) {
+        return false;
+    }
+    if (m_darkness != index.m_darkness) {
+        return false;
+    }
+    if (m_borderWidth != index.m_borderWidth) {
+        return false;
+    }
+    return true;
+}
+
+bool ShadowIndex::operator <(const ShadowIndex &index) const
+{
+    return m_topLeft < index.m_topLeft;
+}
+
+QColor ShadowIndex::color() const
+{
+    return m_color;
+}
+
+
+int ShadowIndex::topLeft() const
+{
+    return m_topLeft;
+}
+
+int ShadowIndex::topRight() const
+{
+    return m_topRight;
+}
+
+int ShadowIndex::bottomLeft() const
+{
+    return m_bottomLeft;
+}
+
+int ShadowIndex::bottomRight() const
+{
+    return m_bottomRight;
+}
+
+qreal ShadowIndex::darkness() const
+{
+    return m_darkness;
+}
+
+int ShadowIndex::borderWidth() const
+{
+    return m_borderWidth;
 }

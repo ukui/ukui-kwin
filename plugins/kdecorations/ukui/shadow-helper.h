@@ -32,6 +32,30 @@ namespace UKUI {
 
 class Decoration;
 
+class ShadowIndex {
+public:
+    ShadowIndex(const QColor &color, int topLeft, int topRight, int bottomLeft, int bottomRight, qreal darkness, int borderWidth);
+    bool operator ==(const ShadowIndex &index);
+    bool operator <(const ShadowIndex &index) const;
+
+    QColor color() const;
+    int topLeft() const;
+    int topRight() const;
+    int bottomLeft() const;
+    int bottomRight() const;
+    qreal darkness() const;
+    int borderWidth() const;
+
+private:
+    QColor m_color;
+    int m_topLeft = -1;
+    int m_topRight = -1;
+    int m_bottomLeft = -1;
+    int m_bottomRight = -1;
+    qreal m_darkness = -1;
+    int m_borderWidth = -1;
+};
+
 class ShadowHelper
 {
     friend class Decoration;
@@ -45,17 +69,11 @@ public:
 
     void releaseShadows();
 
-    QSharedPointer<KDecoration2::DecorationShadow> getShadow(State state,
-                                                             int shadow_border,                     //阴影边框大小：30小边框、100中边框、200大边框
-                                                             qreal darkness,                        //阴影颜色深度：1.0深、1.5很深、2.0超深
-                                                             int borderRadiusTopLeft = 0,
-                                                             int borderRadiusTopRight = 0,
-                                                             int borderRadiusBottomLeft = 0,
-                                                             int borderRadiusBottomRight = 0);
+    QSharedPointer<KDecoration2::DecorationShadow> getShadow(const ShadowIndex &index);
 
 private:
     ShadowHelper();
-    QPixmap getShadowPixmap(State state,
+    QPixmap getShadowPixmap(const QColor &color,
                             int shadow_border,
                             qreal darkness,
                             int borderRadiusTopLeft = 0,
@@ -65,6 +83,8 @@ private:
 
     QMap<QList<int>, QSharedPointer<KDecoration2::DecorationShadow>> m_inactiveShadowsCache;
     QMap<QList<int>, QSharedPointer<KDecoration2::DecorationShadow>> m_activeShadowsCache;
+
+    QMap<ShadowIndex, QSharedPointer<KDecoration2::DecorationShadow>> m_shadowsCache;
 
     QPainterPath caculateRelativePainterPath(qreal borderRadiusTopLeft = 0,
                                              qreal borderRadiusTopRight = 0,
