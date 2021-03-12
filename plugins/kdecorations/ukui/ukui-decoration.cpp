@@ -157,6 +157,9 @@ void Decoration::init()
         connect(settings().data(), &KDecoration2::DecorationSettings::fontChanged, this, &UKUI::Decoration::updatefont);
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
+        connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, [=](){
+            updateShadow();
+        });
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         connect(client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, this, &Decoration::calculateRightButtonCout); //安装兼容应用全屏后还原，可最大化按钮有改变
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
@@ -228,7 +231,9 @@ void Decoration::updateShadow()
         ubr.bottomRight = m_shadowRadius;
     }
 
-    auto shadow = ShadowHelper::globalInstance()->getShadow(ShadowHelper::Active, SHADOW_BORDER, ACTIVE_DARKNESS, ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight);
+    ShadowIndex shadowIndex(this->fontColor(), ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight, ACTIVE_DARKNESS, SHADOW_BORDER);
+
+    auto shadow = ShadowHelper::globalInstance()->getShadow(shadowIndex);
     shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
     setShadow(shadow);
 }
