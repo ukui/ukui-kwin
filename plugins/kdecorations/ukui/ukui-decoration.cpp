@@ -115,19 +115,17 @@ void Decoration::init()
         m_shadowRadius = 0;
     }
 
-
     XAtomHelper::getInstance()->setUKUIDecoraiontHint(client().data()->windowId(), true);
+
+    QDBusConnection::sessionBus().connect(QString(),
+                                          QStringLiteral("/KGlobalSettings"),
+                                          QStringLiteral("org.kde.KGlobalSettings"),
+                                          QStringLiteral("slotThemeChange"),
+                                          this, SLOT(themeUpdate(int)));
+    themeUpdate(m_themeId);
 
     bool isDecoBorderOnly = XAtomHelper::getInstance()->isWindowDecorateBorderOnly(client().data()->windowId());   //是否是仅修饰边框
     if (!isDecoBorderOnly) {
-        QDBusConnection::sessionBus().connect(QString(),
-                                              QStringLiteral("/KGlobalSettings"),
-                                              QStringLiteral("org.kde.KGlobalSettings"),
-                                              QStringLiteral("slotThemeChange"),
-                                              this, SLOT(themeUpdate(int)));
-
-        themeUpdate(m_themeId);
-
         calculateBorders();
         //button
         m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &UKUI::Button::create);
@@ -157,9 +155,6 @@ void Decoration::init()
         connect(settings().data(), &KDecoration2::DecorationSettings::fontChanged, this, &UKUI::Decoration::updatefont);
         connect(client().data(), &KDecoration2::DecoratedClient::sizeChanged, this, &UKUI::Decoration::updateButtonsGeometry);
         connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
-        connect(client().data(), &KDecoration2::DecoratedClient::paletteChanged, this, [=](){
-            updateShadow();
-        });
         connect(client().data(), &KDecoration2::DecoratedClient::activeChanged, this, static_cast<void (Decoration::*)()>(&Decoration::update));
         connect(client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, this, &Decoration::calculateRightButtonCout); //安装兼容应用全屏后还原，可最大化按钮有改变
         connect(client().data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::calculateBorders);
@@ -202,9 +197,6 @@ void Decoration::init()
             }
         }
     });
-
-    updateShadow();
-    update();
 }
 
 void Decoration::updatefont(QFont font)
@@ -379,6 +371,7 @@ void Decoration::themeUpdate(int themeId)
     }
 
     update();
+    updateShadow();
 }
 
 void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
