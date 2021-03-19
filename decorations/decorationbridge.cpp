@@ -173,7 +173,7 @@ void DecorationBridge::init()
     {
         m_themeId = 0;
     }
-    else if("ukui-dark" == strTheme)
+    else if("ukui-black" == strTheme)
     {
         m_themeId = 1;
     }
