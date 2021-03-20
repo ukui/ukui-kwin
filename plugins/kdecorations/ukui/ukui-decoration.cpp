@@ -250,8 +250,9 @@ void Decoration::calculateBorders()
     bool maximized = client().data()->isMaximized();
     if(true == maximized)
     {
-        //在最大化时需要对setBorders中其中一个参数调整一下大小，否则，兆芯笔记本使用VSCode开源软件最大化时，会出现页面刷新不完全的情况。此处选择将m_borderTop减一进行调整。
-        setBorders(QMargins(0, m_borderTop - 1, 0, 0));     //真正的边框尺寸
+        //在最大化时需要对setBorders中其中一个参数调整一下大小，否则，兆芯笔记本使用VSCode开源软件最大化时，会出现页面刷新不完全的情况。此处选择将m_borderTop - 1进行调整。
+        //后来由于使用新版VSCode不会出现该问题，故又将m_borderTop - 1调整回m_borderTop
+        setBorders(QMargins(0, m_borderTop, 0, 0));     //真正的边框尺寸
         setResizeOnlyBorders(QMargins(0, 0, 0, 0));     //边框伸展光标范围
     }
     else
