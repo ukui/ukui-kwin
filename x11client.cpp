@@ -1832,7 +1832,7 @@ void X11Client::closeWindow()
     for(auto it = group()->members().constBegin(); it != group()->members().constEnd(); ++it)
     {
         //当终端或文本编辑器已经有确认关闭对话框之后，2个窗口都已经最小化至任务栏，此时从任务栏关闭main窗口进入下分支
-        if (this->hasTransient(*it, true))
+        if ((this->hasTransient(*it, true)) && this->isMinimized())
         {
             unminimize();
             (*it)->unminimize();
