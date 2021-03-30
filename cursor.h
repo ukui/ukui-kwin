@@ -181,6 +181,7 @@ Q_SIGNALS:
      */
     void cursorChanged();
     void themeChanged();
+    void themeChangeFinished();
 
 protected:
     /**

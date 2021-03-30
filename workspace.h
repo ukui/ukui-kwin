@@ -491,6 +491,7 @@ public Q_SLOTS:
     void setupWindowShortcutDone(bool);
 
     void updateClientArea();
+    void updateAllClientCursor();
 
 private Q_SLOTS:
     void desktopResized();

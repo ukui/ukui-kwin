@@ -386,6 +386,9 @@ void Workspace::init()
         );
     }
 
+    Cursor *c = Cursor::self();
+    connect(c, &Cursor::themeChangeFinished, this, &Workspace::updateAllClientCursor);
+
     // SELI TODO: This won't work with unreasonable focus policies,
     // and maybe in rare cases also if the selected client doesn't
     // want focus
@@ -882,6 +885,14 @@ void Workspace::updateToolWindows(bool also_hide)
         resetUpdateToolWindowsTimer();
 }
 
+void Workspace::updateAllClientCursor()
+{
+    for (X11Client *c : clientList()) {
+        if (c) {
+            c->updateArrowCursor();
+        }
+    }
+}
 
 void Workspace::resetUpdateToolWindowsTimer()
 {

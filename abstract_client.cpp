@@ -1975,6 +1975,13 @@ void AbstractClient::updateCursor()
     emit moveResizeCursorChanged(c);
 }
 
+void AbstractClient::updateArrowCursor()
+{
+    CursorShape c = Qt::ArrowCursor;
+    m_moveResize.cursor = c;
+    emit moveResizeCursorChanged(c);
+}
+
 void AbstractClient::leaveMoveResize()
 {
     workspace()->setMoveResizeClient(nullptr);

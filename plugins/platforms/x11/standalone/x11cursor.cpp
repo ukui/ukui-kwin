@@ -179,6 +179,13 @@ xcb_cursor_t X11Cursor::createCursor(const QByteArray &name)
     }
     if (cursor != XCB_CURSOR_NONE) {
         m_cursors.insert(name, cursor);
+        //当光标主题改变时，m_cursors被清空，为了实现光标改变窗管标栏题立马生效，当光标划出控制面板并进入终端那一刻
+		//m_cursors会新增样式，新增第一个样式后，给workspace发消息，通知主题样式改变完成(而不是刚改变)
+		//workspace会更新所有client的ArrowCursor样式，并发出moveResizeCursorChanged改变信号，此时，client会将本土光标样式重新设置，实现立马生效
+        if(1 == m_cursors.count())
+        {
+            emit themeChangeFinished();
+        }
     }
     xcb_cursor_context_free(ctx);
     return cursor;

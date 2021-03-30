@@ -886,6 +886,8 @@ public:
      */
     virtual bool supportsWindowRules() const;
 
+    void updateArrowCursor();
+
 public Q_SLOTS:
     virtual void closeWindow() = 0;
 
