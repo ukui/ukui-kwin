@@ -805,10 +805,10 @@ void Options::loadConfig()
     if (config.hasKey("Alt")) {
         m_modifierOnlyShortcuts.insert(Qt::AltModifier, config.readEntry("Alt", QStringList()));
     }
-    m_modifierOnlyShortcuts.insert(Qt::MetaModifier, config.readEntry("Meta", QStringList{QStringLiteral("org.kde.plasmashell"),
-                                                                                          QStringLiteral("/PlasmaShell"),
-                                                                                          QStringLiteral("org.kde.PlasmaShell"),
-                                                                                          QStringLiteral("activateLauncherMenu")}));
+    m_modifierOnlyShortcuts.insert(Qt::MetaModifier, config.readEntry("Meta", QStringList{QStringLiteral("org.ukui.menu"),
+                                                                                          QStringLiteral("/org/ukui/menu"),
+                                                                                          QStringLiteral("org.ukui.menu"),
+                                                                                          QStringLiteral("WinKeyResponse")}));
 }
 
 void Options::syncFromKcfgc()
