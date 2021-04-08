@@ -619,9 +619,10 @@ X11Client *Workspace::createClient(xcb_window_t w, bool is_mapped)
     StackingUpdatesBlocker blocker(this);
     X11Client *c = new X11Client();
     setupClientConnections(c);
-    if (X11Compositor *compositor = X11Compositor::self()) {
-        connect(c, &X11Client::blockingCompositingChanged, compositor, &X11Compositor::updateClientCompositeBlocking);
-    }
+    //像向日葵或者ffplay等启动时，会阻塞混成的开启，在此暂时先屏蔽，让其无法关闭混成器
+    //    if (X11Compositor *compositor = X11Compositor::self()) {
+    //        connect(c, &X11Client::blockingCompositingChanged, compositor, &X11Compositor::updateClientCompositeBlocking);
+    //    }
     connect(c, SIGNAL(clientFullScreenSet(KWin::X11Client *,bool,bool)), ScreenEdges::self(), SIGNAL(checkBlocking()));
     if (!c->manage(w, is_mapped)) {
         X11Client::deleteClient(c);
