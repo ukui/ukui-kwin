@@ -326,7 +326,6 @@ void Decoration::themeUpdate(int themeId)
     m_themeId = themeId;
     if(1 == m_themeId)
     {
-        m_frameColor = QColor(31, 32, 34);
         m_fontActiveColor= QColor(207, 207, 207);
         m_fontInactiveColor= QColor(105, 105, 105);
 
@@ -350,7 +349,6 @@ void Decoration::themeUpdate(int themeId)
     }
     else
     {
-        m_frameColor = QColor(255, 255, 255);
         m_fontActiveColor= QColor(0, 0, 0);
         m_fontInactiveColor= QColor(105, 105, 105);
 
@@ -388,20 +386,20 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     if(c->isMaximized())
     {
         auto rect = QRect(QPoint(0, 0), this->client().data()->size());
-        painter->fillRect(rect, frameColor());
+        painter->fillRect(rect, c->palette().color(QPalette::Active, QPalette::Base));
     }
     else if(c->adjacentScreenEdges() != Qt::Edge())
     {
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
-        painter->setBrush(frameColor());
+        painter->setBrush(c->palette().color(QPalette::Active, QPalette::Base));
         painter->drawRoundedRect(rect, 0, 0);
     }
     else
     {
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
-        painter->setBrush(frameColor());
+        painter->setBrush(c->palette().color(QPalette::Active, QPalette::Base));
         // 控制左上、右上的阴影
         painter->drawRoundedRect(rect, m_shadowRadius, m_shadowRadius);
 
@@ -451,11 +449,6 @@ QColor Decoration::fontColor()const
     {
         return m_fontInactiveColor;
     }
-}
-
-QColor Decoration::frameColor() const
-{
-    return m_frameColor;
 }
 
 

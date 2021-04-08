@@ -79,7 +79,6 @@ public:
     void paint(QPainter *painter, const QRect &repaintRegion) override;
 
     QColor fontColor() const;
-    QColor frameColor() const;
     int themeId(){return m_themeId;}
 
 private:
@@ -98,7 +97,6 @@ private:
 
     int m_buttonSpacing;        //按钮空隙
 
-    QColor m_frameColor;        //框体颜色
     QColor m_fontActiveColor;   //活动字体颜色
     QColor m_fontInactiveColor; //非活动字体颜色
 
