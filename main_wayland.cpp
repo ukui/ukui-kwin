@@ -383,7 +383,11 @@ void dropNiceCapability()
 void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QByteArray localMsg = msg.toLocal8Bit();
-    QByteArray currentTime = QTime::currentTime().toString().toLocal8Bit();
+
+    QDateTime dateTime = QDateTime::currentDateTime();
+    QString strFormat = "yyMMdd hh:mm:ss.zzz";
+    QString strDateTime = dateTime.toString(strFormat);
+
 
     QString name[DOUBLE] = {LOG_FILE0, LOG_FILE1};
     FILE *log_file = nullptr;
@@ -425,29 +429,24 @@ void messageOutput(QtMsgType type, const QMessageLogContext &context, const QStr
         }
     }
 
-    char szFunction[k + 1] = {'\0'};
-    memset(szFunction, 0, k + 1);
-    strncpy(szFunction, function, k);
-    const char *func = (const char *)szFunction;
-
     switch (type) {
     case QtDebugMsg:
         if (!log_file) {
             break;
         }
-        fprintf(log_file, "Debug: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        fprintf(log_file, "Debug: %s: %s (%s:%u)\n", strDateTime.toStdString().c_str(), localMsg.constData(), &file[n + 1], context.line);
         break;
     case QtInfoMsg:
-        fprintf(log_file? log_file: stdout, "Info: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        fprintf(log_file? log_file: stdout, "Info: %s: %s (%s:%u)\n", strDateTime.toStdString().c_str(), localMsg.constData(), &file[n + 1], context.line);
         break;
     case QtWarningMsg:
-        fprintf(log_file? log_file: stderr, "Warning: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        fprintf(log_file? log_file: stderr, "Warning: %s: %s (%s:%u)\n", strDateTime.toStdString().c_str(), localMsg.constData(), &file[n + 1], context.line);
         break;
     case QtCriticalMsg:
-        fprintf(log_file? log_file: stderr, "Critical: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        fprintf(log_file? log_file: stderr, "Critical: %s: %s (%s:%u)\n", strDateTime.toStdString().c_str(), localMsg.constData(), &file[n + 1], context.line);
         break;
     case QtFatalMsg:
-        fprintf(log_file? log_file: stderr, "Fatal: %s: %s %s (%s:%u)\n", currentTime.constData(), (const char *)&function[j + 1], localMsg.constData(), &file[n + 1], context.line);
+        fprintf(log_file? log_file: stderr, "Fatal: %s: %s (%s:%u)\n", strDateTime.toStdString().c_str(), localMsg.constData(), &file[n + 1], context.line);
         break;
     }
 
