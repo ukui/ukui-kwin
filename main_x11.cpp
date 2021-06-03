@@ -69,7 +69,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MAX_FILE_SIZE 1024*1024
 #define LOG_FILE0 "ukui_kwin_0.log"
 #define LOG_FILE1 "ukui_kwin_1.log"
-#define LOG_FILE_PATH "/.cache/ukui-kwin/log"
+#define LOG_FILE_PATH "/.log/"
 
 Q_LOGGING_CATEGORY(KWIN_CORE, "kwin_core", QtCriticalMsg)
 

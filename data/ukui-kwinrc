@@ -47,6 +47,7 @@ kwin4_effect_morphingpopupsEnabled=false
 flipswitchEnabled=true
 highlightwindowEnabled=true
 kwin4_effect_translucencyEnabled=false
+zoomEnabled=false
 
 [Effect-CoverSwitch]
 TabBox=false
