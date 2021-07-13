@@ -1,4 +1,5 @@
 [Compositing]
+Enabled=false
 OpenGLIsUnsafe=false
 #UKUI for preview
 HiddenPreviews=6

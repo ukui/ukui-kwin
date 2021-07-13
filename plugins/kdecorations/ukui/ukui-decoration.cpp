@@ -111,7 +111,7 @@ void Decoration::init()
     //从读取配置文件的方式，判断kwin是否能开启毛玻璃效果，如果不能，则阴影圆角为0.
     auto config = KSharedConfig::openConfig("ukui-kwinrc");
     auto group = KConfigGroup(config, "Compositing");
-    if (group.readEntry("Backend") == "XRender" || group.readEntry("OpenGLIsUnsafe") == "true" || group.readEntry("Enabled") == "false") {
+    if (group.readEntry("Backend") == "XRender" || group.readEntry("OpenGLIsUnsafe") == "true") {
         m_shadowRadius = 0;
     }
 

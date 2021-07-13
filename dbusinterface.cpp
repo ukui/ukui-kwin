@@ -316,7 +316,9 @@ bool CompositorDBusInterface::platformRequiresCompositing() const
 void CompositorDBusInterface::resume()
 {
     if (kwinApp()->operationMode() == Application::OperationModeX11) {
-        static_cast<X11Compositor*>(m_compositor)->resume(X11Compositor::ScriptSuspend);
+        //启动时，混成开启后移
+        //static_cast<X11Compositor*>(m_compositor)->resume(X11Compositor::ScriptSuspend);
+        static_cast<X11Compositor*>(m_compositor)->resume(X11Compositor::AllReasonSuspend);
     }
 }
 

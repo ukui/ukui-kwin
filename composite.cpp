@@ -201,7 +201,7 @@ bool Compositor::setupStart()
 
     options->reloadCompositingSettings(true);
 
-    setupX11Support();
+    //setupX11Support();
 
     // There might still be a deleted around, needs to be cleared before
     // creating the scene (BUG 333275).
@@ -337,7 +337,7 @@ void Compositor::startupWithWorkspace()
     Q_ASSERT(m_scene);
 
     connect(workspace(), &Workspace::destroyed, this, [this] { compositeTimer.stop(); });
-    setupX11Support();
+    //setupX11Support();
     fpsInterval = options->maxFpsInterval();
 
     if (m_scene->syncsToVBlank()) {
@@ -388,6 +388,7 @@ void Compositor::startupWithWorkspace()
     // Render at least once.
     addRepaintFull();
     performCompositing();
+    setupX11Support();
 }
 
 void Compositor::scheduleRepaint()
