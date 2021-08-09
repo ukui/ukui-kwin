@@ -104,6 +104,8 @@ private:
     void doUpdateOutputs();
     bool adaptCPUPerformance() const;
     bool adaptVga() const;
+    void checkJingjiaVga() const;
+    void checkQXLVga() const;
 
     XInputIntegration *m_xinputIntegration = nullptr;
     QThread *m_openGLFreezeProtectionThread = nullptr;

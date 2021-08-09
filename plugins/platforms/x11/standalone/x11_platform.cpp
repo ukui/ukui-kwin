@@ -294,6 +294,71 @@ bool X11StandalonePlatform::adaptCPUPerformance() const
     return false;
 }
 
+void X11StandalonePlatform::checkJingjiaVga() const
+{
+    char result[1024] = {0};
+    char buf_ps[1024] = {0};
+    char cmd[128] = {0};
+    FILE *pFile;
+    strcpy(cmd, "lspci |grep -i VGA | grep -i Jingjia");
+    pFile = popen(cmd, "r");
+    if(nullptr != pFile)
+    {
+        while(fgets(buf_ps, 1024, pFile) != nullptr)
+        {
+           strncat((char*)result, buf_ps, 1024);
+           if(strlen(result) > 0)
+           {
+               KConfigGroup kConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
+               kConfig.writeEntry("kwin4_effect_dialogparentEnabled", "false");
+               kConfig.sync();
+               break;
+           }
+        }
+        pclose(pFile);
+        pFile = nullptr;
+    }
+
+    FILE *file;
+    if (file = fopen("/proc/gpuinfo_0", "r"))
+    {
+        fclose(file);
+        KConfigGroup kConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Plugins");
+        kConfig.writeEntry("kwin4_effect_dialogparentEnabled", "false");
+        kConfig.sync();
+    }
+
+    return;
+}
+
+void X11StandalonePlatform::checkQXLVga() const
+{
+    char result[1024] = {0};
+    char buf_ps[1024] = {0};
+    char cmd[128] = {0};
+    FILE *pFile;
+    strcpy(cmd, "lspci |grep -i VGA | grep -i QXL");
+    pFile = popen(cmd, "r");
+    if(nullptr != pFile)
+    {
+        while(fgets(buf_ps, 1024, pFile) != nullptr)
+        {
+           strncat((char*)result, buf_ps, 1024);
+           if(strlen(result) > 0)
+           {
+               KConfigGroup kwinConfig(KSharedConfig::openConfig("ukui-kwinrc"), "Compositing");
+               kwinConfig.writeEntry("Backend", "XRender");
+               kwinConfig.sync();
+               break;
+           }
+        }
+        pclose(pFile);
+        pFile = nullptr;
+    }
+
+    return;
+}
+
 bool X11StandalonePlatform::adaptVga() const
 {
     QFile file;
@@ -373,6 +438,11 @@ bool X11StandalonePlatform::adaptVga() const
 
 bool X11StandalonePlatform::compositingPossible() const
 {
+    //检查虚拟网卡是不是QXL类型，如果是，则走XRender后端
+    //checkQXLVga();
+    //检查景嘉微显卡，如果是则将kwin4_effect_dialogparentEnabled特效关闭
+	checkJingjiaVga();
+
     //适配CPU性能或显卡性能,当使用XRender作为渲染后端时,则没有毛玻璃效果,设置一个0.95的透明度
     if(true == adaptCPUPerformance() || true == adaptVga())
     {

@@ -893,7 +893,7 @@ X11Compositor::X11Compositor(QObject *parent)
     , m_xrrRefreshRate(0)
     , m_isStartOnFirst(false)
 {
-    QTimer::singleShot(4 * 1000, this, [=](){
+    QTimer::singleShot(2 * 1000, this, [=](){
         if(!m_isStartOnFirst){
             resume(SuspendReason::AllReasonSuspend);
         }

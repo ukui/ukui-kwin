@@ -49,7 +49,6 @@ flipswitchEnabled=true
 highlightwindowEnabled=true
 kwin4_effect_translucencyEnabled=false
 zoomEnabled=false
-kwin4_effect_dialogparentEnabled=false
 
 [Effect-CoverSwitch]
 TabBox=false
