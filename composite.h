@@ -270,6 +270,16 @@ private:
     SuspendReasons m_suspended;
 
     int m_xrrRefreshRate;
+
+    /*!
+     * \author Yunpeng Zhu.
+     * \brief 标记混成是否在第一次开机时被打开
+     * 当未打开时，强制去开启
+     * 目的：规避远程桌面下，无法通过dbus开关混成的bug
+     * 该bug的根因在于一个用户下有两个kwin但只有一套dbus，
+     * 正向解决方案为：修改kwin的dbus逻辑
+     */
+    bool m_isStartOnFirst;
 };
 
 }

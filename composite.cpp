@@ -891,7 +891,13 @@ X11Compositor::X11Compositor(QObject *parent)
     : Compositor(parent)
     , m_suspended(options->isUseCompositing() ? NoReasonSuspend : UserSuspend)
     , m_xrrRefreshRate(0)
+    , m_isStartOnFirst(false)
 {
+    QTimer::singleShot(4 * 1000, this, [=](){
+        if(!m_isStartOnFirst){
+            resume(SuspendReason::AllReasonSuspend);
+        }
+    });
 }
 
 void X11Compositor::toggleCompositing()
@@ -982,6 +988,7 @@ void X11Compositor::start()
         QDBusConnection::sessionBus().send(message);
         return;
     }
+    m_isStartOnFirst = true;
     if (!Compositor::setupStart()) {
         // Internal setup failed, abort.
         QDBusConnection::sessionBus().send(message);
