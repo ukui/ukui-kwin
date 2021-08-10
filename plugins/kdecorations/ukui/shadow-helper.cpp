@@ -76,7 +76,11 @@ QSharedPointer<KDecoration2::DecorationShadow> ShadowHelper::getShadow(const Sha
 
     auto shadow = m_shadowsCache.value(index);
     if (!shadow.isNull())
-        return shadow;
+    {
+        shadow.clear();
+        this->releaseShadows();
+        m_shadowsCache.remove(index);
+    }
 
     shadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
     auto pix = this->getShadowPixmap(index.color(), shadow_border, darkness, borderRadiusTopLeft, borderRadiusTopRight, borderRadiusBottomLeft, borderRadiusBottomRight);
@@ -176,11 +180,15 @@ QPixmap ShadowHelper::getShadowPixmap(const QColor &color, int shadow_border, qr
     painter2.setCompositionMode(QPainter::CompositionMode_DestinationOver);
     painter2.setRenderHint(QPainter::HighQualityAntialiasing);
     QColor borderColor = color;
-    borderColor.setAlphaF(0.05);
-    painter2.setPen(QPen(borderColor, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+    painter2.setPen(QPen(borderColor, 1.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter2.setBrush(Qt::NoBrush);
     painter2.translate(shadow_border, shadow_border);
-    painter2.translate(-0.5, -0.5);
+    painter2.translate(-0.05, -0.05);
+    painter2.drawPath(borderPath);
+
+    //封口
+    borderPath.closeSubpath();
     painter2.drawPath(borderPath);
 
     return darkerTarget;

@@ -205,8 +205,10 @@ void Decoration::updatefont(QFont font)
     update();
 }
 
-void Decoration::updateShadow()
+void Decoration::updateShadow(int themeId)
 {
+    m_themeId = themeId;
+
     auto ubr = XAtomHelper::getInstance()->getWindowBorderRadius(client().data()->windowId());
     
     // 控制左上、右上的阴影，ubr不生效时，阴影也应该是0
@@ -223,8 +225,16 @@ void Decoration::updateShadow()
         ubr.bottomRight = m_shadowRadius;
     }
 
-    ShadowIndex shadowIndex(this->fontColor(), ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight, ACTIVE_DARKNESS, SHADOW_BORDER);
+    if(m_themeId==1)
+    {
+        m_BorderColor = QColor(255,255,255);
+        m_BorderColor.setAlphaF(0.15);
+    }else{
+        m_BorderColor = QColor(38,38,38);
+        m_BorderColor.setAlphaF(0.15);
+    }
 
+    ShadowIndex shadowIndex(m_BorderColor, ubr.topLeft, ubr.topRight, ubr.bottomLeft, ubr.bottomRight, ACTIVE_DARKNESS, SHADOW_BORDER);
     auto shadow = ShadowHelper::globalInstance()->getShadow(shadowIndex);
     shadow.data()->setPadding(QMargins(SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER, SHADOW_BORDER));
     setShadow(shadow);
@@ -370,7 +380,8 @@ void Decoration::themeUpdate(int themeId)
     }
 
     update();
-    updateShadow();
+    updateShadow(m_themeId);
+
 }
 
 void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
@@ -394,12 +405,13 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->setPen(Qt::NoPen);
         painter->setBrush(c->palette().color(QPalette::Active, QPalette::Base));
         painter->drawRoundedRect(rect, 0, 0);
+
     }
     else
     {
         auto rect = QRect(0, 0, (c->size().width() + m_borderLeft + m_borderRight), (c->size().height() + m_borderTop + m_borderBottom));
         painter->setPen(Qt::NoPen);
-        painter->setBrush(c->palette().color(QPalette::Active, QPalette::Base));
+        painter->setBrush(c->palette().color(this->client().data()->isActive() ? QPalette::Active : QPalette::Disabled, QPalette::Base));
         // 控制左上、右上的阴影
         painter->drawRoundedRect(rect, m_shadowRadius, m_shadowRadius);
 

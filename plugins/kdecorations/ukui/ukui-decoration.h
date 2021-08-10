@@ -100,6 +100,8 @@ private:
     QColor m_fontActiveColor;   //活动字体颜色
     QColor m_fontInactiveColor; //非活动字体颜色
 
+    QColor m_BorderColor; //边框颜色
+
     int m_nleftButtonCout;
     int m_nrightButtonCout;
 
@@ -116,7 +118,7 @@ public slots:
     void calculateBorders();
     void calculateRightButtonCout();
     void updateTitleBar();
-    void updateShadow();
+    void updateShadow(int themeId);
     void themeUpdate(int themeId);
     void updatefont(QFont font);
 
