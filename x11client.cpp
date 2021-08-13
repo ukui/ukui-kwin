@@ -2136,7 +2136,7 @@ void X11Client::takeFocus()
             // 最小化其它所有窗口
             for (X11Client *c : workspace()->clientList()) {
                 //由skipTaskbar()改为c->skipTaskbar(), 对于图像查看器打开二级窗口打开图像是一个瞬态窗口(skipTaskbar),如果不忽略,则会被最小化,导致激活图像查看器后看不到打开图像窗口
-                if (this == c || c->isDock() || c->isDesktop() || c->skipTaskbar()) {
+                if (this == c || c->isDock() || c->isDesktop() || c->skipTaskbar() || c->keepAbove()) {
                     continue;
                 }
                 // 在进入到显示桌面模式后可能还有活跃的窗口，此时不要最小化，(如进入这个模式后才新建的窗口，新建窗口的那一瞬间其实也已聚焦会进入该函数)
@@ -2164,18 +2164,7 @@ void X11Client::takeFocus()
                 {
                     //当某窗口有瞬态窗口,但瞬态窗口不是该激活窗口时,除了该窗口需要最小化,其瞬态窗口也需最小化
                     //例子:当开启了带有关于二级窗口的文件管理器和终端,显示桌面后,激活终端时,才不会出现文件管理器窗口
-                    if(c->transients().count() > 0)
-                    {
-                        for (auto it = c->transients().constBegin(); it != c->transients().constEnd(); ++it) {
-                            X11Client* pTransients = qobject_cast<X11Client *>(*it);
-                            if (!pTransients)
-                            {
-                                continue;
-                            }
-                            pTransients->minimize(true);
-                        }
-                    }
-                    c->minimize(true);
+                    closeSubTransientRecursively((AbstractClient *)c);
                 }
             }
             workspace()->setShowingDesktop(false);
@@ -2832,6 +2821,22 @@ QMatrix4x4 X11Client::inputTransformation() const
     QMatrix4x4 matrix;
     matrix.translate(-m_bufferGeometry.x(), -m_bufferGeometry.y());
     return matrix;
+}
+
+//ljlj
+void X11Client::closeSubTransientRecursively(AbstractClient *c)
+{
+    int cnt = c->transients().count();
+    if(cnt > 0) {
+        for (int i = 0; i < cnt; i++) {
+            AbstractClient *c1 = c->transients().at(i);
+            closeSubTransientRecursively(c1);
+        }
+        c->minimize(true);
+    } else {
+        c->minimize(true);
+        return;
+    }
 }
 
 Xcb::Property X11Client::fetchShowOnScreenEdge() const

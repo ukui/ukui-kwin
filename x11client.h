@@ -107,6 +107,7 @@ public:
 
     QMatrix4x4 inputTransformation() const override;
 
+    void closeSubTransientRecursively(AbstractClient *c);   //ljlj 递归关闭子瞬态窗口
     bool isTransient() const override;
     bool groupTransient() const override;
     bool wasOriginallyGroupTransient() const;
